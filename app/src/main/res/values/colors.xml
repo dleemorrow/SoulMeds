@@ -1,6 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <!-- 02/12/18 based off Sand http://www.colorhexa.com/c2b280-->
     <color name="colorPrimary">#c2b280</color>
     <color name="colorPrimaryDark">#a69150</color>
     <color name="colorAccent">#c29180</color>
+    <color name="colorAccent2">#b1c280</color>
+    <color name="colorWhite">#fff</color>
 </resources>

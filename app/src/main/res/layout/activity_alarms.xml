@@ -34,13 +34,18 @@
                     android:background="?attr/colorPrimary"
                     app:layout_scrollFlags="scroll|enterAlways"
                     app:popupTheme="@style/AppTheme.PopupOverlay"
-                    app:title="Manage Alarms">
+                    app:title="Manage Alarms"
+                    >
                 </android.support.v7.widget.Toolbar>
 
                 <android.support.design.widget.TabLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:id="@+id/tabs">
+                    android:id="@+id/tabs"
+                    app:tabTextColor="@color/colorPrimaryDark"
+                    app:tabSelectedTextColor="@color/colorWhite"
+                    app:tabIndicatorColor="@color/colorWhite">
+
                 </android.support.design.widget.TabLayout>
 
             </android.support.design.widget.AppBarLayout>
