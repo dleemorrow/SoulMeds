@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/temptation_1"
+        android:title="@string/tempation1"/>
+    <item
+        android:id="@+id/temptation_2"
+        android:title="@string/tempation2"/>
+    <item
+        android:id="@+id/temptation_3"
+        android:title="@string/tempation3"/>
+    <item
+        android:id="@+id/temptation_4"
+        android:title="@string/tempation4"/>
+    <item
+        android:id="@+id/temptation_5"
+        android:title="@string/tempation5"/>
+    <item
+        android:id="@+id/temptation_6"
+        android:title="@string/tempation6"/>
+    <item
+        android:id="@+id/temptation_7"
+        android:title="@string/tempation7"/>
+    <item
+        android:id="@+id/temptation_8"
+        android:title="@string/tempation8"/>
+
+</menu>
