@@ -16,6 +16,18 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity
+            android:name=".alarmsActivity"
+            android:label="@string/title_activity_alarms"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
+
+        <receiver
+            android:name=".MyAlarm"
+            android:enabled="true"
+            android:exported="true"
+            >
+
+        </receiver>
     </application>
 
 </manifest>

@@ -1,9 +1,12 @@
 package com.brendansapps.soulmeds;
 
+import android.content.Context;
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -23,6 +26,7 @@ public class MainActivity extends AppCompatActivity {
         mBtnAlarm.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                goToAlarmsPage();
 
             }
         });
@@ -31,12 +35,26 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
+                // Send a toast saying Option Not Yet Available
+                Context context = getApplicationContext();
+                CharSequence text = "Option Not Yet Available";
+                int duration = Toast.LENGTH_SHORT;
+                Toast toast = Toast.makeText(context, text, duration);
+                toast.show();
+
             }
         });
 
         mBtnFolder.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
+                // Send a toast saying Option Not Yet Available
+                Context context = getApplicationContext();
+                CharSequence text = "Option Not Yet Available";
+                int duration = Toast.LENGTH_SHORT;
+                Toast toast = Toast.makeText(context, text, duration);
+                toast.show();
 
             }
         });
@@ -45,8 +63,21 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
+                // Send a toast saying Option Not Yet Available
+                Context context = getApplicationContext();
+                CharSequence text = "Option Not Yet Available";
+                int duration = Toast.LENGTH_SHORT;
+                Toast toast = Toast.makeText(context, text, duration);
+                toast.show();
+
             }
         });
+    }
+
+    // Function that navigates to a new page
+    private void goToAlarmsPage(){
+        Intent intent = new Intent(this, alarmsActivity.class);
+        startActivity(intent);
     }
 
 
