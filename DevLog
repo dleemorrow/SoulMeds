@@ -1,0 +1,25 @@
+DevLog for Soul Meds app
+Brendan Thompson
+
+
+=== 03/07/18 ===
+
+I) Summary
+	A) Removed old tabbed Alarms Activity
+	B) Started Creating Login Activity
+
+II) Takeaways
+
+III) Resources
+
+IV) To Do
+
+V) Activity Log
+
+A) Removes old tabbed Alarms Activity
+	- removed all of the files
+	- commented out navigation when alarm btn pressed
+
+B) Started Creating Login Activity
+	- File -> New -> Activity -> Login Activity
+

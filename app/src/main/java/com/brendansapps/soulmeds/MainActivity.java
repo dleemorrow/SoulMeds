@@ -76,8 +76,16 @@ public class MainActivity extends AppCompatActivity {
 
     // Function that navigates to a new page
     private void goToAlarmsPage(){
-        Intent intent = new Intent(this, alarmsActivity.class);
-        startActivity(intent);
+
+        // Send a toast saying Option Not Yet Available
+        Context context = getApplicationContext();
+        CharSequence text = "Option Not Yet Available";
+        int duration = Toast.LENGTH_SHORT;
+        Toast toast = Toast.makeText(context, text, duration);
+        toast.show();
+
+//        Intent intent = new Intent(this, alarmsActivity.class);
+//        startActivity(intent);
     }
 
 
