@@ -6,7 +6,8 @@ Brendan Thompson
 
 I) Summary
 	A) Removed old tabbed Alarms Activity
-	B) Started Creating Login Activity
+	B) Created Login Activity
+	C) Created Register Activity
 
 II) Takeaways
 
@@ -20,6 +21,20 @@ A) Removes old tabbed Alarms Activity
 	- removed all of the files
 	- commented out navigation when alarm btn pressed
 
-B) Started Creating Login Activity
+B) Created Login Activity
 	- File -> New -> Activity -> Login Activity
+	- Tools -> Firebase -> Authentication -> Email & Password Authentication
+		1) Connect your app to Firebase
+			- connected to Soul Meds
+		2) Add Firebase Authentication to your app
+			- adds dependencies
+		3) Added Checking Current Auth State
+			- LoginActivity.java -> onCreate
+			- https://firebase.google.com/docs/auth/android/start/
+		4) Sign in Existing Users
+			- LoginActivity.java -> async doInBackground
+			- https://firebase.google.com/docs/auth/android/start/
+
+C) Created Register Activity
+
 

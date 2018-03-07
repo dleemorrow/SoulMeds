@@ -1,0 +1,63 @@
+{
+  "project_info": {
+    "project_number": "973995730432",
+    "firebase_url": "https://soul-meds.firebaseio.com",
+    "project_id": "soul-meds",
+    "storage_bucket": "soul-meds.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:973995730432:android:881dc32ef2b06eb4",
+        "android_client_info": {
+          "package_name": "com.brendansapps.soulmeds"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "973995730432-2egblt2gbd938norjnj5kv9rhn2cob0o.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.brendansapps.soulmeds",
+            "certificate_hash": "84ea4908468044e676227c782b2f329e7daa192e"
+          }
+        },
+        {
+          "client_id": "973995730432-0dh6s9cjd3cue7hhbjhg6ajhjdd1krv7.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyATxwW8xsgZ5Q7vXI0ICJIUrsprfDyP_Kg"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "973995730432-kggpv59p3eegfoih4v737bb9b31sfd5p.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "SoulMeds",
+                "app_store_id": "1213152514"
+              }
+            },
+            {
+              "client_id": "973995730432-0dh6s9cjd3cue7hhbjhg6ajhjdd1krv7.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

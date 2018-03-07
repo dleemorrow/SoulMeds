@@ -8,9 +8,14 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
 
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+
 public class MainActivity extends AppCompatActivity {
 
     Button mBtnAlarm, mBtnQuote, mBtnFolder, mBtnHelp;
+
+    FirebaseAuth mFirebaseAuth;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -23,6 +28,7 @@ public class MainActivity extends AppCompatActivity {
         mBtnFolder = findViewById(R.id.btn_Folder);
         mBtnHelp = findViewById(R.id.btn_Help);
 
+        // On Click Listeners
         mBtnAlarm.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -72,6 +78,22 @@ public class MainActivity extends AppCompatActivity {
 
             }
         });
+    }
+
+    /**
+     * Check if already logged in
+     */
+    @Override
+    protected void onStart() {
+        super.onStart();
+
+        // Check If Logged In
+        mFirebaseAuth = FirebaseAuth.getInstance();
+        FirebaseUser currentUser = mFirebaseAuth.getCurrentUser();
+        if (currentUser == null){
+            Intent intent = new Intent(this, LoginActivity.class);
+            startActivity(intent);
+        }
     }
 
     // Function that navigates to a new page
