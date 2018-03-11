@@ -16,7 +16,7 @@ IV) To Do
 V) Activity Log
 
 A) Created New Alarms Activity
-	1) Simplified Layout:
+	i) Simplified Layout:
 		- List of AlarmPrescription objects
 		- AlarmPrescription object = symptom, time, end date, on/off
 		- Making it one form since the Android Time Pickers are supposed to be those big analog clocks
@@ -24,12 +24,12 @@ A) Created New Alarms Activity
 		- Decided to use ExpandableListView
 			- top list = symptoms for all AlarmPrescriptions
 			- expanded = edit properties
-	2) Created Alarms Activity
+	ii) Created Alarms Activity
 		- Layout for the activity itself
 		- File -> New -> Empty Activity
 		- Navigated to it when Alarms button clicked
 
-	3) Created Expandable ListView
+	iii) Created Expandable ListView
 		- https://youtu.be/jZxZIFnJ9jE
 		1) Add ExpandableListView, give ID, fill space
 		2) Add prescriptions_list_group layout resource file
@@ -50,7 +50,16 @@ A) Created New Alarms Activity
 			b) setAdaptor of ListView to the initialized adapter
 				prescriptionsListView.setAdapter(prescriptionsListAdapter);
 
-
+	iv) Made prescription info edit-able
+		1) Listen for click on prescription info
+	        prescriptionsListView.setOnChildClickListener(new ExpandableListView.OnChildClickListener() {
+	            @Override
+	            public boolean onChildClick(ExpandableListView parent, View v, int groupPosition, int childPosition, long id) {
+	                Log.d(TAG, "Child " + groupPosition + " was clicked");
+	                return true;
+	            }
+	        });
+	    2)
 
 
 

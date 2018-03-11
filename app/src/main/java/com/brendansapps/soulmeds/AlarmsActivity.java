@@ -3,8 +3,12 @@ package com.brendansapps.soulmeds;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ExpandableListView;
 
+import java.sql.Time;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -17,64 +21,55 @@ public class AlarmsActivity extends AppCompatActivity {
     private ExpandableListView prescriptionsListView;
     private PrescriptionsListAdapter prescriptionsListAdapter;
     private List<String> prescriptionListDataHeader;
-    private HashMap<String, List<String>> prescriptionHashMap;
+    private HashMap<String, PrescriptionObject> prescriptionHashMap;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_alarms);
 
+        // Setup the ExpandableListView
         prescriptionsListView = findViewById(R.id.prescriptionListView);
         initPrescriptionData();
         prescriptionsListAdapter = new PrescriptionsListAdapter(this, prescriptionListDataHeader, prescriptionHashMap);
         prescriptionsListView.setAdapter(prescriptionsListAdapter);
 
+        // Listen for Prescription Clicked
+        prescriptionsListView.setOnChildClickListener(new ExpandableListView.OnChildClickListener() {
+            @Override
+            public boolean onChildClick(ExpandableListView parent, View v, int groupPosition, int childPosition, long id) {
+                Log.d(TAG, "Child " + groupPosition + " was clicked");
+                return true;
+            }
+        });
+
     }
 
+    // Map listOfPrescriptions & the headers
     private void initPrescriptionData() {
         prescriptionListDataHeader = new ArrayList<>();
         prescriptionHashMap = new HashMap<>();
 
-        prescriptionListDataHeader.add("Prescription1");
-        prescriptionListDataHeader.add("Prescription2");
-        prescriptionListDataHeader.add("Prescription3");
-        prescriptionListDataHeader.add("Prescription4");
-        prescriptionListDataHeader.add("Prescription5");
-        prescriptionListDataHeader.add("Prescription6");
+        List<PrescriptionObject> listOfPrescriptions = getAllPrescriptions();
 
-        List<String> prescription1 = new ArrayList<>();
-        prescription1.add("Property1");
-        prescription1.add("Property2");
+        // Map the prescription headers with the PrescriptionObjects
+        for (int i = 0; i < listOfPrescriptions.size(); i++){
+            prescriptionListDataHeader.add("Prescription " + i + ": " + listOfPrescriptions.get(i).getSymptom());
+            prescriptionHashMap.put(prescriptionListDataHeader.get(i), listOfPrescriptions.get(i));
+        }
+    }
 
-        List<String> prescription2 = new ArrayList<>();
-        prescription2.add("Property1");
-        prescription2.add("Property2");
-        prescription2.add("Property3");
+    // Gets all of the prescriptions for the current user
+    private List<PrescriptionObject> getAllPrescriptions(){
+        ArrayList<PrescriptionObject> listOfPrescriptions = new ArrayList<>();
 
-        List<String> prescription3 = new ArrayList<>();
-        prescription3.add("Property1");
-        prescription3.add("Property2");
-        prescription3.add("Property3");
-        prescription3.add("Property4");
+        // Generate fake prescriptions
+        for (int i = 0; i < 5; i++){
+            String alarmTime = "12:30";
+            PrescriptionObject prescription = new PrescriptionObject("Symptom " + i, alarmTime);
+            listOfPrescriptions.add(prescription);
+        }
 
-        List<String> prescription4 = new ArrayList<>();
-        prescription4.add("Property1");
-        prescription4.add("Property2");
-
-        List<String> prescription5 = new ArrayList<>();
-        prescription5.add("Property1");
-        prescription5.add("Property2");
-        prescription5.add("Property3");
-        prescription5.add("Property4");
-
-        List<String> prescription6 = new ArrayList<>();
-        prescription6.add("Property1");
-
-        prescriptionHashMap.put(prescriptionListDataHeader.get(0), prescription1);
-        prescriptionHashMap.put(prescriptionListDataHeader.get(1), prescription2);
-        prescriptionHashMap.put(prescriptionListDataHeader.get(2), prescription3);
-        prescriptionHashMap.put(prescriptionListDataHeader.get(3), prescription4);
-        prescriptionHashMap.put(prescriptionListDataHeader.get(4), prescription5);
-        prescriptionHashMap.put(prescriptionListDataHeader.get(5), prescription6);
+        return listOfPrescriptions;
     }
 }

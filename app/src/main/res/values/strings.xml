@@ -1,9 +1,11 @@
 <resources>
+
+    <!-- Strings for General App -->
     <string name="app_name">Soul Meds</string>
     <string name="title_activity_alarms">alarmsActivity</string>
     <string name="action_settings">Settings</string>
 
-    <!-- Strings related to login & registration -->
+    <!-- Strings for login & registration -->
     <string name="title_activity_login">Sign in</string>
     <string name="title_activity_login_register">Register</string>
     <string name="prompt_email">Email</string>
@@ -18,4 +20,7 @@
     <string name="permission_rationale">"Contacts permissions are needed for providing email
         completions."
     </string>
+
+    <!-- Strings for Alarm Prescription Activity -->
+    <string name="action_delete_alarm">Delete Alarm</string>
 </resources>

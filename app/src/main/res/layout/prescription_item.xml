@@ -3,13 +3,40 @@
     xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
     android:layout_height="55dip">
 
-    <TextView
-        android:id="@+id/prescriptionListItem"
+    <LinearLayout
+        android:id="@+id/prescriptionListChildItem"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:paddingTop="5dp"
-        android:paddingBottom="5dp"
-        android:paddingLeft="?android:attr/expandableListPreferredChildPaddingLeft"
-        />
+        android:orientation="vertical">
+
+        <!--<Switch-->
+            <!--android:id="@+id/prescriptionToggle"-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="wrap_content" />-->
+
+        <!--<Button-->
+            <!--android:text="@string/action_delete_alarm"-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="wrap_content" />-->
+
+        <TextView
+            android:id="@+id/prescriptionSymptom"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingTop="5dp"
+            android:paddingBottom="5dp"
+            android:paddingLeft="?android:attr/expandableListPreferredChildPaddingLeft"
+            />
+
+        <TextView
+            android:id="@+id/prescriptionAlarmTime"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingTop="5dp"
+            android:paddingBottom="5dp"
+            android:paddingLeft="?android:attr/expandableListPreferredChildPaddingLeft"
+            />
+
+    </LinearLayout>
 
 </android.support.constraint.ConstraintLayout>
