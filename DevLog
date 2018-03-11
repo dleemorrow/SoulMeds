@@ -2,6 +2,58 @@ DevLog for Soul Meds app
 Brendan Thompson
 
 
+=== 03/11/18 ===
+
+I) Summary
+	A) Created New Alarms Activity
+
+II) Takeaways
+
+III) Resources
+
+IV) To Do
+
+V) Activity Log
+
+A) Created New Alarms Activity
+	1) Simplified Layout:
+		- List of AlarmPrescription objects
+		- AlarmPrescription object = symptom, time, end date, on/off
+		- Making it one form since the Android Time Pickers are supposed to be those big analog clocks
+		- Using one object allows for the amount of them available and on to be dynamic
+		- Decided to use ExpandableListView
+			- top list = symptoms for all AlarmPrescriptions
+			- expanded = edit properties
+	2) Created Alarms Activity
+		- Layout for the activity itself
+		- File -> New -> Empty Activity
+		- Navigated to it when Alarms button clicked
+
+	3) Created Expandable ListView
+		- https://youtu.be/jZxZIFnJ9jE
+		1) Add ExpandableListView, give ID, fill space
+		2) Add prescriptions_list_group layout resource file
+			- Layout for the list itself
+			- right click on "layout" in the project navigation
+			- new -> layout resource file -> "prescriptions_list_group"
+			- Text View with special padding
+		3) Add prescription_item layout resource file
+			- layout for an item's children
+			- Text view with special padding
+		4) Create PrescriptionsListAdaptor Java Class
+			- extends ExpandableListAdaptor
+			- Implement all Methods
+		5) Initialize in AlarmsActivity
+			- ListView, Adapter, DataHeader List, HashMap
+			a) Get the data and use it to instantiate the adapter
+				prescriptionsListAdapter = new PrescriptionsListAdapter(this, prescriptionListDataHeader, prescriptionHashMap);
+			b) setAdaptor of ListView to the initialized adapter
+				prescriptionsListView.setAdapter(prescriptionsListAdapter);
+
+
+
+
+
 === 03/07/18 ===
 
 I) Summary
@@ -11,7 +63,16 @@ I) Summary
 
 II) Takeaways
 
+	- Now able to Login & Register with Firebase
+	- Navigating between the activities is not super smooth.
+		- Should probably replace the two separate login & register activities with one activity that has 2 fragments (tabbed or bottom navigation)
+
 III) Resources
+
+	- Connecting to Firebase
+		- https://firebase.google.com/docs/auth/android/start/
+	- Android Activity Lifecycle events
+		- https://developer.android.com/guide/components/activities/activity-lifecycle.html#onresume
 
 IV) To Do
 
@@ -35,6 +96,14 @@ B) Created Login Activity
 			- LoginActivity.java -> async doInBackground
 			- https://firebase.google.com/docs/auth/android/start/
 
-C) Created Register Activity
-
-
+C) Created Register Activity (Should do fragments)
+	- Copied Login Activity & Login Layout
+	- Enabled navigation between Login & Register
+	- handled Registering
+		- https://firebase.google.com/docs/auth/android/start/
+	- Quit Login after successful registration
+		- https://developer.android.com/guide/components/activities/activity-lifecycle.html#onresume
+		- onResume(){
+			if loggedIn() {
+				finish();
+			}}

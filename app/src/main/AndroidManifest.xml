@@ -14,7 +14,6 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -22,19 +21,19 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
         <activity
             android:name=".LoginActivity"
-            android:label="@string/title_activity_login">
-        </activity>
+            android:label="@string/title_activity_login"></activity>
+        <activity
+            android:name=".LoginActivity_Register"
+            android:label="@string/title_activity_login_register"></activity>
 
         <receiver
             android:name=".MyAlarm"
             android:enabled="true"
-            android:exported="true">
+            android:exported="true"></receiver>
 
-        </receiver>
-
+        <activity android:name=".AlarmsActivity"></activity>
     </application>
 
 </manifest>

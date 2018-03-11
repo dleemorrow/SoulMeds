@@ -3,22 +3,18 @@ package com.brendansapps.soulmeds;
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.annotation.TargetApi;
-import android.content.Intent;
-import android.content.pm.PackageManager;
-import android.support.annotation.NonNull;
-import android.support.design.widget.Snackbar;
-import android.support.v7.app.AppCompatActivity;
 import android.app.LoaderManager.LoaderCallbacks;
-
 import android.content.CursorLoader;
+import android.content.Intent;
 import android.content.Loader;
 import android.database.Cursor;
 import android.net.Uri;
 import android.os.AsyncTask;
-
 import android.os.Build;
 import android.os.Bundle;
 import android.provider.ContactsContract;
+import android.support.annotation.NonNull;
+import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.KeyEvent;
@@ -41,25 +37,23 @@ import com.google.firebase.auth.FirebaseUser;
 import java.util.ArrayList;
 import java.util.List;
 
-import static android.Manifest.permission.READ_CONTACTS;
-
 /**
  * A login screen that offers login via email/password.
  *
  * Synced With Firebase: https://firebase.google.com/docs/auth/android/start/
  *
  */
-public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<Cursor> {
+public class LoginActivity_Register extends AppCompatActivity implements LoaderCallbacks<Cursor> {
 
     // Auth Objects
-    private UserLoginTask mAuthTask = null; // Keep track of the login task to ensure we can cancel it if requested.
+    private UserRegistrationTask mAuthTask = null; // Keep track of the login task to ensure we can cancel it if requested.
     private FirebaseAuth mFirebaseAuth;
 
     // UI references.
     private AutoCompleteTextView mEmailView;
     private EditText mPasswordView;
     private View mProgressView;
-    private View mLoginFormView;
+    private View mRegistrationFormView;
 
     private static final int REQUEST_READ_CONTACTS = 0; // Id to identity READ_CONTACTS permission request.
 
@@ -69,8 +63,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_login);
-        finishIfLoggedIn();
+        setContentView(R.layout.activity_login_register);
 
         // Get instance of FirebaseAuth
         mFirebaseAuth = FirebaseAuth.getInstance();
@@ -84,48 +77,34 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
             @Override
             public boolean onEditorAction(TextView textView, int id, KeyEvent keyEvent) {
                 if (id == EditorInfo.IME_ACTION_DONE || id == EditorInfo.IME_NULL) {
-                    attemptLogin();
+                    attemptRegistration();
                     return true;
                 }
                 return false;
             }
         });
 
-        // Listen for Sign In button
-        Button mEmailSignInButton = (Button) findViewById(R.id.email_sign_in_button);
-        mEmailSignInButton.setOnClickListener(new OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                attemptLogin();
-            }
-        });
-
-        // Listen for switching to Registration
+        // Listen for Registration
         Button mEmailRegisterButton = (Button) findViewById(R.id.email_register_button);
         mEmailRegisterButton.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(LoginActivity.this, LoginActivity_Register.class);
+                attemptRegistration();
+            }
+        });
+
+        // Listen for switching to Login page
+        Button mEmailSignInButton = (Button) findViewById(R.id.email_sign_in_button);
+        mEmailSignInButton.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(LoginActivity_Register.this, LoginActivity.class);
                 startActivity(intent);
             }
         });
 
-        mLoginFormView = findViewById(R.id.login_form);
-        mProgressView = findViewById(R.id.login_progress);
-    }
-
-    @Override
-    protected void onResume() {
-        super.onResume();
-        finishIfLoggedIn();
-    }
-
-    void finishIfLoggedIn(){
-        // Check If Logged In
-        FirebaseUser currentUser = FirebaseAuth.getInstance().getCurrentUser();
-        if (currentUser != null){
-            finish();
-        }
+        mRegistrationFormView = findViewById(R.id.registration_form);
+        mProgressView = findViewById(R.id.registration_progress);
     }
 
     /**
@@ -178,7 +157,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
      * If there are form errors (invalid email, missing fields, etc.), the
      * errors are presented and no actual login attempt is made.
      */
-    private void attemptLogin() {
+    private void attemptRegistration() {
         if (mAuthTask != null) {
             return;
         }
@@ -220,7 +199,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
             // Show a progress spinner, and kick off a background task to
             // perform the user login attempt.
             showProgress(true);
-            mAuthTask = new UserLoginTask(email, password);
+            mAuthTask = new UserRegistrationTask(email, password);
             mAuthTask.execute((Void) null);
         }
     }
@@ -244,12 +223,12 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB_MR2) {
             int shortAnimTime = getResources().getInteger(android.R.integer.config_shortAnimTime);
 
-            mLoginFormView.setVisibility(show ? View.GONE : View.VISIBLE);
-            mLoginFormView.animate().setDuration(shortAnimTime).alpha(
+            mRegistrationFormView.setVisibility(show ? View.GONE : View.VISIBLE);
+            mRegistrationFormView.animate().setDuration(shortAnimTime).alpha(
                     show ? 0 : 1).setListener(new AnimatorListenerAdapter() {
                 @Override
                 public void onAnimationEnd(Animator animation) {
-                    mLoginFormView.setVisibility(show ? View.GONE : View.VISIBLE);
+                    mRegistrationFormView.setVisibility(show ? View.GONE : View.VISIBLE);
                 }
             });
 
@@ -265,7 +244,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
             // The ViewPropertyAnimator APIs are not available, so simply show
             // and hide the relevant UI components.
             mProgressView.setVisibility(show ? View.VISIBLE : View.GONE);
-            mLoginFormView.setVisibility(show ? View.GONE : View.VISIBLE);
+            mRegistrationFormView.setVisibility(show ? View.GONE : View.VISIBLE);
         }
     }
 
@@ -306,7 +285,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
     private void addEmailsToAutoComplete(List<String> emailAddressCollection) {
         //Create adapter to tell the AutoCompleteTextView what to show in its dropdown list.
         ArrayAdapter<String> adapter =
-                new ArrayAdapter<>(LoginActivity.this,
+                new ArrayAdapter<>(LoginActivity_Register.this,
                         android.R.layout.simple_dropdown_item_1line, emailAddressCollection);
 
         mEmailView.setAdapter(adapter);
@@ -327,13 +306,13 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
      * Represents an asynchronous login/registration task used to authenticate
      * the user.
      */
-    public class UserLoginTask extends AsyncTask<Void, Void, Boolean> {
+    public class UserRegistrationTask extends AsyncTask<Void, Void, Boolean> {
 
-        private static final String TAG = "LoginAsyncTask";
+        private static final String TAG = "RegistrationAsyncTask";
         private final String mEmail;
         private final String mPassword;
 
-        UserLoginTask(String email, String password) {
+        UserRegistrationTask(String email, String password) {
             mEmail = email;
             mPassword = password;
         }
@@ -358,20 +337,20 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
 //                }
 //            }
 
-            // Sign In with Firebase
-            mFirebaseAuth.signInWithEmailAndPassword(mEmail, mPassword)
-                .addOnCompleteListener(LoginActivity.this, new OnCompleteListener<AuthResult>() {
+            // Register with Firebase
+            mFirebaseAuth.createUserWithEmailAndPassword(mEmail, mPassword)
+                .addOnCompleteListener(LoginActivity_Register.this, new OnCompleteListener<AuthResult>() {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful()) {
                             // Signed In Successfully
-                            Log.d(TAG, "signInWithEmail:success");
+                            Log.d(TAG, "createUserWithEmailAndPassword:success");
                             FirebaseUser currentUser = mFirebaseAuth.getCurrentUser();
                             // updateUI(currentUser);
                         }
                         else {
-                            Log.w(TAG, "signInWithEmail:failed");
-                            Toast.makeText(LoginActivity.this, "Authentication Failed", Toast.LENGTH_SHORT).show();
+                            Log.w(TAG, "createUserWithEmailAndPassword:failed");
+                            Toast.makeText(LoginActivity_Register.this, "Registration Failed", Toast.LENGTH_SHORT).show();
                             // updateUI(null);
                         }
                     }
