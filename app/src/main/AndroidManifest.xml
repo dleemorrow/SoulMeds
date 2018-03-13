@@ -21,6 +21,17 @@
             android:label="@string/title_activity_alarms"
             android:theme="@style/AppTheme.NoActionBar"></activity>
 
+        <activity
+            android:name=".LoginActivity"
+            android:label="@string/title_activity_login">
+        </activity>
+
+        <activity
+            android:name=".LoginActivity_Register"
+            android:label="@string/title_activity_login_register">
+
+        </activity>
+
         <receiver
             android:name=".MyAlarm"
             android:enabled="true"

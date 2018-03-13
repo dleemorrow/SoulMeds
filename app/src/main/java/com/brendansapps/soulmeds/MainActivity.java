@@ -74,6 +74,15 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
+    @Override
+    protected void onStart() {
+        super.onStart();
+
+        // Launch LoginActivity
+        Intent intent = new Intent(this, LoginActivity.class);
+        startActivity(intent);
+    }
+
     // Function that navigates to a new page
     private void goToAlarmsPage(){
         Intent intent = new Intent(this, alarmsActivity.class);
