@@ -8,14 +8,9 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
 
-import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
-
 public class MainActivity extends AppCompatActivity {
 
-    Button mBtnAlarm, mBtnQuote, mBtnFolder, mBtnHelp; // UI Buttons
-
-    FirebaseAuth mFirebaseAuth; // used for checking if user is logged in
+    Button mBtnAlarm, mBtnQuote, mBtnFolder, mBtnHelp;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,7 +23,6 @@ public class MainActivity extends AppCompatActivity {
         mBtnFolder = findViewById(R.id.btn_Folder);
         mBtnHelp = findViewById(R.id.btn_Help);
 
-        // Alarm Button Listener
         mBtnAlarm.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -37,7 +31,6 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        // Quote Button Listener
         mBtnQuote.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -52,7 +45,6 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        // Folder Button Listener
         mBtnFolder.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -67,7 +59,6 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        // Help Button Listener
         mBtnHelp.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -87,18 +78,14 @@ public class MainActivity extends AppCompatActivity {
     protected void onStart() {
         super.onStart();
 
-        // If not logged in launch LoginActivity
-        mFirebaseAuth = FirebaseAuth.getInstance();
-        FirebaseUser currentUser = mFirebaseAuth.getCurrentUser();
-        if (currentUser == null){
-            Intent intent = new Intent(this, LoginActivity.class);
-            startActivity(intent);
-        }
+        // Launch LoginActivity
+        Intent intent = new Intent(this, LoginActivity.class);
+        startActivity(intent);
     }
 
     // Function that navigates to a new page
     private void goToAlarmsPage(){
-        Intent intent = new Intent(this, AlarmsActivity.class);
+        Intent intent = new Intent(this, alarmsActivity.class);
         startActivity(intent);
     }
 

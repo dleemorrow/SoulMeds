@@ -1,6 +1,4 @@
 <resources>
-
-    <!-- Strings for General App -->
     <string name="app_name">Soul Meds</string>
     <string name="title_activity_alarms">alarmsActivity</string>
     <string name="action_settings">Settings</string>
@@ -21,6 +19,5 @@
         completions."
     </string>
 
-    <!-- Strings for Alarm Prescription Activity -->
-    <string name="action_delete_alarm">Delete Alarm</string>
+
 </resources>
