@@ -1,20 +1,24 @@
 DevLog for Soul Meds app
 Brendan Thompson
 
-
 === 03/14/18 ===
 
 I) Summary
 	A) Created Symptoms Scaffold for tabbedAlarmsListView
 	B) Created Alarms Scaffold for tabbedAlarmsListView
+	C) Designed ListView Items
 
 II) Takeaways
+
+	- Alarms is now a Tabbed Activity with a ListView
+	- Delete button not working
 
 III) Resources
 
 	- Android ListView tutorial: https://www.journaldev.com/10416/android-listview-with-custom-adapter-example-tutorial
 	- My ExpandableListView version: https://github.com/brenthompson2/Soul_Meds/tree/expandableAlarmsListView
 	- Android ListView item design:
+	- Adding button to ListView item: https://stackoverflow.com/questions/17525886/listview-with-add-and-delete-buttons-in-each-row-in-android
 
 IV) To Do
 
@@ -116,6 +120,14 @@ A) Created Symptoms Scaffold for tabbedAlarmsListView
 		    }
 		    "
 
+C) Designed ListView Items
+	- Added a delete button
+		- https://stackoverflow.com/questions/17525886/listview-with-add-and-delete-buttons-in-each-row-in-android
+		- Wrapped everything in a RelativeLayout
+		"
+        android:layout_marginEnd="?android:attr/listPreferredItemPaddingLeft"
+        android:layout_alignParentEnd="true"
+        "
 
 === 03/13/18 ===
 
