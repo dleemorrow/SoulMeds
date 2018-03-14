@@ -2,6 +2,44 @@ DevLog for Soul Meds app
 Brendan Thompson
 
 
+=== 03/14/18 ===
+
+I) Summary
+	A) Started tabbedAlarmsListView
+
+II) Takeaways
+
+III) Resources
+
+IV) To Do
+
+V) Activity Log
+
+A) Started tabbedAlarmsListView
+
+
+=== 03/13/18 ===
+
+I) Summary
+	A) Separated Alarm Implementations into new branches
+
+II) Takeaways
+
+III) Resources
+
+IV) To Do
+
+V) Activity Log
+
+A) Separated Alarm Implementations into new branches
+	1) expandableAlarmsListView
+		- Dynamic list of editable, toggleable, deleteable Prescription objects (Symptom & Time)
+	2) tabbedAlarmsOriginal
+		- 3 tabs each with a Prescription object (symptom & tab)
+	3) tabbedAlarmsListView
+		- 2 separate tabs, 1 with the symptoms and 1 with the times
+		- dynamic, toggle-able,delete-able
+
 === 03/11/18 ===
 
 I) Summary
@@ -9,7 +47,13 @@ I) Summary
 
 II) Takeaways
 
+	- Created another incorrect version of the alarm activity
+		- Dynamic list of editable, toggle-able, delete-able Prescription objects (Symptom & Time)
+		- Need to keep the symptoms separate from the times since all symptoms get addressed for every alarm
+
 III) Resources
+
+	- Expandable ListView: https://youtu.be/jZxZIFnJ9jE
 
 IV) To Do
 
@@ -24,6 +68,7 @@ A) Created New Alarms Activity
 		- Decided to use ExpandableListView
 			- top list = symptoms for all AlarmPrescriptions
 			- expanded = edit properties
+
 	ii) Created Alarms Activity
 		- Layout for the activity itself
 		- File -> New -> Empty Activity
