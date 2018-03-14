@@ -5,17 +5,116 @@ Brendan Thompson
 === 03/14/18 ===
 
 I) Summary
-	A) Started tabbedAlarmsListView
+	A) Created Symptoms Scaffold for tabbedAlarmsListView
+	B) Created Alarms Scaffold for tabbedAlarmsListView
 
 II) Takeaways
 
 III) Resources
 
+	- Android ListView tutorial: https://www.journaldev.com/10416/android-listview-with-custom-adapter-example-tutorial
+	- My ExpandableListView version: https://github.com/brenthompson2/Soul_Meds/tree/expandableAlarmsListView
+	- Android ListView item design:
+
 IV) To Do
+
+	A) Features
+		- Alarms Activity
+			* Create Alarms Tab
+			* Save & Retrieve the data
+			* Symptoms: implement Add, Toggle, and Delete
+			* Alarms: implement Add, Edit, Toggle, and Delete
+	B) Design
+		- Need Button Images
+	C) Backend
+		- Sync user data with Firebase
 
 V) Activity Log
 
-A) Started tabbedAlarmsListView
+A) Created Symptoms Scaffold for tabbedAlarmsListView
+	- Fragment 1 = Symptoms
+	- Fragment 2 = Alarms
+	1) Create Fragment 1 Layout
+		- Just add a a ListView
+		- id = alarms_list
+	2) Create alarms_list_item layout resource
+		- Just a TextView
+		- id = alarms_list_item
+		- paddingLeft = "?android:attr/listPreferredItemPaddingLeft"
+	3) Create AlarmsListAdapter custom ArrayAdapter
+		a) Create Members
+			- private Context mContext;
+    		- private ArrayList<String> mListData;
+		    - private int mResource;
+		    - private int mTextViewResourceId;
+		b) Define members in constructor
+			"
+			public AlarmsListAdapter(@NonNull Context context, int resource, int textViewResourceId, @NonNull List objects) {
+		        super(context, resource, textViewResourceId, objects);
+		        this.mContext = context;
+		        this.mListData = (ArrayList<String>) objects;
+		        this.mResource = resource;
+		        this.mTextViewResourceId = textViewResourceId;
+		        Log.d(TAG, String.valueOf(mListData));
+		    }
+		    "
+		c) Setup getView()
+			"@NonNull
+		    @Override
+		    public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
+
+		        // Get the data
+		        String currentItemText = mListData.get(position);
+		        // Log.d(TAG, currentItemText);
+
+		        if (convertView == null) {
+		            LayoutInflater inflater = (LayoutInflater)this.mContext.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+		            convertView = inflater.inflate(mResource, null);
+		        }
+
+		        TextView alarmItemTextView = convertView.findViewById(mTextViewResourceId);
+		        alarmItemTextView.setTypeface(null, Typeface.BOLD);
+		        alarmItemTextView.setText(currentItemText);
+		        return convertView;
+		    }
+			"
+	4) Create the List in alarms_fragment1
+		a) Create Members
+		    private ListView symptomListView;
+		    private AlarmsListAdapter symptomsListAdapter;
+		    private List<String> symptomsList;
+	    b) Setup the List View in onCreateView()
+	    	"
+	        symptomListView = view.findViewById(R.id.alarms_list_symptoms);
+	        initSymptomData();
+	        symptomsListAdapter = new AlarmsListAdapter(this.getContext(), R.layout.alarms_list_item, R.id.alarms_list_item_TextView, symptomsList);
+	        symptomListView.setAdapter(symptomsListAdapter);
+	        "
+        c) Define the data for symptomsList
+        	"
+        	private void initSymptomData(){
+		        symptomsList = getCurrentSymptoms();
+		        Log.d(TAG, String.valueOf(symptomsList));
+		    }
+		    "
+	    d) For testing, generate the data
+	    	"
+	    	private ArrayList<String> getCurrentSymptoms(){
+		        // TODO: Retrieve the saved list of the User's symptoms
+		        ArrayList<String> listOfCurrentSymptoms = new ArrayList<>();
+
+		        // Fake list of possible symptoms
+		        ArrayList<String> fakeListOfSymptoms = new ArrayList<>(Arrays.asList("anger", "jealousy", "greed", "lust", "hate", "stealing", "violence"));
+
+		        // Generating a fake list of user's  current Symptoms
+		        for (int i = 0; i < 5; i++){
+		            int randomIndex = new Random().nextInt(fakeListOfSymptoms.size());
+		            listOfCurrentSymptoms.add(fakeListOfSymptoms.get(randomIndex));
+		        }
+
+		        return listOfCurrentSymptoms;
+		    }
+		    "
 
 
 === 03/13/18 ===
@@ -24,6 +123,8 @@ I) Summary
 	A) Separated Alarm Implementations into new branches
 
 II) Takeaways
+
+	- Now have 3 branches with different Alarms Activity implementations
 
 III) Resources
 
