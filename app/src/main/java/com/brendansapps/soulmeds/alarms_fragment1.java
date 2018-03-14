@@ -9,81 +9,68 @@ import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ListView;
 import android.widget.TimePicker;
 import android.widget.Toast;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Calendar;
+import java.util.List;
+import java.util.Random;
 
 /**
- * Created by bt on 2/12/18.
+ * Created by bt on 3/14/18.
+ *
+ * Tab Of Alarms Activity for the Symptoms
  */
 
 public class alarms_fragment1 extends Fragment {
     private static final String TAG = "alarms_fragment1";
 
-    private Button mAlarmButton;
-    private TimePicker mTimePicker;
+    // Members for the Alarm Symptom List View
+    private ListView symptomListView;
+    private AlarmsListAdapter symptomsListAdapter;
+    private List<String> symptomsList;
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState){
         View view = inflater.inflate(R.layout.fragment1_alarms, container, false);
 
-        // Find the Alarm
-        mAlarmButton = view.findViewById(R.id.setAlarmBtn1);
-        mTimePicker = view.findViewById(R.id.alarmTimePicker1);
-
-      mAlarmButton.setOnClickListener(new View.OnClickListener() {
-           @Override
-           public void onClick(View v) {
-               Calendar calendar = Calendar.getInstance();
-
-               if (Build.VERSION.SDK_INT >= 23) {
-                   calendar.set(
-                           calendar.get(Calendar.YEAR),
-                           calendar.get(Calendar.MONTH),
-                           calendar.get(Calendar.DAY_OF_YEAR),
-                           mTimePicker.getHour(),
-                           mTimePicker.getMinute(),
-                           0
-                   );
-               }
-               else {
-                   calendar.set(
-                           calendar.get(Calendar.YEAR),
-                           calendar.get(Calendar.MONTH),
-                           calendar.get(Calendar.DAY_OF_YEAR),
-                           mTimePicker.getCurrentHour(),
-                           mTimePicker.getCurrentMinute(),
-                           0
-                   );
-               }
-
-               setAlarm(calendar.getTimeInMillis());
-           }
-        });
+        // Setup the Symptom List View
+        Log.d(TAG, "Creating Symptom List View");
+        symptomListView = view.findViewById(R.id.alarms_list_symptoms);
+        initSymptomData();
+        symptomsListAdapter = new AlarmsListAdapter(this.getContext(), R.layout.alarms_list_item, R.id.alarms_list_item_TextView, symptomsList);
+        symptomListView.setAdapter(symptomsListAdapter);
 
         return view;
     }
 
-    @Override
-    public void onAttach(Context context) {
-        super.onAttach(context);
+    private void initSymptomData(){
+        symptomsList = getCurrentSymptoms();
+        Log.d(TAG, String.valueOf(symptomsList));
     }
 
-    private void setAlarm(long timeInMillis) {
-        Context context = this.getContext();
-        AlarmManager alarmManager = (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);
-        Intent intent = new Intent(context, MyAlarm.class);
-        PendingIntent pendingIntent = PendingIntent.getBroadcast(context, 0, intent, 0);
-        alarmManager.setRepeating(AlarmManager.RTC_WAKEUP, timeInMillis, AlarmManager.INTERVAL_DAY, pendingIntent);
+    private ArrayList<String> getCurrentSymptoms(){
+        // TODO: Retrieve the saved list of the User's symptoms
+        ArrayList<String> listOfCurrentSymptoms = new ArrayList<>();
 
-        Toast.makeText(context, "Alarm is Set", Toast.LENGTH_SHORT).show();
+        // Fake list of possible symptoms
+        ArrayList<String> fakeListOfSymptoms = new ArrayList<>(Arrays.asList("Anger", "Jealousy", "Greed", "Lust", "Hate", "Stealing", "Violence"));
+
+        // Generating a fake list of user's  current Symptoms
+        for (int i = 0; i < 5; i++){
+            int randomIndex = new Random().nextInt(fakeListOfSymptoms.size());
+            listOfCurrentSymptoms.add(fakeListOfSymptoms.get(randomIndex));
+        }
+
+        return listOfCurrentSymptoms;
     }
-
-
 }

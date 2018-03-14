@@ -32,9 +32,8 @@ public class alarmsActivity extends AppCompatActivity {
         // Setup the tab toolbar
         TabLayout tabLayout = findViewById(R.id.tabs);
         tabLayout.setupWithViewPager(mViewPager);
-        tabLayout.getTabAt(0).setText("1");
-        tabLayout.getTabAt(1).setText("2");
-        tabLayout.getTabAt(2).setText("3");
+        tabLayout.getTabAt(0).setText("Symptoms");
+        tabLayout.getTabAt(1).setText("Alarms");
 
     }
 
@@ -43,7 +42,6 @@ public class alarmsActivity extends AppCompatActivity {
         SectionsPagerAdapter adapter = new SectionsPagerAdapter(getSupportFragmentManager());
         adapter.addFragment(new alarms_fragment1());
         adapter.addFragment(new alarms_fragment2());
-        adapter.addFragment(new alarms_fragment3());
         viewPager.setAdapter(adapter);
     }
 
