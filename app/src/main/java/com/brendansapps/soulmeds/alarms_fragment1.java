@@ -43,14 +43,18 @@ public class alarms_fragment1 extends Fragment {
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState){
         View view = inflater.inflate(R.layout.fragment1_alarms, container, false);
 
-        // Setup the Symptom List View
+        initSymptomListView(view);
+
+        return view;
+    }
+
+    // Populate the ListView by getting the Data & setting the Adapter
+    private void initSymptomListView(View view){
         Log.d(TAG, "Creating Symptom List View");
         symptomListView = view.findViewById(R.id.alarms_list_symptoms);
         initSymptomData();
         symptomsListAdapter = new AlarmsListAdapter(this.getContext(), R.layout.alarms_list_item, R.id.alarms_list_item_TextView, symptomsList);
         symptomListView.setAdapter(symptomsListAdapter);
-
-        return view;
     }
 
     private void initSymptomData(){

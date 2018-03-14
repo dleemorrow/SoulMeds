@@ -9,6 +9,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.TextView;
 
 import java.util.ArrayList;
@@ -39,7 +40,7 @@ public class AlarmsListAdapter extends ArrayAdapter {
 
     @NonNull
     @Override
-    public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
+    public View getView(final int position, @Nullable View convertView, @NonNull ViewGroup parent) {
 
         // Get the data
         String currentItemText = mListData.get(position);
@@ -50,9 +51,20 @@ public class AlarmsListAdapter extends ArrayAdapter {
             convertView = inflater.inflate(mResource, null);
         }
 
+        // Set the Text
         TextView alarmItemTextView = convertView.findViewById(mTextViewResourceId);
         alarmItemTextView.setTypeface(null, Typeface.BOLD);
         alarmItemTextView.setText(currentItemText);
+
+        // Set the Delete Button
+        Button mDeleteBtn = convertView.findViewById(R.id.alarms_list_item_DeleteBtn);
+        mDeleteBtn.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v) {
+                mListData.remove(position);
+            }
+        });
+
         return convertView;
     }
 }
