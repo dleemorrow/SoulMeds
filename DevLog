@@ -1,0 +1,163 @@
+DevLog for Soul Meds app
+Brendan Thompson
+
+
+=== 03/14/18 ===
+
+I) Summary
+	A) Started tabbedAlarmsListView
+
+II) Takeaways
+
+III) Resources
+
+IV) To Do
+
+V) Activity Log
+
+A) Started tabbedAlarmsListView
+
+
+=== 03/13/18 ===
+
+I) Summary
+	A) Separated Alarm Implementations into new branches
+
+II) Takeaways
+
+III) Resources
+
+IV) To Do
+
+V) Activity Log
+
+A) Separated Alarm Implementations into new branches
+	1) expandableAlarmsListView
+		- Dynamic list of editable, toggleable, deleteable Prescription objects (Symptom & Time)
+	2) tabbedAlarmsOriginal
+		- 3 tabs each with a Prescription object (symptom & tab)
+	3) tabbedAlarmsListView
+		- 2 separate tabs, 1 with the symptoms and 1 with the times
+		- dynamic, toggle-able,delete-able
+
+=== 03/11/18 ===
+
+I) Summary
+	A) Created New Alarms Activity
+
+II) Takeaways
+
+	- Created another incorrect version of the alarm activity
+		- Dynamic list of editable, toggle-able, delete-able Prescription objects (Symptom & Time)
+		- Need to keep the symptoms separate from the times since all symptoms get addressed for every alarm
+
+III) Resources
+
+	- Expandable ListView: https://youtu.be/jZxZIFnJ9jE
+
+IV) To Do
+
+V) Activity Log
+
+A) Created New Alarms Activity
+	i) Simplified Layout:
+		- List of AlarmPrescription objects
+		- AlarmPrescription object = symptom, time, end date, on/off
+		- Making it one form since the Android Time Pickers are supposed to be those big analog clocks
+		- Using one object allows for the amount of them available and on to be dynamic
+		- Decided to use ExpandableListView
+			- top list = symptoms for all AlarmPrescriptions
+			- expanded = edit properties
+
+	ii) Created Alarms Activity
+		- Layout for the activity itself
+		- File -> New -> Empty Activity
+		- Navigated to it when Alarms button clicked
+
+	iii) Created Expandable ListView
+		- https://youtu.be/jZxZIFnJ9jE
+		1) Add ExpandableListView, give ID, fill space
+		2) Add prescriptions_list_group layout resource file
+			- Layout for the list itself
+			- right click on "layout" in the project navigation
+			- new -> layout resource file -> "prescriptions_list_group"
+			- Text View with special padding
+		3) Add prescription_item layout resource file
+			- layout for an item's children
+			- Text view with special padding
+		4) Create PrescriptionsListAdaptor Java Class
+			- extends ExpandableListAdaptor
+			- Implement all Methods
+		5) Initialize in AlarmsActivity
+			- ListView, Adapter, DataHeader List, HashMap
+			a) Get the data and use it to instantiate the adapter
+				prescriptionsListAdapter = new PrescriptionsListAdapter(this, prescriptionListDataHeader, prescriptionHashMap);
+			b) setAdaptor of ListView to the initialized adapter
+				prescriptionsListView.setAdapter(prescriptionsListAdapter);
+
+	iv) Made prescription info edit-able
+		1) Listen for click on prescription info
+	        prescriptionsListView.setOnChildClickListener(new ExpandableListView.OnChildClickListener() {
+	            @Override
+	            public boolean onChildClick(ExpandableListView parent, View v, int groupPosition, int childPosition, long id) {
+	                Log.d(TAG, "Child " + groupPosition + " was clicked");
+	                return true;
+	            }
+	        });
+	    2)
+
+
+
+=== 03/07/18 ===
+
+I) Summary
+	A) Removed old tabbed Alarms Activity
+	B) Created Login Activity
+	C) Created Register Activity
+
+II) Takeaways
+
+	- Now able to Login & Register with Firebase
+	- Navigating between the activities is not super smooth.
+		- Should probably replace the two separate login & register activities with one activity that has 2 fragments (tabbed or bottom navigation)
+
+III) Resources
+
+	- Connecting to Firebase
+		- https://firebase.google.com/docs/auth/android/start/
+	- Android Activity Lifecycle events
+		- https://developer.android.com/guide/components/activities/activity-lifecycle.html#onresume
+
+IV) To Do
+
+V) Activity Log
+
+A) Removes old tabbed Alarms Activity
+	- removed all of the files
+	- commented out navigation when alarm btn pressed
+
+B) Created Login Activity
+	- File -> New -> Activity -> Login Activity
+	- Tools -> Firebase -> Authentication -> Email & Password Authentication
+		1) Connect your app to Firebase
+			- connected to Soul Meds
+		2) Add Firebase Authentication to your app
+			- adds dependencies
+		3) Added Checking Current Auth State
+			- LoginActivity.java -> onCreate
+			- https://firebase.google.com/docs/auth/android/start/
+		4) Sign in Existing Users
+			- LoginActivity.java -> async doInBackground
+			- https://firebase.google.com/docs/auth/android/start/
+
+C) Created Register Activity (Should do fragments)
+	- Copied Login Activity & Login Layout
+	- Enabled navigation between Login & Register
+	- handled Registering
+		- https://firebase.google.com/docs/auth/android/start/
+	- Quit Login after successful registration
+		- https://developer.android.com/guide/components/activities/activity-lifecycle.html#onresume
+		- onResume(){
+			if loggedIn() {
+				finish();
+			}}
