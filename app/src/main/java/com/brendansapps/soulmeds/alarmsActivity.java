@@ -1,6 +1,7 @@
 package com.brendansapps.soulmeds;
 
 import android.support.design.widget.TabLayout;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 
 import android.support.v4.app.Fragment;
@@ -10,6 +11,7 @@ import android.support.v4.view.ViewPager;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.Toolbar;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -28,6 +30,10 @@ public class alarmsActivity extends AppCompatActivity {
         mSectionsPagerAdapter = new SectionsPagerAdapter(getSupportFragmentManager());
         mViewPager = findViewById(R.id.container);
         setupViewPager(mViewPager);
+
+//        Toolbar mToolbar = findViewById(R.id.alarms_toolbar);
+//        setSupportActionBar(mToolbar);
+//        getActionBar().setDisplayHomeAsUpEnabled(true);
 
         // Setup the tab toolbar
         TabLayout tabLayout = findViewById(R.id.tabs);
