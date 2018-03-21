@@ -62,11 +62,13 @@ public class alarms_fragment1 extends Fragment {
         registerForContextMenu(symptomListView);
     }
 
+    // Get the symptom data for the current user
     private void initSymptomData(){
         symptomsList = getCurrentSymptoms();
         Log.d(TAG, String.valueOf(symptomsList));
     }
 
+    // Generating a list of symptoms
     private ArrayList<String> getCurrentSymptoms(){
         // TODO: Retrieve the saved list of the User's symptoms
         ArrayList<String> listOfCurrentSymptoms = new ArrayList<>();
@@ -98,9 +100,10 @@ public class alarms_fragment1 extends Fragment {
         AdapterView.AdapterContextMenuInfo obj = (AdapterView.AdapterContextMenuInfo) item.getMenuInfo();
 
         switch (item.getItemId()){
-            case R.id.delete:
+            case R.id.action_delete_symptom:
                 symptomsList.remove(obj.position);
                 symptomsListAdapter.notifyDataSetChanged();
+                symptomsListAdapter.notifyDataSetInvalidated();
                 Log.d(TAG, String.valueOf(symptomsList));
                 break;
             default:
@@ -108,6 +111,5 @@ public class alarms_fragment1 extends Fragment {
         }
 
         return super.onContextItemSelected(item);
-
     }
 }

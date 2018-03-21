@@ -4,9 +4,13 @@ import android.support.v4.app.Fragment;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.util.Log;
+import android.view.ContextMenu;
 import android.view.LayoutInflater;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ListView;
 
@@ -40,6 +44,7 @@ public class alarms_fragment2 extends Fragment {
         initAlarmTimesData();
         timesListAdapter = new AlarmsListAdapter(this.getContext(), R.layout.alarms_list_item, R.id.alarms_list_item_TextView, timesList);
         timeListView.setAdapter(timesListAdapter);
+        registerForContextMenu(timeListView);
 
         return view;
     }
@@ -63,6 +68,37 @@ public class alarms_fragment2 extends Fragment {
         }
 
         return listOfCurrentTimes;
+    }
+
+    // Create context menu for each item
+    @Override
+    public void onCreateContextMenu(ContextMenu menu, View v, ContextMenu.ContextMenuInfo menuInfo) {
+        super.onCreateContextMenu(menu, v, menuInfo);
+        MenuInflater menuInflater = new MenuInflater(this.getContext());
+        menuInflater.inflate(R.menu.alarms_time_context_menu, menu);
+
+    }
+
+    // Handle context menu action selected
+    @Override
+    public boolean onContextItemSelected(MenuItem item) {
+        AdapterView.AdapterContextMenuInfo obj = (AdapterView.AdapterContextMenuInfo) item.getMenuInfo();
+
+        switch (item.getItemId()){
+            case R.id.action_delete_time:
+                timesList.remove(obj.position);
+                timesListAdapter.notifyDataSetChanged();
+                timesListAdapter.notifyDataSetInvalidated();
+                Log.d(TAG, String.valueOf(timesList));
+                break;
+            case R.id.action_edit_time:
+                Log.d(TAG, "Edit action pressed");
+                break;
+            default:
+                break;
+        }
+
+        return super.onContextItemSelected(item);
     }
 
 

@@ -1,10 +1,44 @@
 DevLog for Soul Meds app
 Brendan Thompson
 
+=== 03/21/18 ===
+
+I) Summary
+	A) Implemented Alarm Time delete using a context menu
+
+II) Takeaways
+
+	- Now able to delete symptoms
+		- long click to open context menu
+		- select delete in the context menu
+
+III) Resources
+
+IV) To Do
+
+	A) Features
+		- Alarms Activity
+			* Save & Retrieve the data
+			* Symptoms: implement Add, Toggle
+			* Alarms: implement Add, Edit, Toggle, and Delete
+	B) Design
+		- Need Button Images
+	C) Back End
+		- Sync user data with Firebase
+
+V) Activity Log
+
+A) Implemented Alarm Time delete using a context menu
+	- see Activity Log from 03/20/18
+
+B) Implemented back button for Alarm page
+
+C) Implemented Alarm Symptom Add using
+
 === 03/20/18 ===
 
 I) Summary
-	A) Implemented Symptom delete in context menu
+	A) Implemented Alarm Symptom delete using a context menu
 
 II) Takeaways
 
@@ -30,9 +64,44 @@ IV) To Do
 
 V) Activity Log
 
-A) Implemented Symptom delete in context menu
+A) Implemented Alarm Symptom delete using a context menu
 	- https://www.youtube.com/watch?v=2mrN5r9qshg
-	-
+
+	1) Create the Menu Layout File
+		- (right click on res > menu) > new > menu resource file
+		- just add items
+			- `<item android:id="@+id/delete"
+        android:title="Delete"></item>`
+
+	2) Register the ListView with the Context Menu
+		- in onCreateView()
+		- `registerForContextMenu(timeListView);`
+
+	3) Override Creation of Context Menu
+	    @Override
+	    public void onCreateContextMenu(ContextMenu menu, View v, ContextMenu.ContextMenuInfo menuInfo) {
+	        super.onCreateContextMenu(menu, v, menuInfo);
+	        MenuInflater menuInflater = new MenuInflater(this.getContext());
+	        menuInflater.inflate(R.menu.alarms_symptom_context_menu, menu);
+	    }
+
+    4) Override handling Menu Action Selected
+	    @Override
+	    public boolean onContextItemSelected(MenuItem item) {
+	        AdapterView.AdapterContextMenuInfo obj = (AdapterView.AdapterContextMenuInfo) item.getMenuInfo();
+
+	        switch (item.getItemId()){
+	            case R.id.delete:
+	                symptomsList.remove(obj.position);
+	                symptomsListAdapter.notifyDataSetChanged();
+	                Log.d(TAG, String.valueOf(symptomsList));
+	                break;
+	            default:
+	                break;
+	        }
+
+	        return super.onContextItemSelected(item);
+	    }
 
 
 
