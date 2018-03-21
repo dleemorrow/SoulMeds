@@ -4,13 +4,16 @@ import android.content.Context;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity {
 
+    private static final String TAG = "MainActivity";
     Button mBtnAlarm, mBtnQuote, mBtnFolder, mBtnHelp;
+    static private int numVisits = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -77,10 +80,15 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onStart() {
         super.onStart();
+        numVisits++;
+        Log.d(TAG, String.valueOf(numVisits));
 
         // Launch LoginActivity
-        Intent intent = new Intent(this, LoginActivity.class);
-        startActivity(intent);
+        if (numVisits == 1){
+            Intent intent = new Intent(this, LoginActivity.class);
+            startActivity(intent);
+            finish();
+        }
     }
 
     // Function that navigates to a new page

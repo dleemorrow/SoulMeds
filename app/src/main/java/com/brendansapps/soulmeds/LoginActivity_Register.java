@@ -85,7 +85,7 @@ public class LoginActivity_Register extends AppCompatActivity implements LoaderC
         });
 
         // Listen for Registration
-        Button mEmailRegisterButton = (Button) findViewById(R.id.email_register_button);
+        Button mEmailRegisterButton = (Button) findViewById(R.id.action_register);
         mEmailRegisterButton.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -94,7 +94,7 @@ public class LoginActivity_Register extends AppCompatActivity implements LoaderC
         });
 
         // Listen for switching to Login page
-        Button mEmailSignInButton = (Button) findViewById(R.id.email_sign_in_button);
+        Button mEmailSignInButton = (Button) findViewById(R.id.action_login_navigate);
         mEmailSignInButton.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -338,6 +338,7 @@ public class LoginActivity_Register extends AppCompatActivity implements LoaderC
 //            }
 
             // Register with Firebase
+            Log.d(TAG, "Attempting to Register");
             mFirebaseAuth.createUserWithEmailAndPassword(mEmail, mPassword)
                 .addOnCompleteListener(LoginActivity_Register.this, new OnCompleteListener<AuthResult>() {
                     @Override
@@ -365,6 +366,7 @@ public class LoginActivity_Register extends AppCompatActivity implements LoaderC
             showProgress(false);
 
             if (success) {
+                Log.d(TAG, "Registered Successfully");
                 finish();
             } else {
                 mPasswordView.setError(getString(R.string.error_incorrect_password));
