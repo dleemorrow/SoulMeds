@@ -56,16 +56,6 @@ public class AlarmsListAdapter extends ArrayAdapter {
         alarmItemTextView.setTypeface(null, Typeface.BOLD);
         alarmItemTextView.setText(currentItemText);
 
-        // Set the Delete Button
-        // TODO: Fix Delete Button
-        Button mDeleteBtn = convertView.findViewById(R.id.alarms_list_item_DeleteBtn);
-        mDeleteBtn.setOnClickListener(new View.OnClickListener(){
-            @Override
-            public void onClick(View v) {
-                mListData.remove(position);
-            }
-        });
-
         return convertView;
     }
 }

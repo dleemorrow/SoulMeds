@@ -1,6 +1,41 @@
 DevLog for Soul Meds app
 Brendan Thompson
 
+=== 03/20/18 ===
+
+I) Summary
+	A) Implemented Symptom delete in context menu
+
+II) Takeaways
+
+	- Now able to delete symptoms
+		- long click to open context menu
+		- select delete in the context menu
+
+III) Resources
+
+	- Delete List items w/ Context Menu: https://www.youtube.com/watch?v=2mrN5r9qshg
+
+IV) To Do
+
+	A) Features
+		- Alarms Activity
+			* Save & Retrieve the data
+			* Symptoms: implement Add, Toggle
+			* Alarms: implement Add, Edit, Toggle, and Delete
+	B) Design
+		- Need Button Images
+	C) Backend
+		- Sync user data with Firebase
+
+V) Activity Log
+
+A) Implemented Symptom delete in context menu
+	- https://www.youtube.com/watch?v=2mrN5r9qshg
+	-
+
+
+
 === 03/14/18 ===
 
 I) Summary

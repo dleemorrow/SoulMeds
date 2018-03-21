@@ -10,9 +10,13 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.util.Log;
+import android.view.ContextMenu;
 import android.view.LayoutInflater;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TimePicker;
@@ -55,6 +59,7 @@ public class alarms_fragment1 extends Fragment {
         initSymptomData();
         symptomsListAdapter = new AlarmsListAdapter(this.getContext(), R.layout.alarms_list_item, R.id.alarms_list_item_TextView, symptomsList);
         symptomListView.setAdapter(symptomsListAdapter);
+        registerForContextMenu(symptomListView);
     }
 
     private void initSymptomData(){
@@ -76,5 +81,33 @@ public class alarms_fragment1 extends Fragment {
         }
 
         return listOfCurrentSymptoms;
+    }
+
+    // Create context menu for each item
+    @Override
+    public void onCreateContextMenu(ContextMenu menu, View v, ContextMenu.ContextMenuInfo menuInfo) {
+        super.onCreateContextMenu(menu, v, menuInfo);
+        MenuInflater menuInflater = new MenuInflater(this.getContext());
+        menuInflater.inflate(R.menu.alarms_symptom_context_menu, menu);
+
+    }
+
+    // Handle context menu action selected
+    @Override
+    public boolean onContextItemSelected(MenuItem item) {
+        AdapterView.AdapterContextMenuInfo obj = (AdapterView.AdapterContextMenuInfo) item.getMenuInfo();
+
+        switch (item.getItemId()){
+            case R.id.delete:
+                symptomsList.remove(obj.position);
+                symptomsListAdapter.notifyDataSetChanged();
+                Log.d(TAG, String.valueOf(symptomsList));
+                break;
+            default:
+                break;
+        }
+
+        return super.onContextItemSelected(item);
+
     }
 }
