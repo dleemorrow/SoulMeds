@@ -4,15 +4,23 @@ Brendan Thompson
 === 03/21/18 ===
 
 I) Summary
-	A) Implemented Alarm Time delete using a context menu
+	A) Implemented Alarm Time Delete using a context menu
+	B) Added back button for Alarm page
+	C) Started Add for Symptoms and Times using FloatingActionButton
+	D) Fixed Navigation between Login
 
 II) Takeaways
 
 	- Now able to delete symptoms
 		- long click to open context menu
 		- select delete in the context menu
+	- Need to implement function for adding new Symptom or Time
+	- Crappy implementation of only going to login screen the first time
 
 III) Resources
+
+	- FloatingActionButton: https://developer.android.com/guide/topics/ui/floating-action-button.html
+	- Android Icons: https://material.io/icons/
 
 IV) To Do
 
@@ -28,17 +36,50 @@ IV) To Do
 
 V) Activity Log
 
-A) Implemented Alarm Time delete using a context menu
+A) Implemented Alarm Time Delete using a context menu
 	- see Activity Log from 03/20/18
 
-B) Implemented back button for Alarm page
+B) Added back button for Alarm page
+	1) Set MainActivity as parent of AlarmsActivity
+		- `android:parentActivityName=".MainActivity"`
+	2) Bring back navbar by removing the theme in AndroidManifest
+	3) remove custom ToolBar in activity_alarms.xml
+	- the drop shadow looks meh
 
-C) Implemented Alarm Symptom Add using
+C) Started Add for Symptoms and Times using FloatingActionButton
+	1) Add the Icons
+		- https://material.io/icons/
+		- download as PNG
+		- add the 6 drawable-<resolution> folders to src > main > res
+		- https://material.io/icons/#ic_add
+		- https://material.io/icons/#ic_alarm_add
+
+	2) Add the button to the fragment layout
+	    <android.support.design.widget.FloatingActionButton
+	        android:id="@+id/action_add_symptom"
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:layout_marginBottom="16dp"
+	        android:layout_marginRight="16dp"
+	        app:layout_constraintBottom_toBottomOf="parent"
+	        app:layout_constraintRight_toRightOf="parent"
+	        android:backgroundTint="@color/colorPrimary"
+	        android:src="@drawable/ic_add_white_24dp"/>
+
+	3) Handle the button clicked
+
+D) Fixed Navigation between Login
+	- calling finish(); to close
+	- using static numVisits to manage opening Login Activity
+		- if numVisits == 0, Login
+	- Ugly shortcut
+
+
 
 === 03/20/18 ===
 
 I) Summary
-	A) Implemented Alarm Symptom delete using a context menu
+	A) Implemented Alarm Symptom Delete using a context menu
 
 II) Takeaways
 
@@ -64,7 +105,7 @@ IV) To Do
 
 V) Activity Log
 
-A) Implemented Alarm Symptom delete using a context menu
+A) Implemented Alarm Symptom Delete using a context menu
 	- https://www.youtube.com/watch?v=2mrN5r9qshg
 
 	1) Create the Menu Layout File

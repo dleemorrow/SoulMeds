@@ -1,15 +1,16 @@
 <resources>
     <string name="app_name">Soul Meds</string>
-    <string name="title_activity_alarms">alarmsActivity</string>
     <string name="action_settings">Settings</string>
 
-    <!-- Strings for login & registration -->
+    <!-- login & registration -->
     <string name="title_activity_login">Sign in</string>
     <string name="title_activity_login_register">Register</string>
     <string name="prompt_email">Email</string>
     <string name="prompt_password">Password</string>
-    <string name="action_sign_in">Sign in</string>
+    <string name="action_login">Sign in</string>
     <string name="action_register">Register</string>
+    <string name="action_login_navigate">Already Registered? Sign in</string>
+    <string name="action_register_navigate">Create an Account</string>
     <string name="action_sign_in_short">Sign in</string>
     <string name="error_invalid_email">This email address is invalid</string>
     <string name="error_invalid_password">This password is too short</string>
@@ -18,6 +19,11 @@
     <string name="permission_rationale">"Contacts permissions are needed for providing email
         completions."
     </string>
+
+    <!-- Alarms Activity-->
+    <string name="title_activity_alarms">Prescription Manager</string>
+    <string name="action_delete_item">Delete</string>
+    <string name="action_edit_item">Edit</string>
 
 
 </resources>

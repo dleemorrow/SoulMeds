@@ -3,8 +3,10 @@ package com.brendansapps.soulmeds;
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.annotation.TargetApi;
+import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.os.Handler;
 import android.support.annotation.NonNull;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
@@ -92,7 +94,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
         });
 
         // Listen for Sign In button
-        Button mEmailSignInButton = (Button) findViewById(R.id.email_sign_in_button);
+        Button mEmailSignInButton = (Button) findViewById(R.id.action_login);
         mEmailSignInButton.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -101,7 +103,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
         });
 
         // Listen for switching to Registration
-        Button mEmailRegisterButton = (Button) findViewById(R.id.email_register_button);
+        Button mEmailRegisterButton = (Button) findViewById(R.id.action_register_navigate);
         mEmailRegisterButton.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -123,7 +125,9 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
     void finishIfLoggedIn(){
         // Check If Logged In
         FirebaseUser currentUser = FirebaseAuth.getInstance().getCurrentUser();
-        if (currentUser != null){
+        if (currentUser == null){
+            Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+            startActivity(intent);
             finish();
         }
     }
@@ -359,6 +363,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
 //            }
 
             // Sign In with Firebase
+            Log.d(TAG, "Attempting to Login");
             mFirebaseAuth.signInWithEmailAndPassword(mEmail, mPassword)
                 .addOnCompleteListener(LoginActivity.this, new OnCompleteListener<AuthResult>() {
                     @Override
@@ -367,6 +372,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
                             // Signed In Successfully
                             Log.d(TAG, "signInWithEmail:success");
                             FirebaseUser currentUser = mFirebaseAuth.getCurrentUser();
+                            Log.d(TAG, String.valueOf(currentUser));
                             // updateUI(currentUser);
                         }
                         else {
@@ -386,6 +392,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
             showProgress(false);
 
             if (success) {
+                Log.d(TAG, "Logged In Successfully");
                 finish();
             } else {
                 mPasswordView.setError(getString(R.string.error_incorrect_password));
