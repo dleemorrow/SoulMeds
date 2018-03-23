@@ -69,10 +69,10 @@ public class LoginActivity_Register extends AppCompatActivity implements LoaderC
         mFirebaseAuth = FirebaseAuth.getInstance();
 
         // Set up the login form.
-        mEmailView = (AutoCompleteTextView) findViewById(R.id.email);
+        mEmailView = findViewById(R.id.email);
 //        populateAutoComplete();
 
-        mPasswordView = (EditText) findViewById(R.id.password);
+        mPasswordView = findViewById(R.id.password);
         mPasswordView.setOnEditorActionListener(new TextView.OnEditorActionListener() {
             @Override
             public boolean onEditorAction(TextView textView, int id, KeyEvent keyEvent) {
@@ -85,7 +85,7 @@ public class LoginActivity_Register extends AppCompatActivity implements LoaderC
         });
 
         // Listen for Registration
-        Button mEmailRegisterButton = (Button) findViewById(R.id.action_register);
+        Button mEmailRegisterButton = findViewById(R.id.action_register);
         mEmailRegisterButton.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -94,7 +94,7 @@ public class LoginActivity_Register extends AppCompatActivity implements LoaderC
         });
 
         // Listen for switching to Login page
-        Button mEmailSignInButton = (Button) findViewById(R.id.action_login_navigate);
+        Button mEmailSignInButton = findViewById(R.id.action_login_navigate);
         mEmailSignInButton.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -107,9 +107,9 @@ public class LoginActivity_Register extends AppCompatActivity implements LoaderC
         mProgressView = findViewById(R.id.registration_progress);
     }
 
-    /**
-     * Autocomplete Credentials
-     */
+//    /**
+//     * Autocomplete Credentials
+//     */
     //    private void populateAutoComplete() {
 //        if (!mayRequestContacts()) {
 //            return;
@@ -139,9 +139,9 @@ public class LoginActivity_Register extends AppCompatActivity implements LoaderC
 //        return false;
 //    }
 
-    /**
-     * Callback received when a permissions request has been completed.
-     */
+//    /**
+//     * Callback received when a permissions request has been completed.
+//     */
 //    @Override
 //    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions,
 //                                           @NonNull int[] grantResults) {

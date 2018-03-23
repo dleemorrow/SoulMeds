@@ -87,7 +87,7 @@ public class MainActivity extends AppCompatActivity {
         if (numVisits == 1){
             Intent intent = new Intent(this, LoginActivity.class);
             startActivity(intent);
-            finish();
+//            finish();
         }
     }
 

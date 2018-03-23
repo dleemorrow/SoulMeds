@@ -78,10 +78,10 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
         mFirebaseAuth = FirebaseAuth.getInstance();
 
         // Set up the login form.
-        mEmailView = (AutoCompleteTextView) findViewById(R.id.email);
+        mEmailView = findViewById(R.id.email);
 //        populateAutoComplete();
 
-        mPasswordView = (EditText) findViewById(R.id.password);
+        mPasswordView = findViewById(R.id.password);
         mPasswordView.setOnEditorActionListener(new TextView.OnEditorActionListener() {
             @Override
             public boolean onEditorAction(TextView textView, int id, KeyEvent keyEvent) {
@@ -94,7 +94,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
         });
 
         // Listen for Sign In button
-        Button mEmailSignInButton = (Button) findViewById(R.id.action_login);
+        Button mEmailSignInButton = findViewById(R.id.action_login);
         mEmailSignInButton.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -103,7 +103,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
         });
 
         // Listen for switching to Registration
-        Button mEmailRegisterButton = (Button) findViewById(R.id.action_register_navigate);
+        Button mEmailRegisterButton = findViewById(R.id.action_register_navigate);
         mEmailRegisterButton.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -132,16 +132,16 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
         }
     }
 
-    /**
-     * Autocomplete Credentials
-     */
-    //    private void populateAutoComplete() {
+//    /**
+//     * Autocomplete Credentials
+//     */
+//    private void populateAutoComplete() {
 //        if (!mayRequestContacts()) {
 //            return;
 //        }
 //        getLoaderManager().initLoader(0, null, this);
 //    }
-
+//
 //    private boolean mayRequestContacts() {
 //        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.M) {
 //            return true;
@@ -164,9 +164,9 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
 //        return false;
 //    }
 
-    /**
-     * Callback received when a permissions request has been completed.
-     */
+//    /**
+//     * Callback received when a permissions request has been completed.
+//     */
 //    @Override
 //    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions,
 //                                           @NonNull int[] grantResults) {
