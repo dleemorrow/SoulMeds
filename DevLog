@@ -1,6 +1,63 @@
 DevLog for Soul Meds app
 Brendan Thompson
 
+=== 03/22/18 ===
+
+I) Summary
+	A) Simplified Login Interface
+	B) Started bringing in actual resources
+
+II) Takeaways
+
+	- Login / Register working fine
+	- Should use "Spinner" for selecting symptoms:
+
+III) Resources
+
+IV) To Do
+
+	A) Features
+		- Alarms Activity
+			* Save & Retrieve the data
+			* Symptoms: implement Add, Toggle
+			* Alarms: implement Add, Edit, Toggle, and Delete
+			* Actual Alarm Functionality
+	B) Design
+		- Need Button Images
+	C) Back End
+		- Sync user data with Firebase
+
+V) Activity Log
+
+A) Simplified Login Interface
+	- made navigation buttons style buttonBarNegativeButtonStyle
+
+B) Started bringing in actual resources
+	- app > src > main > res > values > symptomList.xml
+	- app > src > main > res > values > bibleQuoteList.xml
+
+C) Started making Alarm Times editable
+	- https://developer.android.com/guide/topics/ui/controls/pickers.html
+		- Should use DialogFragment to display TimePicker
+	1) Created java class alarms_TimePickerDialog
+		- extends DialogFragment
+		- implements TimePickerDialog.OnTimeSetListener
+		`
+	        super.onCreateDialog(savedInstanceState);
+	        // Set default value to current time
+	        final Calendar c = Calendar.getInstance();
+	        int hour = c.get(Calendar.HOUR_OF_DAY);
+	        int minute = c.get(Calendar.MINUTE);
+
+	        // Create TimePickerDialog instance
+	        return new TimePickerDialog(getActivity(), this, hour, minute, true);
+        `
+	2) Open the Dialog when action started
+		`
+		    DialogFragment timeSelectFragment = new alarms_TimePickerDialog();
+		    timeSelectFragment.show(getSupportFragmentManager(), "timePicker");
+	    `
+
 === 03/21/18 ===
 
 I) Summary
@@ -73,8 +130,6 @@ D) Fixed Navigation between Login
 	- using static numVisits to manage opening Login Activity
 		- if numVisits == 0, Login
 	- Ugly shortcut
-
-
 
 === 03/20/18 ===
 
