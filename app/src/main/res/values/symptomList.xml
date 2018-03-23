@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string-array name="symptomsList">
+        <item>Anger</item>
+        <item>Jealousy</item>
+        <item>Greed</item>
+        <item>Lust</item>
+        <item>Hate</item>
+        <item>Stealing</item>
+        <item>Violence</item>
+    </string-array>
+
+</resources>

@@ -1,5 +1,6 @@
 package com.brendansapps.soulmeds;
 
+import android.support.v4.app.DialogFragment;
 import android.support.v4.app.Fragment;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -93,6 +94,8 @@ public class alarms_fragment2 extends Fragment {
                 break;
             case R.id.action_edit_time:
                 Log.d(TAG, "Edit action pressed");
+//                DialogFragment timeSelectFragment = new alarms_TimePickerDialog();
+//                timeSelectFragment.show(getSupportFragmentManager(), "timePicker");
                 break;
             default:
                 break;
