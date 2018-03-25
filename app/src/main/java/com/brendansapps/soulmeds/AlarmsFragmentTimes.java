@@ -16,9 +16,12 @@ import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TimePicker;
 
+import java.sql.Time;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 /**
  * Created by bt on 3/14/18.
@@ -59,7 +62,7 @@ public class AlarmsFragmentTimes extends Fragment {
         // TODO: Retrieve the saved list of the User's Alarm Times
         ArrayList<String> listOfCurrentTimes = new ArrayList<>();
 
-        // Generating a fake list of user's  current Symptoms
+        // Generating a fake list of alarm times
         for (int i = 0; i < 3; i++){
             int randomHour = new Random().nextInt(24);
             int randomMinute = new Random().nextInt(50);
@@ -77,7 +80,6 @@ public class AlarmsFragmentTimes extends Fragment {
         super.onCreateContextMenu(menu, v, menuInfo);
         MenuInflater menuInflater = new MenuInflater(this.getContext());
         menuInflater.inflate(R.menu.alarms_time_context_menu, menu);
-
     }
 
     // Handle context menu action selected
@@ -96,10 +98,20 @@ public class AlarmsFragmentTimes extends Fragment {
             case R.id.action_edit_time:
                 Log.d(TAG, "Edit action pressed");
 
-                // Get current data
-                String oldHour = timesList.get(indexSelected);
+                // Get current time to use as default
+                String currentTime = timesList.get(indexSelected);
+                String currentHour_string;
+                String currentMinute_string;
+                Pattern timePattern = Pattern.compile("^([0-9]|0[0-9]|1[0-9]|2[0-3]):([0-5][0-9])$");
+                Matcher m = timePattern.matcher(currentTime);
+                m.find();
+                currentHour_string = m.group(1);
+                currentMinute_string = m.group(2);
+                Log.d(TAG, "Time: " + currentHour_string + ":" + currentMinute_string);
+                int currentHour = Integer.parseInt(currentHour_string);
+                int currentMinute = Integer.parseInt(currentMinute_string);
 
-                // Get New Time
+                // Get New Time from TimePickerDialog
                 TimePickerDialog mAlarmTimePickerDialog;
                 mAlarmTimePickerDialog = new TimePickerDialog(getContext(),
                     new TimePickerDialog.OnTimeSetListener(){
@@ -110,9 +122,8 @@ public class AlarmsFragmentTimes extends Fragment {
                             timesListAdapter.notifyDataSetInvalidated();
                             Log.d(TAG, String.valueOf(timesList));
                     }
-                }, 12, 30, false);
+                }, currentHour, currentMinute, false);
                 mAlarmTimePickerDialog.show();
-
                 break;
             default:
                 break;
