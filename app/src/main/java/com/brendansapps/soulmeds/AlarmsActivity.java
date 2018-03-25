@@ -1,75 +1,107 @@
 package com.brendansapps.soulmeds;
 
+import android.support.design.widget.TabLayout;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
-import android.util.Log;
-import android.view.View;
-import android.widget.AdapterView;
-import android.widget.AdapterView.OnItemClickListener;
-import android.widget.ExpandableListView;
 
-import java.sql.Time;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentPagerAdapter;
+import android.support.v4.view.ViewPager;
+import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuItem;
+import android.widget.Toolbar;
+
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 
 public class AlarmsActivity extends AppCompatActivity {
 
-    private static final String TAG = "Alarm Activity";
-
-    // Members for the Prescription List View
-    private ExpandableListView prescriptionsListView;
-    private PrescriptionsListAdapter prescriptionsListAdapter;
-    private List<String> prescriptionListDataHeader;
-    private HashMap<String, PrescriptionObject> prescriptionHashMap;
+    private SectionsPagerAdapter mSectionsPagerAdapter; // Manages the Pages in Memory
+    private ViewPager mViewPager; // Hosts the Section Contents
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_alarms);
 
-        // Setup the ExpandableListView
-        prescriptionsListView = findViewById(R.id.prescriptionListView);
-        initPrescriptionData();
-        prescriptionsListAdapter = new PrescriptionsListAdapter(this, prescriptionListDataHeader, prescriptionHashMap);
-        prescriptionsListView.setAdapter(prescriptionsListAdapter);
+        // Set up the ViewPager and the SectionsPagerAdapter.
+        mSectionsPagerAdapter = new SectionsPagerAdapter(getSupportFragmentManager());
+        mViewPager = findViewById(R.id.container);
+        setupViewPager(mViewPager);
 
-        // Listen for Prescription Clicked
-        prescriptionsListView.setOnChildClickListener(new ExpandableListView.OnChildClickListener() {
-            @Override
-            public boolean onChildClick(ExpandableListView parent, View v, int groupPosition, int childPosition, long id) {
-                Log.d(TAG, "Child " + groupPosition + " was clicked");
-                return true;
-            }
-        });
+//        Toolbar mToolbar = findViewById(R.id.alarms_toolbar);
+//        setSupportActionBar(mToolbar);
+//        getActionBar().setDisplayHomeAsUpEnabled(true);
+
+        // Setup the tab toolbar
+        TabLayout tabLayout = findViewById(R.id.tabs);
+        tabLayout.setupWithViewPager(mViewPager);
+        tabLayout.getTabAt(0).setText("Symptoms");
+        tabLayout.getTabAt(1).setText("Alarms");
 
     }
 
-    // Map listOfPrescriptions & the headers
-    private void initPrescriptionData() {
-        prescriptionListDataHeader = new ArrayList<>();
-        prescriptionHashMap = new HashMap<>();
+    // Adds the fragments to the View Page / SectionsPagerAdapter / FragmentList
+    private void setupViewPager(ViewPager viewPager) {
+        SectionsPagerAdapter adapter = new SectionsPagerAdapter(getSupportFragmentManager());
+        adapter.addFragment(new AlarmsFragmentSymptoms());
+        adapter.addFragment(new AlarmsFragmentTimes());
+        viewPager.setAdapter(adapter);
+    }
 
-        List<PrescriptionObject> listOfPrescriptions = getAllPrescriptions();
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
 
-        // Map the prescription headers with the PrescriptionObjects
-        for (int i = 0; i < listOfPrescriptions.size(); i++){
-            prescriptionListDataHeader.add("Prescription " + i + ": " + listOfPrescriptions.get(i).getSymptom());
-            prescriptionHashMap.put(prescriptionListDataHeader.get(i), listOfPrescriptions.get(i));
+        // Inflate the menu; this adds items to the action bar if it is present.
+//        getMenuInflater().inflate(R.menu.menu_alarms, menu);
+
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        // Handle action bar item clicks here. The action bar will
+        // automatically handle clicks on the Home/Up button, so long
+        // as you specify a parent activity in AndroidManifest.xml.
+        int id = item.getItemId();
+
+        //noinspection SimplifiableIfStatement
+        if (id == R.id.action_settings) {
+            return true;
+        }
+
+        return super.onOptionsItemSelected(item);
+    }
+
+    // Fragment Manager Class
+    public class SectionsPagerAdapter extends FragmentPagerAdapter {
+
+        // Create a List of fragments
+        private final List<Fragment> mFragmentList = new ArrayList<>();
+
+        // Constructor
+        public SectionsPagerAdapter(FragmentManager fm) {
+            super(fm);
+        }
+
+        // Add the fragments to the mFragmentList
+        public void addFragment(Fragment fragment){
+            mFragmentList.add(fragment);
+        }
+
+        // Get the Fragment at the position
+        @Override
+        public Fragment getItem(int position) {
+            return mFragmentList.get(position);
+        }
+
+        // Get the number of fragments
+        @Override
+        public int getCount() {
+            return mFragmentList.size();
         }
     }
 
-    // Gets all of the prescriptions for the current user
-    private List<PrescriptionObject> getAllPrescriptions(){
-        ArrayList<PrescriptionObject> listOfPrescriptions = new ArrayList<>();
-
-        // Generate fake prescriptions
-        for (int i = 0; i < 5; i++){
-            String alarmTime = "12:30";
-            PrescriptionObject prescription = new PrescriptionObject("Symptom " + i, alarmTime);
-            listOfPrescriptions.add(prescription);
-        }
-
-        return listOfPrescriptions;
-    }
 }
