@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <array name="elaborateSymptomsList">
+        <item>
+            <string>This is a Bible Quote 1</string>
+            <string>Brendan 3:16 </string>
+        </item>
+        <item>
+            <string>This is a Bible Quote 2</string>
+            <string>Brendan 3:16 </string>
+        </item>
+        <item>
+            <string>This is a Bible Quote 3</string>
+            <string>Brendan 3:16 </string>
+        </item>
+        <item>
+            <string>This is a Bible Quote 4</string>
+            <string>Brendan 3:16 </string>
+        </item>
+        <item>
+            <string>This is a Bible Quote 5</string>
+            <string>Brendan 3:16 </string>
+        </item>
+    </array>
+
+
+
+</resources>

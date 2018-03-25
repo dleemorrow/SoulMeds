@@ -74,12 +74,12 @@ public class alarms_fragment1 extends Fragment {
         ArrayList<String> listOfCurrentSymptoms = new ArrayList<>();
 
         // Fake list of possible symptoms
-        ArrayList<String> fakeListOfSymptoms = new ArrayList<>(Arrays.asList("Anger", "Jealousy", "Greed", "Lust", "Hate", "Stealing", "Violence"));
+        DataManager symptomDataManager = new DataManager();
 
         // Generating a fake list of user's  current Symptoms
         for (int i = 0; i < 5; i++){
-            int randomIndex = new Random().nextInt(fakeListOfSymptoms.size());
-            listOfCurrentSymptoms.add(fakeListOfSymptoms.get(randomIndex));
+            int randomIndex = new Random().nextInt(symptomDataManager.size());
+//            listOfCurrentSymptoms.add(symptomDataManager.getSymptomAtIndex(randomIndex));
         }
 
         return listOfCurrentSymptoms;
