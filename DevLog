@@ -1,11 +1,53 @@
 DevLog for Soul Meds app
 Brendan Thompson
 
+=== 03/24/18 ===
+
+I) Summary
+	A) Started adding official Data
+
+II) Takeaways
+
+
+
+III) Resources
+
+IV) To Do
+
+	A) Features
+		- Alarms Activity
+			* Save & Retrieve the data
+			* Symptoms: implement Add, Toggle
+			* Alarms: implement Add, Edit, Toggle, and Delete
+			* Actual Alarm Functionality
+	B) Design
+		- Need Button Images
+	C) Back End
+		- Sync user data with Firebase
+
+V) Activity Log
+
+A) Started adding official Data
+	- Created a DataManager class and a SymptomObject
+		`
+		class SymptomObject{
+		    public String symptomName;
+		    public int numVerses;
+		    public ArrayList<String> arrayVerses;
+		    public ArrayList<String> arrayReferences;
+		    public ArrayList<String> arrayVerseCards;
+		}
+		`
+	- Wrote out all of the data for 3/25 symptoms
+		- name & 5 verse data (numVerses = array.size())
+
+
 === 03/22/18 ===
 
 I) Summary
 	A) Simplified Login Interface
 	B) Started bringing in actual resources
+	C) Started making Alarm Times editable
 
 II) Takeaways
 
