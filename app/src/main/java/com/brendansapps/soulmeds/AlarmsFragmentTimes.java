@@ -1,6 +1,6 @@
 package com.brendansapps.soulmeds;
 
-import android.support.v4.app.DialogFragment;
+import android.app.TimePickerDialog;
 import android.support.v4.app.Fragment;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -14,9 +14,9 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ListView;
+import android.widget.TimePicker;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.Random;
 
@@ -84,18 +84,35 @@ public class AlarmsFragmentTimes extends Fragment {
     @Override
     public boolean onContextItemSelected(MenuItem item) {
         AdapterView.AdapterContextMenuInfo obj = (AdapterView.AdapterContextMenuInfo) item.getMenuInfo();
+        final int indexSelected = obj.position;
 
         switch (item.getItemId()){
             case R.id.action_delete_time:
-                timesList.remove(obj.position);
+                timesList.remove(indexSelected);
                 timesListAdapter.notifyDataSetChanged();
                 timesListAdapter.notifyDataSetInvalidated();
                 Log.d(TAG, String.valueOf(timesList));
                 break;
             case R.id.action_edit_time:
                 Log.d(TAG, "Edit action pressed");
-                AlarmsTimePickerDialog timeSelectFragment = new AlarmsTimePickerDialog();
-//                timeSelectFragment.show(getSupportFragmentManager(), "timePicker");
+
+                // Get current data
+                String oldHour = timesList.get(indexSelected);
+
+                // Get New Time
+                TimePickerDialog mAlarmTimePickerDialog;
+                mAlarmTimePickerDialog = new TimePickerDialog(getContext(),
+                    new TimePickerDialog.OnTimeSetListener(){
+                        @Override
+                        public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
+                            timesList.set(indexSelected, hourOfDay + ":" + minute);
+                            timesListAdapter.notifyDataSetChanged();
+                            timesListAdapter.notifyDataSetInvalidated();
+                            Log.d(TAG, String.valueOf(timesList));
+                    }
+                }, 12, 30, false);
+                mAlarmTimePickerDialog.show();
+
                 break;
             default:
                 break;

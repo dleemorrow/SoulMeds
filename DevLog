@@ -133,7 +133,8 @@ C) Started making Alarm Times editable
 	1) Created java class alarms_TimePickerDialog
 		- extends DialogFragment
 		- implements TimePickerDialog.OnTimeSetListener
-		`
+		- overwrite onCreateDialog
+			`
 	        super.onCreateDialog(savedInstanceState);
 	        // Set default value to current time
 	        final Calendar c = Calendar.getInstance();
@@ -142,11 +143,11 @@ C) Started making Alarm Times editable
 
 	        // Create TimePickerDialog instance
 	        return new TimePickerDialog(getActivity(), this, hour, minute, true);
-        `
+	        `
 	2) Open the Dialog when action started
 		`
 		    DialogFragment timeSelectFragment = new alarms_TimePickerDialog();
-		    timeSelectFragment.show(getSupportFragmentManager(), "timePicker");
+		    timeSelectFragment.show(getActivity().getFragmentManager(), "timePicker");
 	    `
 
 === 03/21/18 ===
