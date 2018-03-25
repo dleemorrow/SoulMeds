@@ -24,6 +24,7 @@
     <string name="title_activity_alarms">Prescription Manager</string>
     <string name="action_delete_item">Delete</string>
     <string name="action_edit_item">Edit</string>
+    <string name="title_symptom_picker">Select a Symptom</string>
 
 
 

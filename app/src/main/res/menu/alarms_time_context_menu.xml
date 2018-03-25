@@ -2,9 +2,9 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
     <item android:id="@+id/action_edit_time"
-        android:title="@string/action_edit_item"></item>
+        android:title="@string/action_edit_item"/>
 
     <item android:id="@+id/action_delete_time"
-        android:title="@string/action_delete_item"></item>
+        android:title="@string/action_delete_item"/>
 
 </menu>
