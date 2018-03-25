@@ -1,9 +1,16 @@
 package com.brendansapps.soulmeds;
 
+import android.util.Log;
+
 import java.util.ArrayList;
 
 /**
  * Created by bt on 3/24/18.
+ *
+ * DataManager handles all communication with the Symptoms and their associated Verses
+ *
+ * Each SymptomObject has a sympton name and arrays used for bible verses
+ *
  */
 
 // Structure for each Symptom and the associated Verses
@@ -12,19 +19,27 @@ class SymptomObject{
     public ArrayList<String> arrayVerses;
     public ArrayList<String> arrayReferences;
     public ArrayList<String> arrayVerseCards;
+
+    public SymptomObject(){
+        arrayVerses = new ArrayList<>();
+        arrayReferences = new ArrayList<>();
+        arrayVerseCards = new ArrayList<>();
+    }
 }
 
 // Data Manager for the Symptoms and the Verses
 public class DataManager {
 
-    ArrayList<SymptomObject> arraySymptomObjects;
+    private static final String TAG = "DataManager";
+    private ArrayList<SymptomObject> arraySymptomObjects;
 
     // ===========================================================
     // Constructor
     // ===========================================================
-    void DataManager(){
-        arraySymptomObjects = new ArrayList<SymptomObject>();
+    public DataManager(){
+        arraySymptomObjects = new ArrayList<>();
         populateSymptomObjectData();
+        printSymptomData();
     }
 
     // ===========================================================
@@ -56,7 +71,7 @@ public class DataManager {
     // Returns the verse for the Symptom at the Verse
     public String getVerse(String currentSymptom, int quoteNumber){
         for (int i = 0; i < arraySymptomObjects.size(); i++){
-            if (currentSymptom == arraySymptomObjects.get(i).symptomName){
+            if (currentSymptom.equals(arraySymptomObjects.get(i).symptomName)){
                 return arraySymptomObjects.get(i).arrayVerses.get(quoteNumber);
             }
         }
@@ -66,7 +81,7 @@ public class DataManager {
     // Returns the Reference for the verse for the Symptom at the Verse
     public String getVerseReference(String currentSymptom, int quoteNumber){
         for (int i = 0; i < arraySymptomObjects.size(); i++){
-            if (currentSymptom == arraySymptomObjects.get(i).symptomName){
+            if (currentSymptom.equals(arraySymptomObjects.get(i).symptomName)){
                 return arraySymptomObjects.get(i).arrayReferences.get(quoteNumber);
             }
         }
@@ -76,11 +91,24 @@ public class DataManager {
     // Returns the Verse Card for the Symptom at the Verse
     public String getVerseCard(String currentSymptom, int quoteNumber){
         for (int i = 0; i < arraySymptomObjects.size(); i++){
-            if (currentSymptom == arraySymptomObjects.get(i).symptomName){
+            if (currentSymptom.equals(arraySymptomObjects.get(i).symptomName)){
                 return arraySymptomObjects.get(i).arrayVerseCards.get(quoteNumber);
             }
         }
         return "Error: VerseNotFound";
+    }
+
+    public void printSymptomData(){
+        Log.d(TAG, "Symptom Data:");
+        for (int i = 0; i < arraySymptomObjects.size(); i++){
+            String currentSymptom = arraySymptomObjects.get(i).symptomName;
+            Log.d(TAG, currentSymptom);
+            for (int j = 0; j < arraySymptomObjects.get(i).arrayVerses.size(); j++){
+                Log.d(currentSymptom, arraySymptomObjects.get(i).arrayVerses.get(j));
+                Log.d(currentSymptom, arraySymptomObjects.get(i).arrayReferences.get(j));
+                Log.d(currentSymptom, arraySymptomObjects.get(i).arrayVerseCards.get(j));
+            }
+        }
     }
 
     // ===========================================================
