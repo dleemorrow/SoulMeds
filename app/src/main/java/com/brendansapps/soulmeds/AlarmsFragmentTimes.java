@@ -76,7 +76,7 @@ public class AlarmsFragmentTimes extends Fragment {
             int randomHour = new Random().nextInt(24);
             int randomMinute = new Random().nextInt(50);
             randomMinute += 10;
-            String randomTimeAsString = "" + randomHour + ":" + randomMinute;
+            String randomTimeAsString = getTimeInAMPM(randomHour, randomMinute);
             listOfCurrentTimes.add(randomTimeAsString);
         }
 
@@ -115,7 +115,7 @@ public class AlarmsFragmentTimes extends Fragment {
         return super.onContextItemSelected(item);
     }
 
-    void addAlarmTime(){
+    private void addAlarmTime(){
         // Get New Time from TimePickerDialog
         TimePickerDialog mAlarmTimePickerDialog;
         mAlarmTimePickerDialog = new TimePickerDialog(getContext(),
@@ -131,12 +131,12 @@ public class AlarmsFragmentTimes extends Fragment {
         mAlarmTimePickerDialog.show();
     }
 
-    void editAlarmTime(final int indexSelected){
+    private void editAlarmTime(final int indexSelected){
         // Get current time to use as default
         String currentTime = timesList.get(indexSelected);
         String currentHour_string;
         String currentMinute_string;
-        Pattern timePattern = Pattern.compile("^([0-9]|0[0-9]|1[0-9]|2[0-3]):([0-5][0-9])$");
+        Pattern timePattern = Pattern.compile("^([0-9]|0[0-9]|1[0-9]|2[0-3]):([0-5][0-9]) (AM|PM)$");
         Matcher m = timePattern.matcher(currentTime);
         m.find();
         currentHour_string = m.group(1);
@@ -151,7 +151,7 @@ public class AlarmsFragmentTimes extends Fragment {
                 new TimePickerDialog.OnTimeSetListener(){
                     @Override
                     public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
-                        timesList.set(indexSelected, hourOfDay + ":" + minute);
+                        timesList.set(indexSelected, getTimeInAMPM(hourOfDay, minute));
                         timesListAdapter.notifyDataSetChanged();
                         timesListAdapter.notifyDataSetInvalidated();
                         Log.d(TAG, String.valueOf(timesList));
@@ -160,4 +160,11 @@ public class AlarmsFragmentTimes extends Fragment {
         mAlarmTimePickerDialog.show();
     }
 
+    public String getTimeInAMPM(int hour, int minute){
+        if (hour > 12){
+            hour -= 12;
+            return (hour + ":" + minute + " PM");
+        }
+        return (hour + ":" + minute + " AM");
+    }
 }
