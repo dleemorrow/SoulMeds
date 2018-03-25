@@ -1,6 +1,7 @@
 package com.brendansapps.soulmeds;
 
 import android.app.TimePickerDialog;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -12,11 +13,9 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
-import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TimePicker;
 
-import java.sql.Time;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
@@ -36,6 +35,7 @@ public class AlarmsFragmentTimes extends Fragment {
     private ListView timeListView;
     private AlarmsListAdapter timesListAdapter;
     private List<String> timesList;
+    private FloatingActionButton addAlarmButton;
 
     @Nullable
     @Override
@@ -49,6 +49,15 @@ public class AlarmsFragmentTimes extends Fragment {
         timesListAdapter = new AlarmsListAdapter(this.getContext(), R.layout.alarms_list_item, R.id.alarms_list_item_TextView, timesList);
         timeListView.setAdapter(timesListAdapter);
         registerForContextMenu(timeListView);
+
+        // Setup the Add Alarm Button
+        addAlarmButton = view.findViewById(R.id.action_add_alarm);
+        addAlarmButton.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v) {
+                addAlarmTime();
+            }
+        });
 
         return view;
     }
@@ -97,33 +106,7 @@ public class AlarmsFragmentTimes extends Fragment {
                 break;
             case R.id.action_edit_time:
                 Log.d(TAG, "Edit action pressed");
-
-                // Get current time to use as default
-                String currentTime = timesList.get(indexSelected);
-                String currentHour_string;
-                String currentMinute_string;
-                Pattern timePattern = Pattern.compile("^([0-9]|0[0-9]|1[0-9]|2[0-3]):([0-5][0-9])$");
-                Matcher m = timePattern.matcher(currentTime);
-                m.find();
-                currentHour_string = m.group(1);
-                currentMinute_string = m.group(2);
-                Log.d(TAG, "Time: " + currentHour_string + ":" + currentMinute_string);
-                int currentHour = Integer.parseInt(currentHour_string);
-                int currentMinute = Integer.parseInt(currentMinute_string);
-
-                // Get New Time from TimePickerDialog
-                TimePickerDialog mAlarmTimePickerDialog;
-                mAlarmTimePickerDialog = new TimePickerDialog(getContext(),
-                    new TimePickerDialog.OnTimeSetListener(){
-                        @Override
-                        public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
-                            timesList.set(indexSelected, hourOfDay + ":" + minute);
-                            timesListAdapter.notifyDataSetChanged();
-                            timesListAdapter.notifyDataSetInvalidated();
-                            Log.d(TAG, String.valueOf(timesList));
-                    }
-                }, currentHour, currentMinute, false);
-                mAlarmTimePickerDialog.show();
+                editAlarmTime(indexSelected);
                 break;
             default:
                 break;
@@ -132,5 +115,49 @@ public class AlarmsFragmentTimes extends Fragment {
         return super.onContextItemSelected(item);
     }
 
+    void addAlarmTime(){
+        // Get New Time from TimePickerDialog
+        TimePickerDialog mAlarmTimePickerDialog;
+        mAlarmTimePickerDialog = new TimePickerDialog(getContext(),
+                new TimePickerDialog.OnTimeSetListener(){
+                    @Override
+                    public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
+                        timesList.add(hourOfDay + ":" + minute);
+                        timesListAdapter.notifyDataSetChanged();
+                        timesListAdapter.notifyDataSetInvalidated();
+                        Log.d(TAG, String.valueOf(timesList));
+                    }
+                }, 12, 30, false);
+        mAlarmTimePickerDialog.show();
+    }
+
+    void editAlarmTime(final int indexSelected){
+        // Get current time to use as default
+        String currentTime = timesList.get(indexSelected);
+        String currentHour_string;
+        String currentMinute_string;
+        Pattern timePattern = Pattern.compile("^([0-9]|0[0-9]|1[0-9]|2[0-3]):([0-5][0-9])$");
+        Matcher m = timePattern.matcher(currentTime);
+        m.find();
+        currentHour_string = m.group(1);
+        currentMinute_string = m.group(2);
+        Log.d(TAG, "Time: " + currentHour_string + ":" + currentMinute_string);
+        int currentHour = Integer.parseInt(currentHour_string);
+        int currentMinute = Integer.parseInt(currentMinute_string);
+
+        // Get New Time from TimePickerDialog
+        TimePickerDialog mAlarmTimePickerDialog;
+        mAlarmTimePickerDialog = new TimePickerDialog(getContext(),
+                new TimePickerDialog.OnTimeSetListener(){
+                    @Override
+                    public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
+                        timesList.set(indexSelected, hourOfDay + ":" + minute);
+                        timesListAdapter.notifyDataSetChanged();
+                        timesListAdapter.notifyDataSetInvalidated();
+                        Log.d(TAG, String.valueOf(timesList));
+                    }
+                }, currentHour, currentMinute, false);
+        mAlarmTimePickerDialog.show();
+    }
 
 }

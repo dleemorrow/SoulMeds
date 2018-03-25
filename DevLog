@@ -6,11 +6,18 @@ Brendan Thompson
 I) Summary
 	A) Started using official Data
 	B) Researched saving Symptoms to shared preferences
-	C) Continued working on Alarm TimePicker dialog
+	C) Made Alarms Edit-able
+	C) Made Alarms Add-able
 
 II) Takeaways
 
 III) Resources
+
+A) Resources for TimePickerDialog & Pattern Matching
+	- Default TimePickerDialog: https://stackoverflow.com/questions/17901946/timepicker-dialog-from-clicking-edittext
+	- Java Pattern Matching Strings: https://stackoverflow.com/questions/30497850/how-to-do-pattern-matching-of-strings-in-java
+	- Regular expression for Time: https://stackoverflow.com/questions/7536755/regular-expression-for-matching-hhmm-time-format
+	- String to Int conversion: https://stackoverflow.com/questions/2709253/converting-a-string-to-an-integer-on-android
 
 IV) To Do
 
@@ -35,9 +42,49 @@ B) Researched saving Symptoms to shared preferences
 		- requires serialization / parsing upon save / load
 		- https://stackoverflow.com/questions/12347963/android-store-array-of-strings-in-shared-preferences-dynamically
 
-C) Continued working on Alarm TimePicker dialog
+C) Made Alarms Edit-able
+	- using basic TimePickerDialog
+		`
+		TimePickerDialog mAlarmTimePickerDialog;
+        mAlarmTimePickerDialog = new TimePickerDialog(getContext(),
+                new TimePickerDialog.OnTimeSetListener(){
+                    @Override
+                    public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
+                        timesList.set(indexSelected, hourOfDay + ":" + minute);
+                        timesListAdapter.notifyDataSetChanged();
+                        timesListAdapter.notifyDataSetInvalidated();
+                        Log.d(TAG, String.valueOf(timesList));
+                    }
+                }, currentHour, currentMinute, false);
+        mAlarmTimePickerDialog.show();
+		`
+	- got current time using pattern matching with regex
+		- See resources section for resources
+		`
+		String currentTime = timesList.get(indexSelected);
+        String currentHour_string;
+        String currentMinute_string;
+        Pattern timePattern = Pattern.compile("^([0-9]|0[0-9]|1[0-9]|2[0-3]):([0-5][0-9])$");
+        Matcher m = timePattern.matcher(currentTime);
+        m.find();
+        currentHour_string = m.group(1);
+        currentMinute_string = m.group(2);
+        Log.d(TAG, "Time: " + currentHour_string + ":" + currentMinute_string);
+        int currentHour = Integer.parseInt(currentHour_string);
+        int currentMinute = Integer.parseInt(currentMinute_string);
+        `
 
-
+D) Made Alarms Add-able
+	- same TimePickerDialog except add() instead of set()
+	- findViewById in fragment & OnClickListener()
+		`
+		addAlarmButton.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v) {
+                addAlarmTime();
+            }
+        });
+        `
 
 === 03/24/18 ===
 
