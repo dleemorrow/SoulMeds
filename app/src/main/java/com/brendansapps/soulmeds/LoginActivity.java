@@ -125,9 +125,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
     void finishIfLoggedIn(){
         // Check If Logged In
         FirebaseUser currentUser = FirebaseAuth.getInstance().getCurrentUser();
-        if (currentUser == null){
-            Intent intent = new Intent(LoginActivity.this, MainActivity.class);
-            startActivity(intent);
+        if (currentUser != null){
             finish();
         }
     }

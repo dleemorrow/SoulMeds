@@ -1,6 +1,44 @@
 DevLog for Soul Meds app
 Brendan Thompson
 
+=== 03/25/18 ===
+
+I) Summary
+	A) Started using official Data
+	B) Researched saving Symptoms to shared preferences
+	C) Continued working on Alarm TimePicker dialog
+
+II) Takeaways
+
+III) Resources
+
+IV) To Do
+
+	A) Features
+		- Alarms Activity
+			* Save & Retrieve the data
+			* Symptoms: implement Add, Toggle
+			* Alarms: implement Add, Edit, Toggle, and Delete
+			* Actual Alarm Functionality
+	B) Design
+		- Need Button Images
+	C) Back End
+		- Sync user data with Firebase
+
+V) Activity Log
+
+A) Started using official Data
+	- Symptoms section of alarm page displays 5 random symptoms from the official list
+
+B) Researched saving Symptoms to shared preferences
+	- Store the user's symptoms array as 1 shared preference by converting it to a JSON string
+		- requires serialization / parsing upon save / load
+		- https://stackoverflow.com/questions/12347963/android-store-array-of-strings-in-shared-preferences-dynamically
+
+C) Continued working on Alarm TimePicker dialog
+
+
+
 === 03/24/18 ===
 
 I) Summary
@@ -8,9 +46,17 @@ I) Summary
 
 II) Takeaways
 
-
+	- Created a DataManager where the objects are statically defined
+		- Constructor not working properly
+		- Issue = reading entire database into memory upon construction of the alarms_fragment1
+		- Need less memory-intensive alternative
 
 III) Resources
+
+	- Couldn't find any good ways to store static data internally. SQLite seamed like overkill. Shared Preferences might be better.
+	- Should probably use XML files in res > values.
+		- define a struct item in one file and create an array of them in another
+		- https://stackoverflow.com/questions/28446569/using-a-c-struct-in-android-app-java-and-xml
 
 IV) To Do
 
@@ -40,6 +86,9 @@ A) Started adding official Data
 		`
 	- Wrote out all of the data for 3/25 symptoms
 		- name & 5 verse data (numVerses = array.size())
+		- delete / deallocate object
+			- currentSymptom = null;
+			- System.gc();
 
 
 === 03/22/18 ===

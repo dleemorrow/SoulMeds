@@ -93,7 +93,7 @@ public class MainActivity extends AppCompatActivity {
 
     // Function that navigates to a new page
     private void goToAlarmsPage(){
-        Intent intent = new Intent(this, alarmsActivity.class);
+        Intent intent = new Intent(this, AlarmsActivity.class);
         startActivity(intent);
     }
 
