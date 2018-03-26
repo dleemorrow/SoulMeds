@@ -39,7 +39,7 @@ public class DataManager {
     public DataManager(){
         arraySymptomObjects = new ArrayList<>();
         populateSymptomObjectData();
-        printSymptomData();
+//        printSymptomData();
     }
 
     // ===========================================================

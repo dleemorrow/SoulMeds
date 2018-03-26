@@ -1,6 +1,37 @@
 DevLog for Soul Meds app
 Brendan Thompson
 
+=== 03/26/18 ===
+
+I) Summary
+	A) Saving & Loading prescription data
+
+II) Takeaways
+
+III) Resources
+
+IV) To Do
+
+	A) Features
+		- Alarms Activity
+			* Implement Toggle for Symptoms & Times
+			* Actual Alarm Functionality
+	B) Design
+		- Need Button Images
+	C) Back End
+		- Sync user data with Firebase
+
+V) Activity Log
+
+A) Saving & Loading prescription data
+	- StringBuilder for Shared Preferences: https://stackoverflow.com/questions/7965290/put-and-get-string-array-from-shared-preferences
+		- Use StringBuilder and separate elements with commas
+		- use .split(",") to parse
+		- `userPrescriptionList = compressedSymptomString.split(",");`
+	- String[] -> ArrayList<String>
+		- https://stackoverflow.com/10230929/how-can-i-convert-string-to-arrayliststring
+		- `ArrayList<String> listOfCurrentSymptoms = new ArrayList<String>(Arrays.asList(userPrescriptionList));`
+
 === 03/25/18 ===
 
 I) Summary
