@@ -33,7 +33,7 @@ public class AlarmsFragmentTimes extends Fragment {
     /** =================================================
      * Member Variables
      * ===================================================== */
-    private static final String TAG = "alarms_fragment2";
+    private static final String TAG = "AlarmTimesFragment";
     private FloatingActionButton addAlarmButton;
 
     // Members for the Alarm Times List View
