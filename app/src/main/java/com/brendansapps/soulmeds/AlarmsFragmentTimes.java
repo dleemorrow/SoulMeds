@@ -1,6 +1,7 @@
 package com.brendansapps.soulmeds;
 
 import android.app.TimePickerDialog;
+import android.content.SharedPreferences;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.os.Bundle;
@@ -17,15 +18,20 @@ import android.widget.ListView;
 import android.widget.TimePicker;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
+import java.util.Objects;
 import java.util.Random;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+
+import static android.content.Context.MODE_PRIVATE;
 
 /** =================================================
  * Created by bt on 3/14/18.
  *
  * Tab Of Alarms Activity for the Alarm Times
+ * Manages the user's Prescription Alarm Times
  * ===================================================== */
 
 public class AlarmsFragmentTimes extends Fragment {
@@ -65,35 +71,59 @@ public class AlarmsFragmentTimes extends Fragment {
     }
 
     private void initAlarmTimesListView(View view){
-        Log.d(TAG, "Creating Alarm Times List View");
         timeListView = view.findViewById(R.id.alarms_list_times);
-        initAlarmTimesData();
+        timesList = loadUserPrescriptions();
+        Log.d(TAG, "User's Times: " + String.valueOf(timesList));
+        if (Objects.equals(timesList.get(0), "")){ timesList.clear(); }
         timesListAdapter = new AlarmsListAdapter(this.getContext(), R.layout.alarms_list_item, R.id.alarms_list_item_TextView, timesList);
         timeListView.setAdapter(timesListAdapter);
         registerForContextMenu(timeListView);
     }
 
-    // Get the Alarm Time data for the current user
-    private void initAlarmTimesData(){
-        timesList = getCurrentAlarmTimes();
-        Log.d(TAG, String.valueOf(timesList));
+    /** =================================================
+     * Save and Load User's Prescriptions
+     * ===================================================== */
+    private void saveUserPrescriptions(){
+        // Compress timesList into one string
+        StringBuilder stringBuilder = new StringBuilder();
+        for (int i = 0; i < timesList.size(); i++){
+            stringBuilder.append(timesList.get(i)).append(",");
+        }
+        Log.d(TAG, "Saved Prescriptions: " + stringBuilder.toString());
+
+        // Save SharedPreference
+        SharedPreferences mSharedPreference = this.getContext().getSharedPreferences("Prescriptions", MODE_PRIVATE);
+        SharedPreferences.Editor mSPEditor = mSharedPreference.edit();
+        mSPEditor.putString("times", stringBuilder.toString());
+        mSPEditor.apply();
     }
 
-    // Generate a list of alarms
-    private ArrayList<String> getCurrentAlarmTimes(){
-        // TODO: Retrieve the saved list of the User's Alarm Times
-        ArrayList<String> listOfCurrentTimes = new ArrayList<>();
+    private ArrayList<String> loadUserPrescriptions(){
+        // Load SharedPreference
+        SharedPreferences mSharedPreference = this.getContext().getSharedPreferences("Prescriptions", MODE_PRIVATE);
+        String compressedTimesString = mSharedPreference.getString("times", "");
 
-        // Generating a fake list of alarm times
-        for (int i = 0; i < 3; i++){
-            int randomHour = new Random().nextInt(24);
-            int randomMinute = new Random().nextInt(50);
-            randomMinute += 10;
-            String randomTimeAsString = getTimeInAMPM(randomHour, randomMinute);
-            listOfCurrentTimes.add(randomTimeAsString);
+        // If first time user, give 1 fake time
+        int hasVisited = mSharedPreference.getInt("hasVisitedT", 0);
+        if (hasVisited == 0){
+            Log.d(TAG, "Found First Time User");
+            // Initialize Default
+            compressedTimesString = "12:30 PM";
+            timesList = new ArrayList<>();
+            timesList.add("12:30 PM");
+            saveUserPrescriptions();
+
+            // Mark as having visited
+            hasVisited = 1;
+            SharedPreferences.Editor mSPEditor = mSharedPreference.edit();
+            mSPEditor.putInt("hasVisitedT", hasVisited);
+            mSPEditor.apply();
         }
 
-        return listOfCurrentTimes;
+        // Parse from compressed string into symptomsList array
+        ArrayList<String> listOfUserTimes = new ArrayList<>(Arrays.asList(compressedTimesString.split(",")));
+        Log.d(TAG, "Loaded Prescriptions: " + listOfUserTimes.toString());
+        return listOfUserTimes;
     }
 
     /** =================================================
@@ -101,7 +131,6 @@ public class AlarmsFragmentTimes extends Fragment {
      * ===================================================== */
     // Add a new Alarm Time
     private void addAlarmTime(){
-        // Get New Time from TimePickerDialog
         TimePickerDialog mAlarmTimePickerDialog;
         mAlarmTimePickerDialog = new TimePickerDialog(getContext(),
                 new TimePickerDialog.OnTimeSetListener(){
@@ -111,14 +140,23 @@ public class AlarmsFragmentTimes extends Fragment {
                         timesListAdapter.notifyDataSetChanged();
                         timesListAdapter.notifyDataSetInvalidated();
                         Log.d(TAG, String.valueOf(timesList));
+                        saveUserPrescriptions();
                     }
                 }, 12, 30, false);
         mAlarmTimePickerDialog.show();
     }
 
+    private void deleteAlarmTime(int index){
+        timesList.remove(index);
+        timesListAdapter.notifyDataSetChanged();
+        timesListAdapter.notifyDataSetInvalidated();
+        Log.d(TAG, String.valueOf(timesList));
+        saveUserPrescriptions();
+    }
+
     // Edit the selected Alarm Time
     private void editAlarmTime(final int indexSelected){
-        // Get current time to use as default
+        // Get what the time was to use as default value
         String currentTime = timesList.get(indexSelected);
         String currentHour_string;
         String currentMinute_string;
@@ -141,6 +179,7 @@ public class AlarmsFragmentTimes extends Fragment {
                         timesListAdapter.notifyDataSetChanged();
                         timesListAdapter.notifyDataSetInvalidated();
                         Log.d(TAG, String.valueOf(timesList));
+                        saveUserPrescriptions();
                     }
                 }, currentHour, currentMinute, false);
         mAlarmTimePickerDialog.show();
@@ -174,13 +213,9 @@ public class AlarmsFragmentTimes extends Fragment {
 
         switch (item.getItemId()){
             case R.id.action_delete_time:
-                timesList.remove(indexSelected);
-                timesListAdapter.notifyDataSetChanged();
-                timesListAdapter.notifyDataSetInvalidated();
-                Log.d(TAG, String.valueOf(timesList));
+                deleteAlarmTime(indexSelected);
                 break;
             case R.id.action_edit_time:
-                Log.d(TAG, "Edit action pressed");
                 editAlarmTime(indexSelected);
                 break;
             default:
