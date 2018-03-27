@@ -1,6 +1,61 @@
 DevLog for Soul Meds app
 Brendan Thompson
 
+=== 03/27/18 ===
+
+I) Summary
+	A) Started implementing alarm functionality
+
+II) Takeaways
+
+	- created new AlarmFunctionality branch
+	- AlarmHandler should play ringtone and vibrate onReceive
+	- AlarmHandler needs to send a push notification onReceive
+	- Need to set up an AlarmManager / PendingIntent for each alarm time.
+
+	- Perhaps there should be a whole PrescriptionManager object that the AlarmFragments communicate with
+		- Handles SharedPreferences
+		- Handles symptomList, timesList
+		- Handles setting up the actual alarms
+
+III) Resources
+
+	- simple alarm: https://www.youtube.com/watch?v=QcF4M2yUpY4
+
+IV) To Do
+
+	A) Features
+		- Alarms Activity
+			* Implement Toggle for Symptoms & Times
+			* Actual Alarm Functionality
+	B) Design
+		- Need Button Images
+	C) Back End
+		- Sync user data with Firebase
+
+V) Activity Log
+
+A) Started implementing alarm functionality
+	- AlarmHandler inherits from BroadcastReceiver
+	- https://www.youtube.com/watch?v=QcF4M2yUpY4
+	- Should play default ringtone onReceive
+		`
+		MediaPlayer mediaPlayer = MediaPlayer.create(context, Settings.System.DEFAULT_RINGTONE_URI);
+        mediaPlayer.start();
+        `
+	- Added vibrate onReceive
+		`
+		Vibrator vibrator = (Vibrator) context.getSystemService(context.VIBRATOR_SERVICE);
+        vibrator.vibrate(10000);
+        `
+        - Gave permission in the AndroidManifest
+        	`<uses-permission android:name="android.permission.VIBRATE"/>`
+	- Needed = all of the AlarmManager / PendingIntent stuff
+		- Starts at 5 minutes into tutorial video
+		- will need to do this for every alarm
+	- Needed = onReceive sends notification to user
+	- Needed = clicking on notification brings user to the appropriate Verses
+
 === 03/26/18 ===
 
 I) Summary
