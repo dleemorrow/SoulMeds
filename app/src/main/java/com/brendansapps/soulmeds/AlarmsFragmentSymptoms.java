@@ -21,6 +21,7 @@ import android.widget.ListView;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Objects;
 import java.util.Random;
 
 import static android.content.Context.MODE_PRIVATE;
@@ -29,6 +30,7 @@ import static android.content.Context.MODE_PRIVATE;
  * Created by bt on 3/14/18.
  *
  * Tab Of Alarms Activity for the Symptoms
+ * Manages the user's Prescription Symptoms
  * ===================================================== */
 
 public class AlarmsFragmentSymptoms extends Fragment {
@@ -73,9 +75,10 @@ public class AlarmsFragmentSymptoms extends Fragment {
 
     // Populate the ListView by getting the Data & setting the Adapter
     private void initSymptomListView(View view){
-        Log.d(TAG, "Creating Symptom List View");
-        symptomListView = view.findViewById(R.id.alarms_list_symptoms);symptomsList = loadUserPrescriptions();
-        Log.d(TAG, "User's Prescriptions: " + String.valueOf(symptomsList));
+        symptomListView = view.findViewById(R.id.alarms_list_symptoms);
+        symptomsList = loadUserPrescriptions();
+        Log.d(TAG, "User's Symptoms: " + String.valueOf(symptomsList));
+        if (Objects.equals(symptomsList.get(0), "")){ symptomsList.clear(); }
         symptomsListAdapter = new AlarmsListAdapter(this.getContext(), R.layout.alarms_list_item, R.id.alarms_list_item_TextView, symptomsList);
         symptomListView.setAdapter(symptomsListAdapter);
         registerForContextMenu(symptomListView);
@@ -102,12 +105,29 @@ public class AlarmsFragmentSymptoms extends Fragment {
     private ArrayList<String> loadUserPrescriptions(){
         // Load SharedPreference
         SharedPreferences mSharedPreference = this.getContext().getSharedPreferences("Prescriptions", MODE_PRIVATE);
-        String compressedSymptomString = mSharedPreference.getString("symptoms", "");
+        String compressedSymptomsString = mSharedPreference.getString("symptoms", "");
+
+        // If first time user, give 1 fake symptom
+        int hasVisited = mSharedPreference.getInt("hasVisitedS", 0);
+        if (hasVisited == 0){
+            Log.d(TAG, "Found First Time User");
+            // Initialize Default
+            compressedSymptomsString = allSymptomsList.get(0);
+            symptomsList = new ArrayList<>();
+            symptomsList.add(allSymptomsList.get(0));
+            saveUserPrescriptions();
+
+            // Mark as having visited
+            hasVisited = 1;
+            SharedPreferences.Editor mSPEditor = mSharedPreference.edit();
+            mSPEditor.putInt("hasVisitedS", hasVisited);
+            mSPEditor.apply();
+        }
 
         // Parse from compressed string into symptomsList array
-        ArrayList<String> listOfCurrentSymptoms = new ArrayList<>(Arrays.asList(compressedSymptomString.split(",")));
-        Log.d(TAG, "Loaded Prescriptions: " + listOfCurrentSymptoms.toString());
-        return listOfCurrentSymptoms;
+        ArrayList<String> listOfUserSymptoms = new ArrayList<>(Arrays.asList(compressedSymptomsString.split(",")));
+        Log.d(TAG, "Loaded Prescriptions: " + listOfUserSymptoms.toString());
+        return listOfUserSymptoms;
     }
 
     /** =================================================

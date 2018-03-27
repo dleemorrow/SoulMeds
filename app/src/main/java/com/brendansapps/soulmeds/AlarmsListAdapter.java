@@ -35,7 +35,7 @@ public class AlarmsListAdapter extends ArrayAdapter {
         this.mListData = (ArrayList<String>) objects;
         this.mResource = resource;
         this.mTextViewResourceId = textViewResourceId;
-        Log.d(TAG, String.valueOf(mListData));
+//        Log.d(TAG, String.valueOf(mListData));
     }
 
     @NonNull
