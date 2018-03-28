@@ -1,6 +1,42 @@
 DevLog for Soul Meds app
 Brendan Thompson
 
+=== 03/28/18 ===
+
+I) Summary
+	A) Abstracted all prescription handling to the PrescriptionManager
+
+II) Takeaways
+
+	- created new AlarmFunctionality branch
+	- AlarmHandler should play ringtone and vibrate onReceive
+	- AlarmHandler needs to send a push notification onReceive
+	- Need to set up an AlarmManager / PendingIntent for each alarm time.
+
+	- Perhaps there should be a whole PrescriptionManager object that the AlarmFragments communicate with
+		- Handles SharedPreferences
+		- Handles symptomList, timesList
+		- Handles setting up the actual alarms
+
+III) Resources
+
+	- simple alarm: https://www.youtube.com/watch?v=QcF4M2yUpY4
+
+IV) To Do
+
+	A) Features
+		- Alarms Activity
+			* Implement Toggle for Symptoms & Times
+			* Actual Alarm Functionality
+	B) Design
+		- Need Button Images
+	C) Back End
+		- Sync user data with Firebase
+
+V) Activity Log
+
+A) Abstracted all prescription handling to the PrescriptionManager
+
 === 03/27/18 ===
 
 I) Summary

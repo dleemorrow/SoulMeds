@@ -58,4 +58,11 @@ public class AlarmsListAdapter extends ArrayAdapter {
 
         return convertView;
     }
+
+    // Change the data list source
+//    public void changeList(ArrayList<String> newList){
+//        mListData = newList;
+//    }
+
+
 }

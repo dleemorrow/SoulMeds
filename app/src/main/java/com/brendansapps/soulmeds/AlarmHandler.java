@@ -12,6 +12,8 @@ import static android.content.Context.ALARM_SERVICE;
 
 /**
  * Created by bt on 2/12/18.
+ *
+ * Handles what happens when an alarm goes off
  */
 
 public class AlarmHandler extends BroadcastReceiver {
@@ -24,5 +26,6 @@ public class AlarmHandler extends BroadcastReceiver {
         // Vibrate
         Vibrator vibrator = (Vibrator) context.getSystemService(context.VIBRATOR_SERVICE);
         vibrator.vibrate(10000);
+        // TODO: Send Notification
     }
 }

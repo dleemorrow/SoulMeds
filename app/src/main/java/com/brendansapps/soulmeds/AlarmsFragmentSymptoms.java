@@ -43,10 +43,11 @@ public class AlarmsFragmentSymptoms extends Fragment {
     private FloatingActionButton addSymptomButton;
 
     // Members for the Alarm Symptom List View
+    private PrescriptionManager prescriptionManager;
     private ListView symptomListView;
     private AlarmsListAdapter symptomsListAdapter;
     private ArrayList<String> allSymptomsList; // List of all possible symptoms
-    private List<String> symptomsList; // List of the user's current symptoms
+    private ArrayList<String> symptomsList; // List of the user's current symptoms
 
     /** =================================================
      * Constructors
@@ -57,8 +58,9 @@ public class AlarmsFragmentSymptoms extends Fragment {
         View view = inflater.inflate(R.layout.fragment1_alarms, container, false);
 
         // Setup the Symptom List View
-        DataManager symptomDataManager = new DataManager();
-        allSymptomsList = symptomDataManager.getSymptomsList();
+        prescriptionManager = new PrescriptionManager(this.getContext());
+        allSymptomsList = prescriptionManager.getAllSymptoms();
+        symptomsList = prescriptionManager.getUserSymptoms();
         initSymptomListView(view);
 
         // Setup the Add Symptom Button
@@ -66,7 +68,7 @@ public class AlarmsFragmentSymptoms extends Fragment {
         addSymptomButton.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v) {
-                createSymptomPickerDialog(0, 0, 0); // Type 0 = Add new
+                createSymptomPickerDialog(-1, 0, 0); // Type 0 = Add new
             }
         });
 
@@ -76,58 +78,18 @@ public class AlarmsFragmentSymptoms extends Fragment {
     // Populate the ListView by getting the Data & setting the Adapter
     private void initSymptomListView(View view){
         symptomListView = view.findViewById(R.id.alarms_list_symptoms);
-        symptomsList = loadUserPrescriptions();
         Log.d(TAG, "User's Symptoms: " + String.valueOf(symptomsList));
-        if (Objects.equals(symptomsList.get(0), "")){ symptomsList.clear(); }
+//        if (Objects.equals(symptomsList.get(0), "")){ symptomsList.clear(); }
         symptomsListAdapter = new AlarmsListAdapter(this.getContext(), R.layout.alarms_list_item, R.id.alarms_list_item_TextView, symptomsList);
         symptomListView.setAdapter(symptomsListAdapter);
         registerForContextMenu(symptomListView);
     }
 
-    /** =================================================
-     * Save and Load User's Prescriptions
-     * ===================================================== */
-    private void saveUserPrescriptions(){
-        // Compress symptomsList into one string
-        StringBuilder stringBuilder = new StringBuilder();
-        for (int i = 0; i < symptomsList.size(); i++){
-            stringBuilder.append(symptomsList.get(i)).append(",");
-        }
-        Log.d(TAG, "Saved Prescriptions: " + stringBuilder.toString());
-
-        // Save SharedPreference
-        SharedPreferences mSharedPreference = this.getContext().getSharedPreferences("Prescriptions", MODE_PRIVATE);
-        SharedPreferences.Editor mSPEditor = mSharedPreference.edit();
-        mSPEditor.putString("symptoms", stringBuilder.toString());
-        mSPEditor.apply();
-    }
-
-    private ArrayList<String> loadUserPrescriptions(){
-        // Load SharedPreference
-        SharedPreferences mSharedPreference = this.getContext().getSharedPreferences("Prescriptions", MODE_PRIVATE);
-        String compressedSymptomsString = mSharedPreference.getString("symptoms", "");
-
-        // If first time user, give 1 fake symptom
-        int hasVisited = mSharedPreference.getInt("hasVisitedS", 0);
-        if (hasVisited == 0){
-            Log.d(TAG, "Found First Time User");
-            // Initialize Default
-            compressedSymptomsString = allSymptomsList.get(0);
-            symptomsList = new ArrayList<>();
-            symptomsList.add(allSymptomsList.get(0));
-            saveUserPrescriptions();
-
-            // Mark as having visited
-            hasVisited = 1;
-            SharedPreferences.Editor mSPEditor = mSharedPreference.edit();
-            mSPEditor.putInt("hasVisitedS", hasVisited);
-            mSPEditor.apply();
-        }
-
-        // Parse from compressed string into symptomsList array
-        ArrayList<String> listOfUserSymptoms = new ArrayList<>(Arrays.asList(compressedSymptomsString.split(",")));
-        Log.d(TAG, "Loaded Prescriptions: " + listOfUserSymptoms.toString());
-        return listOfUserSymptoms;
+    // Re-draw the ListView
+    private void resetSymptomList(){
+        symptomsListAdapter.notifyDataSetChanged();
+        symptomsListAdapter.notifyDataSetInvalidated();
+        Log.d(TAG, String.valueOf(symptomsList));
     }
 
     /** =================================================
@@ -136,30 +98,27 @@ public class AlarmsFragmentSymptoms extends Fragment {
     // Adds the newSymptom to the ListView
     private void addSymptom(String newSymptom){
         symptomsList.add(newSymptom);
-        symptomsListAdapter.notifyDataSetChanged();
-        symptomsListAdapter.notifyDataSetInvalidated();
-        saveUserPrescriptions();
+        prescriptionManager.addSymptom(newSymptom);
+        resetSymptomList();
     }
 
     // Deletes the symptom at the index
     private void deleteSymptom(int index){
         symptomsList.remove(index);
-        symptomsListAdapter.notifyDataSetChanged();
-        symptomsListAdapter.notifyDataSetInvalidated();
-        saveUserPrescriptions();
+        prescriptionManager.deleteSymptom(index);
+        resetSymptomList();
     }
 
     // Edits the symptom at index to be newSymptom
     private void editSymptom(int index, String newSymptom){
         symptomsList.set(index, newSymptom);
-        symptomsListAdapter.notifyDataSetChanged();
-        symptomsListAdapter.notifyDataSetInvalidated();
-        saveUserPrescriptions();
+        prescriptionManager.editSymptom(index, newSymptom);
+        resetSymptomList();
     }
 
-    // Starts Dialog to add a new symptom
+    // Creates Dialog to pick new symptom for adding or editing
     private void createSymptomPickerDialog(final int currentSelected, final int type, final int indexInList){
-        // Prepare the list of Symptoms Adapter
+        // Prepare the list of Symptoms to select
         final ArrayAdapter<String> symptomSelectAdapter = new ArrayAdapter<>(this.getContext(), android.R.layout.select_dialog_singlechoice);
         for (int i = 0; i < allSymptomsList.size(); i++){
             symptomSelectAdapter.add(allSymptomsList.get(i));
