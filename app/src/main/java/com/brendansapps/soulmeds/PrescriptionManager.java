@@ -1,14 +1,21 @@
 package com.brendansapps.soulmeds;
 
+import android.app.AlarmManager;
+import android.app.PendingIntent;
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.util.Log;
 
 import java.sql.Time;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Calendar;
 import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
+import static android.content.Context.ALARM_SERVICE;
 import static android.content.Context.MODE_PRIVATE;
 
 /**
@@ -33,6 +40,7 @@ public class PrescriptionManager {
     private static DataManager symptomDataManager;
     private static SharedPreferences prescriptionSP;
     private static SharedPreferences.Editor prescriptionSPEditor;
+    private Context mContext;
 
     // Symptom Data
     public static ArrayList<String> allSymptomsList;
@@ -45,11 +53,12 @@ public class PrescriptionManager {
      * Constructor
      * ===================================================== */
     public PrescriptionManager(Context context){
+        mContext = context;
 
         // Initialize Managers
         symptomDataManager = new DataManager();
         allSymptomsList = symptomDataManager.getSymptomsList();
-        prescriptionSP = context.getSharedPreferences("Prescriptions", MODE_PRIVATE);
+        prescriptionSP = mContext.getSharedPreferences("Prescriptions", MODE_PRIVATE);
         prescriptionSPEditor = prescriptionSP.edit();
 
         // Initialize User's Prescriptions
@@ -61,6 +70,8 @@ public class PrescriptionManager {
         else {
             loadUserPrescriptions();
         }
+
+        printAlarms();
     }
 
     /** =================================================
@@ -119,6 +130,7 @@ public class PrescriptionManager {
         newTime.isActive = true;
         userTimesList.add(newTime);
         saveUserTimes();
+        updateAlarms();
     }
 
     public void deleteSymptom(int index){
@@ -129,6 +141,7 @@ public class PrescriptionManager {
     public void deleteTime(int index){
         userTimesList.remove(index);
         saveUserTimes();
+        updateAlarms();
     }
 
     public void editSymptom(int index, String newName){
@@ -139,6 +152,7 @@ public class PrescriptionManager {
     public void editTime(int index, String newTime){
         userTimesList.get(index).name = newTime;
         saveUserTimes();
+        updateAlarms();
     }
 
     /** =================================================
@@ -230,4 +244,55 @@ public class PrescriptionManager {
         prescriptionSPEditor.putBoolean("hasVisited", true);
         prescriptionSPEditor.apply();
     }
+
+    /** =================================================
+     * Functions for managing Alarms
+     * ===================================================== */
+    private void updateAlarms(){
+
+        for (int i = 0; i < userTimesList.size(); i++){
+            // Get Time
+            String currentTime = userTimesList.get(i).name;
+            String currentHour_string;
+            String currentMinute_string;
+            Pattern timePattern = Pattern.compile("^([0-9]|0[0-9]|1[0-9]|2[0-3]):([0-5][0-9]) (AM|PM)$");
+            Matcher m = timePattern.matcher(currentTime);
+            m.find();
+            currentHour_string = m.group(1);
+            currentMinute_string = m.group(2);
+            Log.d(TAG, "Time: " + currentHour_string + ":" + currentMinute_string);
+            int currentHour = Integer.parseInt(currentHour_string);
+            int currentMinute = Integer.parseInt(currentMinute_string);
+
+            // Prepare Time
+            Calendar calendar = Calendar.getInstance();
+            calendar.set(
+                    calendar.get(Calendar.YEAR),
+                    calendar.get(Calendar.MONTH),
+                    calendar.get(Calendar.DAY_OF_MONTH),
+                    currentHour,
+                    currentMinute,
+                    0
+            );
+
+            setAlarm(calendar.getTimeInMillis());
+        }
+    }
+
+    private void setAlarm(long timeInMillis){
+        AlarmManager alarmManager = (AlarmManager) mContext.getSystemService(ALARM_SERVICE);
+        Intent intent = new Intent(mContext, AlarmHandler.class);
+        PendingIntent pendingIntent = PendingIntent.getBroadcast(mContext, 0, intent, 0);
+
+        alarmManager.setRepeating(AlarmManager.RTC_WAKEUP, timeInMillis, AlarmManager.INTERVAL_DAY, pendingIntent);
+
+        printAlarms();
+    }
+
+    private void printAlarms(){
+        AlarmManager alarmManager = (AlarmManager) mContext.getSystemService(ALARM_SERVICE);
+        Log.d(TAG, "Next Alarm: " + String.valueOf(alarmManager.getNextAlarmClock()));
+    }
+
+
 }

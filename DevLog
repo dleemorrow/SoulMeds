@@ -36,6 +36,14 @@ IV) To Do
 V) Activity Log
 
 A) Abstracted all prescription handling to the PrescriptionManager
+	- See PrescriptionManager: https://github.com/brenthompson2/Soul_Meds/blob/alarmFunctionality/app/src/main/java/com/brendansapps/soulmeds/PrescriptionManager.java
+
+B) Implemented Alarm Functionality
+	- simple alarm: https://www.youtube.com/watch?v=QcF4M2yUpY4
+	- Recurring Alarm: https://www.youtube.com/watch?v=ZuPbt83VilY
+
+
+
 
 === 03/27/18 ===
 

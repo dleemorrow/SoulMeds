@@ -108,6 +108,7 @@ public class AlarmsFragmentTimes extends Fragment {
 
     private void deleteAlarmTime(int index){
         timesList.remove(index);
+        prescriptionManager.deleteTime(index);
         resetTimesList();
     }
 
