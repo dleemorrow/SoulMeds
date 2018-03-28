@@ -21,7 +21,9 @@ import static android.content.Context.MODE_PRIVATE;
 /**
  * Created by bt on 3/27/18.
  *
- * Class to handle the user's alarm prescription data
+ * Class to handle the user's alarm prescription data (Symptoms & Times)
+ *
+ * Manages Setting the Actual Alarms
  *
  * Utilized in the AlarmsActivity
  */
@@ -283,9 +285,7 @@ public class PrescriptionManager {
         AlarmManager alarmManager = (AlarmManager) mContext.getSystemService(ALARM_SERVICE);
         Intent intent = new Intent(mContext, AlarmHandler.class);
         PendingIntent pendingIntent = PendingIntent.getBroadcast(mContext, 0, intent, 0);
-
         alarmManager.setRepeating(AlarmManager.RTC_WAKEUP, timeInMillis, AlarmManager.INTERVAL_DAY, pendingIntent);
-
         printAlarms();
     }
 
