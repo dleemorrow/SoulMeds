@@ -1,6 +1,34 @@
 DevLog for Soul Meds app
 Brendan Thompson
 
+=== 03/31/18 ===
+
+I) Summary
+	A) Added Images
+
+II) Takeaways
+
+	- Background & Button Images
+
+III) Resources
+
+IV) To Do
+
+	A) Features
+		- Alarms Activity
+			* Implement Toggle for Symptoms & Times
+	B) Design
+		- Need Button Images
+	C) Back End
+		- Sync user data with Firebase
+
+V) Activity Log
+
+A) Added Images
+	- Background & Button images
+	- Removed Homepage Toolbar
+		`android:theme="@style/AppTheme.NoActionBar"`
+
 === 03/28/18 ===
 
 I) Summary
