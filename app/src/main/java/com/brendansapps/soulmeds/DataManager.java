@@ -68,6 +68,16 @@ public class DataManager {
         return symptomsList;
     }
 
+    // Returns the number of Verses for that symptom
+    public int getNumVerses(String symptom){
+        for (int i = 0; i < arraySymptomObjects.size(); i++){
+            if (symptom.equals(arraySymptomObjects.get(i).symptomName)){
+                return arraySymptomObjects.get(i).arrayVerses.size();
+            }
+        }
+        return 0;
+    }
+
     // Returns the verse for the Symptom at the Verse
     public String getVerse(String currentSymptom, int quoteNumber){
         for (int i = 0; i < arraySymptomObjects.size(); i++){

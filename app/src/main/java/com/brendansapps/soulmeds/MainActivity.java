@@ -30,49 +30,27 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 goToAlarmsPage();
-
             }
         });
 
         mBtnQuote.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
-                // Send a toast saying Option Not Yet Available
-                Context context = getApplicationContext();
-                CharSequence text = "Option Not Yet Available";
-                int duration = Toast.LENGTH_SHORT;
-                Toast toast = Toast.makeText(context, text, duration);
-                toast.show();
-
+                goToMedsPage();
             }
         });
 
         mBtnFolder.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
-                // Send a toast saying Option Not Yet Available
-                Context context = getApplicationContext();
-                CharSequence text = "Option Not Yet Available";
-                int duration = Toast.LENGTH_SHORT;
-                Toast toast = Toast.makeText(context, text, duration);
-                toast.show();
-
+                printNotYetAvailableToast();
             }
         });
 
         mBtnHelp.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
-                // Send a toast saying Option Not Yet Available
-                Context context = getApplicationContext();
-                CharSequence text = "Option Not Yet Available";
-                int duration = Toast.LENGTH_SHORT;
-                Toast toast = Toast.makeText(context, text, duration);
-                toast.show();
-
+                printNotYetAvailableToast();
             }
         });
     }
@@ -91,11 +69,24 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    // Function that navigates to a new page
+    // Send a toast saying Option Not Yet Available
+    private void printNotYetAvailableToast(){
+        Context context = getApplicationContext();
+        CharSequence text = "Option Not Yet Available";
+        int duration = Toast.LENGTH_SHORT;
+        Toast toast = Toast.makeText(context, text, duration);
+        toast.show();
+    }
+
+    // Function that navigates to Alarms page
     private void goToAlarmsPage(){
         Intent intent = new Intent(this, AlarmsActivity.class);
         startActivity(intent);
     }
 
-
+    // Function that navigates to Meds page
+    private void goToMedsPage(){
+        Intent intent = new Intent(this, MedsActivity.class);
+        startActivity(intent);
+    }
 }

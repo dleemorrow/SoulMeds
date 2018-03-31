@@ -114,6 +114,21 @@ public class PrescriptionManager {
         return allSymptomsList;
     }
 
+    // Returns the number of Verses for that symptom
+    public int getNumVerses(String symptom){
+        return symptomDataManager.getNumVerses(symptom);
+    }
+
+    // Returns the Verse for that symptom at that index
+    public String getVerse(String symptom, int index){
+        return symptomDataManager.getVerse(symptom, index);
+    }
+
+    // Returns the Reference for the Verse for that symptom at that index
+    public String getReference(String symptom, int index){
+        return symptomDataManager.getVerseReference(symptom, index);
+    }
+
     /** =================================================
      * Manipulators
      * ===================================================== */

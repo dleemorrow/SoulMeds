@@ -8,6 +8,7 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.media.MediaPlayer;
+import android.os.CountDownTimer;
 import android.os.Vibrator;
 import android.provider.Settings;
 import android.support.v4.app.NotificationCompat;
@@ -34,20 +35,43 @@ public class AlarmHandler extends BroadcastReceiver {
     public void onReceive(Context context, Intent intent) {
         mContext = context;
 
-        // Play default ringtone
-        MediaPlayer mediaPlayer = MediaPlayer.create(context, Settings.System.DEFAULT_RINGTONE_URI);
-        mediaPlayer.start();
-
-        // Vibrate
-        Vibrator vibrator = (Vibrator) context.getSystemService(context.VIBRATOR_SERVICE);
-        vibrator.vibrate(10000);
+        // Ringtone & Vibrate
+        playNoiseAndVibrate();
 
         // Send Notification
         showNotification();
     }
 
-    void showNotification(){
-        Intent intent = new Intent(mContext, AlarmsActivity.class);
+    private void playNoiseAndVibrate(){
+
+        // Play default ringtone
+        final MediaPlayer mediaPlayer = MediaPlayer.create(mContext, Settings.System.DEFAULT_RINGTONE_URI);
+        mediaPlayer.start();
+
+        // Vibrate
+        Vibrator vibrator = (Vibrator) mContext.getSystemService(mContext.VIBRATOR_SERVICE);
+        vibrator.vibrate(10000);
+
+        // Stop Ringtone
+        CountDownTimer timer = new CountDownTimer(10000, 1000) {
+            @Override
+            public void onTick(long millisUntilFinished) {
+                // Nothing to do
+            }
+
+            @Override
+            public void onFinish() {
+                if (mediaPlayer.isPlaying()) {
+                    mediaPlayer.stop();
+                    mediaPlayer.release();
+                }
+            }
+        };
+        timer.start();
+    }
+
+    private void showNotification(){
+        Intent intent = new Intent(mContext, MedsActivity.class);
         PendingIntent pendingIntent = PendingIntent.getActivity(mContext, REQUEST_CODE, intent, PendingIntent.FLAG_UPDATE_CURRENT);
 
         Notification notification = new NotificationCompat.Builder(mContext)

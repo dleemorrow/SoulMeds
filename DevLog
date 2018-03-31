@@ -5,12 +5,16 @@ Brendan Thompson
 
 I) Summary
 	A) Added Images
+	B) Created MedsActivity to see Verses
 
 II) Takeaways
 
 	- Background & Button Images
+	- MedsActivity for showing Verses based off prescription
 
 III) Resources
+
+	- icon ic_autorenew_white = https://material.io/icons/#ic_autorenew
 
 IV) To Do
 
@@ -28,6 +32,16 @@ A) Added Images
 	- Background & Button images
 	- Removed Homepage Toolbar
 		`android:theme="@style/AppTheme.NoActionBar"`
+
+B) Created MedsActivity to see Verses
+	- Shows random verse based off Prescriptions
+	- Used refresh icon ic_autorenew_white
+	- Currently navigate-able to using 911_btn
+
+C) Fixed Alarm Notification
+	- Plays ringtone for duration
+		- https://stackoverflow.com/questions/16059094/how-to-set-media-player-duration-in-android
+	- Opens MedsActivity
 
 === 03/28/18 ===
 
