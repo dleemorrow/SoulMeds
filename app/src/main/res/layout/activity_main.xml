@@ -5,24 +5,15 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="com.brendansapps.soulmeds.MainActivity"
-    tools:layout_editor_absoluteY="81dp">
-
-    <TextView
-        android:id="@+id/textView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="60dp"
-        android:text="Welcome to Soul Meds"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+    tools:layout_editor_absoluteY="81dp"
+    android:background="@drawable/homescreen">
 
     <Button
         android:id="@+id/btn_Alarm"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="32dp"
-        android:text="Alarms"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:layout_marginEnd="24dp"
+        android:background="@drawable/btn_prescription"
         app:layout_constraintBaseline_toBaselineOf="@+id/btn_Folder"
         app:layout_constraintEnd_toStartOf="@+id/btn_Folder"
         app:layout_constraintHorizontal_chainStyle="packed"
@@ -30,10 +21,10 @@
 
     <Button
         android:id="@+id/btn_Quote"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="32dp"
-        android:text="Quote"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:layout_marginEnd="24dp"
+        android:background="@drawable/btn_911"
         app:layout_constraintBaseline_toBaselineOf="@+id/btn_Help"
         app:layout_constraintEnd_toStartOf="@+id/btn_Help"
         app:layout_constraintHorizontal_chainStyle="packed"
@@ -41,24 +32,23 @@
 
     <Button
         android:id="@+id/btn_Folder"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="2dp"
-        android:layout_marginStart="32dp"
-        android:layout_marginTop="37dp"
-        android:text="Folder"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="24dp"
+        android:background="@drawable/btn_rescources"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/btn_Alarm"
-        app:layout_constraintTop_toBottomOf="@+id/textView" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <Button
         android:id="@+id/btn_Help"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
         android:layout_marginEnd="2dp"
-        android:layout_marginStart="32dp"
-        android:layout_marginTop="30dp"
-        android:text="Help"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="32dp"
+        android:background="@drawable/btn_settings"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/btn_Quote"
         app:layout_constraintTop_toBottomOf="@+id/btn_Folder" />

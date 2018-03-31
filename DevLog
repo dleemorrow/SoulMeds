@@ -1,6 +1,177 @@
 DevLog for Soul Meds app
 Brendan Thompson
 
+=== 03/31/18 ===
+
+I) Summary
+	A) Added Images
+	B) Created MedsActivity to see Verses
+
+II) Takeaways
+
+	- Background & Button Images
+	- MedsActivity for showing Verses based off prescription
+
+III) Resources
+
+	- icon ic_autorenew_white = https://material.io/icons/#ic_autorenew
+
+IV) To Do
+
+	A) Features
+		- Alarms Activity
+			* Implement Toggle for Symptoms & Times
+	B) Design
+		- Need Button Images
+	C) Back End
+		- Sync user data with Firebase
+
+V) Activity Log
+
+A) Added Images
+	- Background & Button images
+	- Removed Homepage Toolbar
+		`android:theme="@style/AppTheme.NoActionBar"`
+
+B) Created MedsActivity to see Verses
+	- Shows random verse based off Prescriptions
+	- Used refresh icon ic_autorenew_white
+	- Currently navigate-able to using 911_btn
+
+C) Fixed Alarm Notification
+	- Plays ringtone for duration
+		- https://stackoverflow.com/questions/16059094/how-to-set-media-player-duration-in-android
+	- Opens MedsActivity
+
+=== 03/28/18 ===
+
+I) Summary
+	A) Abstracted all prescription handling to the PrescriptionManager
+	B) Implemented Alarm Functionality
+
+II) Takeaways
+
+	- Implemented PrescriptionManager (also handles alarms)
+	- Implemented Alarm Functionality
+		- Ringtone, Vibrate, & Notification
+		- PROBLEM: Never deleting any alarms
+		- Ringtone doesn't end until App Closed out
+
+III) Resources
+
+	- simple alarm: https://www.youtube.com/watch?v=QcF4M2yUpY4
+	- Recurring Alarm: https://www.youtube.com/watch?v=ZuPbt83VilY
+	- Notification: https://github.com/sergiormrz560/RamblerApp/blob/master/app/src/main/java/com/example/sergiorm/testramblerapp/FirebaseMessageHandler.java
+
+IV) To Do
+
+	A) Features
+		- Alarms Activity
+			* Implement Toggle for Symptoms & Times
+	B) Design
+		- Need Button Images
+	C) Back End
+		- Sync user data with Firebase
+
+V) Activity Log
+
+A) Abstracted all prescription handling to the PrescriptionManager
+	- See PrescriptionManager: https://github.com/brenthompson2/Soul_Meds/blob/alarmFunctionality/app/src/main/java/com/brendansapps/soulmeds/PrescriptionManager.java
+
+B) Implemented Alarm Functionality
+	- simple alarm: https://www.youtube.com/watch?v=QcF4M2yUpY4
+	- Recurring Alarm: https://www.youtube.com/watch?v=ZuPbt83VilY
+	- Getting the time:
+		`
+        Calendar calendar = Calendar.getInstance();
+        calendar.set(
+                calendar.get(Calendar.YEAR),
+                calendar.get(Calendar.MONTH),
+                calendar.get(Calendar.DAY_OF_MONTH),
+                currentHour,
+                currentMinute,
+                0
+        );
+        `
+	- Setting the Alarm:
+		`
+        AlarmManager alarmManager = (AlarmManager) mContext.getSystemService(ALARM_SERVICE);
+        Intent intent = new Intent(mContext, AlarmHandler.class);
+        PendingIntent pendingIntent = PendingIntent.getBroadcast(mContext, 0, intent, 0);
+        alarmManager.setRepeating(AlarmManager.RTC_WAKEUP, timeInMillis, AlarmManager.INTERVAL_DAY, pendingIntent);
+        `
+	- Sending the Notification:
+		`
+        Intent intent = new Intent(mContext, AlarmsActivity.class);
+        PendingIntent pendingIntent = PendingIntent.getActivity(mContext, REQUEST_CODE, intent, PendingIntent.FLAG_UPDATE_CURRENT);
+
+        Notification notification = new NotificationCompat.Builder(mContext)
+                .setContentText(notificationMessage)
+                .setContentTitle(notificationTitle)
+                .setContentIntent(pendingIntent)
+                .setSmallIcon(R.mipmap.ic_launcher_round)
+                .build();
+
+        NotificationManager manager = (NotificationManager) mContext.getSystemService(NOTIFICATION_SERVICE);
+        manager.notify(NOTIFICATION_ID, notification);
+        `
+
+
+=== 03/27/18 ===
+
+I) Summary
+	A) Started implementing alarm functionality
+
+II) Takeaways
+
+	- created new AlarmFunctionality branch
+	- AlarmHandler should play ringtone and vibrate onReceive
+	- AlarmHandler needs to send a push notification onReceive
+	- Need to set up an AlarmManager / PendingIntent for each alarm time.
+
+	- Perhaps there should be a whole PrescriptionManager object that the AlarmFragments communicate with
+		- Handles SharedPreferences
+		- Handles symptomList, timesList
+		- Handles setting up the actual alarms
+
+III) Resources
+
+	- simple alarm: https://www.youtube.com/watch?v=QcF4M2yUpY4
+
+IV) To Do
+
+	A) Features
+		- Alarms Activity
+			* Implement Toggle for Symptoms & Times
+			* Actual Alarm Functionality
+	B) Design
+		- Need Button Images
+	C) Back End
+		- Sync user data with Firebase
+
+V) Activity Log
+
+A) Started implementing alarm functionality
+	- AlarmHandler inherits from BroadcastReceiver
+	- https://www.youtube.com/watch?v=QcF4M2yUpY4
+	- Should play default ringtone onReceive
+		`
+		MediaPlayer mediaPlayer = MediaPlayer.create(context, Settings.System.DEFAULT_RINGTONE_URI);
+        mediaPlayer.start();
+        `
+	- Added vibrate onReceive
+		`
+		Vibrator vibrator = (Vibrator) context.getSystemService(context.VIBRATOR_SERVICE);
+        vibrator.vibrate(10000);
+        `
+        - Gave permission in the AndroidManifest
+        	`<uses-permission android:name="android.permission.VIBRATE"/>`
+	- Needed = all of the AlarmManager / PendingIntent stuff
+		- Starts at 5 minutes into tutorial video
+		- will need to do this for every alarm
+	- Needed = onReceive sends notification to user
+	- Needed = clicking on notification brings user to the appropriate Verses
+
 === 03/26/18 ===
 
 I) Summary

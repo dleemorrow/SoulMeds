@@ -43,9 +43,10 @@ public class AlarmsFragmentTimes extends Fragment {
     private FloatingActionButton addAlarmButton;
 
     // Members for the Alarm Times List View
+    private PrescriptionManager prescriptionManager;
     private ListView timeListView;
     private AlarmsListAdapter timesListAdapter;
-    private List<String> timesList;
+    private ArrayList<String> timesList;
 
     /** =================================================
      * Constructors
@@ -56,6 +57,8 @@ public class AlarmsFragmentTimes extends Fragment {
         View view = inflater.inflate(R.layout.fragment2_alarms, container, false);
 
         // Setup the Symptom List View
+        prescriptionManager = new PrescriptionManager(this.getContext());
+        timesList = prescriptionManager.getUserTimes();
         initAlarmTimesListView(view);
 
         // Setup the Add Alarm Button
@@ -72,58 +75,17 @@ public class AlarmsFragmentTimes extends Fragment {
 
     private void initAlarmTimesListView(View view){
         timeListView = view.findViewById(R.id.alarms_list_times);
-        timesList = loadUserPrescriptions();
         Log.d(TAG, "User's Times: " + String.valueOf(timesList));
-        if (Objects.equals(timesList.get(0), "")){ timesList.clear(); }
         timesListAdapter = new AlarmsListAdapter(this.getContext(), R.layout.alarms_list_item, R.id.alarms_list_item_TextView, timesList);
         timeListView.setAdapter(timesListAdapter);
         registerForContextMenu(timeListView);
     }
 
-    /** =================================================
-     * Save and Load User's Prescriptions
-     * ===================================================== */
-    private void saveUserPrescriptions(){
-        // Compress timesList into one string
-        StringBuilder stringBuilder = new StringBuilder();
-        for (int i = 0; i < timesList.size(); i++){
-            stringBuilder.append(timesList.get(i)).append(",");
-        }
-        Log.d(TAG, "Saved Prescriptions: " + stringBuilder.toString());
-
-        // Save SharedPreference
-        SharedPreferences mSharedPreference = this.getContext().getSharedPreferences("Prescriptions", MODE_PRIVATE);
-        SharedPreferences.Editor mSPEditor = mSharedPreference.edit();
-        mSPEditor.putString("times", stringBuilder.toString());
-        mSPEditor.apply();
-    }
-
-    private ArrayList<String> loadUserPrescriptions(){
-        // Load SharedPreference
-        SharedPreferences mSharedPreference = this.getContext().getSharedPreferences("Prescriptions", MODE_PRIVATE);
-        String compressedTimesString = mSharedPreference.getString("times", "");
-
-        // If first time user, give 1 fake time
-        int hasVisited = mSharedPreference.getInt("hasVisitedT", 0);
-        if (hasVisited == 0){
-            Log.d(TAG, "Found First Time User");
-            // Initialize Default
-            compressedTimesString = "12:30 PM";
-            timesList = new ArrayList<>();
-            timesList.add("12:30 PM");
-            saveUserPrescriptions();
-
-            // Mark as having visited
-            hasVisited = 1;
-            SharedPreferences.Editor mSPEditor = mSharedPreference.edit();
-            mSPEditor.putInt("hasVisitedT", hasVisited);
-            mSPEditor.apply();
-        }
-
-        // Parse from compressed string into symptomsList array
-        ArrayList<String> listOfUserTimes = new ArrayList<>(Arrays.asList(compressedTimesString.split(",")));
-        Log.d(TAG, "Loaded Prescriptions: " + listOfUserTimes.toString());
-        return listOfUserTimes;
+    // Re-draw the ListView
+    private void resetTimesList(){
+        timesListAdapter.notifyDataSetChanged();
+        timesListAdapter.notifyDataSetInvalidated();
+        Log.d(TAG, String.valueOf(timesList));
     }
 
     /** =================================================
@@ -137,10 +99,8 @@ public class AlarmsFragmentTimes extends Fragment {
                     @Override
                     public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
                         timesList.add(getTimeInAMPM(hourOfDay, minute));
-                        timesListAdapter.notifyDataSetChanged();
-                        timesListAdapter.notifyDataSetInvalidated();
-                        Log.d(TAG, String.valueOf(timesList));
-                        saveUserPrescriptions();
+                        prescriptionManager.addTime(getTimeInAMPM(hourOfDay, minute));
+                        resetTimesList();
                     }
                 }, 12, 30, false);
         mAlarmTimePickerDialog.show();
@@ -148,10 +108,8 @@ public class AlarmsFragmentTimes extends Fragment {
 
     private void deleteAlarmTime(int index){
         timesList.remove(index);
-        timesListAdapter.notifyDataSetChanged();
-        timesListAdapter.notifyDataSetInvalidated();
-        Log.d(TAG, String.valueOf(timesList));
-        saveUserPrescriptions();
+        prescriptionManager.deleteTime(index);
+        resetTimesList();
     }
 
     // Edit the selected Alarm Time
@@ -176,10 +134,8 @@ public class AlarmsFragmentTimes extends Fragment {
                     @Override
                     public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
                         timesList.set(indexSelected, getTimeInAMPM(hourOfDay, minute));
-                        timesListAdapter.notifyDataSetChanged();
-                        timesListAdapter.notifyDataSetInvalidated();
-                        Log.d(TAG, String.valueOf(timesList));
-                        saveUserPrescriptions();
+                        prescriptionManager.editTime(indexSelected, getTimeInAMPM(hourOfDay, minute));
+                        resetTimesList();
                     }
                 }, currentHour, currentMinute, false);
         mAlarmTimePickerDialog.show();
