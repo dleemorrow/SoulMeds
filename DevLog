@@ -6,6 +6,7 @@ Brendan Thompson
 I) Summary
 	A) Added Images
 	B) Created MedsActivity to see Verses
+	C) Fixed Alarm Notification
 
 II) Takeaways
 
@@ -19,12 +20,15 @@ III) Resources
 IV) To Do
 
 	A) Features
-		- Alarms Activity
-			* Implement Toggle for Symptoms & Times
+		- Implement Toggle for Alarm Symptoms & Times
 	B) Design
-		- Need Button Images
+		- App Icon
+		- MedsActivity Design
 	C) Back End
 		- Sync user data with Firebase
+	D) Codebase
+		- Login & Registration as Fragments
+		-
 
 V) Activity Log
 
