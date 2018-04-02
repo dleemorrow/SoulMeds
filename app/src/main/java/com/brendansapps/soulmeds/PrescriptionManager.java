@@ -37,7 +37,9 @@ class PrescriptionDataObject {
 // Class to handle the user's alarm prescription data
 public class PrescriptionManager {
 
-    // Properties
+    /** =================================================
+     * Private Properties
+     * ===================================================== */
     private static final String TAG = "PrescriptionManager";
     private static DataManager symptomDataManager;
     private static SharedPreferences prescriptionSP;
@@ -45,11 +47,11 @@ public class PrescriptionManager {
     private Context mContext;
 
     // Symptom Data
-    public static ArrayList<String> allSymptomsList;
-    public static ArrayList<PrescriptionDataObject> userSymptomsList;
+    private static ArrayList<String> allSymptomsList;
+    private static ArrayList<PrescriptionDataObject> userSymptomsList;
 
-    // Times Data
-    public static ArrayList<PrescriptionDataObject> userTimesList;
+    // Alarm Times Data
+    private static ArrayList<PrescriptionDataObject> userTimesList;
 
     /** =================================================
      * Constructor
@@ -67,6 +69,7 @@ public class PrescriptionManager {
         userSymptomsList = new ArrayList<>();
         userTimesList = new ArrayList<>();
         if (firstTimeUser()){
+            Log.d(TAG, "First Time User");
             createDefaults();
         }
         else {
@@ -236,7 +239,9 @@ public class PrescriptionManager {
      * Functions for managing first time user
      * ===================================================== */
     private Boolean firstTimeUser(){
-        return prescriptionSP.getBoolean("hasVisited", false);
+        Boolean firstTimeVisiting = prescriptionSP.getBoolean("firstTimeVisiting", true);
+//        Log.d(TAG, "firstTimeVisiting = " + firstTimeVisiting);
+        return firstTimeVisiting;
     }
 
     // Initializes Symptom data for first time users
@@ -258,7 +263,7 @@ public class PrescriptionManager {
         saveUserTimes();
 
         // Mark as having visited
-        prescriptionSPEditor.putBoolean("hasVisited", true);
+        prescriptionSPEditor.putBoolean("firstTimeVisiting", false);
         prescriptionSPEditor.apply();
     }
 
@@ -308,6 +313,4 @@ public class PrescriptionManager {
         AlarmManager alarmManager = (AlarmManager) mContext.getSystemService(ALARM_SERVICE);
         Log.d(TAG, "Next Alarm: " + String.valueOf(alarmManager.getNextAlarmClock()));
     }
-
-
 }
