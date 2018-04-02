@@ -4,6 +4,39 @@ Brendan Thompson
 === 03/31/18 ===
 
 I) Summary
+	A) Created App Icon
+
+II) Takeaways
+
+III) Resources
+
+	- Icon Generator: https://romannurik.github.io/AndroidAssetStudio/icons-launcher.html
+
+IV) To Do
+
+	A) Features
+		- Implement Toggle for Alarm Symptoms & Times
+		- 911 Activity
+		- Resources Activity
+		- Settings Activity
+	B) Design
+		- App Icon
+		- MedsActivity Design
+	C) Back End
+		- Sync user data with Firebase
+	D) Codebase
+		- Login & Registration as Fragments of one Activity
+
+V) Activity Log
+
+A) Created App Icon
+	- Generated images using largest AppIcon from Xcode project
+	- Circle & Square
+	- Icon Generator: https://romannurik.github.io/AndroidAssetStudio/icons-launcher.html
+
+=== 03/31/18 ===
+
+I) Summary
 	A) Added Images
 	B) Created MedsActivity to see Verses
 	C) Fixed Alarm Notification
@@ -21,6 +54,9 @@ IV) To Do
 
 	A) Features
 		- Implement Toggle for Alarm Symptoms & Times
+		- 911 Activity
+		- Resources Activity
+		- Settings Activity
 	B) Design
 		- App Icon
 		- MedsActivity Design
@@ -28,7 +64,6 @@ IV) To Do
 		- Sync user data with Firebase
 	D) Codebase
 		- Login & Registration as Fragments
-		-
 
 V) Activity Log
 
