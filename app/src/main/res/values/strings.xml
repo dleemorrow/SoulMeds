@@ -25,6 +25,7 @@
     <string name="action_delete_item">Delete</string>
     <string name="action_edit_item">Edit</string>
     <string name="title_symptom_picker">Select a Symptom</string>
+    <string name="section_format">Hello World from section: %1$d</string>
 
 
 </resources>
