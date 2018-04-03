@@ -60,6 +60,7 @@ public class AlarmsFragmentTimes extends Fragment {
         prescriptionManager = new PrescriptionManager(this.getContext());
         timesList = prescriptionManager.getUserTimes();
         initAlarmTimesListView(view);
+//        prescriptionManager.printTimes();
 
         // Setup the Add Alarm Button
         addAlarmButton = view.findViewById(R.id.action_add_alarm);
@@ -85,7 +86,7 @@ public class AlarmsFragmentTimes extends Fragment {
     private void resetTimesList(){
         timesListAdapter.notifyDataSetChanged();
         timesListAdapter.notifyDataSetInvalidated();
-        Log.d(TAG, String.valueOf(timesList));
+        prescriptionManager.printTimes();
     }
 
     /** =================================================

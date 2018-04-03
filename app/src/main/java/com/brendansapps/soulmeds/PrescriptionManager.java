@@ -104,11 +104,6 @@ public class PrescriptionManager {
             userTimes.add(userTimesList.get(i).name);
         }
 
-        // Clear list if empty
-        if (userTimes.get(0).equals("")){
-            userTimes.remove(0);
-        }
-
         return userTimes;
     }
 
@@ -132,6 +127,12 @@ public class PrescriptionManager {
         return symptomDataManager.getVerseReference(symptom, index);
     }
 
+    public void printTimes(){
+        for (int i = 0; i < userTimesList.size(); i++){
+            Log.d(TAG, i + ": " + userTimesList.get(i).name);
+        }
+    }
+
     /** =================================================
      * Manipulators
      * ===================================================== */
@@ -146,13 +147,14 @@ public class PrescriptionManager {
     }
 
     public void addTime(String time){
-        Log.d(TAG, "Adding Time");
+        Log.d(TAG, "Adding Time: " + time);
         PrescriptionDataObject newTime = new PrescriptionDataObject();
         newTime.name = time;
         newTime.isActive = true;
         userTimesList.add(newTime);
         saveUserTimes();
         updateAlarms();
+        printTimes();
     }
 
     public void deleteSymptom(int index){
@@ -166,6 +168,7 @@ public class PrescriptionManager {
         userTimesList.remove(index);
         saveUserTimes();
         updateAlarms();
+        printTimes();
     }
 
     public void editSymptom(int index, String newName){
@@ -179,6 +182,7 @@ public class PrescriptionManager {
         userTimesList.get(index).name = newTime;
         saveUserTimes();
         updateAlarms();
+        printTimes();
     }
 
     /** =================================================
@@ -202,6 +206,8 @@ public class PrescriptionManager {
 
     // Saves the user's Alarm Times to the Shared Preference
     private void saveUserTimes(){
+        printTimes();
+
         // Compress userTimesList into one string
         StringBuilder stringBuilder = new StringBuilder();
         for (int i = 0; i < userTimesList.size(); i++){
@@ -239,6 +245,17 @@ public class PrescriptionManager {
 //            tempData.isActive = listOfUserTimes;
             userTimesList.add(tempData);
         }
+
+        // Handle if first empty
+        if (userSymptomsList.get(0).name.equals("")){
+            deleteSymptom(0);
+        }
+        if (userTimesList.get(0).name.equals("")){
+            Log.d(TAG, "First Time is Empty");
+            deleteTime(0);
+        }
+
+        printTimes();
     }
 
     /** =================================================
@@ -276,43 +293,55 @@ public class PrescriptionManager {
     /** =================================================
      * Functions for managing Alarms
      * ===================================================== */
+    private long getTimeInMillis(String currentTime){
+        String currentHour_string;
+        String currentMinute_string;
+        Pattern timePattern = Pattern.compile("^([0-9]|0[0-9]|1[0-9]|2[0-3]):([0-5][0-9]) (AM|PM)$");
+        Matcher m = timePattern.matcher(currentTime);
+        m.find();
+        currentHour_string = m.group(1);
+        currentMinute_string = m.group(2);
+        Log.d(TAG, "Time: " + currentHour_string + ":" + currentMinute_string);
+        int currentHour = Integer.parseInt(currentHour_string);
+        int currentMinute = Integer.parseInt(currentMinute_string);
+
+        // Prepare Time
+        Calendar calendar = Calendar.getInstance();
+        calendar.set(
+                calendar.get(Calendar.YEAR),
+                calendar.get(Calendar.MONTH),
+                calendar.get(Calendar.DAY_OF_MONTH),
+                currentHour,
+                currentMinute,
+                0
+        );
+
+        return calendar.getTimeInMillis();
+    }
+
+    // Calls Set Alarm for each time in userTimesList
     private void updateAlarms(){
-
         for (int i = 0; i < userTimesList.size(); i++){
-            // Get Time
             String currentTime = userTimesList.get(i).name;
-            String currentHour_string;
-            String currentMinute_string;
-            Pattern timePattern = Pattern.compile("^([0-9]|0[0-9]|1[0-9]|2[0-3]):([0-5][0-9]) (AM|PM)$");
-            Matcher m = timePattern.matcher(currentTime);
-            m.find();
-            currentHour_string = m.group(1);
-            currentMinute_string = m.group(2);
-            Log.d(TAG, "Time: " + currentHour_string + ":" + currentMinute_string);
-            int currentHour = Integer.parseInt(currentHour_string);
-            int currentMinute = Integer.parseInt(currentMinute_string);
-
-            // Prepare Time
-            Calendar calendar = Calendar.getInstance();
-            calendar.set(
-                    calendar.get(Calendar.YEAR),
-                    calendar.get(Calendar.MONTH),
-                    calendar.get(Calendar.DAY_OF_MONTH),
-                    currentHour,
-                    currentMinute,
-                    0
-            );
-
-            setAlarm(calendar.getTimeInMillis());
+            setAlarm(getTimeInMillis(currentTime));
         }
     }
 
+    // Sets an alarm for the selected timeInMillis
     private void setAlarm(long timeInMillis){
         AlarmManager alarmManager = (AlarmManager) mContext.getSystemService(ALARM_SERVICE);
         Intent intent = new Intent(mContext, AlarmHandler.class);
         PendingIntent pendingIntent = PendingIntent.getBroadcast(mContext, 0, intent, 0);
         alarmManager.setRepeating(AlarmManager.RTC_WAKEUP, timeInMillis, AlarmManager.INTERVAL_DAY, pendingIntent);
         printAlarms();
+    }
+
+    // Deletes the alarm specified
+    private void deleteAlarms(){
+        AlarmManager alarmManager = (AlarmManager) mContext.getSystemService(ALARM_SERVICE);
+        Intent intent = new Intent(mContext, AlarmHandler.class);
+        PendingIntent pendingIntent = PendingIntent.getBroadcast(mContext, 0, intent, 0);
+        alarmManager.cancel(pendingIntent);
     }
 
     private void printAlarms(){
