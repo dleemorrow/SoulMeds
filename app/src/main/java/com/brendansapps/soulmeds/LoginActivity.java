@@ -72,10 +72,10 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
-        finishIfLoggedIn();
 
         // Get instance of FirebaseAuth
         mFirebaseAuth = FirebaseAuth.getInstance();
+        finishIfLoggedIn();
 
         // Set up the login form.
         mEmailView = findViewById(R.id.email);
@@ -122,9 +122,8 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
         finishIfLoggedIn();
     }
 
-    void finishIfLoggedIn(){
-        // Check If Logged In
-        FirebaseUser currentUser = FirebaseAuth.getInstance().getCurrentUser();
+    private void finishIfLoggedIn(){
+        FirebaseUser currentUser = mFirebaseAuth.getCurrentUser();
         if (currentUser != null){
             finish();
         }
@@ -370,8 +369,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
                             // Signed In Successfully
                             Log.d(TAG, "signInWithEmail:success");
                             FirebaseUser currentUser = mFirebaseAuth.getCurrentUser();
-                            Log.d(TAG, String.valueOf(currentUser));
-                            // updateUI(currentUser);
+                            finish();
                         }
                         else {
                             Log.w(TAG, "signInWithEmail:failed");
@@ -390,8 +388,6 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
             showProgress(false);
 
             if (success) {
-                Log.d(TAG, "Logged In Successfully");
-                finish();
             } else {
                 mPasswordView.setError(getString(R.string.error_incorrect_password));
                 mPasswordView.requestFocus();

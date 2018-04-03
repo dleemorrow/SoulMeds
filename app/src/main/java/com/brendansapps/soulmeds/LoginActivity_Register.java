@@ -84,7 +84,7 @@ public class LoginActivity_Register extends AppCompatActivity implements LoaderC
             }
         });
 
-        // Listen for Registration
+        // Listen for Registration btn
         Button mEmailRegisterButton = findViewById(R.id.action_register);
         mEmailRegisterButton.setOnClickListener(new OnClickListener() {
             @Override
@@ -98,8 +98,7 @@ public class LoginActivity_Register extends AppCompatActivity implements LoaderC
         mEmailSignInButton.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(LoginActivity_Register.this, LoginActivity.class);
-                startActivity(intent);
+                finish();
             }
         });
 
@@ -347,6 +346,7 @@ public class LoginActivity_Register extends AppCompatActivity implements LoaderC
                             // Signed In Successfully
                             Log.d(TAG, "createUserWithEmailAndPassword:success");
                             FirebaseUser currentUser = mFirebaseAuth.getCurrentUser();
+                            finish();
                             // updateUI(currentUser);
                         }
                         else {
@@ -366,8 +366,6 @@ public class LoginActivity_Register extends AppCompatActivity implements LoaderC
             showProgress(false);
 
             if (success) {
-                Log.d(TAG, "Registered Successfully");
-                finish();
             } else {
                 mPasswordView.setError(getString(R.string.error_incorrect_password));
                 mPasswordView.requestFocus();
