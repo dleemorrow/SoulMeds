@@ -137,6 +137,7 @@ public class PrescriptionManager {
      * ===================================================== */
 
     public void addSymptom(String name){
+        Log.d(TAG, "Adding Symptom");
         PrescriptionDataObject newSymptom = new PrescriptionDataObject();
         newSymptom.name = name;
         newSymptom.isActive = true;
@@ -145,6 +146,7 @@ public class PrescriptionManager {
     }
 
     public void addTime(String time){
+        Log.d(TAG, "Adding Time");
         PrescriptionDataObject newTime = new PrescriptionDataObject();
         newTime.name = time;
         newTime.isActive = true;
@@ -154,22 +156,26 @@ public class PrescriptionManager {
     }
 
     public void deleteSymptom(int index){
+        Log.d(TAG, "Deleting Symptom");
         userSymptomsList.remove(index);
         saveUserSymptoms();
     }
 
     public void deleteTime(int index){
+        Log.d(TAG, "Deleting Time");
         userTimesList.remove(index);
         saveUserTimes();
         updateAlarms();
     }
 
     public void editSymptom(int index, String newName){
+        Log.d(TAG, "Editing Symptom");
         userSymptomsList.get(index).name = newName;
         saveUserSymptoms();
     }
 
     public void editTime(int index, String newTime){
+        Log.d(TAG, "Editing Time");
         userTimesList.get(index).name = newTime;
         saveUserTimes();
         updateAlarms();

@@ -5,6 +5,7 @@ Brendan Thompson
 
 I) Summary
 	A) Created App Icon
+	B) Fixed Login Navigation
 
 II) Takeaways
 
@@ -16,6 +17,7 @@ IV) To Do
 
 	A) Features
 		- Implement Toggle for Alarm Symptoms & Times
+		- Delete Alarm time needs to delete from AlarmManager
 		- 911 Activity
 		- Resources Activity
 		- Settings Activity
@@ -24,8 +26,6 @@ IV) To Do
 		- MedsActivity Design
 	C) Back End
 		- Sync user data with Firebase
-	D) Codebase
-		- Login & Registration as Fragments of one Activity
 
 V) Activity Log
 
@@ -33,6 +33,15 @@ A) Created App Icon
 	- Generated images using largest AppIcon from Xcode project
 	- Circle & Square
 	- Icon Generator: https://romannurik.github.io/AndroidAssetStudio/icons-launcher.html
+
+B) Fixed Login Navigation
+	- Fixed finishIfLoggedIn()
+	- On registration called finish() instead of newIntent() when action_login_navigation
+	- Call finish() if succeeded w/ login/registration
+
+C) Found Timer Bugs
+	- Sometimes App crashed if time has a 0 (5:05, 5:50, 4:30)
+	- Not deleting alarms from AlarmManager
 
 === 03/31/18 ===
 

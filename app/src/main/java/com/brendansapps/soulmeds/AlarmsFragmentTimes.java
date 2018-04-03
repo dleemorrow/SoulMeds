@@ -143,11 +143,23 @@ public class AlarmsFragmentTimes extends Fragment {
 
     // Returns a String representing the time in AM|PM format
     public String getTimeInAMPM(int hour, int minute){
-        if (hour > 12){
+        String newTime;
+
+        // Create Hour
+        if (hour > 12) {
             hour -= 12;
-            return (hour + ":" + minute + " PM");
         }
-        return (hour + ":" + minute + " AM");
+        newTime = hour + ":";
+
+        // Create Minute
+        if (minute < 10) {
+            newTime = newTime + "0" + minute + " PM";
+        } else {
+            newTime = newTime + minute + " PM";
+        }
+
+        Log.d(TAG, "Time in AMPM = " + newTime);
+        return newTime;
     }
 
     /** =================================================

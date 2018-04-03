@@ -13,7 +13,6 @@ public class MainActivity extends AppCompatActivity {
 
     private static final String TAG = "MainActivity";
     Button mBtnAlarm, mBtnQuote, mBtnFolder, mBtnHelp;
-    static private int numVisits = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -58,15 +57,8 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onStart() {
         super.onStart();
-        numVisits++;
-        Log.d(TAG, String.valueOf(numVisits));
-
-        // Launch LoginActivity
-        if (numVisits == 1){
-            Intent intent = new Intent(this, LoginActivity.class);
-            startActivity(intent);
-//            finish();
-        }
+        Intent intent = new Intent(this, LoginActivity.class);
+        startActivity(intent);
     }
 
     // Send a toast saying Option Not Yet Available
