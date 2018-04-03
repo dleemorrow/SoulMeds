@@ -9,6 +9,9 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
 
+import net.hockeyapp.android.CrashManager;
+import net.hockeyapp.android.UpdateManager;
+
 public class MainActivity extends AppCompatActivity {
 
     private static final String TAG = "MainActivity";
@@ -25,6 +28,7 @@ public class MainActivity extends AppCompatActivity {
         mBtnFolder = findViewById(R.id.btn_Folder);
         mBtnHelp = findViewById(R.id.btn_Help);
 
+        // Button OnClickListener
         mBtnAlarm.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -52,6 +56,8 @@ public class MainActivity extends AppCompatActivity {
                 printNotYetAvailableToast();
             }
         });
+
+        checkForUpdates();
     }
 
     @Override
@@ -80,5 +86,41 @@ public class MainActivity extends AppCompatActivity {
     private void goToMedsPage(){
         Intent intent = new Intent(this, MedsActivity.class);
         startActivity(intent);
+    }
+
+    // ============================================================================
+    // Lifecycle events for HockeyApp CrashReporting & Beta-Distrobution@Override
+    // ============================================================================
+    public void onResume() {
+        super.onResume();
+        checkForCrashes();
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        unregisterManagers();
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        unregisterManagers();
+    }
+
+    // HockeyApp CrashReporting & Beta-Distrobution@Override
+    private void checkForCrashes() {
+        CrashManager.register(this);
+    }
+
+    // HockeyApp CrashReporting & Beta-Distrobution@Override
+    private void checkForUpdates() {
+        // Remove this for store builds!
+        UpdateManager.register(this);
+    }
+
+    // HockeyApp CrashReporting & Beta-Distrobution@Override
+    private void unregisterManagers() {
+        UpdateManager.unregister();
     }
 }

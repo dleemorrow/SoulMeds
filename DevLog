@@ -1,13 +1,130 @@
 DevLog for Soul Meds app
 Brendan Thompson
 
+================
 === 03/31/18 ===
+================
+
+I) Summary
+	A) Connected With HockeyApp
+
+II) Takeaways
+
+	- App Icon Added
+	- Login Navigation Fixed
+	- Some Alarm Time Bugs Fixed
+
+III) Resources
+
+IV) To Do
+
+	A) Features
+		- Implement Toggle for Alarm Symptoms & Times
+		*** Alarm System Not Complete:
+			- Currently only 1 timer that goes off one minute from when it was added
+			- Need To store an ID for each alarm & manage storage/deletion
+			- Will need an AlarmManager class
+		- 911 Activity
+		- Resources Activity
+		- Settings Activity
+	B) Design
+		- App Icon
+		- MedsActivity Design
+	C) Back End
+		- Sync user data with Firebase
+
+V) Activity Log
+
+A) Connected With HockeyApp
+	- Integration:
+		1) Give them the package from AndroidManifest
+			`com.brendansapps.soulmeds`
+		2) Add dependency using build.gradle
+			`compile 'net.hockeyapp.android:HockeySDK:5.1.0'`
+			- make sure repository configuration contains jCenter repository
+			allprojects {
+			    repositories {
+			        jcenter()
+			    }
+			}
+		3) Integrate
+			- Add ID to build.gradle
+				`manifestPlaceholders = [HOCKEYAPP_APP_ID: "112304HEXNUMBERWITH32DIGITS"]`
+			- Add meta-data to AndroidManifest in <application></...>
+				`<meta-data android:name="net.hockeyapp.android.appIdentifier" android:value="${HOCKEYAPP_APP_ID}" />`
+			- Add CrashReporting and Beta-Distribution to MainActivity
+				`
+				import net.hockeyapp.android.CrashManager;
+
+				public class YourActivity extends Activity {
+
+				  @Override
+				  public void onCreate(Bundle savedInstanceState) {
+				    super.onCreate(savedInstanceState);
+				    // Your own code to create the view
+				    // ...
+
+				    checkForUpdates();
+				  }
+
+				  @Override
+				  public void onResume() {
+				    super.onResume();
+				    // ... your own onResume implementation
+				    checkForCrashes();
+				  }
+
+				  @Override
+				  public void onPause() {
+				    super.onPause();
+				    unregisterManagers();
+				  }
+
+				  @Override
+				  public void onDestroy() {
+				    super.onDestroy();
+				    unregisterManagers();
+				  }
+
+				  private void checkForCrashes() {
+				    CrashManager.register(this);
+				  }
+
+				  private void checkForUpdates() {
+				    // Remove this for store builds!
+				    UpdateManager.register(this);
+				  }
+
+				  private void unregisterManagers() {
+				    UpdateManager.unregister();
+				  }
+
+				}
+				`
+		4) Add APK File to HockeyApp Dashboard
+			- Build -> Build APK(s)
+			- Soul Meds/app/build/outputs/apk/debug/app-debug.apk
+		5) Release Notes
+
+
+================
+=== 04/02/18 ===
+================
 
 I) Summary
 	A) Created App Icon
 	B) Fixed Login Navigation
+	C) Fixed Timer Bugs
 
 II) Takeaways
+
+	- App Icon Added
+	- Login Navigation Fixed
+	- Some Alarm Time Bugs Fixed
+	*** Alarm System Not Complete:
+		- Currently only 1 timer that goes off one minute from when it was added
+		- Need To store an ID for each alarm
+		- Will need an AlarmManager class
 
 III) Resources
 
@@ -39,11 +156,15 @@ B) Fixed Login Navigation
 	- On registration called finish() instead of newIntent() when action_login_navigation
 	- Call finish() if succeeded w/ login/registration
 
-C) Found Timer Bugs
-	- Sometimes App crashed if time has a 0 (5:05, 5:50, 4:30)
-	- Not deleting alarms from AlarmManager
+C) Fixed Timer Bugs
+	- Sometimes App crashes if time has a 0 (5:05, 5:50, 4:30)
+		- Fixed
+	- Blank alarm times were causing crashes
+		- Fixed
 
+================
 === 03/31/18 ===
+================
 
 I) Summary
 	A) Added Images
@@ -91,7 +212,9 @@ C) Fixed Alarm Notification
 		- https://stackoverflow.com/questions/16059094/how-to-set-media-player-duration-in-android
 	- Opens MedsActivity
 
+================
 === 03/28/18 ===
+================
 
 I) Summary
 	A) Abstracted all prescription handling to the PrescriptionManager
@@ -165,7 +288,9 @@ B) Implemented Alarm Functionality
         `
 
 
+================
 === 03/27/18 ===
+================
 
 I) Summary
 	A) Started implementing alarm functionality
@@ -220,7 +345,9 @@ A) Started implementing alarm functionality
 	- Needed = onReceive sends notification to user
 	- Needed = clicking on notification brings user to the appropriate Verses
 
+================
 === 03/26/18 ===
+================
 
 I) Summary
 	A) Saving & Loading prescription data
@@ -251,7 +378,9 @@ A) Saving & Loading prescription data
 		- https://stackoverflow.com/10230929/how-can-i-convert-string-to-arrayliststring
 		- `ArrayList<String> listOfCurrentSymptoms = new ArrayList<String>(Arrays.asList(userPrescriptionList));`
 
+================
 === 03/25/18 ===
+================
 
 I) Summary
 	A) Started using official Data
@@ -360,7 +489,9 @@ F) Implementing Symptom Select (Edit & Add New)
 	- Using AlertDialog & Builder: https://stackoverflow.com/questions/2115758/how-do-i-display-an-alert-dialog-on-android
 	- Adding an ArrayAdapter: https://stackoverflow.com/questions/15762905/how-can-i-display-a-list-view-in-an-android-alert-dialog
 
+================
 === 03/24/18 ===
+================
 
 I) Summary
 	A) Started adding official Data
@@ -412,7 +543,9 @@ A) Started adding official Data
 			- System.gc();
 
 
+================
 === 03/22/18 ===
+================
 
 I) Summary
 	A) Simplified Login Interface
@@ -471,7 +604,9 @@ C) Started making Alarm Times editable
 		    timeSelectFragment.show(getActivity().getFragmentManager(), "timePicker");
 	    `
 
+================
 === 03/21/18 ===
+================
 
 I) Summary
 	A) Implemented Alarm Time Delete using a context menu
@@ -544,7 +679,9 @@ D) Fixed Navigation between Login
 		- if numVisits == 0, Login
 	- Ugly shortcut
 
+================
 === 03/20/18 ===
+================
 
 I) Summary
 	A) Implemented Alarm Symptom Delete using a context menu
@@ -612,9 +749,9 @@ A) Implemented Alarm Symptom Delete using a context menu
 	        return super.onContextItemSelected(item);
 	    }
 
-
-
+================
 === 03/14/18 ===
+================
 
 I) Summary
 	A) Created Symptoms Scaffold for tabbedAlarmsListView
@@ -742,7 +879,9 @@ C) Designed ListView Items
         android:layout_alignParentEnd="true"
         "
 
+================
 === 03/13/18 ===
+================
 
 I) Summary
 	A) Separated Alarm Implementations into new branches
@@ -766,7 +905,9 @@ A) Separated Alarm Implementations into new branches
 		- 2 separate tabs, 1 with the symptoms and 1 with the times
 		- dynamic, toggle-able,delete-able
 
+================
 === 03/11/18 ===
+================
 
 I) Summary
 	A) Created New Alarms Activity
@@ -834,7 +975,9 @@ A) Created New Alarms Activity
 
 
 
+================
 === 03/07/18 ===
+================
 
 I) Summary
 	A) Removed old tabbed Alarms Activity
