@@ -5,7 +5,7 @@ package com.brendansapps.soulmeds;
  *
  * Datatype consisting of a symptom/time name, a boolean, and an ID
  *
- * Utilized by PrescriptionManager & PrescriptionAlarmManager
+ * Utilized by PrescriptionManager
  */
 
 // Object for representing either a symptom or a time for the Alarm prescriptions
