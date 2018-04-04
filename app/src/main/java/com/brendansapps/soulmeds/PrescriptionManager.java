@@ -87,11 +87,6 @@ public class PrescriptionManager {
             userSymptoms.add(userSymptomsList.get(i).name);
         }
 
-        // Clear list if empty
-        if (userSymptoms.get(0).equals("")){
-            userSymptoms.remove(0);
-        }
-
         return userSymptoms;
     }
 
@@ -136,7 +131,7 @@ public class PrescriptionManager {
      * ===================================================== */
 
     public void addSymptom(String name){
-        Log.d(TAG, "Adding Symptom");
+        Log.d(TAG, "Adding Symptom " + name);
         PrescriptionDataObject newSymptom = new PrescriptionDataObject();
         newSymptom.name = name;
         newSymptom.isActive = true;
@@ -146,49 +141,55 @@ public class PrescriptionManager {
     }
 
     public void addTime(String time){
-        Log.d(TAG, "Adding Time: " + time);
+        Log.d(TAG, "Adding Time " + time);
         PrescriptionDataObject newTime = new PrescriptionDataObject();
         newTime.name = time;
         newTime.isActive = true;
         newTime.alarmID = getAlarmID(newTime.name);
         userTimesList.add(newTime);
-
         saveUserTimes();
-        updateAlarms();
-        printTimes();
+        // printTimes();
+
+        // Add Alarm
+        setAlarm(getTimeInMillis(newTime.name), newTime.alarmID);
     }
 
     public void deleteSymptom(int index){
-        Log.d(TAG, "Deleting Symptom");
+        Log.d(TAG, "Deleting Symptom " + userSymptomsList.get(index).name);
         userSymptomsList.remove(index);
 
         saveUserSymptoms();
     }
 
     public void deleteTime(int index){
-        Log.d(TAG, "Deleting Time");
+        Log.d(TAG, "Deleting Time " + userTimesList.get(index).name);
+        deleteAlarm(userTimesList.get(index).alarmID);
         userTimesList.remove(index);
 
         saveUserTimes();
-        deleteAlarm(userTimesList.get(index).alarmID);
-        printTimes();
+        // printTimes();
     }
 
     public void editSymptom(int index, String newName){
-        Log.d(TAG, "Editing Symptom");
+        Log.d(TAG, "Changing Symptom " + userSymptomsList.get(index).name + " to " + newName);
         userSymptomsList.get(index).name = newName;
 
         saveUserSymptoms();
     }
 
     public void editTime(int index, String newTime){
-        Log.d(TAG, "Editing Time");
+        // Delete Old Alarm
+        deleteAlarm(userTimesList.get(index).alarmID);
+
+        // Edit Time
+        Log.d(TAG, "Changing Time " + userTimesList.get(index).name + " to " + newTime);
         userTimesList.get(index).name = newTime;
         userTimesList.get(index).alarmID = getAlarmID(newTime);
-
         saveUserTimes();
-        updateAlarms();
-        printTimes();
+        // printTimes();
+
+        // Add New Alarm
+        setAlarm(getTimeInMillis(userTimesList.get(index).name), userTimesList.get(index).alarmID);
     }
 
     /** =================================================
@@ -212,8 +213,6 @@ public class PrescriptionManager {
 
     // Saves the user's Alarm Times to the Shared Preference
     private void saveUserTimes(){
-        printTimes();
-
         // Compress userTimesList into one string
         StringBuilder stringBuilder = new StringBuilder();
         for (int i = 0; i < userTimesList.size(); i++){
@@ -237,30 +236,29 @@ public class PrescriptionManager {
         // Parse Loaded data into userSymptomsList
         ArrayList<String> listOfUserSymptoms = new ArrayList<>(Arrays.asList(compressedSymptomsString.split(",")));
         for (int i = 0; i < listOfUserSymptoms.size(); i++){
-            PrescriptionDataObject tempData = new PrescriptionDataObject();
-            tempData.name = listOfUserSymptoms.get(i);
-//            tempData.isActive = listOfUserSymptoms_Active;
-            userSymptomsList.add(tempData);
+            PrescriptionDataObject loadedSymptom = new PrescriptionDataObject();
+            loadedSymptom.name = listOfUserSymptoms.get(i);
+
+            if (!(loadedSymptom.name.equals(""))){
+                // loadedSymptom.isActive = listOfUserSymptoms_Active;
+                userSymptomsList.add(loadedSymptom);
+            }
         }
 
         // Parse Loaded data into userTimesList
         ArrayList<String> listOfUserTimes = new ArrayList<>(Arrays.asList(compressedTimesString.split(",")));
         for (int i = 0; i < listOfUserTimes.size(); i++){
-            PrescriptionDataObject tempData = new PrescriptionDataObject();
-            tempData.name = listOfUserTimes.get(i);
-//            tempData.isActive = listOfUserTimes;
-            tempData.alarmID = getAlarmID(tempData.name);
-            userTimesList.add(tempData);
+            PrescriptionDataObject loadedTime = new PrescriptionDataObject();
+            loadedTime.name = listOfUserTimes.get(i);
+
+            if (!(loadedTime.name.equals(""))){
+                // loadedTime.isActive = listOfUserTimes_Active;
+                loadedTime.alarmID = getAlarmID(loadedTime.name);
+                userTimesList.add(loadedTime);
+            }
         }
 
-        // Handle if first empty
-        if (userSymptomsList.get(0).name.equals("")){
-            deleteSymptom(0);
-        }
-        if (userTimesList.get(0).name.equals("")){
-            deleteTime(0);
-        }
-
+        Log.d(TAG, "Loaded Times:");
         printTimes();
     }
 
@@ -301,66 +299,78 @@ public class PrescriptionManager {
      * ===================================================== */
     private long getTimeInMillis(String currentTime){
         // Get Hour & Minute from string
-        Pattern timePattern = Pattern.compile("^([0-9]|0[0-9]|1[0-9]|2[0-3]):([0-5][0-9]) (AM|PM)$");
-        Matcher m = timePattern.matcher(currentTime);
-        m.find();
-        int currentHour = Integer.parseInt(m.group(1));
-        int currentMinute = Integer.parseInt(m.group(2));
+        Matcher m;
+        try {
+            Pattern timePattern = Pattern.compile("^([0-9]|0[0-9]|1[0-9]|2[0-3]):([0-5][0-9]) (AM|PM)$");
+            m = timePattern.matcher(currentTime);
+            m.find();
+            int currentHour = Integer.parseInt(m.group(1));
+            int currentMinute = Integer.parseInt(m.group(2));
 
-        // Prepare Time
-        Calendar calendar = Calendar.getInstance();
-        calendar.set(
-                calendar.get(Calendar.YEAR),
-                calendar.get(Calendar.MONTH),
-                calendar.get(Calendar.DAY_OF_MONTH),
-                currentHour,
-                currentMinute,
-                0
-        );
+            if (m.group(3).equals("PM")){
+                currentHour += 12;
+            }
 
-        return calendar.getTimeInMillis();
+            // Prepare Time
+            Calendar calendar = Calendar.getInstance();
+            calendar.set(
+                    calendar.get(Calendar.YEAR),
+                    calendar.get(Calendar.MONTH),
+                    calendar.get(Calendar.DAY_OF_MONTH),
+                    currentHour,
+                    currentMinute,
+                    0
+            );
+
+            long alarmTIM = calendar.getTimeInMillis();
+            Log.d(TAG, "Got Time in Millis as " + alarmTIM);
+            return calendar.getTimeInMillis();
+        }
+        catch (IllegalStateException e){
+            Log.d(TAG, "Pattern Matcher Failed: " + e);
+            return -1;
+        }
     }
 
     // Returns an AlarmID created by appending the hour, minute, and amOrPm (0 | 1)
     private int getAlarmID(String currentTime){
-        Pattern timePattern = Pattern.compile("^([0-9]|0[0-9]|1[0-9]|2[0-3]):([0-5][0-9]) (AM|PM)$");
-        Matcher m = timePattern.matcher(currentTime);
-        m.find();
-        int amOrPm;
-        if (m.group(3).equals("AM")){
-            amOrPm = 0;
-        }else {
-            amOrPm = 1;
-        }
-        return Integer.parseInt(m.group(1) + m.group(2) + amOrPm);
-    }
+        Matcher m;
+        try {
+            Pattern timePattern = Pattern.compile("^([0-9]|0[0-9]|1[0-9]|2[0-3]):([0-5][0-9]) (AM|PM)$");
+            m = timePattern.matcher(currentTime);
+            m.find();
 
-    // Calls Set Alarm for each time in userTimesList
-    private void updateAlarms(){
-        for (int i = 0; i < userTimesList.size(); i++){
-            long timeInMillis = getTimeInMillis(userTimesList.get(i).name);
-            int alarmId = userTimesList.get(i).alarmID;
-            setAlarm(timeInMillis, alarmId);
+            int amOrPm;
+            if (m.group(3).equals("AM")){
+                amOrPm = 0;
+            }else {
+                amOrPm = 1;
+            }
+            return Integer.parseInt(m.group(1) + m.group(2) + amOrPm);
+        }
+        catch (IllegalStateException e){
+            Log.d(TAG, "Pattern Matcher Failed: " + e);
+            return -1;
         }
     }
 
     // Sets an alarm for the selected timeInMillis
-    private void setAlarm(long timeInMillis, int requestCode){
+    private void setAlarm(long timeInMillis, int alarmID){
         Intent intent = new Intent(mContext, AlarmHandler.class);
-        PendingIntent pendingIntent = PendingIntent.getBroadcast(mContext, requestCode, intent, 0);
+        PendingIntent pendingIntent = PendingIntent.getBroadcast(mContext, alarmID, intent, 0);
         mAlarmManager.setRepeating(AlarmManager.RTC_WAKEUP, timeInMillis, AlarmManager.INTERVAL_DAY, pendingIntent);
+        Log.d(TAG, "Set alarm for " + timeInMillis + " millis");
         printAlarms();
     }
 
     // Deletes the alarm specified
-    private void deleteAlarm(int requestCode){
+    private void deleteAlarm(int alarmID){
         Intent intent = new Intent(mContext, AlarmHandler.class);
-        PendingIntent pendingIntent = PendingIntent.getBroadcast(mContext, requestCode, intent, 0);
+        PendingIntent pendingIntent = PendingIntent.getBroadcast(mContext, alarmID, intent, 0);
         mAlarmManager.cancel(pendingIntent);
     }
 
     private void printAlarms(){
-        AlarmManager alarmManager = (AlarmManager) mContext.getSystemService(ALARM_SERVICE);
-        Log.d(TAG, "Next Alarm: " + String.valueOf(alarmManager.getNextAlarmClock()));
+        Log.d(TAG, "Next Alarm: " + String.valueOf(mAlarmManager.getNextAlarmClock()));
     }
 }

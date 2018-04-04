@@ -2,6 +2,45 @@ DevLog for Soul Meds app
 Brendan Thompson
 
 ================
+=== 04/04/18 ===
+================
+
+I) Summary
+	A) Fixed Alarms
+
+II) Takeaways
+
+	- Functioning Alarms
+
+III) Resources
+
+IV) To Do
+
+	A) Features
+		- Implement Toggle for Alarm Symptoms & Times
+		*** Alarm System Not Complete:
+			- Currently only 1 timer that goes off one minute from when it was added
+			- Need To store an ID for each alarm & manage storage/deletion
+			- Will need an AlarmManager class
+		- 911 Activity
+		- Resources Activity
+		- Settings Activity
+	B) Design
+		- App Icon
+		- MedsActivity Design
+	C) Back End
+		- Sync user data with Firebase
+
+V) Activity Log
+
+A) Fixed Alarms
+	- Wasn't adding 12 to the hour if PM
+	- Cleaned Code
+	- Caught Exceptions
+	- Stopped re-setting all alarms
+
+
+================
 === 04/03/18 ===
 ================
 

@@ -12,6 +12,7 @@ import android.os.CountDownTimer;
 import android.os.Vibrator;
 import android.provider.Settings;
 import android.support.v4.app.NotificationCompat;
+import android.util.Log;
 
 import static android.content.Context.ALARM_SERVICE;
 import static android.content.Context.NOTIFICATION_SERVICE;
@@ -24,6 +25,7 @@ import static android.content.Context.NOTIFICATION_SERVICE;
 
 public class AlarmHandler extends BroadcastReceiver {
 
+    private static final String TAG = "AlarmHandler";
     private static final String notificationTitle = "Soul Meds";
     private static final String notificationMessage = "An alarm has gone off";
     private static final int REQUEST_CODE = 1;
@@ -33,6 +35,7 @@ public class AlarmHandler extends BroadcastReceiver {
 
     @Override
     public void onReceive(Context context, Intent intent) {
+        Log.d(TAG, "Receiving an Alarm");
         mContext = context;
 
         // Ringtone & Vibrate
