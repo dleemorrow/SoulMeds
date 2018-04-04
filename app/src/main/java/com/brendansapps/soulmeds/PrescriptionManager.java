@@ -7,11 +7,16 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.util.Log;
 
+import java.nio.charset.StandardCharsets;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 import java.sql.Time;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Base64;
 import java.util.Calendar;
 import java.util.List;
+import java.util.Objects;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -19,22 +24,13 @@ import static android.content.Context.ALARM_SERVICE;
 import static android.content.Context.MODE_PRIVATE;
 
 /**
- * Created by bt on 3/27/18.
+ *  Created by bt on 03/27/18.
  *
- * Class to handle the user's alarm prescription data (Symptoms & Times)
+ *  Manages the symptoms and times associated with the user's prescription data
  *
- * Manages Setting the Actual Alarms
- *
- * Utilized in the AlarmsActivity
+ *  Utilized by AlarmsFragmentSymptoms & AlarmsFragmentTimes
  */
 
-// Object for representing either a symptom or a time for the Alarm prescriptions
-class PrescriptionDataObject {
-    public String name;
-    public Boolean isActive;
-}
-
-// Class to handle the user's alarm prescription data
 public class PrescriptionManager {
 
     /** =================================================
@@ -45,6 +41,7 @@ public class PrescriptionManager {
     private static SharedPreferences prescriptionSP;
     private static SharedPreferences.Editor prescriptionSPEditor;
     private Context mContext;
+    private static AlarmManager mAlarmManager;
 
     // Symptom Data
     private static ArrayList<String> allSymptomsList;
@@ -60,6 +57,7 @@ public class PrescriptionManager {
         mContext = context;
 
         // Initialize Managers
+        mAlarmManager = (AlarmManager) mContext.getSystemService(ALARM_SERVICE);
         symptomDataManager = new DataManager();
         allSymptomsList = symptomDataManager.getSymptomsList();
         prescriptionSP = mContext.getSharedPreferences("Prescriptions", MODE_PRIVATE);
@@ -129,7 +127,7 @@ public class PrescriptionManager {
 
     public void printTimes(){
         for (int i = 0; i < userTimesList.size(); i++){
-            Log.d(TAG, i + ": " + userTimesList.get(i).name);
+            Log.d(TAG, i + ": " + userTimesList.get(i).name + ", " + userTimesList.get(i).isActive + ", " + userTimesList.get(i).alarmID);
         }
     }
 
@@ -143,6 +141,7 @@ public class PrescriptionManager {
         newSymptom.name = name;
         newSymptom.isActive = true;
         userSymptomsList.add(newSymptom);
+
         saveUserSymptoms();
     }
 
@@ -151,7 +150,9 @@ public class PrescriptionManager {
         PrescriptionDataObject newTime = new PrescriptionDataObject();
         newTime.name = time;
         newTime.isActive = true;
+        newTime.alarmID = getAlarmID(newTime.name);
         userTimesList.add(newTime);
+
         saveUserTimes();
         updateAlarms();
         printTimes();
@@ -160,26 +161,31 @@ public class PrescriptionManager {
     public void deleteSymptom(int index){
         Log.d(TAG, "Deleting Symptom");
         userSymptomsList.remove(index);
+
         saveUserSymptoms();
     }
 
     public void deleteTime(int index){
         Log.d(TAG, "Deleting Time");
         userTimesList.remove(index);
+
         saveUserTimes();
-        updateAlarms();
+        deleteAlarm(userTimesList.get(index).alarmID);
         printTimes();
     }
 
     public void editSymptom(int index, String newName){
         Log.d(TAG, "Editing Symptom");
         userSymptomsList.get(index).name = newName;
+
         saveUserSymptoms();
     }
 
     public void editTime(int index, String newTime){
         Log.d(TAG, "Editing Time");
         userTimesList.get(index).name = newTime;
+        userTimesList.get(index).alarmID = getAlarmID(newTime);
+
         saveUserTimes();
         updateAlarms();
         printTimes();
@@ -243,6 +249,7 @@ public class PrescriptionManager {
             PrescriptionDataObject tempData = new PrescriptionDataObject();
             tempData.name = listOfUserTimes.get(i);
 //            tempData.isActive = listOfUserTimes;
+            tempData.alarmID = getAlarmID(tempData.name);
             userTimesList.add(tempData);
         }
 
@@ -251,7 +258,6 @@ public class PrescriptionManager {
             deleteSymptom(0);
         }
         if (userTimesList.get(0).name.equals("")){
-            Log.d(TAG, "First Time is Empty");
             deleteTime(0);
         }
 
@@ -294,16 +300,12 @@ public class PrescriptionManager {
      * Functions for managing Alarms
      * ===================================================== */
     private long getTimeInMillis(String currentTime){
-        String currentHour_string;
-        String currentMinute_string;
+        // Get Hour & Minute from string
         Pattern timePattern = Pattern.compile("^([0-9]|0[0-9]|1[0-9]|2[0-3]):([0-5][0-9]) (AM|PM)$");
         Matcher m = timePattern.matcher(currentTime);
         m.find();
-        currentHour_string = m.group(1);
-        currentMinute_string = m.group(2);
-        Log.d(TAG, "Time: " + currentHour_string + ":" + currentMinute_string);
-        int currentHour = Integer.parseInt(currentHour_string);
-        int currentMinute = Integer.parseInt(currentMinute_string);
+        int currentHour = Integer.parseInt(m.group(1));
+        int currentMinute = Integer.parseInt(m.group(2));
 
         // Prepare Time
         Calendar calendar = Calendar.getInstance();
@@ -319,29 +321,42 @@ public class PrescriptionManager {
         return calendar.getTimeInMillis();
     }
 
+    // Returns an AlarmID created by appending the hour, minute, and amOrPm (0 | 1)
+    private int getAlarmID(String currentTime){
+        Pattern timePattern = Pattern.compile("^([0-9]|0[0-9]|1[0-9]|2[0-3]):([0-5][0-9]) (AM|PM)$");
+        Matcher m = timePattern.matcher(currentTime);
+        m.find();
+        int amOrPm;
+        if (m.group(3).equals("AM")){
+            amOrPm = 0;
+        }else {
+            amOrPm = 1;
+        }
+        return Integer.parseInt(m.group(1) + m.group(2) + amOrPm);
+    }
+
     // Calls Set Alarm for each time in userTimesList
     private void updateAlarms(){
         for (int i = 0; i < userTimesList.size(); i++){
-            String currentTime = userTimesList.get(i).name;
-            setAlarm(getTimeInMillis(currentTime));
+            long timeInMillis = getTimeInMillis(userTimesList.get(i).name);
+            int alarmId = userTimesList.get(i).alarmID;
+            setAlarm(timeInMillis, alarmId);
         }
     }
 
     // Sets an alarm for the selected timeInMillis
-    private void setAlarm(long timeInMillis){
-        AlarmManager alarmManager = (AlarmManager) mContext.getSystemService(ALARM_SERVICE);
+    private void setAlarm(long timeInMillis, int requestCode){
         Intent intent = new Intent(mContext, AlarmHandler.class);
-        PendingIntent pendingIntent = PendingIntent.getBroadcast(mContext, 0, intent, 0);
-        alarmManager.setRepeating(AlarmManager.RTC_WAKEUP, timeInMillis, AlarmManager.INTERVAL_DAY, pendingIntent);
+        PendingIntent pendingIntent = PendingIntent.getBroadcast(mContext, requestCode, intent, 0);
+        mAlarmManager.setRepeating(AlarmManager.RTC_WAKEUP, timeInMillis, AlarmManager.INTERVAL_DAY, pendingIntent);
         printAlarms();
     }
 
     // Deletes the alarm specified
-    private void deleteAlarms(){
-        AlarmManager alarmManager = (AlarmManager) mContext.getSystemService(ALARM_SERVICE);
+    private void deleteAlarm(int requestCode){
         Intent intent = new Intent(mContext, AlarmHandler.class);
-        PendingIntent pendingIntent = PendingIntent.getBroadcast(mContext, 0, intent, 0);
-        alarmManager.cancel(pendingIntent);
+        PendingIntent pendingIntent = PendingIntent.getBroadcast(mContext, requestCode, intent, 0);
+        mAlarmManager.cancel(pendingIntent);
     }
 
     private void printAlarms(){

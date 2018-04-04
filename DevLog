@@ -2,11 +2,12 @@ DevLog for Soul Meds app
 Brendan Thompson
 
 ================
-=== 03/31/18 ===
+=== 04/03/18 ===
 ================
 
 I) Summary
 	A) Connected With HockeyApp
+	B) Started Fixing Alarms
 
 II) Takeaways
 
@@ -15,6 +16,9 @@ II) Takeaways
 	- Some Alarm Time Bugs Fixed
 
 III) Resources
+
+	- hockeyapp.net
+	- Multiple Alarms: https://stackoverflow.com/questions/8469705/how-to-set-multiple-alarms-using-android-alarm-manager
 
 IV) To Do
 
@@ -106,6 +110,11 @@ A) Connected With HockeyApp
 			- Soul Meds/app/build/outputs/apk/debug/app-debug.apk
 		5) Release Notes
 
+B) Started Fixing Alarms
+	- Added an alarmID used for building the PendingIntent for set & cancel
+	- alarmID = hour_string + minute_string + (isAM ? 0 : 1)
+	- Still setting the alarm for the next minute
+	- Multiple Alarms: https://stackoverflow.com/questions/8469705/how-to-set-multiple-alarms-using-android-alarm-manager
 
 ================
 === 04/02/18 ===
