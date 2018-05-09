@@ -7,11 +7,14 @@ Brendan Thompson
 
 I) Summary
 	A) Updated Homepage
+	B) Updated Meds Activity
+	c) New App Icon
 
 
 II) Takeaways
 
 	- Started Major V2 update
+	- New App Icon
 
 III) Resources
 
@@ -19,16 +22,13 @@ IV) To Do
 
 	A) Features
 		- Implement Toggle for Alarm Symptoms & Times
-		*** Alarm System Not Complete:
-			- Currently only 1 timer that goes off one minute from when it was added
-			- Need To store an ID for each alarm & manage storage/deletion
-			- Will need an AlarmManager class
-		- 911 Activity
-		- Resources Activity
-		- Settings Activity
+		- Alarms Activity: 3 symptoms, 3 alarms
+		- 911 Activity: pick symptom, go to MedsActivity
+		- MedsActivity: "next" through all before exit
+		- Resources Activity: ?
+		- Settings Activity: ?
 	B) Design
-		- App Icon
-		- MedsActivity Design
+		- Bible reference string
 	C) Back End
 		- Sync user data with Firebase
 
@@ -38,6 +38,15 @@ A) Updated Homepage
 	- added crosswhite icon
 	- increased icon size
 	- made buttons arc around center cross
+
+B) Updated Meds Activity
+	- Added bible reference to bottom (need exact string)
+	- centered quote vertically
+	- set background as dark gray
+
+c) New App Icon
+	- created icons [http://romannurik.github.io/AndroidAssetStudio/icons-launcher.html]
+	- extracted to src/main/
 
 ================
 === 04/04/18 ===
