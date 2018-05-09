@@ -2,11 +2,50 @@ DevLog for Soul Meds app
 Brendan Thompson
 
 ================
+=== 05/09/18 ===
+================
+
+I) Summary
+	A) Updated Homepage
+
+
+II) Takeaways
+
+	- Started Major V2 update
+
+III) Resources
+
+IV) To Do
+
+	A) Features
+		- Implement Toggle for Alarm Symptoms & Times
+		*** Alarm System Not Complete:
+			- Currently only 1 timer that goes off one minute from when it was added
+			- Need To store an ID for each alarm & manage storage/deletion
+			- Will need an AlarmManager class
+		- 911 Activity
+		- Resources Activity
+		- Settings Activity
+	B) Design
+		- App Icon
+		- MedsActivity Design
+	C) Back End
+		- Sync user data with Firebase
+
+V) Activity Log
+
+A) Updated Homepage
+	- added crosswhite icon
+	- increased icon size
+	- made buttons arc around center cross
+
+================
 === 04/04/18 ===
 ================
 
 I) Summary
 	A) Fixed Alarms
+	B) Uploaded the official Demo on HockeyApp
 
 II) Takeaways
 
@@ -38,6 +77,8 @@ A) Fixed Alarms
 	- Cleaned Code
 	- Caught Exceptions
 	- Stopped re-setting all alarms
+
+B) Uploaded the official Demo on HockeyApp
 
 
 ================
