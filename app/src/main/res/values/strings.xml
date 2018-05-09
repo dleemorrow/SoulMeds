@@ -2,6 +2,9 @@
     <string name="app_name">Soul Meds</string>
     <string name="action_settings">Settings</string>
 
+    <!-- Bible Reference Source -->
+    <string name="bible_reference">This verse is from a specific bible which was used with permission. This string needs to be updated to reflect the correct information.</string>
+
     <!-- login & registration -->
     <string name="title_activity_login">Sign In</string>
     <string name="title_activity_login_register">Register</string>
