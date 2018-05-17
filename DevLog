@@ -2,14 +2,11 @@ DevLog for Soul Meds app
 Brendan Thompson
 
 ================
-=== 05/09/18 ===
+=== 05/13/18 ===
 ================
 
 I) Summary
-	A) Updated Homepage
-	B) Updated Meds Activity
-	c) New App Icon
-
+	A) Implemented Emergency Activity Flow
 
 II) Takeaways
 
@@ -21,14 +18,52 @@ III) Resources
 IV) To Do
 
 	A) Features
-		- Implement Toggle for Alarm Symptoms & Times
 		- Alarms Activity: 3 symptoms, 3 alarms
-		- 911 Activity: pick symptom, go to MedsActivity
+		- Emergency Activity: pick symptom, go to MedsActivity
 		- MedsActivity: "next" through all before exit
 		- Resources Activity: ?
 		- Settings Activity: ?
 	B) Design
-		- Bible reference string
+		- Need official Bible reference string
+	C) Back End
+		- Sync user data with Firebase
+
+V) Activity Log
+
+A) Implemented Emergency Activity
+
+	- created EmergencyActivity
+	- coppied over ListView logic from Alarms activity
+		- get list using PrescriptionManager
+	- setOnItemClickListener() and navigated to the MedsActivity
+	- Pass the selection to the MedsActivity
+
+================
+=== 05/09/18 ===
+================
+
+I) Summary
+	A) Updated Homepage
+	B) Updated Meds Activity
+	c) New App Icon
+
+II) Takeaways
+
+	- Started Major V2 update
+	- New App Icon
+
+III) Resources
+
+IV) To Do
+
+	A) Features
+		- Alarms Activity: 3 symptoms, 3 alarms
+		- Emergency Activity: pick symptom, go to MedsActivity
+		- MedsActivity: "next" through all before exit
+		- Resources Activity: ?
+		- Settings Activity: ?
+	B) Design
+		- Need official Bible reference string
 	C) Back End
 		- Sync user data with Firebase
 

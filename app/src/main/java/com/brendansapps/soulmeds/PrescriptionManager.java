@@ -105,6 +105,15 @@ public class PrescriptionManager {
         return allSymptomsList;
     }
 
+    public String getSymptom(int index){
+        return symptomDataManager.getSymptomAtIndex(index);
+    }
+
+    // Returns the number of Verses for that symptom
+    public int getNumSymptoms(){
+        return symptomDataManager.size();
+    }
+
     // Returns the number of Verses for that symptom
     public int getNumVerses(String symptom){
         return symptomDataManager.getNumVerses(symptom);
@@ -266,9 +275,9 @@ public class PrescriptionManager {
      * Functions for managing first time user
      * ===================================================== */
     private Boolean firstTimeUser(){
-        Boolean firstTimeVisiting = prescriptionSP.getBoolean("firstTimeVisiting", true);
+//        Boolean firstTimeVisiting = prescriptionSP.getBoolean("firstTimeVisiting", true);
 //        Log.d(TAG, "firstTimeVisiting = " + firstTimeVisiting);
-        return firstTimeVisiting;
+        return prescriptionSP.getBoolean("firstTimeVisiting", true);
     }
 
     // Initializes Symptom data for first time users

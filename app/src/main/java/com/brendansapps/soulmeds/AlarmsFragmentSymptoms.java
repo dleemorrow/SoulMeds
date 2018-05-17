@@ -75,11 +75,10 @@ public class AlarmsFragmentSymptoms extends Fragment {
         return view;
     }
 
-    // Populate the ListView by getting the Data & setting the Adapter
+    // Populate the ListView by getting the data & setting the Adapter
     private void initSymptomListView(View view){
         symptomListView = view.findViewById(R.id.alarms_list_symptoms);
-        Log.d(TAG, "User's Symptoms: " + String.valueOf(symptomsList));
-//        if (Objects.equals(symptomsList.get(0), "")){ symptomsList.clear(); }
+//        Log.d(TAG, "User's Symptoms: " + String.valueOf(symptomsList));
         symptomsListAdapter = new AlarmsListAdapter(this.getContext(), R.layout.alarms_list_item, R.id.alarms_list_item_TextView, symptomsList);
         symptomListView.setAdapter(symptomsListAdapter);
         registerForContextMenu(symptomListView);

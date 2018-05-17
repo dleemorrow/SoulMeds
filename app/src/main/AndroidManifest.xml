@@ -11,8 +11,9 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-
-        <meta-data android:name="net.hockeyapp.android.appIdentifier" android:value="${HOCKEYAPP_APP_ID}" />
+        <meta-data
+            android:name="net.hockeyapp.android.appIdentifier"
+            android:value="${HOCKEYAPP_APP_ID}" />
 
         <activity
             android:name=".MainActivity"
@@ -23,22 +24,21 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
         <activity
             android:name=".AlarmsActivity"
             android:label="@string/title_activity_alarms"
-            android:parentActivityName=".MainActivity"/>
-
+            android:parentActivityName=".MainActivity" />
         <activity
             android:name=".LoginActivity"
-            android:label="@string/title_activity_login"/>
-
+            android:label="@string/title_activity_login" />
         <activity
             android:name=".LoginActivity_Register"
-            android:label="@string/title_activity_login_register"/>
-
-        <activity android:name=".MedsActivity"
-            android:parentActivityName=".MainActivity"/>
+            android:label="@string/title_activity_login_register" />
+        <activity
+            android:name=".MedsActivity"
+            android:parentActivityName=".MainActivity" />
+        <activity android:name=".EmergencyActivity"
+            android:parentActivityName=".MainActivity" />
 
         <receiver
             android:name=".AlarmHandler"

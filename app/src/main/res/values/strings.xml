@@ -3,7 +3,7 @@
     <string name="action_settings">Settings</string>
 
     <!-- Bible Reference Source -->
-    <string name="bible_reference">This verse is from a specific bible which was used with permission. This string needs to be updated to reflect the correct information.</string>
+    <string name="bible_reference">Scripture quotations taken from the New American Standard Bible (NASB), Copyright 1960, 1962, 1963, 1968, 1971, 1972, 1973, 1975, 1977, 1995 by The Lockman Foundation. Used by permission. www.Lockman.org</string>
 
     <!-- login & registration -->
     <string name="title_activity_login">Sign In</string>
