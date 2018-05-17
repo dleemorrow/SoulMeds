@@ -2,6 +2,38 @@ DevLog for Soul Meds app
 Brendan Thompson
 
 ================
+=== 05/17/18 ===
+================
+
+I) Summary
+	A) Implemented Meds Activity Navigation
+	B) Made MedsActivity look like iOS version
+
+II) Takeaways
+
+	- Started Major V2 update
+	- New App Icon
+
+III) Resources
+
+IV) To Do
+
+	A) Features
+		- Alarms Activity: 3 symptoms, 3 alarms
+		- Resources Activity: ?
+		- Settings Activity: ?
+	B) Design
+	C) Back End
+		- Sync user data with Firebase
+
+V) Activity Log
+
+A) Implemented Meds Activity Navigation
+	- back, done, and next buttons
+	- "< Back" = "\u003c Back"
+	- "Next >" = "Next \u003e"
+
+================
 === 05/13/18 ===
 ================
 

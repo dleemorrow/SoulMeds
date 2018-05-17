@@ -4,8 +4,10 @@ import android.support.annotation.NonNull;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.util.Pair;
 import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
 
 import java.util.ArrayList;
@@ -19,12 +21,15 @@ public class MedsActivity extends AppCompatActivity {
     // ===========================================================
     // Member Variables
     // ===========================================================
+    private static final String TAG = "MedsActivity";
 
     // Layout Accessors
     TextView mSymptomTV;
     TextView mVerseTV;
     TextView mReferenceTV;
-    FloatingActionButton mRefreshBtn;
+    Button mNextButton;
+    Button mBackButton;
+    Button mDoneButton;
 
     // Data Model
     Integer currentVerseIndex;
@@ -59,13 +64,31 @@ public class MedsActivity extends AppCompatActivity {
         mSymptomTV = findViewById(R.id.tv_symptom);
         mVerseTV = findViewById(R.id.tv_verse);
         mReferenceTV = findViewById(R.id.tv_reference);
-        mRefreshBtn = findViewById(R.id.action_new_verse);
+        mNextButton = findViewById(R.id.next_btn_meds);
+        mBackButton = findViewById(R.id.back_btn_meds);
+        mDoneButton = findViewById(R.id.done_btn_meds);
 
-        // Refresh Btn OnClickListener
-        mRefreshBtn.setOnClickListener(new View.OnClickListener() {
+        // Next Btn OnClickListener
+        mNextButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 handleNextButton();
+            }
+        });
+
+        // Back Btn OnClickListener
+        mBackButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                handleBackButton();
+            }
+        });
+
+        // Done Btn OnClickListener
+        mDoneButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                handleDoneButton();
             }
         });
 
@@ -83,16 +106,42 @@ public class MedsActivity extends AppCompatActivity {
         mSymptomTV.setText(symptom);
         mVerseTV.setText(mPrescriptionManager.getVerse(symptom, verseIndex));
         mReferenceTV.setText(mPrescriptionManager.getReference(symptom, verseIndex));
+
+        // Manage Next & Done button visibility
+        if (currentVerseIndex == currentVersesList.size() - 1){
+            mDoneButton.setVisibility(View.VISIBLE);
+            mNextButton.setVisibility(View.INVISIBLE);
+        }
+        else {
+            mDoneButton.setVisibility(View.INVISIBLE);
+            mNextButton.setVisibility(View.VISIBLE);
+
+            // Manage Back button visibility
+            if (currentVerseIndex == 0){
+                mBackButton.setVisibility(View.INVISIBLE);
+            }
+            else {
+                mBackButton.setVisibility(View.VISIBLE);
+            }
+        }
     }
 
     private void handleNextButton(){
-        currentVerseIndex++;
-        if (currentVerseIndex < currentVersesList.size()){
+        if (currentVerseIndex < currentVersesList.size() - 1){
+            currentVerseIndex++;
             showVerse(currentVersesList.get(currentVerseIndex).first, currentVersesList.get(currentVerseIndex).second);
         }
-        else {
-            finish();
+    }
+
+    private void handleBackButton(){
+        if (currentVerseIndex > 0){
+            currentVerseIndex--;
+            showVerse(currentVersesList.get(currentVerseIndex).first, currentVersesList.get(currentVerseIndex).second);
         }
+    }
+
+    private void handleDoneButton(){
+        finish();
     }
 
     // ===========================================================
@@ -100,22 +149,19 @@ public class MedsActivity extends AppCompatActivity {
     // ===========================================================
 
     /// Create a list of Symptom-VerseIndex pairs based off the specified format
-        // 1 symptom = all associated verses
-        // 2 symptoms = 3 associated verses from each
-        // 3 symptoms = 2 associated verses from each
     private ArrayList<Pair<String, Integer>> getVerses_formatted(){
         ArrayList<Pair<String, Integer>> newListOfVerses = new ArrayList<>();
         String nextSymptom;
 
         switch (userSymptoms.size()){
-            case 1:
+            case 1: // 1 symptom = all associated verses
                 nextSymptom = userSymptoms.get(0);
                 for (int nextVerseIndex = 0; nextVerseIndex < mPrescriptionManager.getNumVerses(nextSymptom); nextVerseIndex++){
                     Pair<String, Integer> nextVerse = new Pair<>(nextSymptom, nextVerseIndex);
                     newListOfVerses.add(nextVerse);
                 }
                 break;
-            case 2:
+            case 2: // 2 symptoms = 3 associated verses from each
                 // Use first 3 verses for the first symptom
                 nextSymptom = userSymptoms.get(0);
                 for (int nextVerseIndex = 0; nextVerseIndex < 3; nextVerseIndex++){
@@ -129,7 +175,7 @@ public class MedsActivity extends AppCompatActivity {
                     newListOfVerses.add(nextVerse);
                 }
                 break;
-            case 3:
+            case 3: // 3 symptoms = 2 associated verses from each
                 // Use first 2 verses for the first symptom
                 nextSymptom = userSymptoms.get(0);
                 for (int nextVerseIndex = 0; nextVerseIndex < 2; nextVerseIndex++){

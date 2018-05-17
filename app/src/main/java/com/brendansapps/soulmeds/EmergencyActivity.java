@@ -57,5 +57,6 @@ public class EmergencyActivity extends AppCompatActivity {
         Intent intent = new Intent(this, MedsActivity.class);
         intent.putExtra("symptom", prescriptionManager.getSymptom(indexOfSelection)); // pass the symptom
         startActivity(intent);
+        finish();
     }
 }
