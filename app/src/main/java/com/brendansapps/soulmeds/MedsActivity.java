@@ -8,6 +8,7 @@ import android.util.Log;
 import android.util.Pair;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.TextView;
 
 import java.util.ArrayList;
@@ -24,12 +25,9 @@ public class MedsActivity extends AppCompatActivity {
     private static final String TAG = "MedsActivity";
 
     // Layout Accessors
-    TextView mSymptomTV;
-    TextView mVerseTV;
-    TextView mReferenceTV;
-    Button mNextButton;
-    Button mBackButton;
-    Button mDoneButton;
+    TextView mSymptomTV, mVerseTV, mReferenceTV;
+    Button mNextButton, mBackButton, mDoneButton;
+    ImageButton mFacebookShareButton, mTwitterShareButton;
 
     // Data Model
     Integer currentVerseIndex;
@@ -89,6 +87,22 @@ public class MedsActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 handleDoneButton();
+            }
+        });
+
+        // Facebook Share OnClickListener
+        mFacebookShareButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                shareToFacebook();
+            }
+        });
+
+        // Twitter Share OnClickListener
+        mTwitterShareButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                shareToTwitter();
             }
         });
 
@@ -234,5 +248,16 @@ public class MedsActivity extends AppCompatActivity {
         }
 
         return newListOfVerses;
+    }
+
+    // ===========================================================
+    // Social Media Sharing
+    // ===========================================================
+    private void shareToFacebook(){
+
+    }
+
+    private void shareToTwitter(){
+
     }
 }

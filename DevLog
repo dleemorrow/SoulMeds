@@ -6,14 +6,47 @@ Brendan Thompson
 ================
 
 I) Summary
+	A) Started Implementing Sharing to Facebook & Twitter
+
+II) Takeaways
+
+	- Started Major V2 update
+	- New App Icon
+
+III) Resources
+
+IV) To Do
+
+	A) Features
+		- Alarms Activity: 3 symptoms, 3 alarms
+		- Resources Activity: ?
+		- Settings Activity: Settings page w/ tutorials, logout, and more
+	B) Design
+	C) Back End
+		- Sync user data with Firebase
+
+V) Activity Log
+
+A) Started Implementing Sharing to Facebook & Twitter
+	- got button images from Xcode version
+	- requires Facebook Developer account stuff and dependencies
+
+
+
+
+================
+=== 05/17/18 ===
+================
+
+I) Summary
 	A) Implemented Meds Activity Navigation
 	B) Made MedsActivity look like iOS version
 	C) Started new AlarmsActivity_Tabbed w/ AlarmsSymptomsFragment
 
 II) Takeaways
 
-	- Started Major V2 update
-	- New App Icon
+	- MedsActivity flows making the user go through all before done
+	- Started correct AlarmsActivity
 
 III) Resources
 
@@ -57,8 +90,7 @@ I) Summary
 
 II) Takeaways
 
-	- Started Major V2 update
-	- New App Icon
+	- Emergency Button now asks to pic a symptom and presents it
 
 III) Resources
 
