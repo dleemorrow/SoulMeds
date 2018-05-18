@@ -8,6 +8,7 @@ Brendan Thompson
 I) Summary
 	A) Implemented Meds Activity Navigation
 	B) Made MedsActivity look like iOS version
+	C) Started new AlarmsActivity_Tabbed w/ AlarmsSymptomsFragment
 
 II) Takeaways
 
@@ -32,6 +33,20 @@ A) Implemented Meds Activity Navigation
 	- back, done, and next buttons
 	- "< Back" = "\u003c Back"
 	- "Next >" = "Next \u003e"
+
+B) Made MedsActivity look like iOS version
+	- Layout
+	- Navigation
+	- Still needs social media sharing
+
+C) Started new AlarmsActivity_Tabbed w/ AlarmsSymptomsFragment
+	- Created new fragment with 3 labels & 3 spinners `AlarmsSymptomsFragment`
+	- Created new activity that opens that fragment `AlarmsActivity_Tabbed`
+	- Filling spinners with allSymptomList data
+		- https://stackoverflow.com/questions/15404206/populating-spinner-using-arraylist-in-android
+	- Customized toolbar btn function & text based off current page
+		- https://stackoverflow.com/questions/7424562/how-to-change-viewpagers-page
+		- `mViewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() ...`
 
 ================
 === 05/13/18 ===

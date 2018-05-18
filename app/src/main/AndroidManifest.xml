@@ -15,6 +15,7 @@
             android:name="net.hockeyapp.android.appIdentifier"
             android:value="${HOCKEYAPP_APP_ID}" />
 
+        <!-- Main Activity -->
         <activity
             android:name=".MainActivity"
             android:theme="@style/AppTheme.NoActionBar">
@@ -24,26 +25,37 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+        <!-- Alarms -->
         <activity
             android:name=".AlarmsActivity"
             android:label="@string/title_activity_alarms"
             android:parentActivityName=".MainActivity" />
+        <activity
+            android:name=".AlarmsActivity_Tabbed"
+            android:label="@string/title_activity_alarms"
+            android:theme="@style/AppTheme.NoActionBar" />
+
+        <receiver
+            android:name=".AlarmHandler"
+            android:enabled="true"
+            android:exported="true" />
+
+        <!-- Login & Registration -->
         <activity
             android:name=".LoginActivity"
             android:label="@string/title_activity_login" />
         <activity
             android:name=".LoginActivity_Register"
             android:label="@string/title_activity_login_register" />
+
+        <!-- Emergency & Meds -->
+        <activity
+            android:name=".EmergencyActivity"
+            android:parentActivityName=".MainActivity" />
         <activity
             android:name=".MedsActivity"
-            android:theme="@style/AppTheme.NoActionBar"/>
-        <activity android:name=".EmergencyActivity"
-            android:parentActivityName=".MainActivity" />
-
-        <receiver
-            android:name=".AlarmHandler"
-            android:enabled="true"
-            android:exported="true" />
+            android:theme="@style/AppTheme.NoActionBar" />
 
     </application>
 

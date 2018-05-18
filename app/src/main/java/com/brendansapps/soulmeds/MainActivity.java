@@ -87,7 +87,7 @@ public class MainActivity extends AppCompatActivity {
 
     // Alarms
     private void goToAlarmsPage(){
-        Intent intent = new Intent(this, AlarmsActivity.class);
+        Intent intent = new Intent(this, AlarmsActivity_Tabbed.class);
         startActivity(intent);
     }
 

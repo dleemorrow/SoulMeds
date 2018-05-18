@@ -29,7 +29,7 @@ import static android.content.Context.MODE_PRIVATE;
 /** =================================================
  * Created by bt on 3/14/18.
  *
- * Tab Of Alarms Activity for the Symptoms
+ * Tab Of Alarms Activity for the Symptoms - Dynamic Version
  * Manages the user's Prescription Symptoms
  * ===================================================== */
 
@@ -125,7 +125,7 @@ public class AlarmsFragmentSymptoms extends Fragment {
 
         // Setup the Actual Alert Dialog
         AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
-        builder.setTitle(R.string.title_symptom_picker);
+        builder.setTitle(R.string.title_alarms_symptoms);
         builder.setSingleChoiceItems(symptomSelectAdapter, currentSelected, new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
