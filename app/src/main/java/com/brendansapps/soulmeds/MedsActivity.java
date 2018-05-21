@@ -65,6 +65,8 @@ public class MedsActivity extends AppCompatActivity {
         mNextButton = findViewById(R.id.next_btn_meds);
         mBackButton = findViewById(R.id.back_btn_meds);
         mDoneButton = findViewById(R.id.done_btn_meds);
+        mFacebookShareButton = findViewById(R.id.facebook_share_btn);
+        mTwitterShareButton = findViewById(R.id.twitter_share_btn);
 
         // Next Btn OnClickListener
         mNextButton.setOnClickListener(new View.OnClickListener() {
