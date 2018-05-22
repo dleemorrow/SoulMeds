@@ -29,7 +29,9 @@ import static android.content.Context.MODE_PRIVATE;
 /** =================================================
  * Created by bt on 3/14/18.
  *
- * Tab Of Alarms Activity for the Symptoms
+ * NOT BEING USED
+ *
+ * Tab Of Alarms Activity for the Symptoms - Dynamic Version
  * Manages the user's Prescription Symptoms
  * ===================================================== */
 
@@ -75,11 +77,10 @@ public class AlarmsFragmentSymptoms extends Fragment {
         return view;
     }
 
-    // Populate the ListView by getting the Data & setting the Adapter
+    // Populate the ListView by getting the data & setting the Adapter
     private void initSymptomListView(View view){
         symptomListView = view.findViewById(R.id.alarms_list_symptoms);
-        Log.d(TAG, "User's Symptoms: " + String.valueOf(symptomsList));
-//        if (Objects.equals(symptomsList.get(0), "")){ symptomsList.clear(); }
+//        Log.d(TAG, "User's Symptoms: " + String.valueOf(symptomsList));
         symptomsListAdapter = new AlarmsListAdapter(this.getContext(), R.layout.alarms_list_item, R.id.alarms_list_item_TextView, symptomsList);
         symptomListView.setAdapter(symptomsListAdapter);
         registerForContextMenu(symptomListView);
@@ -126,7 +127,7 @@ public class AlarmsFragmentSymptoms extends Fragment {
 
         // Setup the Actual Alert Dialog
         AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
-        builder.setTitle(R.string.title_symptom_picker);
+        builder.setTitle(R.string.title_alarms_symptoms);
         builder.setSingleChoiceItems(symptomSelectAdapter, currentSelected, new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {

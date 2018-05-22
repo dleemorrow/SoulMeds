@@ -39,7 +39,7 @@ public class MainActivity extends AppCompatActivity {
         mBtnQuote.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                goToMedsPage();
+                goToEmergencyPage();
             }
         });
 
@@ -63,11 +63,10 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onStart() {
         super.onStart();
-        Intent intent = new Intent(this, LoginActivity.class);
-        startActivity(intent);
+        goToLoginPage();
     }
 
-    // Send a toast saying Option Not Yet Available
+    // Send a toast saying "Option Not Yet Available"
     private void printNotYetAvailableToast(){
         Context context = getApplicationContext();
         CharSequence text = "Option Not Yet Available";
@@ -76,21 +75,38 @@ public class MainActivity extends AppCompatActivity {
         toast.show();
     }
 
-    // Function that navigates to Alarms page
+    // ============================================================================
+    // Navigation
+    // ============================================================================
+
+    // Login
+    private void goToLoginPage() {
+        Intent intent = new Intent(this, LoginActivity.class);
+        startActivity(intent);
+    }
+
+    // Alarms
     private void goToAlarmsPage(){
-        Intent intent = new Intent(this, AlarmsActivity.class);
+        Intent intent = new Intent(this, AlarmsActivity_Tabbed.class);
         startActivity(intent);
     }
 
-    // Function that navigates to Meds page
-    private void goToMedsPage(){
-        Intent intent = new Intent(this, MedsActivity.class);
+    // Emergency
+    private void goToEmergencyPage(){
+        Intent intent = new Intent(this, EmergencyActivity.class);
         startActivity(intent);
     }
 
+    // Meds (see verses)
+//    private void goToMedsPage(){
+//        Intent intent = new Intent(this, MedsActivity.class);
+//        startActivity(intent);
+//    }
+
     // ============================================================================
-    // Lifecycle events for HockeyApp CrashReporting & Beta-Distrobution@Override
+    // Lifecycle events for HockeyApp CrashReporting & Beta-Distrobution
     // ============================================================================
+    @Override
     public void onResume() {
         super.onResume();
         checkForCrashes();

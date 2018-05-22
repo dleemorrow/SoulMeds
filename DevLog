@@ -2,14 +2,54 @@ DevLog for Soul Meds app
 Brendan Thompson
 
 ================
-=== 05/09/18 ===
+=== 05/21/18 ===
 ================
 
 I) Summary
-	A) Updated Homepage
-	B) Updated Meds Activity
-	c) New App Icon
+	A) Implemented Complete Alarm Times page
+	B) Implemented Complete Alarm Symptoms Backend
+	C) Started writing program to convert data
 
+II) Takeaways
+
+	- New Alarms Activity is functional ("cancel" & "done" don't change anything, all edits happen immediately)
+
+III) Resources
+
+IV) To Do
+
+	A) Features
+		- Alarms Activity: don't save till "done"
+		- Resources Activity: ?
+		- Settings Activity: Settings page w/ tutorials, logout, and more
+	B) Design
+	C) Back End
+		- Sync user data with Firebase
+
+V) Activity Log
+
+A) Implemented Complete Alarm Times page
+	- new fragment layout and class
+	- had to change PrescriptionManager to always have 3 in userTimesList
+	- Using TextViews with OnClickListeneres to manage the Alarm Times
+		- Pulls up TimePicker dialog
+
+B) Implemented Complete Alarm Symptoms Backend
+	- edits the alarms immediately (cancel & done don't change anything)
+
+C) Started writing program to convert data
+	- 25 symptoms * (1 name + 5 verses + 5 references + 5 verseCards) = 400 copy & pastes at least
+	- writing c++ that reads the Verse.swift data into a a data structure then outputs it to a file in the new format
+	- currently reads & writes to file and can tell if a line has a new symptom on it
+		- in the process of parsing the data into the data structure
+		- should write out a quick NDFA that simulates the parsing of a line
+
+================
+=== 05/17/18 ===
+================
+
+I) Summary
+	A) Started Implementing Sharing to Facebook & Twitter
 
 II) Takeaways
 
@@ -21,14 +61,128 @@ III) Resources
 IV) To Do
 
 	A) Features
-		- Implement Toggle for Alarm Symptoms & Times
 		- Alarms Activity: 3 symptoms, 3 alarms
-		- 911 Activity: pick symptom, go to MedsActivity
+		- Resources Activity: ?
+		- Settings Activity: Settings page w/ tutorials, logout, and more
+	B) Design
+	C) Back End
+		- Sync user data with Firebase
+
+V) Activity Log
+
+A) Started Implementing Sharing to Facebook & Twitter
+	- got button images from Xcode version
+	- requires Facebook Developer account stuff and dependencies
+
+================
+=== 05/17/18 ===
+================
+
+I) Summary
+	A) Implemented Meds Activity Navigation
+	B) Made MedsActivity look like iOS version
+	C) Started new AlarmsActivity_Tabbed w/ AlarmsSymptomsFragment
+
+II) Takeaways
+
+	- MedsActivity flows making the user go through all before done
+	- Started correct AlarmsActivity
+
+III) Resources
+
+IV) To Do
+
+	A) Features
+		- Alarms Activity: 3 symptoms, 3 alarms
+		- Resources Activity: ?
+		- Settings Activity: ?
+	B) Design
+	C) Back End
+		- Sync user data with Firebase
+
+V) Activity Log
+
+A) Implemented Meds Activity Navigation
+	- back, done, and next buttons
+	- "< Back" = "\u003c Back"
+	- "Next >" = "Next \u003e"
+
+B) Made MedsActivity look like iOS version
+	- Layout
+	- Navigation
+	- Still needs social media sharing
+
+C) Started new AlarmsActivity_Tabbed w/ AlarmsSymptomsFragment
+	- Created new fragment with 3 labels & 3 spinners `AlarmsSymptomsFragment`
+	- Created new activity that opens that fragment `AlarmsActivity_Tabbed`
+	- Filling spinners with allSymptomList data
+		- https://stackoverflow.com/questions/15404206/populating-spinner-using-arraylist-in-android
+	- Customized toolbar btn function & text based off current page
+		- https://stackoverflow.com/questions/7424562/how-to-change-viewpagers-page
+		- `mViewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() ...`
+
+================
+=== 05/13/18 ===
+================
+
+I) Summary
+	A) Implemented Emergency Activity Flow
+
+II) Takeaways
+
+	- Emergency Button now asks to pic a symptom and presents it
+
+III) Resources
+
+IV) To Do
+
+	A) Features
+		- Alarms Activity: 3 symptoms, 3 alarms
+		- Emergency Activity: pick symptom, go to MedsActivity
 		- MedsActivity: "next" through all before exit
 		- Resources Activity: ?
 		- Settings Activity: ?
 	B) Design
-		- Bible reference string
+		- Need official Bible reference string
+	C) Back End
+		- Sync user data with Firebase
+
+V) Activity Log
+
+A) Implemented Emergency Activity
+
+	- created EmergencyActivity
+	- coppied over ListView logic from Alarms activity
+		- get list using PrescriptionManager
+	- setOnItemClickListener() and navigated to the MedsActivity
+	- Pass the selection to the MedsActivity
+
+================
+=== 05/09/18 ===
+================
+
+I) Summary
+	A) Updated Homepage
+	B) Updated Meds Activity
+	c) New App Icon
+
+II) Takeaways
+
+	- Started Major V2 update
+	- New App Icon
+
+III) Resources
+
+IV) To Do
+
+	A) Features
+		- Alarms Activity: 3 symptoms, 3 alarms
+		- Emergency Activity: pick symptom, go to MedsActivity
+		- MedsActivity: "next" through all before exit
+		- Resources Activity: ?
+		- Settings Activity: ?
+	B) Design
+		- Need official Bible reference string
 	C) Back End
 		- Sync user data with Firebase
 

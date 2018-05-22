@@ -28,7 +28,8 @@ import static android.content.Context.MODE_PRIVATE;
  *
  *  Manages the symptoms and times associated with the user's prescription data
  *
- *  Utilized by AlarmsFragmentSymptoms & AlarmsFragmentTimes
+ *  Utilized by AlarmsFragment_Symptoms & AlarmsFragment_Times
+ *  Capable of managing dynamic lists of Symptoms & Times but only using 3 of each
  */
 
 public class PrescriptionManager {
@@ -103,6 +104,15 @@ public class PrescriptionManager {
     // Returns all possible symptoms
     public ArrayList<String> getAllSymptoms(){
         return allSymptomsList;
+    }
+
+    public String getSymptom(int index){
+        return symptomDataManager.getSymptomAtIndex(index);
+    }
+
+    // Returns the number of Verses for that symptom
+    public int getNumSymptoms(){
+        return symptomDataManager.size();
     }
 
     // Returns the number of Verses for that symptom
@@ -235,9 +245,15 @@ public class PrescriptionManager {
 
         // Parse Loaded data into userSymptomsList
         ArrayList<String> listOfUserSymptoms = new ArrayList<>(Arrays.asList(compressedSymptomsString.split(",")));
-        for (int i = 0; i < listOfUserSymptoms.size(); i++){
+        for (int i = 0; i < 3; i++){
             PrescriptionDataObject loadedSymptom = new PrescriptionDataObject();
-            loadedSymptom.name = listOfUserSymptoms.get(i);
+
+            if (i < listOfUserSymptoms.size()){
+                loadedSymptom.name = listOfUserSymptoms.get(i);
+            }
+            else {
+                loadedSymptom.name = listOfUserSymptoms.get(0);
+            }
 
             if (!(loadedSymptom.name.equals(""))){
                 // loadedSymptom.isActive = listOfUserSymptoms_Active;
@@ -247,9 +263,15 @@ public class PrescriptionManager {
 
         // Parse Loaded data into userTimesList
         ArrayList<String> listOfUserTimes = new ArrayList<>(Arrays.asList(compressedTimesString.split(",")));
-        for (int i = 0; i < listOfUserTimes.size(); i++){
+        for (int i = 0; i < 3; i++){
             PrescriptionDataObject loadedTime = new PrescriptionDataObject();
-            loadedTime.name = listOfUserTimes.get(i);
+
+            if (i < listOfUserTimes.size()){
+                loadedTime.name = listOfUserTimes.get(i);
+            }
+            else {
+                loadedTime.name = "8:00 AM";
+            }
 
             if (!(loadedTime.name.equals(""))){
                 // loadedTime.isActive = listOfUserTimes_Active;
@@ -266,9 +288,9 @@ public class PrescriptionManager {
      * Functions for managing first time user
      * ===================================================== */
     private Boolean firstTimeUser(){
-        Boolean firstTimeVisiting = prescriptionSP.getBoolean("firstTimeVisiting", true);
+//        Boolean firstTimeVisiting = prescriptionSP.getBoolean("firstTimeVisiting", true);
 //        Log.d(TAG, "firstTimeVisiting = " + firstTimeVisiting);
-        return firstTimeVisiting;
+        return prescriptionSP.getBoolean("firstTimeVisiting", true);
     }
 
     // Initializes Symptom data for first time users
