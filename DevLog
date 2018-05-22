@@ -7,10 +7,12 @@ Brendan Thompson
 
 I) Summary
 	A) Wrote program that converts data
+	B) Started Settings Activity
 
 II) Takeaways
 
-	- New Alarms Activity is functional ("cancel" & "done" don't change anything, all edits happen immediately)
+	- Copied over all symptom data
+	- Started Settings Activity
 
 III) Resources
 
@@ -32,6 +34,10 @@ A) Wrote program that converts data
 	- 25 symptoms * (1 name + 5 verses + 5 references + 5 verseCards) = at least 400 error prone copy & pastes
 	- 681 lines
 	- drew an NDFA to see that all reads terminate with `"`
+
+B) Started Settings Activity
+	- Implemented everything except Tutorial, About, and Email Support
+	- Login & Reset work perfectly
 
 
 ================

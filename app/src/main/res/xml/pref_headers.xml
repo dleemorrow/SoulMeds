@@ -1,0 +1,64 @@
+<preference-headers xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <header
+        android:id="@+id/pref_tutorial"
+        android:icon="@drawable/ic_help_black_24dp"
+        android:title="@string/pref_header_tutorial" />
+
+    <header
+        android:icon="@drawable/ic_edit_black_24dp"
+        android:title="@string/pref_header_change_prescriptions">
+        <intent
+            android:targetPackage="com.brendansapps.soulmeds"
+            android:targetClass="com.brendansapps.soulmeds.AlarmsActivity_Tabbed"/>
+
+    </header>
+
+    <header
+        android:icon="@drawable/ic_alarm_black_24dp"
+        android:title="@string/pref_header_change_alarms">
+        <intent
+            android:targetPackage="com.brendansapps.soulmeds"
+            android:targetClass="com.brendansapps.soulmeds.AlarmsActivity_Tabbed"/>
+
+    </header>
+
+    <header
+        android:id="@+id/pref_reset_data"
+        android:icon="@drawable/ic_delete_forever_black_24dp"
+        android:title="@string/pref_header_reset" />
+
+    <header
+        android:id="@+id/pref_logout"
+        android:icon="@drawable/ic_account_circle_black_24dp"
+        android:title="@string/pref_header_logout" />
+
+    <header
+        android:id="@+id/pref_about"
+        android:icon="@drawable/ic_info_black_24dp"
+        android:title="@string/pref_header_about" />
+
+    <header
+        android:id="@+id/pref_email_support"
+        android:icon="@drawable/ic_chat_black_24dp"
+        android:title="@string/pref_header_email_support" />
+
+
+
+
+    <!--<header-->
+        <!--android:fragment="com.brendansapps.soulmeds.SettingsActivity$GeneralPreferenceFragment"-->
+        <!--android:icon="@drawable/ic_info_black_24dp"-->
+        <!--android:title="@string/pref_header_general" />-->
+
+    <!--<header-->
+        <!--android:fragment="com.brendansapps.soulmeds.SettingsActivity$NotificationPreferenceFragment"-->
+        <!--android:icon="@drawable/ic_notifications_black_24dp"-->
+        <!--android:title="@string/pref_header_notifications" />-->
+
+    <!--<header-->
+        <!--android:fragment="com.brendansapps.soulmeds.SettingsActivity$DataSyncPreferenceFragment"-->
+        <!--android:icon="@drawable/ic_sync_black_24dp"-->
+        <!--android:title="@string/pref_header_data_sync" />-->
+
+</preference-headers>
