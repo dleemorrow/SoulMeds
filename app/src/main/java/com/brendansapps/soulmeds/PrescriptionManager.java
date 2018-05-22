@@ -65,11 +65,9 @@ public class PrescriptionManager {
         prescriptionSPEditor = prescriptionSP.edit();
 
         // Initialize User's Prescriptions
-        userSymptomsList = new ArrayList<>();
-        userTimesList = new ArrayList<>();
         if (firstTimeUser()){
             Log.d(TAG, "First Time User");
-            createDefaults();
+            resetDeafults();
         }
         else {
             loadUserPrescriptions();
@@ -237,6 +235,9 @@ public class PrescriptionManager {
     }
 
     private void loadUserPrescriptions(){
+        userSymptomsList = new ArrayList<>();
+        userTimesList = new ArrayList<>();
+
         // Load SharedPreferences
         String compressedSymptomsString = prescriptionSP.getString("symptomsList", "");
 //        String compressedSymptomsString = prescriptionSP.getString("symptomsList_Active", "");
@@ -294,20 +295,43 @@ public class PrescriptionManager {
     }
 
     // Initializes Symptom data for first time users
-    private void createDefaults(){
-        // Initialize First Symptom
-        PrescriptionDataObject firstSymptom = new PrescriptionDataObject();
-        firstSymptom.name = allSymptomsList.get(0);
-        firstSymptom.isActive = false;
+    public void resetDeafults(){
+        userSymptomsList = new ArrayList<>();
+        userTimesList = new ArrayList<>();
 
-        // Initialize First Time
-        PrescriptionDataObject firstTime = new PrescriptionDataObject();
-        firstTime.name = "8:00 AM";
-        firstTime.isActive = false;
+        // Initialize Three Symptoms
+        PrescriptionDataObject newSymptom = new PrescriptionDataObject();
+        newSymptom.name = allSymptomsList.get(0);
+        newSymptom.isActive = false;
+        userSymptomsList.add(newSymptom);
+
+        newSymptom = new PrescriptionDataObject();
+        newSymptom.name = allSymptomsList.get(1);
+        newSymptom.isActive = false;
+        userSymptomsList.add(newSymptom);
+
+        newSymptom = new PrescriptionDataObject();
+        newSymptom.name = allSymptomsList.get(2);
+        newSymptom.isActive = false;
+        userSymptomsList.add(newSymptom);
+
+        // Initialize Three Times
+        PrescriptionDataObject newTime = new PrescriptionDataObject();
+        newTime.name = "8:00 AM";
+        newTime.isActive = false;
+        userTimesList.add(newTime);
+
+        newTime = new PrescriptionDataObject();
+        newTime.name = "9:00 AM";
+        newTime.isActive = false;
+        userTimesList.add(newTime);
+
+        newTime = new PrescriptionDataObject();
+        newTime.name = "10:00 AM";
+        newTime.isActive = false;
+        userTimesList.add(newTime);
 
         // Save First Prescription
-        userSymptomsList.add(firstSymptom);
-        userTimesList.add(firstTime);
         saveUserSymptoms();
         saveUserTimes();
 

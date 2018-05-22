@@ -369,11 +369,12 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
                             // Signed In Successfully
                             Log.d(TAG, "signInWithEmail:success");
                             FirebaseUser currentUser = mFirebaseAuth.getCurrentUser();
+                            Toast.makeText(LoginActivity.this, "Login Succeeded", Toast.LENGTH_SHORT).show();
                             finish();
                         }
                         else {
                             Log.w(TAG, "signInWithEmail:failed");
-                            Toast.makeText(LoginActivity.this, "Authentication Failed", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(LoginActivity.this, "Login Failed", Toast.LENGTH_SHORT).show();
                             // updateUI(null);
                         }
                     }

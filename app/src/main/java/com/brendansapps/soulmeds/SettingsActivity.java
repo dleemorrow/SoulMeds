@@ -19,6 +19,9 @@ import android.preference.RingtonePreference;
 import android.text.TextUtils;
 import android.view.MenuItem;
 import android.support.v4.app.NavUtils;
+import android.widget.Toast;
+
+import com.google.firebase.auth.FirebaseAuth;
 
 import java.util.List;
 
@@ -47,6 +50,35 @@ public class SettingsActivity extends AppCompatPreferenceActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setupActionBar();
+    }
+
+    @Override
+    public void onHeaderClick(Header header, int position) {
+        super.onHeaderClick(header, position);
+        if (header.id == R.id.pref_tutorial) {
+            Toast.makeText(getApplicationContext(), "Option Not Yet Available", Toast.LENGTH_SHORT).show();
+        }
+        if (header.id == R.id.pref_logout) {
+            FirebaseAuth mFirebaseAuth;
+            mFirebaseAuth = FirebaseAuth.getInstance();
+            mFirebaseAuth.signOut();
+
+            Toast.makeText(getApplicationContext(), "User Logged Out", Toast.LENGTH_SHORT).show();
+            finish();
+        }
+        if (header.id == R.id.pref_reset_data) {
+            PrescriptionManager prescriptionManager = new PrescriptionManager(getApplicationContext());
+            prescriptionManager.resetDeafults();
+
+            Toast.makeText(getApplicationContext(), "Prescriptions Reset", Toast.LENGTH_SHORT).show();
+        }
+        if (header.id == R.id.pref_about) {
+            Toast.makeText(getApplicationContext(), "Option Not Yet Available", Toast.LENGTH_SHORT).show();
+        }
+        if (header.id == R.id.pref_email_support) {
+            Toast.makeText(getApplicationContext(), "Option Not Yet Available", Toast.LENGTH_SHORT).show();
+        }
+
     }
 
     // Set up the {@link android.app.ActionBar}, if the API is available.
@@ -170,6 +202,34 @@ public class SettingsActivity extends AppCompatPreferenceActivity {
     /** =============================================================================
      * Fragments
      * ============================================================================== */
+
+    // Tutorial Fragment
+    @TargetApi(Build.VERSION_CODES.HONEYCOMB)
+    public static class AboutFragment extends PreferenceFragment {
+        @Override
+        public void onCreate(Bundle savedInstanceState) {
+            super.onCreate(savedInstanceState);
+            addPreferencesFromResource(R.xml.pref_about);
+            setHasOptionsMenu(true);
+
+            // Bind the summaries of EditText/List/Dialog/Ringtone preferences
+            // to their values. When their values change, their summaries are
+            // updated to reflect the new value, per the Android Design
+            // guidelines.
+//            bindPreferenceSummaryToValue(findPreference("example_text"));
+//            bindPreferenceSummaryToValue(findPreference("example_list"));
+        }
+
+//        @Override
+//        public boolean onOptionsItemSelected(MenuItem item) {
+//            int id = item.getItemId();
+//            if (id == android.R.id.home) {
+//                startActivity(new Intent(getActivity(), SettingsActivity.class));
+//                return true;
+//            }
+//            return super.onOptionsItemSelected(item);
+//        }
+    }
 
     // This fragment shows general preferences only. It is used when the activity is showing a two-pane settings UI.
     @TargetApi(Build.VERSION_CODES.HONEYCOMB)
