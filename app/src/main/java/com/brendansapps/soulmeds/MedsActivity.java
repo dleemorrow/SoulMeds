@@ -1,5 +1,6 @@
 package com.brendansapps.soulmeds;
 
+import android.content.Context;
 import android.support.annotation.NonNull;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
@@ -10,6 +11,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -255,11 +257,21 @@ public class MedsActivity extends AppCompatActivity {
     // ===========================================================
     // Social Media Sharing
     // ===========================================================
-    private void shareToFacebook(){
 
+    // Send a toast saying "Option Not Yet Available"
+    private void printNotYetAvailableToast(){
+        Context context = getApplicationContext();
+        CharSequence text = "Option Not Yet Available";
+        int duration = Toast.LENGTH_SHORT;
+        Toast toast = Toast.makeText(context, text, duration);
+        toast.show();
+    }
+
+    private void shareToFacebook(){
+        printNotYetAvailableToast();
     }
 
     private void shareToTwitter(){
-
+        printNotYetAvailableToast();
     }
 }

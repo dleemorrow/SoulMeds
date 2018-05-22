@@ -28,7 +28,8 @@ import static android.content.Context.MODE_PRIVATE;
  *
  *  Manages the symptoms and times associated with the user's prescription data
  *
- *  Utilized by AlarmsFragmentSymptoms & AlarmsFragmentTimes
+ *  Utilized by AlarmsFragment_Symptoms & AlarmsFragment_Times
+ *  Capable of managing dynamic lists of Symptoms & Times but only using 3 of each
  */
 
 public class PrescriptionManager {
@@ -256,9 +257,15 @@ public class PrescriptionManager {
 
         // Parse Loaded data into userTimesList
         ArrayList<String> listOfUserTimes = new ArrayList<>(Arrays.asList(compressedTimesString.split(",")));
-        for (int i = 0; i < listOfUserTimes.size(); i++){
+        for (int i = 0; i < 3; i++){
             PrescriptionDataObject loadedTime = new PrescriptionDataObject();
-            loadedTime.name = listOfUserTimes.get(i);
+
+            if (i < listOfUserTimes.size()){
+                loadedTime.name = listOfUserTimes.get(i);
+            }
+            else {
+                loadedTime.name = "8:00 AM";
+            }
 
             if (!(loadedTime.name.equals(""))){
                 // loadedTime.isActive = listOfUserTimes_Active;

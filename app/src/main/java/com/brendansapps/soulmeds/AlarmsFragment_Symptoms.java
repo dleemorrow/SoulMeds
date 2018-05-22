@@ -18,12 +18,12 @@ import java.util.ArrayList;
  * Manages the user's Prescription Symptoms
  */
 
-public class AlarmsSymptomsFragment extends Fragment {
+public class AlarmsFragment_Symptoms extends Fragment {
 
     /** =================================================
      * Member Variables
      * ===================================================== */
-    private static final String TAG = "AlarmSymptomsFragment";
+    private static final String TAG = "AlarmsFragment_Symptoms";
 
     // Members for the Spinners
     Spinner mSpinner1;

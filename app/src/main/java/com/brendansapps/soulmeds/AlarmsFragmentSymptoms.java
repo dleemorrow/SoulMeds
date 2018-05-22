@@ -29,6 +29,8 @@ import static android.content.Context.MODE_PRIVATE;
 /** =================================================
  * Created by bt on 3/14/18.
  *
+ * NOT BEING USED
+ *
  * Tab Of Alarms Activity for the Symptoms - Dynamic Version
  * Manages the user's Prescription Symptoms
  * ===================================================== */

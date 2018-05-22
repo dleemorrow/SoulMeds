@@ -16,7 +16,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /** =================================================
- * Created by bt on 3/14/18.
+ * Created by bt on 5/17/18.
  *
  * Alarms Activity for managing symptoms and times
  * Tabbed Activity with changing Toolbar text & functionality
@@ -113,13 +113,13 @@ public class AlarmsActivity_Tabbed extends AppCompatActivity {
     private void setupViewPager(ViewPager viewPager) {
         SectionsPagerAdapter adapter = new SectionsPagerAdapter(getSupportFragmentManager());
 
-        Fragment symptomsFragment = new AlarmsSymptomsFragment();
-        Fragment symptomsFragment2 = new AlarmsSymptomsFragment();
-//        Fragment timesFragment = new AlarmsFragmentTimes();
+        Fragment symptomsFragment = new AlarmsFragment_Symptoms();
+        Fragment symptomsFragment2 = new AlarmsFragment_Times();
+        Fragment timesFragment = new AlarmsFragmentTimes();
 
         adapter.addFragment(symptomsFragment);
         adapter.addFragment(symptomsFragment2);
-//        adapter.addFragment(timesFragment);
+        adapter.addFragment(timesFragment);
         viewPager.setAdapter(adapter);
         setupPageManager();
     }
