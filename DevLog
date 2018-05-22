@@ -2,6 +2,39 @@ DevLog for Soul Meds app
 Brendan Thompson
 
 ================
+=== 05/22/18 ===
+================
+
+I) Summary
+	A) Wrote program that converts data
+
+II) Takeaways
+
+	- New Alarms Activity is functional ("cancel" & "done" don't change anything, all edits happen immediately)
+
+III) Resources
+
+IV) To Do
+
+	A) Features
+		- Alarms Activity: don't save till "done"
+		- Resources Activity: ?
+		- Settings Activity: Settings page w/ tutorials, logout, and more
+	B) Design
+	C) Back End
+		- Sync user data with Firebase
+
+V) Activity Log
+
+A) Wrote program that converts data
+	- reads in all data for a symptom & then outputs it in the new format
+	- writes the entire content of the function `populateSymptomObjectData()` in DataManager.java
+	- 25 symptoms * (1 name + 5 verses + 5 references + 5 verseCards) = at least 400 error prone copy & pastes
+	- 681 lines
+	- drew an NDFA to see that all reads terminate with `"`
+
+
+================
 === 05/21/18 ===
 ================
 
