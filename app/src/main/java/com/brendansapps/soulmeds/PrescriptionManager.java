@@ -245,9 +245,15 @@ public class PrescriptionManager {
 
         // Parse Loaded data into userSymptomsList
         ArrayList<String> listOfUserSymptoms = new ArrayList<>(Arrays.asList(compressedSymptomsString.split(",")));
-        for (int i = 0; i < listOfUserSymptoms.size(); i++){
+        for (int i = 0; i < 3; i++){
             PrescriptionDataObject loadedSymptom = new PrescriptionDataObject();
-            loadedSymptom.name = listOfUserSymptoms.get(i);
+
+            if (i < listOfUserSymptoms.size()){
+                loadedSymptom.name = listOfUserSymptoms.get(i);
+            }
+            else {
+                loadedSymptom.name = listOfUserSymptoms.get(0);
+            }
 
             if (!(loadedSymptom.name.equals(""))){
                 // loadedSymptom.isActive = listOfUserSymptoms_Active;

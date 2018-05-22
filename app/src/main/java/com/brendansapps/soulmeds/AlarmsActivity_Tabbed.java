@@ -29,13 +29,11 @@ public class AlarmsActivity_Tabbed extends AppCompatActivity {
      * ===================================================== */
 
     // Page Management
-    private SectionsPagerAdapter mSectionsPagerAdapter;
     private ViewPager mViewPager;
 
     // Toolbar UI Items
     private TextView pageTitle;
-    private Button mBackBtn;
-    private Button mNextBtn;
+    private Button mBackBtn, mNextBtn;
 
     /** =================================================
      * Constructor
@@ -46,8 +44,7 @@ public class AlarmsActivity_Tabbed extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_alarms_tabbed);
 
-        // Set up the ViewPager and the SectionsPagerAdapter.
-        mSectionsPagerAdapter = new SectionsPagerAdapter(getSupportFragmentManager());
+        // Set up the fragments
         mViewPager = findViewById(R.id.container);
         setupViewPager(mViewPager);
 
@@ -94,7 +91,6 @@ public class AlarmsActivity_Tabbed extends AppCompatActivity {
                 }
             }
         });
-
     }
 
     /** =================================================
@@ -102,7 +98,7 @@ public class AlarmsActivity_Tabbed extends AppCompatActivity {
      * ===================================================== */
 
     private void savePrescription(){
-
+        finish();
     }
 
     /** =================================================

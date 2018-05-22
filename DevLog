@@ -7,18 +7,19 @@ Brendan Thompson
 
 I) Summary
 	A) Implemented Complete Alarm Times page
+	B) Implemented Complete Alarm Symptoms Backend
+	C) Started writing program to convert data
 
 II) Takeaways
 
-	- Started Major V2 update
-	- New App Icon
+	- New Alarms Activity is functional ("cancel" & "done" don't change anything, all edits happen immediately)
 
 III) Resources
 
 IV) To Do
 
 	A) Features
-		- Alarms Activity: 3 symptoms, 3 alarms
+		- Alarms Activity: don't save till "done"
 		- Resources Activity: ?
 		- Settings Activity: Settings page w/ tutorials, logout, and more
 	B) Design
@@ -33,7 +34,15 @@ A) Implemented Complete Alarm Times page
 	- Using TextViews with OnClickListeneres to manage the Alarm Times
 		- Pulls up TimePicker dialog
 
-B)
+B) Implemented Complete Alarm Symptoms Backend
+	- edits the alarms immediately (cancel & done don't change anything)
+
+C) Started writing program to convert data
+	- 25 symptoms * (1 name + 5 verses + 5 references + 5 verseCards) = 400 copy & pastes at least
+	- writing c++ that reads the Verse.swift data into a a data structure then outputs it to a file in the new format
+	- currently reads & writes to file and can tell if a line has a new symptom on it
+		- in the process of parsing the data into the data structure
+		- should write out a quick NDFA that simulates the parsing of a line
 
 ================
 === 05/17/18 ===

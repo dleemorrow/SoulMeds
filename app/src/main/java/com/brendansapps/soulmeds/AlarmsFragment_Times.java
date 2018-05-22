@@ -8,7 +8,6 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextClock;
 import android.widget.TextView;
 import android.widget.TimePicker;
 
@@ -31,7 +30,7 @@ public class AlarmsFragment_Times extends Fragment {
     private static final String TAG = "AlarmsFragment_Times";
 
     // Members for the Spinners
-    TextView mClock1, mClock2, mClock3;
+    private TextView mClock1, mClock2, mClock3;
 
     // Members for the Symptom Data
     private PrescriptionManager mPrescriptionManager;
