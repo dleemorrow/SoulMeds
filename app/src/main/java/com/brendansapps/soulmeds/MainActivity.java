@@ -53,7 +53,7 @@ public class MainActivity extends AppCompatActivity {
         mBtnHelp.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                printNotYetAvailableToast();
+                goToSettingsPage();
             }
         });
 
@@ -94,6 +94,12 @@ public class MainActivity extends AppCompatActivity {
     // Emergency
     private void goToEmergencyPage(){
         Intent intent = new Intent(this, EmergencyActivity.class);
+        startActivity(intent);
+    }
+
+    // Setting
+    private void goToSettingsPage(){
+        Intent intent = new Intent(this, SettingsActivity.class);
         startActivity(intent);
     }
 
