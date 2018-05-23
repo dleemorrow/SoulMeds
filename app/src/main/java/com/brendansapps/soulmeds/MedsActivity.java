@@ -1,6 +1,12 @@
 package com.brendansapps.soulmeds;
 
+import android.content.ActivityNotFoundException;
 import android.content.Context;
+import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.content.pm.ResolveInfo;
+import android.net.Uri;
+import android.os.Environment;
 import android.support.annotation.NonNull;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
@@ -13,9 +19,11 @@ import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Iterator;
+import java.util.List;
 import java.util.Random;
 import java.util.Set;
 
@@ -268,10 +276,72 @@ public class MedsActivity extends AppCompatActivity {
     }
 
     private void shareToFacebook(){
-        printNotYetAvailableToast();
+        try {
+            // Prepare Image
+//            String filename = "twitter_image.jpg";
+//            File imageFile = new File(Environment.getExternalStorageDirectory(), filename);
+
+            // Prepare Intent
+            Intent shareIntent = new Intent(Intent.ACTION_SEND);
+            shareIntent.putExtra(Intent.EXTRA_TEXT, getString(R.string.share_text));
+//            shareIntent.putExtra(Intent.EXTRA_STREAM, Uri.fromFile(imageFile)); // add image to intent
+            shareIntent.setType("image/jpeg");
+            shareIntent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
+
+            // Try to connect to facebook app
+            PackageManager pm = this.getPackageManager();
+            List<ResolveInfo> lract = pm.queryIntentActivities(shareIntent, PackageManager.MATCH_DEFAULT_ONLY);
+            boolean resolved = false;
+            for (ResolveInfo ri : lract) {
+                if (ri.activityInfo.name.contains("facebook")) {
+                    shareIntent.setClassName(ri.activityInfo.packageName,
+                            ri.activityInfo.name);
+                    resolved = true;
+                    break;
+                }
+            }
+
+            // Send it to facebook, else ask
+            startActivity(resolved ?
+                    shareIntent :
+                    Intent.createChooser(shareIntent, "Choose one"));
+        } catch (final ActivityNotFoundException e) {
+            Toast.makeText(this, "You don't seem to have facebook installed on this device", Toast.LENGTH_SHORT).show();
+        }
     }
 
+    // https://stackoverflow.com/questions/19120036/add-image-to-twitter-share-intent-android
     private void shareToTwitter(){
-        printNotYetAvailableToast();
+        try {
+            // Prepare Image
+//            String filename = "twitter_image.jpg";
+//            File imageFile = new File(Environment.getExternalStorageDirectory(), filename);
+
+            // Prepare Intent
+            Intent shareIntent = new Intent(Intent.ACTION_SEND);
+            shareIntent.putExtra(Intent.EXTRA_TEXT, getString(R.string.share_text));
+//            shareIntent.putExtra(Intent.EXTRA_STREAM, Uri.fromFile(imageFile)); // add image to intent
+            shareIntent.setType("image/jpeg");
+
+            // Try to connect to twitter app
+            PackageManager pm = this.getPackageManager();
+            List<ResolveInfo> lract = pm.queryIntentActivities(shareIntent, PackageManager.MATCH_DEFAULT_ONLY);
+            boolean resolved = false;
+            for (ResolveInfo ri : lract) {
+                if (ri.activityInfo.name.contains("twitter")) {
+                    shareIntent.setClassName(ri.activityInfo.packageName,
+                            ri.activityInfo.name);
+                    resolved = true;
+                    break;
+                }
+            }
+
+            // Send it to twitter, else ask
+            startActivity(resolved ?
+                    shareIntent :
+                    Intent.createChooser(shareIntent, "Choose one"));
+        } catch (final ActivityNotFoundException e) {
+            Toast.makeText(this, "You don't seem to have twitter installed on this device", Toast.LENGTH_SHORT).show();
+        }
     }
 }

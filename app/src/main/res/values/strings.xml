@@ -1,15 +1,25 @@
 <resources>
+
+    <!-- ======================================================== -->
+    <!-- Basic Info -->
+    <!-- ======================================================== -->
     <string name="app_name">Soul Meds</string>
     <string name="action_settings">Settings</string>
 
     <!-- ======================================================== -->
-    <!-- Meds Activity -->
+    <!-- Sharing to Social Media -->
+    <!-- ======================================================== -->
+    <string name="share_text">Check out this Bible verse from the Soul Meds mobile app</string>
+
+    <!-- ======================================================== -->
+    <!-- Emergency & Meds Activities -->
     <!-- ======================================================== -->
     <string name="bible_reference">Scripture quotations taken from the New American Standard Bible (NASB), Copyright 1960, 1962, 1963, 1968, 1971, 1972, 1973, 1975, 1977, 1995 by The Lockman Foundation. Used by permission. www.Lockman.org</string>
     <string name="next_btn">Next \u003e</string>
     <string name="back_btn">\u003c Back</string>
     <string name="cancel_btn">Cancel</string>
     <string name="done_btn">Done</string>
+    <string name="title_activity_emergency">Pick a symptom</string>
 
     <!-- ======================================================== -->
     <!-- login & registration -->

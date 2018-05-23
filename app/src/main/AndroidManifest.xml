@@ -52,6 +52,7 @@
         <!-- Emergency & Meds -->
         <activity
             android:name=".EmergencyActivity"
+            android:label="@string/title_activity_emergency"
             android:parentActivityName=".MainActivity" />
         <activity
             android:name=".MedsActivity"
