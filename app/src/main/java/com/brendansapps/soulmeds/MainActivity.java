@@ -87,7 +87,9 @@ public class MainActivity extends AppCompatActivity {
 
     // Alarms
     private void goToAlarmsPage(){
-        Intent intent = new Intent(this, AlarmsActivity_Tabbed.class);
+        Intent intent = new Intent(this, AlarmsActivitySimple.class);
+//        Intent intent = new Intent(this, AlarmsActivity_Tabbed.class); // closer to iOS version
+//        Intent intent = new Intent(this, AlarmsActivity.class); // Dynamic (CRUD = create, read, update, delete),
         startActivity(intent);
     }
 
