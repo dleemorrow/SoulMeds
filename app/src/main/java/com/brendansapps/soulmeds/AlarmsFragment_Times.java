@@ -29,8 +29,8 @@ public class AlarmsFragment_Times extends Fragment {
      * ===================================================== */
     private static final String TAG = "AlarmsFragment_Times";
 
-    // Members for the Spinners
-    private TextView mClock1, mClock2, mClock3;
+    // Members for the TimePickers
+    private TimePicker mTP1, mTP2, mTP3;
 
     // Members for the Symptom Data
     private PrescriptionManager mPrescriptionManager;
@@ -45,34 +45,34 @@ public class AlarmsFragment_Times extends Fragment {
         View view = inflater.inflate(R.layout.fragment_alarms_times, container, false);
 
         // Connect to spinners in the interface
-        mClock1 = view.findViewById(R.id.tv_clock_1);
-        mClock2 = view.findViewById(R.id.tv_clock_2);
-        mClock3 = view.findViewById(R.id.tv_clock_3);
+        mTP1 = view.findViewById(R.id.tp_clock_1);
+        mTP2 = view.findViewById(R.id.tp_clock_2);
+        mTP3 = view.findViewById(R.id.tp_clock_3);
 
         // Get Prescription Data & initialize spinners
         mPrescriptionManager = new PrescriptionManager(this.getContext());
         resetTimes();
 
-        mClock1.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                editTime(0);
-            }
-        });
-
-        mClock2.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                editTime(1);
-            }
-        });
-
-        mClock3.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                editTime(2);
-            }
-        });
+//        mTP1.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                editTime(0);
+//            }
+//        });
+//
+//        mTP2.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                editTime(1);
+//            }
+//        });
+//
+//        mTP3.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                editTime(2);
+//            }
+//        });
 
         return view;
     }
@@ -87,9 +87,9 @@ public class AlarmsFragment_Times extends Fragment {
             Log.d(TAG, "Clock 1 = " + userTimesList.get(0));
             Log.d(TAG, "Clock 2 = " + userTimesList.get(1));
             Log.d(TAG, "Clock 3 = " + userTimesList.get(2));
-            mClock1.setText(userTimesList.get(0));
-            mClock2.setText(userTimesList.get(1));
-            mClock3.setText(userTimesList.get(2));
+//            mClock1.setText(userTimesList.get(0));
+//            mClock2.setText(userTimesList.get(1));
+//            mClock3.setText(userTimesList.get(2));
         }
     }
 

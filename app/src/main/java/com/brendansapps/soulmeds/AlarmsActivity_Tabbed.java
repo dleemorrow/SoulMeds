@@ -8,6 +8,7 @@ import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.os.Bundle;
 
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -28,12 +29,20 @@ public class AlarmsActivity_Tabbed extends AppCompatActivity {
      * Member Variables
      * ===================================================== */
 
+    final String TAG = "AlarmsActivity_Tabbed";
+
     // Page Management
     private ViewPager mViewPager;
+    Fragment symptomsFragment, timesFragment;
 
     // Toolbar UI Items
     private TextView pageTitle;
     private Button mBackBtn, mNextBtn;
+
+    // Prescription Info
+    private PrescriptionManager mPrescriptionManager;
+    private String symptom1, symptom2, symptom3;
+    private String time1, time2, time3;
 
     /** =================================================
      * Constructor
@@ -43,6 +52,8 @@ public class AlarmsActivity_Tabbed extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_alarms_tabbed);
+
+        mPrescriptionManager = new PrescriptionManager(this);
 
         // Set up the fragments
         mViewPager = findViewById(R.id.container);
@@ -63,10 +74,10 @@ public class AlarmsActivity_Tabbed extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 switch (mViewPager.getCurrentItem()){
-                    case 0:
+                    case 0: // cancel
                         finish();
                         break;
-                    case 1:
+                    case 1: // next
                         mViewPager.setCurrentItem(0);
                         break;
                     default:
@@ -80,10 +91,10 @@ public class AlarmsActivity_Tabbed extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 switch (mViewPager.getCurrentItem()){
-                    case 0:
+                    case 0: // back
                         mViewPager.setCurrentItem(1);
                         break;
-                    case 1:
+                    case 1: // save
                         savePrescription();
                         break;
                     default:
@@ -98,6 +109,12 @@ public class AlarmsActivity_Tabbed extends AppCompatActivity {
      * ===================================================== */
 
     private void savePrescription(){
+        if (!(symptom1 == null)){mPrescriptionManager.editSymptom(0, symptom1);}
+        if (!(symptom2 == null)){mPrescriptionManager.editSymptom(1, symptom2);}
+        if (!(symptom3 == null)){mPrescriptionManager.editSymptom(2, symptom3);}
+//        mPrescriptionManager.editTime(0, time1);
+//        mPrescriptionManager.editTime(1, time2);
+//        mPrescriptionManager.editTime(2, time3);
         finish();
     }
 
@@ -109,12 +126,10 @@ public class AlarmsActivity_Tabbed extends AppCompatActivity {
     private void setupViewPager(ViewPager viewPager) {
         SectionsPagerAdapter adapter = new SectionsPagerAdapter(getSupportFragmentManager());
 
-        Fragment symptomsFragment = new AlarmsFragment_Symptoms();
-        Fragment symptomsFragment2 = new AlarmsFragment_Times();
-        Fragment timesFragment = new AlarmsFragmentTimes();
+        symptomsFragment = new AlarmsFragment_Symptoms();
+        timesFragment = new AlarmsFragment_Times();
 
         adapter.addFragment(symptomsFragment);
-        adapter.addFragment(symptomsFragment2);
         adapter.addFragment(timesFragment);
         viewPager.setAdapter(adapter);
         setupPageManager();
@@ -153,7 +168,39 @@ public class AlarmsActivity_Tabbed extends AppCompatActivity {
         });
     }
 
-    // Fragment Manager Class
+    /** =============================================
+    * Prescription Info Setters
+    * ============================================= */
+    public void setTime1(String time1) {
+        this.time1 = time1;
+    }
+
+    public void setTime2(String time2) {
+        this.time2 = time2;
+    }
+
+    public void setTime3(String time3) {
+        this.time3 = time3;
+    }
+
+    public void setSymptom1(String symptom1) {
+        Log.d(TAG, "Set Symptom 1 as: " + symptom1);
+        this.symptom1 = symptom1;
+    }
+
+    public void setSymptom2(String symptom2) {
+        Log.d(TAG, "Set Symptom 2 as: " + symptom2);
+        this.symptom2 = symptom2;
+    }
+
+    public void setSymptom3(String symptom3) {
+        Log.d(TAG, "Set Symptom 3 as: " + symptom3);
+        this.symptom3 = symptom3;
+    }
+
+    /** =============================================
+     * Fragment Manager Class
+     * ============================================= */
     public class SectionsPagerAdapter extends FragmentPagerAdapter {
 
         // Create a List of fragments

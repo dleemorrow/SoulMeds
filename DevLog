@@ -2,6 +2,57 @@ DevLog for Soul Meds app
 Brendan Thompson
 
 ================
+=== 06/06/18 ===
+================
+
+I) Summary
+	A) Continued working on AlarmsActivity
+
+II) Takeaways
+
+	- Copied over all symptom data
+	- Started Settings Activity
+
+III) Resources
+
+IV) Activity Log
+
+A) Continued working on AlarmsActivity
+	- filling NumberPickers with allSymptomsList
+	- saving Symptoms when "done"
+
+================
+=== 06/01/18 ===
+================
+
+I) Summary
+	A) Major AlarmsActivity UI Change
+
+II) Takeaways
+
+	- Copied over all symptom data
+	- Started Settings Activity
+
+III) Resources
+
+IV) To Do
+
+	A) Features
+		- Alarms Activity: don't save till "done"
+		- Resources Activity: ?
+		- Settings Activity: Settings page w/ tutorials, logout, and more
+	B) Design
+	C) Back End
+		- Sync user data with Firebase
+
+V) Activity Log
+
+A) Major AlarmsActivity UI Change
+	- Using NumberPicker for symptoms
+	- Using TimePicker mode="spinner"
+
+
+================
 === 05/22/18 ===
 ================
 

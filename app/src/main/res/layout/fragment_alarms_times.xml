@@ -10,72 +10,67 @@
         android:id="@+id/tv_alarm_1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:layout_marginBottom="16dp"
+        android:layout_marginBottom="32dp"
         android:layout_marginStart="16dp"
         android:text="Alarm 1"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toTopOf="@+id/tv_clock_1"
-        app:layout_constraintStart_toStartOf="parent" />
-
-    <TextView
-        android:id="@+id/tv_clock_1"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:layout_marginBottom="16dp"
-        android:layout_marginStart="16dp"
-        android:textAlignment="center"
-        app:layout_constraintTop_toBottomOf="@+id/tv_alarm_1"
         app:layout_constraintBottom_toTopOf="@+id/tv_alarm_2"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintEnd_toStartOf="@id/tp_clock_1"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TimePicker
+        android:id="@+id/tp_clock_1"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:timePickerMode="spinner"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/tp_clock_2"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/tv_alarm_1" />
 
     <TextView
         android:id="@+id/tv_alarm_2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:layout_marginBottom="16dp"
         android:layout_marginStart="16dp"
+        android:layout_marginTop="32dp"
         android:text="Alarm 2"
-        app:layout_constraintTop_toBottomOf="@+id/tv_clock_1"
-        app:layout_constraintBottom_toTopOf="@+id/tv_clock_2"
-        app:layout_constraintStart_toStartOf="parent" />
-
-    <TextView
-        android:id="@+id/tv_clock_2"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:layout_marginBottom="16dp"
-        android:layout_marginStart="16dp"
-        android:textAlignment="center"
-        app:layout_constraintTop_toBottomOf="@+id/tv_alarm_2"
         app:layout_constraintBottom_toTopOf="@+id/tv_alarm_3"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintEnd_toStartOf="@id/tp_clock_2"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tv_alarm_1" />
+
+    <TimePicker
+        android:id="@+id/tp_clock_2"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:timePickerMode="spinner"
+        app:layout_constraintBottom_toTopOf="@+id/tp_clock_3"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/tv_alarm_2"
+        app:layout_constraintTop_toBottomOf="@id/tp_clock_1" />
 
     <TextView
         android:id="@+id/tv_alarm_3"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:layout_marginBottom="16dp"
         android:layout_marginStart="16dp"
+        android:layout_marginTop="32dp"
         android:text="Alarm 3"
-        app:layout_constraintTop_toBottomOf="@+id/tv_clock_2"
-        app:layout_constraintBottom_toTopOf="@+id/tv_clock_3"
-        app:layout_constraintStart_toStartOf="parent" />
-
-    <TextView
-        android:id="@+id/tv_clock_3"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:layout_marginBottom="64dp"
-        android:layout_marginStart="16dp"
-        android:textAlignment="center"
-        app:layout_constraintTop_toBottomOf="@+id/tv_alarm_3"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintEnd_toStartOf="@id/tp_clock_3"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tv_alarm_2" />
+
+    <TimePicker
+        android:id="@+id/tp_clock_3"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:timePickerMode="spinner"
+        android:layout_marginBottom="50dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/tv_alarm_3"
+        app:layout_constraintTop_toBottomOf="@id/tp_clock_2" />
 
 </android.support.constraint.ConstraintLayout>
