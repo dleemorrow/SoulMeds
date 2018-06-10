@@ -27,7 +27,6 @@ public class AlarmsFragment_Symptoms extends Fragment {
      * Member Variables
      * ===================================================== */
     private static final String TAG = "AlarmsFragment_Symptoms";
-    private Boolean isInitializing = true;
     AlarmsActivity_Tabbed theActivity;
 
     // Members for the Symptom Picker UI elements
@@ -46,6 +45,7 @@ public class AlarmsFragment_Symptoms extends Fragment {
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState){
         View view = inflater.inflate(R.layout.fragment_alarms_symptoms, container, false);
 
+        // Connect to Activity for saving Prescriptions
         theActivity = (AlarmsActivity_Tabbed) getActivity();
 
         // Connect to spinners in the interface
@@ -58,7 +58,7 @@ public class AlarmsFragment_Symptoms extends Fragment {
         allSymptomsList = mPrescriptionManager.getAllSymptoms();
         userSymptomsList = mPrescriptionManager.getUserSymptoms();
 
-        initSymptomPicker();
+        initSymptomPickers();
         return view;
     }
 
@@ -66,9 +66,7 @@ public class AlarmsFragment_Symptoms extends Fragment {
      * Functions for Controlling Spinners
      * ===================================================== */
 
-    private void initSymptomPicker(){
-        Log.d(TAG, "Initializing symptom pickers...");
-        isInitializing = true;
+    private void initSymptomPickers(){
         String[] symptomListAsString = new String [allSymptomsList.size()];
         symptomListAsString = allSymptomsList.toArray(symptomListAsString);
         final String[] realList = symptomListAsString;
@@ -130,6 +128,6 @@ public class AlarmsFragment_Symptoms extends Fragment {
     private void editSymptom(int index, String newSymptom){
         mPrescriptionManager.editSymptom(index, newSymptom);
         userSymptomsList = mPrescriptionManager.getUserSymptoms();
-        Log.d(TAG, "Symptoms Edited: " + userSymptomsList);
+//        Log.d(TAG, "Symptoms Edited: " + userSymptomsList);
     }
 }

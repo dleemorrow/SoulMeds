@@ -2,6 +2,27 @@ DevLog for Soul Meds app
 Brendan Thompson
 
 ================
+=== 06/10/18 ===
+================
+
+I) Summary
+	A) Finished AlarmsActivity
+
+II) Takeaways
+
+	- Finished setting up iOS style Alarms Page Components
+
+III) Resources
+
+IV) Activity Log
+
+	A) Finished AlarmsActivity
+		- all data is retrieved, displayed, editable, and saveable
+		- removed unused activities, fragments, and layouts
+	B) Updated Emergency Activity
+		- Switched to NumberPicker
+
+================
 === 06/06/18 ===
 ================
 
@@ -10,16 +31,15 @@ I) Summary
 
 II) Takeaways
 
-	- Copied over all symptom data
-	- Started Settings Activity
+	- Continued using iOS style Alarms Page components
 
 III) Resources
 
 IV) Activity Log
 
-A) Continued working on AlarmsActivity
-	- filling NumberPickers with allSymptomsList
-	- saving Symptoms when "done"
+	A) Continued working on AlarmsActivity
+		- filling NumberPickers with allSymptomsList
+		- saving Symptoms when "done"
 
 ================
 === 06/01/18 ===
@@ -30,8 +50,7 @@ I) Summary
 
 II) Takeaways
 
-	- Copied over all symptom data
-	- Started Settings Activity
+	- started using iOS style Alarm Page components
 
 III) Resources
 
@@ -47,9 +66,9 @@ IV) To Do
 
 V) Activity Log
 
-A) Major AlarmsActivity UI Change
-	- Using NumberPicker for symptoms
-	- Using TimePicker mode="spinner"
+	A) Major AlarmsActivity UI Change
+		- Using NumberPicker for symptoms
+		- Using TimePicker mode="spinner"
 
 
 ================
@@ -79,16 +98,16 @@ IV) To Do
 
 V) Activity Log
 
-A) Wrote program that converts data
-	- reads in all data for a symptom & then outputs it in the new format
-	- writes the entire content of the function `populateSymptomObjectData()` in DataManager.java
-	- 25 symptoms * (1 name + 5 verses + 5 references + 5 verseCards) = at least 400 error prone copy & pastes
-	- 681 lines
-	- drew an NDFA to see that all reads terminate with `"`
+	A) Wrote program that converts data
+		- reads in all data for a symptom & then outputs it in the new format
+		- writes the entire content of the function `populateSymptomObjectData()` in DataManager.java
+		- 25 symptoms * (1 name + 5 verses + 5 references + 5 verseCards) = at least 400 error prone copy & pastes
+		- 681 lines
+		- drew an NDFA to see that all reads terminate with `"`
 
-B) Started Settings Activity
-	- Implemented everything except Tutorial, About, and Email Support
-	- Login & Reset work perfectly
+	B) Started Settings Activity
+		- Implemented everything except Tutorial, About, and Email Support
+		- Login & Reset work perfectly
 
 
 ================
@@ -118,21 +137,21 @@ IV) To Do
 
 V) Activity Log
 
-A) Implemented Complete Alarm Times page
-	- new fragment layout and class
-	- had to change PrescriptionManager to always have 3 in userTimesList
-	- Using TextViews with OnClickListeneres to manage the Alarm Times
-		- Pulls up TimePicker dialog
+	A) Implemented Complete Alarm Times page
+		- new fragment layout and class
+		- had to change PrescriptionManager to always have 3 in userTimesList
+		- Using TextViews with OnClickListeneres to manage the Alarm Times
+			- Pulls up TimePicker dialog
 
-B) Implemented Complete Alarm Symptoms Backend
-	- edits the alarms immediately (cancel & done don't change anything)
+	B) Implemented Complete Alarm Symptoms Backend
+		- edits the alarms immediately (cancel & done don't change anything)
 
-C) Started writing program to convert data
-	- 25 symptoms * (1 name + 5 verses + 5 references + 5 verseCards) = 400 copy & pastes at least
-	- writing c++ that reads the Verse.swift data into a a data structure then outputs it to a file in the new format
-	- currently reads & writes to file and can tell if a line has a new symptom on it
-		- in the process of parsing the data into the data structure
-		- should write out a quick NDFA that simulates the parsing of a line
+	C) Started writing program to convert data
+		- 25 symptoms * (1 name + 5 verses + 5 references + 5 verseCards) = 400 copy & pastes at least
+		- writing c++ that reads the Verse.swift data into a a data structure then outputs it to a file in the new format
+		- currently reads & writes to file and can tell if a line has a new symptom on it
+			- in the process of parsing the data into the data structure
+			- should write out a quick NDFA that simulates the parsing of a line
 
 ================
 === 05/17/18 ===

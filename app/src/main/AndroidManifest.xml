@@ -28,10 +28,6 @@
 
         <!-- Alarms -->
         <activity
-            android:name=".AlarmsActivity"
-            android:label="@string/title_activity_alarms"
-            android:parentActivityName=".MainActivity" />
-        <activity
             android:name=".AlarmsActivity_Tabbed"
             android:label="@string/title_activity_alarms"
             android:theme="@style/AppTheme.NoActionBar" />
@@ -53,10 +49,12 @@
         <activity
             android:name=".EmergencyActivity"
             android:label="@string/title_activity_emergency"
-            android:parentActivityName=".MainActivity" />
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".MedsActivity"
             android:theme="@style/AppTheme.NoActionBar" />
+
+        <!-- Settings -->
         <activity
             android:name=".SettingsActivity"
             android:label="@string/title_activity_settings"

@@ -18,6 +18,7 @@
     <string name="next_btn">Next</string>
     <string name="back_btn">Back</string>
     <string name="cancel_btn">Cancel</string>
+    <string name="save_btn">Save</string>
     <string name="done_btn">Done</string>
     <string name="title_activity_emergency">Pick a symptom</string>
 

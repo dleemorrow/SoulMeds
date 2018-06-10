@@ -109,12 +109,12 @@ public class AlarmsActivity_Tabbed extends AppCompatActivity {
      * ===================================================== */
 
     private void savePrescription(){
-        if (!(symptom1 == null)){mPrescriptionManager.editSymptom(0, symptom1);}
-        if (!(symptom2 == null)){mPrescriptionManager.editSymptom(1, symptom2);}
-        if (!(symptom3 == null)){mPrescriptionManager.editSymptom(2, symptom3);}
-//        mPrescriptionManager.editTime(0, time1);
-//        mPrescriptionManager.editTime(1, time2);
-//        mPrescriptionManager.editTime(2, time3);
+        if (symptom1 != null){mPrescriptionManager.editSymptom(0, symptom1);}
+        if (symptom2 != null){mPrescriptionManager.editSymptom(1, symptom2);}
+        if (symptom3 != null){mPrescriptionManager.editSymptom(2, symptom3);}
+        if (time1 != null){mPrescriptionManager.editTime(0, time1);}
+        if (time2 != null){mPrescriptionManager.editTime(1, time2);}
+        if (time3 != null){mPrescriptionManager.editTime(2, time3);}
         finish();
     }
 
@@ -154,7 +154,7 @@ public class AlarmsActivity_Tabbed extends AppCompatActivity {
                     case 1:
                         pageTitle.setText(R.string.title_alarms_times);
                         mBackBtn.setText(R.string.back_btn);
-                        mNextBtn.setText(R.string.done_btn);
+                        mNextBtn.setText(R.string.save_btn);
                         break;
                     default:
                         break;
