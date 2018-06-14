@@ -2,6 +2,27 @@ DevLog for Soul Meds app
 Brendan Thompson
 
 ================
+=== 06/13/18 ===
+================
+
+I) Summary
+	A) Stored Prescription Data on Firebase
+
+II) Takeaways
+
+	- Stored Prescription Data on Firebase
+	- I have been storing alarm times in the worst formats. Military Time should have been the move from day 1. No Regular expressions, no AlarmIDs.
+
+III) Resources
+
+	- https://firebase.google.com/docs/database/android/start/
+
+IV) Activity Log
+
+	A) Stored Prescription Data on Firebase
+		- https://firebase.google.com/docs/database/android/start/
+
+================
 === 06/10/18 ===
 ================
 

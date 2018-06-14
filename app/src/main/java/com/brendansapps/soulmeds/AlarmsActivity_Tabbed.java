@@ -115,6 +115,8 @@ public class AlarmsActivity_Tabbed extends AppCompatActivity {
         if (time1 != null){mPrescriptionManager.editTime(0, time1);}
         if (time2 != null){mPrescriptionManager.editTime(1, time2);}
         if (time3 != null){mPrescriptionManager.editTime(2, time3);}
+        mPrescriptionManager.saveUserPrescriptions_Local();
+        mPrescriptionManager.saveUserPrescriptions_Firebase();
         finish();
     }
 
