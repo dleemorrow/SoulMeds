@@ -27,11 +27,22 @@ import java.util.List;
 import java.util.Random;
 import java.util.Set;
 
+/** ===========================================================
+ * MedsActivity.java Created by bt on 3/31/18.
+ *
+ * Displays Verses when notification clicked or for EmergencyActivity
+ *      1 symptom = all associated verses
+ *      2 symptom = 3 associated verses from each
+ *      3 symptom = 2 associated verses from each
+ *
+ * Also shares VerseCards to Facebook & Twitter
+ * =========================================================== */
+
 public class MedsActivity extends AppCompatActivity {
 
-    // ===========================================================
-    // Member Variables
-    // ===========================================================
+    /** ===========================================================
+     * Member Variables
+     * =========================================================== */
     private static final String TAG = "MedsActivity";
 
     // Layout Accessors
@@ -45,9 +56,9 @@ public class MedsActivity extends AppCompatActivity {
     ArrayList<String> userSymptoms;
     ArrayList<Pair<String, Integer>> currentVersesList;
 
-    // ===========================================================
-    // Constructor
-    // ===========================================================
+    /** ===========================================================
+     * Constructor
+     * =========================================================== */
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -123,9 +134,9 @@ public class MedsActivity extends AppCompatActivity {
         showVerse(currentVersesList.get(currentVerseIndex).first, currentVersesList.get(currentVerseIndex).second);
     }
 
-    // ===========================================================
-    // State Managers
-    // ===========================================================
+    /** ===========================================================
+     * State Managers
+     * =========================================================== */
 
     // Show the verse at the index for that symptom
     private void showVerse(String symptom, int verseIndex){
@@ -170,9 +181,9 @@ public class MedsActivity extends AppCompatActivity {
         finish();
     }
 
-    // ===========================================================
-    // Verse List Generators
-    // ===========================================================
+    /** ===========================================================
+     * Verse List Generators
+     * =========================================================== */
 
     /// Create a list of Symptom-VerseIndex pairs based off the specified format
     private ArrayList<Pair<String, Integer>> getVerses_formatted(){
@@ -229,7 +240,7 @@ public class MedsActivity extends AppCompatActivity {
         return newListOfVerses;
     }
 
-    // Create a list given a specific symptom
+    // Create a list of Symptom-VerseIndex pairs given a specific Symptom
     private ArrayList<Pair<String, Integer>> getVerses_specified(String symptom){
         ArrayList<Pair<String, Integer>> newListOfVerses = new ArrayList<>();
 
@@ -262,9 +273,9 @@ public class MedsActivity extends AppCompatActivity {
         return newListOfVerses;
     }
 
-    // ===========================================================
-    // Social Media Sharing
-    // ===========================================================
+    /** ===========================================================
+    * Social Media Sharing
+    * =========================================================== */
 
     // Send a toast saying "Option Not Yet Available"
     private void printNotYetAvailableToast(){
@@ -275,6 +286,8 @@ public class MedsActivity extends AppCompatActivity {
         toast.show();
     }
 
+    // There is a better way to share to Facebook using the Facebook SDK
+    // This version is just a copy of the Twitter version below
     private void shareToFacebook(){
         try {
             // Prepare Image
