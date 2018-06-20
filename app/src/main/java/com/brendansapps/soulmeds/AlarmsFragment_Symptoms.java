@@ -33,7 +33,6 @@ public class AlarmsFragment_Symptoms extends Fragment {
     public NumberPicker mSymptomNP1, mSymptomNP2, mSymptomNP3;
 
     // Members for the Symptom Data
-    private PrescriptionManager mPrescriptionManager;
     private ArrayList<String> allSymptomsList; // List of all possible symptoms
     private ArrayList<String> userSymptomsList; // List of user's symptoms
 
@@ -45,18 +44,15 @@ public class AlarmsFragment_Symptoms extends Fragment {
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState){
         View view = inflater.inflate(R.layout.fragment_alarms_symptoms, container, false);
 
-        // Connect to Activity for saving Prescriptions
+        // Connect to Activity for user Prescriptions
         theActivity = (AlarmsActivity_Tabbed) getActivity();
+        allSymptomsList = theActivity.getAllSymptoms();
+        userSymptomsList = theActivity.getUserSymptoms();
 
         // Connect to spinners in the interface
         mSymptomNP1 = view.findViewById(R.id.symptom_picker_1);
         mSymptomNP2 = view.findViewById(R.id.symptom_picker_2);
         mSymptomNP3 = view.findViewById(R.id.symptom_picker_3);
-
-        // Get Prescription Data & initialize spinners
-        mPrescriptionManager = new PrescriptionManager(this.getContext());
-        allSymptomsList = mPrescriptionManager.getAllSymptoms();
-        userSymptomsList = mPrescriptionManager.getUserSymptoms();
 
         initSymptomPickers();
         return view;
@@ -67,6 +63,7 @@ public class AlarmsFragment_Symptoms extends Fragment {
      * ===================================================== */
 
     private void initSymptomPickers(){
+        // Convoluted way to get the list as a final String[]
         String[] symptomListAsString = new String [allSymptomsList.size()];
         symptomListAsString = allSymptomsList.toArray(symptomListAsString);
         final String[] realList = symptomListAsString;
@@ -118,16 +115,5 @@ public class AlarmsFragment_Symptoms extends Fragment {
                 theActivity.setSymptom3(realList[newVal]);
             }
         });
-    }
-
-    /** =================================================
-     * Functions for Controlling User Symptoms
-     * ===================================================== */
-
-    // Edits the symptom at index to be newSymptom
-    private void editSymptom(int index, String newSymptom){
-        mPrescriptionManager.editSymptom(index, newSymptom);
-        userSymptomsList = mPrescriptionManager.getUserSymptoms();
-//        Log.d(TAG, "Symptoms Edited: " + userSymptomsList);
     }
 }

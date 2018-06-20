@@ -7,6 +7,7 @@ Brendan Thompson
 
 I) Summary
 	A) Fixed Alarm Notifications
+	B) Simplified Alarm data model
 
 II) Takeaways
 
@@ -64,7 +65,9 @@ A) Fixed Alarm Notifications
 	        manager.notify(NOTIFICATION_ID, mBuilder.build());
 	    }`
 
-
+B) Simplified Alarm data model
+	- only the AlarmsActivity_Tabbed has a PrescriptionManager
+	- each fragment gets their lists from the activity (getUserTimes, getUserSymptoms, getAllSymptoms)
 
 ================
 === 06/13/18 ===

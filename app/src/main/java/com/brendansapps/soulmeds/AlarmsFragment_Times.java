@@ -38,7 +38,6 @@ public class AlarmsFragment_Times extends Fragment {
     private TimePicker mTP1, mTP2, mTP3;
 
     // Members for the Symptom Data
-    private PrescriptionManager mPrescriptionManager;
     private ArrayList<String> userTimesList;
 
     /** =================================================
@@ -49,12 +48,9 @@ public class AlarmsFragment_Times extends Fragment {
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState){
         View view = inflater.inflate(R.layout.fragment_alarms_times, container, false);
 
-        // Connect to Activity for saving Prescriptions
+        // Connect to Activity for user Prescriptions
         theActivity = (AlarmsActivity_Tabbed) getActivity();
-
-        // Get Prescription Data & initialize spinners
-        mPrescriptionManager = new PrescriptionManager(this.getContext());
-        userTimesList = mPrescriptionManager.getUserTimes();
+        userTimesList = theActivity.getUserTimes();
 
         // Connect to spinners in the interface
         mTP1 = view.findViewById(R.id.tp_clock_1);
@@ -70,8 +66,6 @@ public class AlarmsFragment_Times extends Fragment {
      * ===================================================== */
 
     private void initTimePickers(){
-        userTimesList = mPrescriptionManager.getUserTimes();
-
         Pattern timePattern = Pattern.compile("^([0-9]|0[0-9]|1[0-9]|2[0-3]):([0-5][0-9]) (AM|PM)$");
         Matcher match1, match2, match3;
 

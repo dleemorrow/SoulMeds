@@ -171,8 +171,21 @@ public class AlarmsActivity_Tabbed extends AppCompatActivity {
     }
 
     /** =============================================
-    * Prescription Info Setters
+    * Prescription Info Getters & Setters
     * ============================================= */
+
+    public ArrayList<String> getUserTimes(){
+        return mPrescriptionManager.getUserTimes();
+    }
+
+    public ArrayList<String> getUserSymptoms(){
+        return mPrescriptionManager.getUserSymptoms();
+    }
+
+    public ArrayList<String> getAllSymptoms(){
+        return mPrescriptionManager.getAllSymptoms();
+    }
+
     public void setTime1(String time1) {
         this.time1 = time1;
     }
