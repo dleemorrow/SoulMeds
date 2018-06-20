@@ -7,9 +7,9 @@ import java.util.ArrayList;
 /**
  * Created by bt on 3/24/18.
  *
- * DataManager handles all information about the Symptoms and their associated Verses
+ * DataManager handles all information about the S
  *
- * Each SymptomObject has a symptom name and three arrays used for the bible verse info (verse, reference, card)
+ * Each SymptomObject has a symptom name and threeymptoms and their associated Verses arrays used for the bible verse info (verse, reference, card)
  */
 
 // Structure for each Symptom and the associated Verses

@@ -2,6 +2,71 @@ DevLog for Soul Meds app
 Brendan Thompson
 
 ================
+=== 06/19/18 ===
+================
+
+I) Summary
+	A) Fixed Alarm Notifications
+
+II) Takeaways
+
+	- Fixed Alarm Notifications: Ringtone, Vibrate, Dismiss
+
+III) Resources
+
+	- Notification Documentation: https://developer.android.com/guide/topics/ui/notifiers/notifications
+	- NotificationCompat.Builder Documentation: https://developer.android.com/reference/android/support/v4/app/NotificationCompat.Builder
+
+IV) Activity Log
+
+A) Fixed Alarm Notifications
+
+	1) Create Notification Channel in MainActivity.onStart()
+		if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            String channelID = getResources().getString(R.string.channel_id_alarms);
+            String name = getResources().getString(R.string.channel_name);
+            String description = getResources().getString(R.string.channel_description);
+            int importance = NotificationManager.IMPORTANCE_DEFAULT;
+            NotificationChannel channel = new NotificationChannel(channelID, name, importance);
+            channel.setDescription(description);
+            NotificationManager notificationManager = getSystemService(NotificationManager.class);
+            notificationManager.createNotificationChannel(channel);
+        }
+
+    2) Further Customize the Notification in AlarmHandler.java
+	    `private void showNotification(){
+	        // Setup Intent for when Notification clicked
+	        Intent intent = new Intent(mContext, MedsActivity.class);
+	        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK); // See https://developer.android.com/training/notify-user/navigation for better navigation
+	        PendingIntent pendingIntent = PendingIntent.getActivity(mContext, 0, intent, 0);
+
+	        // Setup Ringtone & Vibrate
+	        Uri alarmSound = Settings.System.DEFAULT_RINGTONE_URI;
+	        long[] vibratePattern = { 0, 100, 200, 300 };
+
+	        // Setup Notification
+	        String channelID = mContext.getResources().getString(R.string.channel_id_alarms);
+	        NotificationCompat.Builder mBuilder = new NotificationCompat.Builder(mContext, channelID)
+	                .setContentText(notificationMessage)
+	                .setContentTitle(notificationTitle)
+	                .setSmallIcon(R.mipmap.ic_launcher_round)
+	                .setPriority(NotificationCompat.PRIORITY_DEFAULT)
+	                .setCategory(NotificationCompat.CATEGORY_ALARM)
+	                .setVisibility(NotificationCompat.VISIBILITY_PUBLIC)
+	                .setContentIntent(pendingIntent)
+	                .setSound(alarmSound, AudioManager.STREAM_ALARM)
+	                .setVibrate(vibratePattern)
+	                .setOnlyAlertOnce(true)
+	                .setAutoCancel(true);
+
+	        // Send Notification
+	        NotificationManager manager = (NotificationManager) mContext.getSystemService(NOTIFICATION_SERVICE);
+	        manager.notify(NOTIFICATION_ID, mBuilder.build());
+	    }`
+
+
+
+================
 === 06/13/18 ===
 ================
 
@@ -10,7 +75,7 @@ I) Summary
 
 II) Takeaways
 
-	- Stored Prescription Data on Firebase
+	- Stored Prescription Data on Firebase but NOT retrieving them
 	- I have been storing alarm times in the worst formats. Military Time should have been the move from day 1. No Regular expressions, no AlarmIDs.
 
 III) Resources

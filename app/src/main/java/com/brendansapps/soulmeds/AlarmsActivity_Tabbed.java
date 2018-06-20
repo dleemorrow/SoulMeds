@@ -77,7 +77,7 @@ public class AlarmsActivity_Tabbed extends AppCompatActivity {
                     case 0: // cancel
                         finish();
                         break;
-                    case 1: // next
+                    case 1: // back
                         mViewPager.setCurrentItem(0);
                         break;
                     default:
@@ -91,7 +91,7 @@ public class AlarmsActivity_Tabbed extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 switch (mViewPager.getCurrentItem()){
-                    case 0: // back
+                    case 0: // next
                         mViewPager.setCurrentItem(1);
                         break;
                     case 1: // save

@@ -1,7 +1,10 @@
 package com.brendansapps.soulmeds;
 
+import android.app.NotificationChannel;
+import android.app.NotificationManager;
 import android.content.Context;
 import android.content.Intent;
+import android.os.Build;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -63,8 +66,24 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onStart() {
         super.onStart();
+        createNotificationChannel();
         goToLoginPage();
     }
+
+    // Creates a channel for alarms notifications (API 26+, https://developer.android.com/training/notify-user/build-notification)
+    private void createNotificationChannel(){
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            String channelID = getResources().getString(R.string.channel_id_alarms);
+            String name = getResources().getString(R.string.channel_name);
+            String description = getResources().getString(R.string.channel_description);
+            int importance = NotificationManager.IMPORTANCE_HIGH; // sound & heads-up
+            NotificationChannel channel = new NotificationChannel(channelID, name, importance);
+            channel.setDescription(description);
+            NotificationManager notificationManager = getSystemService(NotificationManager.class);
+            notificationManager.createNotificationChannel(channel);
+        }
+    }
+
 
     // Send a toast saying "Option Not Yet Available"
     private void printNotYetAvailableToast(){

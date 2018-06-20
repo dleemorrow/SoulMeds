@@ -92,7 +92,7 @@ public class PrescriptionManager {
         }
         else {
             loadUserPrescriptions();
-            loadUserPrescriptions_Firebase();
+//            loadUserPrescriptions_Firebase();
         }
 
         printAlarms();
@@ -488,7 +488,7 @@ public class PrescriptionManager {
         Intent intent = new Intent(mContext, AlarmHandler.class);
         PendingIntent pendingIntent = PendingIntent.getBroadcast(mContext, alarmID, intent, 0);
         mAlarmManager.setRepeating(AlarmManager.RTC_WAKEUP, timeInMillis, AlarmManager.INTERVAL_DAY, pendingIntent);
-//        Log.d(TAG, "Set alarm for " + timeInMillis + " millis");
+        Log.d(TAG, "Set alarm for " + timeInMillis + " millis");
         printAlarms();
     }
 
