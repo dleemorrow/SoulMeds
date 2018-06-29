@@ -75,8 +75,14 @@ public class AlarmsFragment_Times extends Fragment {
             if (match1.group(3).equals("PM")){
                 hour1 += 12;
             }
-            mTP1.setHour(hour1);
-            mTP1.setMinute(Integer.parseInt(match1.group(2)));
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                mTP1.setHour(hour1);
+                mTP1.setMinute(Integer.parseInt(match1.group(2)));
+            }
+            else {
+                mTP1.setCurrentHour(hour1);
+                mTP1.setCurrentMinute(Integer.parseInt(match1.group(2)));
+            }
         }
 
         match2 = timePattern.matcher(userTimesList.get(1));
@@ -85,8 +91,14 @@ public class AlarmsFragment_Times extends Fragment {
             if (match2.group(3).equals("PM")){
                 hour2 += 12;
             }
-            mTP2.setHour(hour2);
-            mTP2.setMinute(Integer.parseInt(match2.group(2)));
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                mTP2.setHour(hour2);
+                mTP2.setMinute(Integer.parseInt(match2.group(2)));
+            }
+            else {
+                mTP2.setCurrentHour(hour2);
+                mTP2.setCurrentMinute(Integer.parseInt(match2.group(2)));
+            }
         }
 
         match3 = timePattern.matcher(userTimesList.get(2));
@@ -95,8 +107,14 @@ public class AlarmsFragment_Times extends Fragment {
             if (match3.group(3).equals("PM")){
                 hour3 += 12;
             }
-            mTP3.setHour(hour3);
-            mTP3.setMinute(Integer.parseInt(match3.group(2)));
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                mTP3.setHour(hour3);
+                mTP3.setMinute(Integer.parseInt(match3.group(2)));
+            }
+            else {
+                mTP3.setCurrentHour(hour3);
+                mTP3.setCurrentMinute(Integer.parseInt(match3.group(2)));
+            }
         }
 
         mTP1.setOnTimeChangedListener(new TimePicker.OnTimeChangedListener() {
