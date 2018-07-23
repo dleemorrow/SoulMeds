@@ -63,6 +63,12 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.brendansapps.soulmeds.MainActivity" />
         </activity>
+        <activity
+            android:name=".AlarmsActivity"
+            android:theme="@style/AppTheme.NoActionBar"/>
+        <activity
+            android:name=".SymptomsActivity"
+            android:theme="@style/AppTheme.NoActionBar"/>
     </application>
 
 </manifest>

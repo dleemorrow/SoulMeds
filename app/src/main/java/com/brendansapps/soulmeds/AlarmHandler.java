@@ -7,6 +7,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.media.AudioManager;
 import android.media.MediaPlayer;
+import android.media.RingtoneManager;
 import android.net.Uri;
 import android.os.CountDownTimer;
 import android.os.Vibrator;
@@ -49,7 +50,8 @@ public class AlarmHandler extends BroadcastReceiver {
         PendingIntent pendingIntent = PendingIntent.getActivity(mContext, 0, intent, 0);
 
         // Setup Ringtone & Vibrate
-        Uri alarmSound = Settings.System.DEFAULT_RINGTONE_URI;
+        Uri alarmSound = Settings.System.DEFAULT_RINGTONE_URI; //was the commented line below
+        // Uri alarmSound = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
         long[] vibratePattern = { 0, 100, 200, 300 };
 
         // Setup Notification
@@ -59,10 +61,10 @@ public class AlarmHandler extends BroadcastReceiver {
                 .setContentTitle(notificationTitle)
                 .setSmallIcon(R.mipmap.ic_launcher_round)
                 .setPriority(NotificationCompat.PRIORITY_DEFAULT)
-                .setCategory(NotificationCompat.CATEGORY_ALARM)
+                .setCategory(NotificationCompat.CATEGORY_CALL) // was reminder
                 .setVisibility(NotificationCompat.VISIBILITY_PUBLIC)
                 .setContentIntent(pendingIntent)
-                .setSound(alarmSound, AudioManager.STREAM_ALARM)
+                .setSound(alarmSound, AudioManager.STREAM_RING) // was notification
                 .setVibrate(vibratePattern)
                 .setOnlyAlertOnce(true)
                 .setAutoCancel(true);

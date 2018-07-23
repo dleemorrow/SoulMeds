@@ -148,6 +148,15 @@
     <string name="pref_ringtone_silent">Silent</string>
 
     <string name="pref_title_vibrate">Vibrate</string>
+    <string name="set_alarms">Set Alarms</string>
+    <string name="save">Save</string>
+    <string name="alarm_1">Alarm 1</string>
+    <string name="alarm_2">Alarm 2</string>
+    <string name="alarm_3">Alarm 3</string>
+    <string name="pref_header_change_symptoms">Change Symptoms</string>
+    <string name="symptom_1">Symptom 1</string>
+    <string name="symptom_2">Symptom 2</string>
+    <string name="symptom_3">Symptom 3</string>
 
 
 </resources>

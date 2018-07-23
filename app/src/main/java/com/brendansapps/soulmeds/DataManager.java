@@ -133,7 +133,7 @@ public class DataManager {
         currentSymptom = new SymptomObject();
         currentSymptom.symptomName = "Anger";
 
-        currentSymptom.arrayVerses.add("for the anger of man does not achieve the righteousness of God.");
+        currentSymptom.arrayVerses.add("For the anger of man does not achieve the righteousness of God.");
         currentSymptom.arrayReferences.add("James 1:20");
         currentSymptom.arrayVerseCards.add("Anger1.png");
 
@@ -152,6 +152,58 @@ public class DataManager {
         currentSymptom.arrayVerses.add("He who is slow to anger has great understanding But he who is quick-tempered exalts folly.");
         currentSymptom.arrayReferences.add("Proverbs 14:29");
         currentSymptom.arrayVerseCards.add("Anger5.png");
+
+        arraySymptomObjects.add(currentSymptom);
+
+        // Complaining
+        currentSymptom = new SymptomObject();
+        currentSymptom.symptomName = "Complaining";
+
+        currentSymptom.arrayVerses.add("Do all things without grumbling or disputing;");
+        currentSymptom.arrayReferences.add("Philippians 2:14");
+        currentSymptom.arrayVerseCards.add("Complaining1.png");
+
+        currentSymptom.arrayVerses.add("Rejoice always; pray without ceasing; in everything give thanks; for this is God’s will for you in Christ Jesus.");
+        currentSymptom.arrayReferences.add("1 Thessalonians 5:16-18");
+        currentSymptom.arrayVerseCards.add("Complaining2.png");
+
+        currentSymptom.arrayVerses.add("Now the people became like those who complain of adversity in the hearing of the Lord; and when the Lord heard  it, His anger was kindled.");
+        currentSymptom.arrayReferences.add("Numbers 11:1a");
+        currentSymptom.arrayVerseCards.add("Complaining3.png");
+
+        currentSymptom.arrayVerses.add("Not that I speak from want, for I have learned to be   content in whatever circumstances I am.");
+        currentSymptom.arrayReferences.add("Philippians 4:11");
+        currentSymptom.arrayVerseCards.add("Complaining4.png");
+
+        currentSymptom.arrayVerses.add("Moses said, “ This will happen when the Lord gives you meat to eat in the evening, and bread to the full in the morning; for the Lord hears your grumblings which you grumble against Him. And what are we? Your grumblings are not against us but against the Lord.”");
+        currentSymptom.arrayReferences.add("Exodus 16:8");
+        currentSymptom.arrayVerseCards.add("Complaining5.png");
+
+        arraySymptomObjects.add(currentSymptom);
+
+        // Cussing/Sarcasm
+        currentSymptom = new SymptomObject();
+        currentSymptom.symptomName = "Cussing/Sarcasm";
+
+        currentSymptom.arrayVerses.add("Let no unwholesome word proceed from your mouth, but only such  a word as is good for edification according to the need  of the moment, so that it will give grace to those who hear.");
+        currentSymptom.arrayReferences.add("Ephesians 4:29");
+        currentSymptom.arrayVerseCards.add("Cussing1.png");
+
+        currentSymptom.arrayVerses.add("You shall not take the name of the Lord your God in vain, for the Lord will not leave him unpunished who takes His name in vain.");
+        currentSymptom.arrayReferences.add("Exodus 20:7");
+        currentSymptom.arrayVerseCards.add("Cussing2.png");
+
+        currentSymptom.arrayVerses.add("If anyone thinks himself to be religious, and yet does not bridle his tongue but deceives his  own heart, this man’s religion is worthless.");
+        currentSymptom.arrayReferences.add("James 1:26");
+        currentSymptom.arrayVerseCards.add("Cussing3.png");
+
+        currentSymptom.arrayVerses.add("The mouth of the righteous flows with wisdom, But the perverted tongue will be cut out.");
+        currentSymptom.arrayReferences.add("Proverbs 10:31");
+        currentSymptom.arrayVerseCards.add("Cussing4.png");
+
+        currentSymptom.arrayVerses.add("It is not what enters into the mouth  that defiles the man, but what proceeds out of the mouth, this defiles the man.");
+        currentSymptom.arrayReferences.add("Matthew 15:11");
+        currentSymptom.arrayVerseCards.add("Cussing5.png");
 
         arraySymptomObjects.add(currentSymptom);
 
@@ -181,55 +233,55 @@ public class DataManager {
 
         arraySymptomObjects.add(currentSymptom);
 
-        // Pride
+        // Faith
         currentSymptom = new SymptomObject();
-        currentSymptom.symptomName = "Pride";
+        currentSymptom.symptomName = "Faith";
 
-        currentSymptom.arrayVerses.add("But He gives a greater grace. Therefore  it says, “God is opposed to the proud, but gives grace to the humble.”");
-        currentSymptom.arrayReferences.add("James 4:6");
-        currentSymptom.arrayVerseCards.add("Pride1.png");
+        currentSymptom.arrayVerses.add("For I know the plans that I have for you,’ declares the Lord, ‘plans for welfare and not for calamity to give you a future and a hope.");
+        currentSymptom.arrayReferences.add("Jeremiah 29:11");
+        currentSymptom.arrayVerseCards.add("Faith1.png");
 
-        currentSymptom.arrayVerses.add("Thus says the Lord, “Let not a wise man boast of his wisdom, and let not the mighty man boast of his might, let not a rich man boast of his riches;    but let him who boasts boast of this, that he understands and knows Me, that I am the Lord who exercises lovingkindness, justice and righteousness on earth; for I delight in these things,” declares the Lord.");
-        currentSymptom.arrayReferences.add("Jeremiah 9:23-24");
-        currentSymptom.arrayVerseCards.add("Pride2.png");
+        currentSymptom.arrayVerses.add("And without faith it is impossible to please  Him, for he who comes to God must believe that He is and  that He is a rewarder of those who seek Him.");
+        currentSymptom.arrayReferences.add("Hebrews 11:6");
+        currentSymptom.arrayVerseCards.add("Faith2.png");
 
-        currentSymptom.arrayVerses.add("Do nothing from selfishness or empty conceit, but with humility of mind regard one another as more important than yourselves; do not  merely look out for your own personal interests, but also for the interests of others.");
-        currentSymptom.arrayReferences.add("Philippians 2:3-4");
-        currentSymptom.arrayVerseCards.add("Pride3.png");
+        currentSymptom.arrayVerses.add("But he must ask in faith without any doubting, for the one who doubts is like the surf of the sea, driven and tossed by the wind.");
+        currentSymptom.arrayReferences.add("James 1:6");
+        currentSymptom.arrayVerseCards.add("Faith3.png");
 
-        currentSymptom.arrayVerses.add("Let another praise you, and not your own mouth; A stranger, and not your own lips.");
-        currentSymptom.arrayReferences.add("Proverbs 27:2");
-        currentSymptom.arrayVerseCards.add("Pride4.png");
+        currentSymptom.arrayVerses.add("For in it  the righteousness of God is revealed from faith to faith; as it is written, “But the righteous  man shall live by faith.”");
+        currentSymptom.arrayReferences.add("Romans 1:17");
+        currentSymptom.arrayVerseCards.add("Faith4.png");
 
-        currentSymptom.arrayVerses.add("Be of the same mind toward one another; do not be haughty in mind, but associate with the lowly. Do not be wise in your own estimation.");
-        currentSymptom.arrayReferences.add("Romans 12:16");
-        currentSymptom.arrayVerseCards.add("Pride5.png");
+        currentSymptom.arrayVerses.add("for we walk by faith, not by sight");
+        currentSymptom.arrayReferences.add("2 Corinthians 5:7");
+        currentSymptom.arrayVerseCards.add("Faith5.png");
 
         arraySymptomObjects.add(currentSymptom);
 
-        // Purity
+        // Father's love your family
         currentSymptom = new SymptomObject();
-        currentSymptom.symptomName = "Purity";
+        currentSymptom.symptomName = "Father's love your family";
 
-        currentSymptom.arrayVerses.add("For this is the will of God, your sanctification;  that is, that you abstain from sexual immorality;");
-        currentSymptom.arrayReferences.add("1 Thessalonians 4:3");
-        currentSymptom.arrayVerseCards.add("sexualPurity1.png");
+        currentSymptom.arrayVerses.add("But if anyone does not provide for his own, and especially for those of his household, he has denied the faith and is worse than an unbeliever.");
+        currentSymptom.arrayReferences.add("1 Timothy 5:8");
+        currentSymptom.arrayVerseCards.add("fatherLoveYourFamily1.png");
 
-        currentSymptom.arrayVerses.add("Flee immorality. Every  other sin that a man commits is outside the body, but the immoral man sins against his own body.");
-        currentSymptom.arrayReferences.add("1 Corinthians 6:18");
-        currentSymptom.arrayVerseCards.add("sexualPurity2.png");
+        currentSymptom.arrayVerses.add("Fathers, do not provoke your children to anger, but bring them up in the discipline and instruction of the Lord.");
+        currentSymptom.arrayReferences.add("Ephesians 6:4");
+        currentSymptom.arrayVerseCards.add("fatherLoveYourFamily2.png");
 
-        currentSymptom.arrayVerses.add("But I say to you that everyone who looks at a woman with lust for her has already committed adultery with her in his heart.");
-        currentSymptom.arrayReferences.add("Matthew 5:28");
-        currentSymptom.arrayVerseCards.add("sexualPurity3.png");
+        currentSymptom.arrayVerses.add("Husbands, love your wives, just as Christ also loved the church and gave himself up for her");
+        currentSymptom.arrayReferences.add("Ephesians 5:25");
+        currentSymptom.arrayVerseCards.add("fatherLoveYourFamily3.png");
 
-        currentSymptom.arrayVerses.add("No temptation has overtaken you but such as is common to man; and God is faithful, who will not allow you to be tempted beyond what you are able, but with the temptation will provide the way of escape also, so that you will be able to endure it.");
-        currentSymptom.arrayReferences.add("1 Corinthians 10:13");
-        currentSymptom.arrayVerseCards.add("sexualPurity4.png");
+        currentSymptom.arrayVerses.add("Husbands, love your wives and do not be embittered against them.");
+        currentSymptom.arrayReferences.add("Colossians 3:19");
+        currentSymptom.arrayVerseCards.add("fatherLoveYourFamily4.png");
 
-        currentSymptom.arrayVerses.add("Now the deeds of the flesh are evident, which are: immorality, impurity,  sensuality, idolatry, sorcery, enmities, strife, jealousy, outbursts of anger, disputes, dissensions, factions, envying, drunkenness, carousing, and things like these, of which I forewarn you, just as I have forewarned you, that those who practice such things  will not inherit the kingdom of God.");
-        currentSymptom.arrayReferences.add("Galatians 5:19-21");
-        currentSymptom.arrayVerseCards.add("sexualPurity5.png");
+        currentSymptom.arrayVerses.add("For this reason a man shall leave his father and mother and shall be joined to his wife, and the two shall become one flesh.");
+        currentSymptom.arrayReferences.add("Ephesians 5:31");
+        currentSymptom.arrayVerseCards.add("fatherLoveYourFamily5.png");
 
         arraySymptomObjects.add(currentSymptom);
 
@@ -285,29 +337,29 @@ public class DataManager {
 
         arraySymptomObjects.add(currentSymptom);
 
-        // Complaining
+        // Greed
         currentSymptom = new SymptomObject();
-        currentSymptom.symptomName = "Complaining";
+        currentSymptom.symptomName = "Greed";
 
-        currentSymptom.arrayVerses.add("Do all things without grumbling or disputing;");
-        currentSymptom.arrayReferences.add("Philippians 2:14");
-        currentSymptom.arrayVerseCards.add("Complaining1.png");
+        currentSymptom.arrayVerses.add("He who loves money will not be satisfied with money, nor he who loves abundance  with its income. This too is vanity.");
+        currentSymptom.arrayReferences.add("Ecclesiastes 5:10");
+        currentSymptom.arrayVerseCards.add("Greed1.png");
 
-        currentSymptom.arrayVerses.add("Rejoice always; pray without ceasing; in everything give thanks; for this is God’s will for you in Christ Jesus.");
-        currentSymptom.arrayReferences.add("1 Thessalonians 5:16-18");
-        currentSymptom.arrayVerseCards.add("Complaining2.png");
+        currentSymptom.arrayVerses.add("Make sure that your character is free from the love of money, being content with what you have; for He Himself has said, “I will never desert you, nor will I ever forsake you,”");
+        currentSymptom.arrayReferences.add("Hebrews 13:5");
+        currentSymptom.arrayVerseCards.add("Greed2.png");
 
-        currentSymptom.arrayVerses.add("Now the people became like those who complain of adversity in the hearing of the Lord; and when the Lord heard  it, His anger was kindled.");
-        currentSymptom.arrayReferences.add("Numbers 11:1a");
-        currentSymptom.arrayVerseCards.add("Complaining3.png");
+        currentSymptom.arrayVerses.add("Then He said to them, “Beware, and be on your guard against every form of greed; for not even when one has an abundance does his life consist of his possessions.”");
+        currentSymptom.arrayReferences.add("Luke 12:15");
+        currentSymptom.arrayVerseCards.add("Greed3.png");
 
-        currentSymptom.arrayVerses.add("Not that I speak from want, for I have learned to be   content in whatever circumstances I am.");
-        currentSymptom.arrayReferences.add("Philippians 4:11");
-        currentSymptom.arrayVerseCards.add("Complaining4.png");
+        currentSymptom.arrayVerses.add("No one can serve two masters; for either he will hate the one and love the other, or he will be devoted to one and despise the other. You cannot serve God and wealth.");
+        currentSymptom.arrayReferences.add("Matthew 6:24");
+        currentSymptom.arrayVerseCards.add("Greed4.png");
 
-        currentSymptom.arrayVerses.add("Moses said, “ This will happen when the Lord gives you meat to eat in the evening, and bread to the full in the morning; for the Lord hears your grumblings which you grumble against Him. And what are we? Your grumblings are not against us but against the Lord.”");
-        currentSymptom.arrayReferences.add("Exodus 16:8");
-        currentSymptom.arrayVerseCards.add("Complaining5.png");
+        currentSymptom.arrayVerses.add("He who is generous will be blessed, For he gives some of his food to the poor.");
+        currentSymptom.arrayReferences.add("Proverbs 22:9");
+        currentSymptom.arrayVerseCards.add("Greed5.png");
 
         arraySymptomObjects.add(currentSymptom);
 
@@ -337,133 +389,29 @@ public class DataManager {
 
         arraySymptomObjects.add(currentSymptom);
 
-        // Lying
+        // Jealousy
         currentSymptom = new SymptomObject();
-        currentSymptom.symptomName = "Lying";
+        currentSymptom.symptomName = "Jealousy";
 
-        currentSymptom.arrayVerses.add("You shall not steal, nor deal falsely, nor lie to one another.");
-        currentSymptom.arrayReferences.add("Leviticus 19:11");
-        currentSymptom.arrayVerseCards.add("Lying1.png");
+        currentSymptom.arrayVerses.add("Love is patient, love is kind and is not jealous; love does not brag and is not arrogant");
+        currentSymptom.arrayReferences.add("1 Corinthians 13:4");
+        currentSymptom.arrayVerseCards.add("Jealousy1.png");
 
-        currentSymptom.arrayVerses.add("Lying lips are an abomination to the Lord, But those who deal faithfully are His delight.");
-        currentSymptom.arrayReferences.add("Proverbs 12:22");
-        currentSymptom.arrayVerseCards.add("Lying2.png");
+        currentSymptom.arrayVerses.add("But if you have bitter jealousy and selfish ambition in your heart, do not be arrogant and so lie against the truth. This wisdom is not that which comes down from above, but is earthly, natural, demonic. For where jealousy and selfish ambition exist, there is disorder and every evil thing.");
+        currentSymptom.arrayReferences.add("James 3:14-16");
+        currentSymptom.arrayVerseCards.add("Jealousy2.png");
 
-        currentSymptom.arrayVerses.add("Therefore, laying aside falsehood, speak truth each one  of you with his neighbor, for we are members of one another.");
-        currentSymptom.arrayReferences.add("Ephesians 4:25");
-        currentSymptom.arrayVerseCards.add("Lying3.png");
+        currentSymptom.arrayVerses.add("for you are still fleshly. For since there is jealousy and strife among you, are you not fleshly, and are you not walking like mere men?");
+        currentSymptom.arrayReferences.add("1 Corinthians 3:3");
+        currentSymptom.arrayVerseCards.add("Jealousy3.png");
 
-        currentSymptom.arrayVerses.add("You shall not bear false witness against your neighbor.");
-        currentSymptom.arrayReferences.add("Exodus 20:16");
-        currentSymptom.arrayVerseCards.add("Lying4.png");
+        currentSymptom.arrayVerses.add("Therefore, putting aside all malice and all deceit and hypocrisy and envy and all slander");
+        currentSymptom.arrayReferences.add("1 Peter 2:1");
+        currentSymptom.arrayVerseCards.add("Jealousy4.png");
 
-        currentSymptom.arrayVerses.add("A false witness will not go unpunished, And he who tells lies will perish.");
-        currentSymptom.arrayReferences.add("Proverbs 19:9");
-        currentSymptom.arrayVerseCards.add("Lying5.png");
-
-        arraySymptomObjects.add(currentSymptom);
-
-        // Cussing/Sarcasm
-        currentSymptom = new SymptomObject();
-        currentSymptom.symptomName = "Cussing/Sarcasm";
-
-        currentSymptom.arrayVerses.add("Let no unwholesome word proceed from your mouth, but only such  a word as is good for edification according to the need  of the moment, so that it will give grace to those who hear.");
-        currentSymptom.arrayReferences.add("Ephesians 4:29");
-        currentSymptom.arrayVerseCards.add("Cussing1.png");
-
-        currentSymptom.arrayVerses.add("You shall not take the name of the Lord your God in vain, for the Lord will not leave him unpunished who takes His name in vain.");
-        currentSymptom.arrayReferences.add("Exodus 20:7");
-        currentSymptom.arrayVerseCards.add("Cussing2.png");
-
-        currentSymptom.arrayVerses.add("If anyone thinks himself to be religious, and yet does not bridle his tongue but deceives his  own heart, this man’s religion is worthless.");
-        currentSymptom.arrayReferences.add("James 1:26");
-        currentSymptom.arrayVerseCards.add("Cussing3.png");
-
-        currentSymptom.arrayVerses.add("The mouth of the righteous flows with wisdom, But the perverted tongue will be cut out.");
-        currentSymptom.arrayReferences.add("Proverbs 10:31");
-        currentSymptom.arrayVerseCards.add("Cussing4.png");
-
-        currentSymptom.arrayVerses.add("It is not what enters into the mouth  that defiles the man, but what proceeds out of the mouth, this defiles the man.");
-        currentSymptom.arrayReferences.add("Matthew 15:11");
-        currentSymptom.arrayVerseCards.add("Cussing5.png");
-
-        arraySymptomObjects.add(currentSymptom);
-
-        // Stealing
-        currentSymptom = new SymptomObject();
-        currentSymptom.symptomName = "Stealing";
-
-        currentSymptom.arrayVerses.add("You shall not steal.");
-        currentSymptom.arrayReferences.add("Exodus 20:15");
-        currentSymptom.arrayVerseCards.add("Stealing1.png");
-
-        currentSymptom.arrayVerses.add("He who steals must steal no longer; but rather he must labor, performing with his own hands what is good, so that he will have  something to share with one who has need.");
-        currentSymptom.arrayReferences.add("Ephesians 4:28");
-        currentSymptom.arrayVerseCards.add("Stealing2.png");
-
-        currentSymptom.arrayVerses.add("Then he said to Him, “Which ones?” And Jesus said, “You shall not commit murder; You shall not commit adultery; You shall not steal; You shall not bear false witness”");
-        currentSymptom.arrayReferences.add("Matthew 19:18");
-        currentSymptom.arrayVerseCards.add("Stealing1.png");
-
-        currentSymptom.arrayVerses.add("Or do you not know that the unrighteous will not inherit the kingdom of God? Do not be deceived; neither fornicators, nor idolaters, nor adulterers, nor effeminate, nor homosexuals,  nor thieves , nor  the covetous, nor drunkards, nor revilers, nor swindlers, will inherit the kingdom of God. Such were some of you; but you were washed, but you were sanctified, but you were justified in the name of the Lord Jesus Christ and in the Spirit of our God.");
-        currentSymptom.arrayReferences.add("1 Corinthians 6:9-11");
-        currentSymptom.arrayVerseCards.add("Stealing1.png");
-
-        currentSymptom.arrayVerses.add("Bread obtained by falsehood is sweet to a man, But afterward his mouth will be filled with gravel.");
-        currentSymptom.arrayReferences.add("Proverbs 20:17");
-        currentSymptom.arrayVerseCards.add("Stealing1.png");
-
-        arraySymptomObjects.add(currentSymptom);
-
-        // Father's love your family
-        currentSymptom = new SymptomObject();
-        currentSymptom.symptomName = "Father's love your family";
-
-        currentSymptom.arrayVerses.add("But if anyone does not provide for his own, and especially for those of his household, he has denied the faith and is worse than an unbeliever.");
-        currentSymptom.arrayReferences.add("1 Timothy 5:8");
-        currentSymptom.arrayVerseCards.add("fatherLoveYourFamily1.png");
-
-        currentSymptom.arrayVerses.add("Fathers, do not provoke your children to anger, but bring them up in the discipline and instruction of the Lord.");
-        currentSymptom.arrayReferences.add("Ephesians 6:4");
-        currentSymptom.arrayVerseCards.add("fatherLoveYourFamily2.png");
-
-        currentSymptom.arrayVerses.add("Husbands, love your wives, just as Christ also loved the church and gave himself up for her");
-        currentSymptom.arrayReferences.add("Ephesians 5:25");
-        currentSymptom.arrayVerseCards.add("fatherLoveYourFamily3.png");
-
-        currentSymptom.arrayVerses.add("Husbands, love your wives and do not be embittered against them.");
-        currentSymptom.arrayReferences.add("Colossians 3:19");
-        currentSymptom.arrayVerseCards.add("fatherLoveYourFamily4.png");
-
-        currentSymptom.arrayVerses.add("For this reason a man shall leave his father and mother and shall be joined to his wife, and the two shall become one flesh.");
-        currentSymptom.arrayReferences.add("Ephesians 5:31");
-        currentSymptom.arrayVerseCards.add("fatherLoveYourFamily5.png");
-
-        arraySymptomObjects.add(currentSymptom);
-
-        // Wives love your Family
-        currentSymptom = new SymptomObject();
-        currentSymptom.symptomName = "Wives love your Family";
-
-        currentSymptom.arrayVerses.add("Wives, be subject to your own husbands, as to the Lord.");
-        currentSymptom.arrayReferences.add("Ephesians 5:22");
-        currentSymptom.arrayVerseCards.add("wivesLoveYourFamily1.png");
-
-        currentSymptom.arrayVerses.add("An excellent wife is the crown of her husband, But she who shames  him is like rottenness in his bones.");
-        currentSymptom.arrayReferences.add("Proverbs 12:4");
-        currentSymptom.arrayVerseCards.add("wivesLoveYourFamily2.png");
-
-        currentSymptom.arrayVerses.add("Wives, be subject to your husbands, as is fitting in the Lord.");
-        currentSymptom.arrayReferences.add("Colossians 3:18");
-        currentSymptom.arrayVerseCards.add("wivesLoveYourFamily3.png");
-
-        currentSymptom.arrayVerses.add("House and wealth are an inheritance from fathers, But a prudent wife is from the Lord.");
-        currentSymptom.arrayReferences.add("Proverbs 19:14");
-        currentSymptom.arrayVerseCards.add("wivesLoveYourFamily4.png");
-
-        currentSymptom.arrayVerses.add("Train up a child in the way he should go,Even when he is old he will not depart from it.");
-        currentSymptom.arrayReferences.add("Proverbs 22:6");
-        currentSymptom.arrayVerseCards.add("wivesLoveYourFamily5.png");
+        currentSymptom.arrayVerses.add("For this, “You shall not commit adultery, You shall not murder, You shall not steal,  You shall not covet ,” and if there is any other commandment, it is summed up in this saying, “You shall love your neighbor as yourself.”");
+        currentSymptom.arrayReferences.add("Romans 13:9");
+        currentSymptom.arrayVerseCards.add("Jealousy5.png");
 
         arraySymptomObjects.add(currentSymptom);
 
@@ -493,136 +441,6 @@ public class DataManager {
 
         arraySymptomObjects.add(currentSymptom);
 
-        // Greed
-        currentSymptom = new SymptomObject();
-        currentSymptom.symptomName = "Greed";
-
-        currentSymptom.arrayVerses.add("He who loves money will not be satisfied with money, nor he who loves abundance  with its income. This too is vanity.");
-        currentSymptom.arrayReferences.add("Ecclesiastes 5:10");
-        currentSymptom.arrayVerseCards.add("Greed1.png");
-
-        currentSymptom.arrayVerses.add("Make sure that your character is free from the love of money, being content with what you have; for He Himself has said, “I will never desert you, nor will I ever forsake you,”");
-        currentSymptom.arrayReferences.add("Hebrews 13:5");
-        currentSymptom.arrayVerseCards.add("Greed2.png");
-
-        currentSymptom.arrayVerses.add("Then He said to them, “Beware, and be on your guard against every form of greed; for not even when one has an abundance does his life consist of his possessions.”");
-        currentSymptom.arrayReferences.add("Luke 12:15");
-        currentSymptom.arrayVerseCards.add("Greed3.png");
-
-        currentSymptom.arrayVerses.add("No one can serve two masters; for either he will hate the one and love the other, or he will be devoted to one and despise the other. You cannot serve God and wealth.");
-        currentSymptom.arrayReferences.add("Matthew 6:24");
-        currentSymptom.arrayVerseCards.add("Greed4.png");
-
-        currentSymptom.arrayVerses.add("He who is generous will be blessed, For he gives some of his food to the poor.");
-        currentSymptom.arrayReferences.add("Proverbs 22:9");
-        currentSymptom.arrayVerseCards.add("Greed5.png");
-
-        arraySymptomObjects.add(currentSymptom);
-
-        // Substance abuse
-        currentSymptom = new SymptomObject();
-        currentSymptom.symptomName = "Substance abuse";
-
-        currentSymptom.arrayVerses.add("No temptation has overtaken you but such as is common to man; and God is faithful, who will not allow you to be tempted beyond what you are able, but with the temptation will provide the way of escape also, so that you will be able to endure it.");
-        currentSymptom.arrayReferences.add("1 Corinthians 10:13");
-        currentSymptom.arrayVerseCards.add("substanceAbuse1.png");
-
-        currentSymptom.arrayVerses.add("Submit therefore to God. Resist the devil and he will flee from you.");
-        currentSymptom.arrayReferences.add("James 4:7");
-        currentSymptom.arrayVerseCards.add("substanceAbuse2.png");
-
-        currentSymptom.arrayVerses.add("For you have been bought with a price: therefore glorify God in your body");
-        currentSymptom.arrayReferences.add("1 Corinthians 6:20");
-        currentSymptom.arrayVerseCards.add("substanceAbuse3.png");
-
-        currentSymptom.arrayVerses.add("I can do all things through Him who strengthens me.");
-        currentSymptom.arrayReferences.add("Philippians 4:13");
-        currentSymptom.arrayVerseCards.add("substanceAbuse4.png");
-
-        currentSymptom.arrayVerses.add("Keep watching and praying that you may not enter into temptation; the spirit is willing, but the flesh is weak.");
-        currentSymptom.arrayReferences.add("Matthew 26:41");
-        currentSymptom.arrayVerseCards.add("substanceAbuse5.png");
-
-        arraySymptomObjects.add(currentSymptom);
-
-        // Worrying
-        currentSymptom = new SymptomObject();
-        currentSymptom.symptomName = "Worrying";
-
-        currentSymptom.arrayVerses.add("And do not lean on your own understanding. In all your ways acknowledge Him, And He will make your paths straight.");
-        currentSymptom.arrayReferences.add("Proverbs 3:5-6");
-        currentSymptom.arrayVerseCards.add("Worrying1.png");
-
-        currentSymptom.arrayVerses.add("Be anxious for nothing, but in everything by prayer and supplication with thanksgiving let your requests be made known to God. And the peace of God, which surpasses all comprehension, will guard your hearts and your minds in Christ Jesus.");
-        currentSymptom.arrayReferences.add("Philippians 4:6-7");
-        currentSymptom.arrayVerseCards.add("Worrying2.png");
-
-        currentSymptom.arrayVerses.add("Come to Me, all who are weary and heavy-laden, and I will give you rest. Take My yoke upon you and learn from Me, for I am gentle and humble in heart, and you will find rest for your souls. For My yoke is easy and My burden is light.");
-        currentSymptom.arrayReferences.add("Matthew 11:28-30");
-        currentSymptom.arrayVerseCards.add("Worrying3.png");
-
-        currentSymptom.arrayVerses.add("Now may the Lord of peace Himself continually grant you peace in every circumstance. The Lord be with you all");
-        currentSymptom.arrayReferences.add("2 Thessalonians 3:16");
-        currentSymptom.arrayVerseCards.add("Worrying4.png");
-
-        currentSymptom.arrayVerses.add("Cast your burden upon the Lord and He will sustain you; He will never allow the righteous to be shaken.");
-        currentSymptom.arrayReferences.add("Psalm 55:22");
-        currentSymptom.arrayVerseCards.add("Worrying5.png");
-
-        arraySymptomObjects.add(currentSymptom);
-
-        // Witnessing
-        currentSymptom = new SymptomObject();
-        currentSymptom.symptomName = "Witnessing";
-
-        currentSymptom.arrayVerses.add("Let your light shine before men in such a way that they may see your good works, and glorify your Father who is in heaven.");
-        currentSymptom.arrayReferences.add("Matthew 5:16");
-        currentSymptom.arrayVerseCards.add("Witnessing1.png");
-
-        currentSymptom.arrayVerses.add("Go therefore and make disciples of all the nations, baptizing them in the name of the Father and the Son and the Holy Spirit, teaching them to observe all that I commanded you; and lo, I am with you always, even to the end of the age");
-        currentSymptom.arrayReferences.add("Matthew 28:19-20");
-        currentSymptom.arrayVerseCards.add("Witnessing2.png");
-
-        currentSymptom.arrayVerses.add("Let your speech always be with grace,  as though seasoned with salt, so that you will know how you should respond to each person.");
-        currentSymptom.arrayReferences.add("Colossians 4:6");
-        currentSymptom.arrayVerseCards.add("Witnessing3.png");
-
-        currentSymptom.arrayVerses.add("And He said to them, “Go into all the world and preach the gospel to all creation.");
-        currentSymptom.arrayReferences.add("Mark 16:15");
-        currentSymptom.arrayVerseCards.add("Witnessing4.png");
-
-        currentSymptom.arrayVerses.add("For I am not ashamed of the gospel, for it is the power of God for salvation to everyone who believes, to the Jew first and also to the Greek.");
-        currentSymptom.arrayReferences.add("Romans 1:16");
-        currentSymptom.arrayVerseCards.add("Witnessing5.png");
-
-        arraySymptomObjects.add(currentSymptom);
-
-        // Faith
-        currentSymptom = new SymptomObject();
-        currentSymptom.symptomName = "Faith";
-
-        currentSymptom.arrayVerses.add("For I know the plans that I have for you,’ declares the Lord, ‘plans for welfare and not for calamity to give you a future and a hope.");
-        currentSymptom.arrayReferences.add("Jeremiah 29:11");
-        currentSymptom.arrayVerseCards.add("Faith1.png");
-
-        currentSymptom.arrayVerses.add("And without faith it is impossible to please  Him, for he who comes to God must believe that He is and  that He is a rewarder of those who seek Him.");
-        currentSymptom.arrayReferences.add("Hebrews 11:6");
-        currentSymptom.arrayVerseCards.add("Faith2.png");
-
-        currentSymptom.arrayVerses.add("But he must ask in faith without any doubting, for the one who doubts is like the surf of the sea, driven and tossed by the wind.");
-        currentSymptom.arrayReferences.add("James 1:6");
-        currentSymptom.arrayVerseCards.add("Faith3.png");
-
-        currentSymptom.arrayVerses.add("For in it  the righteousness of God is revealed from faith to faith; as it is written, “But the righteous  man shall live by faith.”");
-        currentSymptom.arrayReferences.add("Romans 1:17");
-        currentSymptom.arrayVerseCards.add("Faith4.png");
-
-        currentSymptom.arrayVerses.add("for we walk by faith, not by sight");
-        currentSymptom.arrayReferences.add("2 Corinthians 5:7");
-        currentSymptom.arrayVerseCards.add("Faith5.png");
-
-        arraySymptomObjects.add(currentSymptom);
-
         // Loneliness
         currentSymptom = new SymptomObject();
         currentSymptom.symptomName = "Loneliness";
@@ -649,84 +467,6 @@ public class DataManager {
 
         arraySymptomObjects.add(currentSymptom);
 
-        // Jealousy
-        currentSymptom = new SymptomObject();
-        currentSymptom.symptomName = "Jealousy";
-
-        currentSymptom.arrayVerses.add("Love is patient, love is kind and is not jealous; love does not brag and is not arrogant");
-        currentSymptom.arrayReferences.add("1 Corinthians 13:4");
-        currentSymptom.arrayVerseCards.add("Jealousy1.png");
-
-        currentSymptom.arrayVerses.add("But if you have bitter jealousy and selfish ambition in your heart, do not be arrogant and so lie against the truth. This wisdom is not that which comes down from above, but is earthly, natural, demonic. For where jealousy and selfish ambition exist, there is disorder and every evil thing.");
-        currentSymptom.arrayReferences.add("James 3:14-16");
-        currentSymptom.arrayVerseCards.add("Jealousy2.png");
-
-        currentSymptom.arrayVerses.add("for you are still fleshly. For since there is jealousy and strife among you, are you not fleshly, and are you not walking like mere men?");
-        currentSymptom.arrayReferences.add("1 Corinthians 3:3");
-        currentSymptom.arrayVerseCards.add("Jealousy3.png");
-
-        currentSymptom.arrayVerses.add("Therefore, putting aside all malice and all deceit and hypocrisy and envy and all slander");
-        currentSymptom.arrayReferences.add("1 Peter 2:1");
-        currentSymptom.arrayVerseCards.add("Jealousy4.png");
-
-        currentSymptom.arrayVerses.add("For this, “You shall not commit adultery, You shall not murder, You shall not steal,  You shall not covet ,” and if there is any other commandment, it is summed up in this saying, “You shall love your neighbor as yourself.”");
-        currentSymptom.arrayReferences.add("Romans 13:9");
-        currentSymptom.arrayVerseCards.add("Jealousy5.png");
-
-        arraySymptomObjects.add(currentSymptom);
-
-        // Time Management
-        currentSymptom = new SymptomObject();
-        currentSymptom.symptomName = "Time Management";
-
-        currentSymptom.arrayVerses.add("Therefore be careful how you walk, not as unwise men but as wise, making the most of your time, because the days are evil.");
-        currentSymptom.arrayReferences.add("Ephesians 5:15-16");
-        currentSymptom.arrayVerseCards.add("TimeManagement1.png");
-
-        currentSymptom.arrayVerses.add("Yet you do not know what your life will be like tomorrow. You are  just a vapor that appears for a little while and then vanishes away.");
-        currentSymptom.arrayReferences.add("James 4:14");
-        currentSymptom.arrayVerseCards.add("TimeManagement2.png");
-
-        currentSymptom.arrayVerses.add("So teach us to number our days, That we may present to You a heart of wisdom.");
-        currentSymptom.arrayReferences.add("Psalm 90:12");
-        currentSymptom.arrayVerseCards.add("TimeManagement3.png");
-
-        currentSymptom.arrayVerses.add("There is an appointed time for everything. And there is a time for every event under heaven.");
-        currentSymptom.arrayReferences.add("Ecclesiastes 3:1");
-        currentSymptom.arrayVerseCards.add("TimeManagement4.png");
-
-        currentSymptom.arrayVerses.add("Therefore be careful how you walk, not as unwise men but as wise, making the most of your time, because the days are evil.");
-        currentSymptom.arrayReferences.add("Ephesians 5:15-16");
-        currentSymptom.arrayVerseCards.add("TimeManagement5.png");
-
-        arraySymptomObjects.add(currentSymptom);
-
-        // Self-Worth
-        currentSymptom = new SymptomObject();
-        currentSymptom.symptomName = "Self-Worth";
-
-        currentSymptom.arrayVerses.add("I will give thanks to You, for I am fearfully and wonderfully made; Wonderful are Your works, And my soul knows it very well.");
-        currentSymptom.arrayReferences.add("Psalm 139:14");
-        currentSymptom.arrayVerseCards.add("selfWorth1.png");
-
-        currentSymptom.arrayVerses.add("just as he chose us in him before the foundation of the world, that we would be holy and blameless before him. In love");
-        currentSymptom.arrayReferences.add("Ephesians 1:4");
-        currentSymptom.arrayVerseCards.add("selfWorth2.png");
-
-        currentSymptom.arrayVerses.add("Know that the Lord Himself is God; It is he who has made us, and not we ourselves;  We are his people and the sheep of his pasture.");
-        currentSymptom.arrayReferences.add("Psalm 100:3");
-        currentSymptom.arrayVerseCards.add("selfWorth3.png");
-
-        currentSymptom.arrayVerses.add("For you have been bought with a price: therefore glorify God in your body.");
-        currentSymptom.arrayReferences.add("1 Corinthians 6:20");
-        currentSymptom.arrayVerseCards.add("selfWorth4.png");
-
-        currentSymptom.arrayVerses.add("But we all, with unveiled face, beholding as in a mirror the glory of the Lord, are being transformed into the same image from glory to glory, just as from the Lord, the Spirit.");
-        currentSymptom.arrayReferences.add("2 Corinthians 3:18");
-        currentSymptom.arrayVerseCards.add("selfWorth5.png");
-
-        arraySymptomObjects.add(currentSymptom);
-
         // Loving Others
         currentSymptom = new SymptomObject();
         currentSymptom.symptomName = "Loving Others";
@@ -750,6 +490,84 @@ public class DataManager {
         currentSymptom.arrayVerses.add("The second is this, ‘You shall love your neighbor as yourself.’ There is no other commandment greater than these.");
         currentSymptom.arrayReferences.add("Mark 12:31");
         currentSymptom.arrayVerseCards.add("lovingOthers5.png");
+
+        arraySymptomObjects.add(currentSymptom);
+
+        // Lying
+        currentSymptom = new SymptomObject();
+        currentSymptom.symptomName = "Lying";
+
+        currentSymptom.arrayVerses.add("You shall not steal, nor deal falsely, nor lie to one another.");
+        currentSymptom.arrayReferences.add("Leviticus 19:11");
+        currentSymptom.arrayVerseCards.add("Lying1.png");
+
+        currentSymptom.arrayVerses.add("Lying lips are an abomination to the Lord, But those who deal faithfully are His delight.");
+        currentSymptom.arrayReferences.add("Proverbs 12:22");
+        currentSymptom.arrayVerseCards.add("Lying2.png");
+
+        currentSymptom.arrayVerses.add("Therefore, laying aside falsehood, speak truth each one  of you with his neighbor, for we are members of one another.");
+        currentSymptom.arrayReferences.add("Ephesians 4:25");
+        currentSymptom.arrayVerseCards.add("Lying3.png");
+
+        currentSymptom.arrayVerses.add("You shall not bear false witness against your neighbor.");
+        currentSymptom.arrayReferences.add("Exodus 20:16");
+        currentSymptom.arrayVerseCards.add("Lying4.png");
+
+        currentSymptom.arrayVerses.add("A false witness will not go unpunished, And he who tells lies will perish.");
+        currentSymptom.arrayReferences.add("Proverbs 19:9");
+        currentSymptom.arrayVerseCards.add("Lying5.png");
+
+        arraySymptomObjects.add(currentSymptom);
+
+        // Pride
+        currentSymptom = new SymptomObject();
+        currentSymptom.symptomName = "Pride";
+
+        currentSymptom.arrayVerses.add("But He gives a greater grace. Therefore  it says, “God is opposed to the proud, but gives grace to the humble.”");
+        currentSymptom.arrayReferences.add("James 4:6");
+        currentSymptom.arrayVerseCards.add("Pride1.png");
+
+        currentSymptom.arrayVerses.add("Thus says the Lord, “Let not a wise man boast of his wisdom, and let not the mighty man boast of his might, let not a rich man boast of his riches;    but let him who boasts boast of this, that he understands and knows Me, that I am the Lord who exercises lovingkindness, justice and righteousness on earth; for I delight in these things,” declares the Lord.");
+        currentSymptom.arrayReferences.add("Jeremiah 9:23-24");
+        currentSymptom.arrayVerseCards.add("Pride2.png");
+
+        currentSymptom.arrayVerses.add("Do nothing from selfishness or empty conceit, but with humility of mind regard one another as more important than yourselves; do not  merely look out for your own personal interests, but also for the interests of others.");
+        currentSymptom.arrayReferences.add("Philippians 2:3-4");
+        currentSymptom.arrayVerseCards.add("Pride3.png");
+
+        currentSymptom.arrayVerses.add("Let another praise you, and not your own mouth; A stranger, and not your own lips.");
+        currentSymptom.arrayReferences.add("Proverbs 27:2");
+        currentSymptom.arrayVerseCards.add("Pride4.png");
+
+        currentSymptom.arrayVerses.add("Be of the same mind toward one another; do not be haughty in mind, but associate with the lowly. Do not be wise in your own estimation.");
+        currentSymptom.arrayReferences.add("Romans 12:16");
+        currentSymptom.arrayVerseCards.add("Pride5.png");
+
+        arraySymptomObjects.add(currentSymptom);
+
+        // Purity
+        currentSymptom = new SymptomObject();
+        currentSymptom.symptomName = "Purity";
+
+        currentSymptom.arrayVerses.add("For this is the will of God, your sanctification;  that is, that you abstain from sexual immorality;");
+        currentSymptom.arrayReferences.add("1 Thessalonians 4:3");
+        currentSymptom.arrayVerseCards.add("sexualPurity1.png");
+
+        currentSymptom.arrayVerses.add("Flee immorality. Every  other sin that a man commits is outside the body, but the immoral man sins against his own body.");
+        currentSymptom.arrayReferences.add("1 Corinthians 6:18");
+        currentSymptom.arrayVerseCards.add("sexualPurity2.png");
+
+        currentSymptom.arrayVerses.add("But I say to you that everyone who looks at a woman with lust for her has already committed adultery with her in his heart.");
+        currentSymptom.arrayReferences.add("Matthew 5:28");
+        currentSymptom.arrayVerseCards.add("sexualPurity3.png");
+
+        currentSymptom.arrayVerses.add("No temptation has overtaken you but such as is common to man; and God is faithful, who will not allow you to be tempted beyond what you are able, but with the temptation will provide the way of escape also, so that you will be able to endure it.");
+        currentSymptom.arrayReferences.add("1 Corinthians 10:13");
+        currentSymptom.arrayVerseCards.add("sexualPurity4.png");
+
+        currentSymptom.arrayVerses.add("Now the deeds of the flesh are evident, which are: immorality, impurity,  sensuality, idolatry, sorcery, enmities, strife, jealousy, outbursts of anger, disputes, dissensions, factions, envying, drunkenness, carousing, and things like these, of which I forewarn you, just as I have forewarned you, that those who practice such things  will not inherit the kingdom of God.");
+        currentSymptom.arrayReferences.add("Galatians 5:19-21");
+        currentSymptom.arrayVerseCards.add("sexualPurity5.png");
 
         arraySymptomObjects.add(currentSymptom);
 
@@ -802,6 +620,188 @@ public class DataManager {
         currentSymptom.arrayVerses.add("And do not neglect doing good and sharing, for with such sacrifices God is pleased.");
         currentSymptom.arrayReferences.add("Hebrews 13:16");
         currentSymptom.arrayVerseCards.add("Selfishness5.png");
+
+        arraySymptomObjects.add(currentSymptom);
+
+        // Self-Worth
+        currentSymptom = new SymptomObject();
+        currentSymptom.symptomName = "Self-Worth";
+
+        currentSymptom.arrayVerses.add("I will give thanks to You, for I am fearfully and wonderfully made; Wonderful are Your works, And my soul knows it very well.");
+        currentSymptom.arrayReferences.add("Psalm 139:14");
+        currentSymptom.arrayVerseCards.add("selfWorth1.png");
+
+        currentSymptom.arrayVerses.add("just as he chose us in him before the foundation of the world, that we would be holy and blameless before him. In love");
+        currentSymptom.arrayReferences.add("Ephesians 1:4");
+        currentSymptom.arrayVerseCards.add("selfWorth2.png");
+
+        currentSymptom.arrayVerses.add("Know that the Lord Himself is God; It is he who has made us, and not we ourselves;  We are his people and the sheep of his pasture.");
+        currentSymptom.arrayReferences.add("Psalm 100:3");
+        currentSymptom.arrayVerseCards.add("selfWorth3.png");
+
+        currentSymptom.arrayVerses.add("For you have been bought with a price: therefore glorify God in your body.");
+        currentSymptom.arrayReferences.add("1 Corinthians 6:20");
+        currentSymptom.arrayVerseCards.add("selfWorth4.png");
+
+        currentSymptom.arrayVerses.add("But we all, with unveiled face, beholding as in a mirror the glory of the Lord, are being transformed into the same image from glory to glory, just as from the Lord, the Spirit.");
+        currentSymptom.arrayReferences.add("2 Corinthians 3:18");
+        currentSymptom.arrayVerseCards.add("selfWorth5.png");
+
+        arraySymptomObjects.add(currentSymptom);
+
+        // Stealing
+        currentSymptom = new SymptomObject();
+        currentSymptom.symptomName = "Stealing";
+
+        currentSymptom.arrayVerses.add("You shall not steal.");
+        currentSymptom.arrayReferences.add("Exodus 20:15");
+        currentSymptom.arrayVerseCards.add("Stealing1.png");
+
+        currentSymptom.arrayVerses.add("He who steals must steal no longer; but rather he must labor, performing with his own hands what is good, so that he will have  something to share with one who has need.");
+        currentSymptom.arrayReferences.add("Ephesians 4:28");
+        currentSymptom.arrayVerseCards.add("Stealing2.png");
+
+        currentSymptom.arrayVerses.add("Then he said to Him, “Which ones?” And Jesus said, “You shall not commit murder; You shall not commit adultery; You shall not steal; You shall not bear false witness”");
+        currentSymptom.arrayReferences.add("Matthew 19:18");
+        currentSymptom.arrayVerseCards.add("Stealing1.png");
+
+        currentSymptom.arrayVerses.add("Or do you not know that the unrighteous will not inherit the kingdom of God? Do not be deceived; neither fornicators, nor idolaters, nor adulterers, nor effeminate, nor homosexuals,  nor thieves , nor  the covetous, nor drunkards, nor revilers, nor swindlers, will inherit the kingdom of God. Such were some of you; but you were washed, but you were sanctified, but you were justified in the name of the Lord Jesus Christ and in the Spirit of our God.");
+        currentSymptom.arrayReferences.add("1 Corinthians 6:9-11");
+        currentSymptom.arrayVerseCards.add("Stealing1.png");
+
+        currentSymptom.arrayVerses.add("Bread obtained by falsehood is sweet to a man, But afterward his mouth will be filled with gravel.");
+        currentSymptom.arrayReferences.add("Proverbs 20:17");
+        currentSymptom.arrayVerseCards.add("Stealing1.png");
+
+        arraySymptomObjects.add(currentSymptom);
+
+        // Substance abuse
+        currentSymptom = new SymptomObject();
+        currentSymptom.symptomName = "Substance abuse";
+
+        currentSymptom.arrayVerses.add("No temptation has overtaken you but such as is common to man; and God is faithful, who will not allow you to be tempted beyond what you are able, but with the temptation will provide the way of escape also, so that you will be able to endure it.");
+        currentSymptom.arrayReferences.add("1 Corinthians 10:13");
+        currentSymptom.arrayVerseCards.add("substanceAbuse1.png");
+
+        currentSymptom.arrayVerses.add("Submit therefore to God. Resist the devil and he will flee from you.");
+        currentSymptom.arrayReferences.add("James 4:7");
+        currentSymptom.arrayVerseCards.add("substanceAbuse2.png");
+
+        currentSymptom.arrayVerses.add("For you have been bought with a price: therefore glorify God in your body");
+        currentSymptom.arrayReferences.add("1 Corinthians 6:20");
+        currentSymptom.arrayVerseCards.add("substanceAbuse3.png");
+
+        currentSymptom.arrayVerses.add("I can do all things through Him who strengthens me.");
+        currentSymptom.arrayReferences.add("Philippians 4:13");
+        currentSymptom.arrayVerseCards.add("substanceAbuse4.png");
+
+        currentSymptom.arrayVerses.add("Keep watching and praying that you may not enter into temptation; the spirit is willing, but the flesh is weak.");
+        currentSymptom.arrayReferences.add("Matthew 26:41");
+        currentSymptom.arrayVerseCards.add("substanceAbuse5.png");
+
+        arraySymptomObjects.add(currentSymptom);
+
+        // Time Management
+        currentSymptom = new SymptomObject();
+        currentSymptom.symptomName = "Time Management";
+
+        currentSymptom.arrayVerses.add("Therefore be careful how you walk, not as unwise men but as wise, making the most of your time, because the days are evil.");
+        currentSymptom.arrayReferences.add("Ephesians 5:15-16");
+        currentSymptom.arrayVerseCards.add("TimeManagement1.png");
+
+        currentSymptom.arrayVerses.add("Yet you do not know what your life will be like tomorrow. You are  just a vapor that appears for a little while and then vanishes away.");
+        currentSymptom.arrayReferences.add("James 4:14");
+        currentSymptom.arrayVerseCards.add("TimeManagement2.png");
+
+        currentSymptom.arrayVerses.add("So teach us to number our days, That we may present to You a heart of wisdom.");
+        currentSymptom.arrayReferences.add("Psalm 90:12");
+        currentSymptom.arrayVerseCards.add("TimeManagement3.png");
+
+        currentSymptom.arrayVerses.add("There is an appointed time for everything. And there is a time for every event under heaven.");
+        currentSymptom.arrayReferences.add("Ecclesiastes 3:1");
+        currentSymptom.arrayVerseCards.add("TimeManagement4.png");
+
+        currentSymptom.arrayVerses.add("Therefore be careful how you walk, not as unwise men but as wise, making the most of your time, because the days are evil.");
+        currentSymptom.arrayReferences.add("Ephesians 5:15-16");
+        currentSymptom.arrayVerseCards.add("TimeManagement5.png");
+
+        arraySymptomObjects.add(currentSymptom);
+
+        // Witnessing
+        currentSymptom = new SymptomObject();
+        currentSymptom.symptomName = "Witnessing";
+
+        currentSymptom.arrayVerses.add("Let your light shine before men in such a way that they may see your good works, and glorify your Father who is in heaven.");
+        currentSymptom.arrayReferences.add("Matthew 5:16");
+        currentSymptom.arrayVerseCards.add("Witnessing1.png");
+
+        currentSymptom.arrayVerses.add("Go therefore and make disciples of all the nations, baptizing them in the name of the Father and the Son and the Holy Spirit, teaching them to observe all that I commanded you; and lo, I am with you always, even to the end of the age");
+        currentSymptom.arrayReferences.add("Matthew 28:19-20");
+        currentSymptom.arrayVerseCards.add("Witnessing2.png");
+
+        currentSymptom.arrayVerses.add("Let your speech always be with grace,  as though seasoned with salt, so that you will know how you should respond to each person.");
+        currentSymptom.arrayReferences.add("Colossians 4:6");
+        currentSymptom.arrayVerseCards.add("Witnessing3.png");
+
+        currentSymptom.arrayVerses.add("And He said to them, “Go into all the world and preach the gospel to all creation.");
+        currentSymptom.arrayReferences.add("Mark 16:15");
+        currentSymptom.arrayVerseCards.add("Witnessing4.png");
+
+        currentSymptom.arrayVerses.add("For I am not ashamed of the gospel, for it is the power of God for salvation to everyone who believes, to the Jew first and also to the Greek.");
+        currentSymptom.arrayReferences.add("Romans 1:16");
+        currentSymptom.arrayVerseCards.add("Witnessing5.png");
+
+        arraySymptomObjects.add(currentSymptom);
+
+        // Wives love your Family
+        currentSymptom = new SymptomObject();
+        currentSymptom.symptomName = "Wives love your Family";
+
+        currentSymptom.arrayVerses.add("Wives, be subject to your own husbands, as to the Lord.");
+        currentSymptom.arrayReferences.add("Ephesians 5:22");
+        currentSymptom.arrayVerseCards.add("wivesLoveYourFamily1.png");
+
+        currentSymptom.arrayVerses.add("An excellent wife is the crown of her husband, But she who shames  him is like rottenness in his bones.");
+        currentSymptom.arrayReferences.add("Proverbs 12:4");
+        currentSymptom.arrayVerseCards.add("wivesLoveYourFamily2.png");
+
+        currentSymptom.arrayVerses.add("Wives, be subject to your husbands, as is fitting in the Lord.");
+        currentSymptom.arrayReferences.add("Colossians 3:18");
+        currentSymptom.arrayVerseCards.add("wivesLoveYourFamily3.png");
+
+        currentSymptom.arrayVerses.add("House and wealth are an inheritance from fathers, But a prudent wife is from the Lord.");
+        currentSymptom.arrayReferences.add("Proverbs 19:14");
+        currentSymptom.arrayVerseCards.add("wivesLoveYourFamily4.png");
+
+        currentSymptom.arrayVerses.add("Train up a child in the way he should go,Even when he is old he will not depart from it.");
+        currentSymptom.arrayReferences.add("Proverbs 22:6");
+        currentSymptom.arrayVerseCards.add("wivesLoveYourFamily5.png");
+
+        arraySymptomObjects.add(currentSymptom);
+
+        // Worrying
+        currentSymptom = new SymptomObject();
+        currentSymptom.symptomName = "Worrying";
+
+        currentSymptom.arrayVerses.add("And do not lean on your own understanding. In all your ways acknowledge Him, And He will make your paths straight.");
+        currentSymptom.arrayReferences.add("Proverbs 3:5-6");
+        currentSymptom.arrayVerseCards.add("Worrying1.png");
+
+        currentSymptom.arrayVerses.add("Be anxious for nothing, but in everything by prayer and supplication with thanksgiving let your requests be made known to God. And the peace of God, which surpasses all comprehension, will guard your hearts and your minds in Christ Jesus.");
+        currentSymptom.arrayReferences.add("Philippians 4:6-7");
+        currentSymptom.arrayVerseCards.add("Worrying2.png");
+
+        currentSymptom.arrayVerses.add("Come to Me, all who are weary and heavy-laden, and I will give you rest. Take My yoke upon you and learn from Me, for I am gentle and humble in heart, and you will find rest for your souls. For My yoke is easy and My burden is light.");
+        currentSymptom.arrayReferences.add("Matthew 11:28-30");
+        currentSymptom.arrayVerseCards.add("Worrying3.png");
+
+        currentSymptom.arrayVerses.add("Now may the Lord of peace Himself continually grant you peace in every circumstance. The Lord be with you all");
+        currentSymptom.arrayReferences.add("2 Thessalonians 3:16");
+        currentSymptom.arrayVerseCards.add("Worrying4.png");
+
+        currentSymptom.arrayVerses.add("Cast your burden upon the Lord and He will sustain you; He will never allow the righteous to be shaken.");
+        currentSymptom.arrayReferences.add("Psalm 55:22");
+        currentSymptom.arrayVerseCards.add("Worrying5.png");
 
         arraySymptomObjects.add(currentSymptom);
 

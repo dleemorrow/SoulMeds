@@ -7,10 +7,10 @@
 
     <header
         android:icon="@drawable/ic_edit_black_24dp"
-        android:title="@string/pref_header_change_prescriptions">
+        android:title="@string/pref_header_change_symptoms">
         <intent
             android:targetPackage="com.brendansapps.soulmeds"
-            android:targetClass="com.brendansapps.soulmeds.AlarmsActivity_Tabbed"/>
+            android:targetClass="com.brendansapps.soulmeds.SymptomsActivity"/>
 
     </header>
 
@@ -19,7 +19,7 @@
         android:title="@string/pref_header_change_alarms">
         <intent
             android:targetPackage="com.brendansapps.soulmeds"
-            android:targetClass="com.brendansapps.soulmeds.AlarmsActivity_Tabbed"/>
+            android:targetClass="com.brendansapps.soulmeds.AlarmsActivity"/>
 
     </header>
 

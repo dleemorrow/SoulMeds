@@ -1,33 +1,28 @@
 package com.brendansapps.soulmeds;
 
+import android.os.Build;
+import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.support.annotation.Nullable;
-import android.support.v4.app.Fragment;
-import android.util.Log;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
-import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.NumberPicker;
-import android.widget.Spinner;
+import android.widget.TextView;
+import android.widget.TimePicker;
+import android.widget.Toast;
 
 import java.util.ArrayList;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
-/**
- * Created by bt on 5/17/18.
- *
- * Tab Of Alarms Activity for the Symptoms - Static Version
- * Manages the user's Prescription Symptoms
- */
-
-public class AlarmsFragment_Symptoms extends Fragment {
-
+public class SymptomsActivity extends AppCompatActivity {
     /** =================================================
      * Member Variables
      * ===================================================== */
-    private static final String TAG = "AlarmsFragment_Symptoms";
-    AlarmsActivity_Tabbed theActivity;
+    private static final String TAG = "AlarmsFragment_Times";
+
+    // Prescription Info
+    private PrescriptionManager mPrescriptionManager;
+    private String symptom1, symptom2, symptom3;
 
     // Members for the Symptom Picker UI elements
     public NumberPicker mSymptomNP1, mSymptomNP2, mSymptomNP3;
@@ -37,27 +32,41 @@ public class AlarmsFragment_Symptoms extends Fragment {
     private ArrayList<String> allSymptomsListNone; // List of all possible symptoms with None option
     private ArrayList<String> userSymptomsList; // List of user's symptoms
 
-    /** =================================================
-     * Constructors
-     * ===================================================== */
-    @Nullable
     @Override
-    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState){
-        View view = inflater.inflate(R.layout.fragment_alarms_symptoms, container, false);
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_symptoms);
+
+        mPrescriptionManager = new PrescriptionManager(getApplicationContext()); // or builtin this, is this the same thing?
 
         // Connect to Activity for user Prescriptions
-        theActivity = (AlarmsActivity_Tabbed) getActivity();
-        allSymptomsList = theActivity.getAllSymptoms();
-        allSymptomsListNone = theActivity.getAllSymptoms();
-        userSymptomsList = theActivity.getUserSymptoms();
+        allSymptomsList = mPrescriptionManager.getAllSymptoms();
+        allSymptomsListNone = mPrescriptionManager.getAllSymptoms();
+        userSymptomsList = mPrescriptionManager.getUserSymptoms();
 
         // Connect to spinners in the interface
-        mSymptomNP1 = view.findViewById(R.id.symptom_picker_1);
-        mSymptomNP2 = view.findViewById(R.id.symptom_picker_2);
-        mSymptomNP3 = view.findViewById(R.id.symptom_picker_3);
+        mSymptomNP1 = findViewById(R.id.symptom_picker_1);
+        mSymptomNP2 = findViewById(R.id.symptom_picker_2);
+        mSymptomNP3 = findViewById(R.id.symptom_picker_3);
 
+        // Toolbar UI Items
+        Button cancelBtn = findViewById(R.id.alarms_btn_cancel);
+        cancelBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
+
+        Button saveBtn = findViewById(R.id.alarms_btn_save);
+        saveBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                saveSymptoms();
+                Toast.makeText(SymptomsActivity.this, "Symptoms Saved", Toast.LENGTH_SHORT).show();
+            }
+        });
         initSymptomPickers();
-        return view;
     }
 
     /** =================================================
@@ -88,7 +97,7 @@ public class AlarmsFragment_Symptoms extends Fragment {
         mSymptomNP1.setOnValueChangedListener(new NumberPicker.OnValueChangeListener(){
             @Override
             public void onValueChange(NumberPicker picker, int oldVal, int newVal) {
-                theActivity.setSymptom1(realList[newVal]);
+                symptom1 = realList[newVal];
             }
         });
 
@@ -104,7 +113,7 @@ public class AlarmsFragment_Symptoms extends Fragment {
         mSymptomNP2.setOnValueChangedListener(new NumberPicker.OnValueChangeListener(){
             @Override
             public void onValueChange(NumberPicker picker, int oldVal, int newVal) {
-                theActivity.setSymptom2(realListNone[newVal]);
+                symptom2 = realListNone[newVal];
             }
         });
 
@@ -120,8 +129,22 @@ public class AlarmsFragment_Symptoms extends Fragment {
         mSymptomNP3.setOnValueChangedListener(new NumberPicker.OnValueChangeListener(){
             @Override
             public void onValueChange(NumberPicker picker, int oldVal, int newVal) {
-                theActivity.setSymptom3(realListNone[newVal]);
+                symptom3 = realListNone[newVal];
             }
         });
+    }
+
+
+    /** =================================================
+     * Prescription Management
+     * ===================================================== */
+
+    private void saveSymptoms(){
+        if (symptom1 != null){mPrescriptionManager.editSymptom(0, symptom1);}
+        if (symptom2 != null){mPrescriptionManager.editSymptom(1, symptom2);}
+        if (symptom3 != null){mPrescriptionManager.editSymptom(2, symptom3);}
+        mPrescriptionManager.saveUserPrescriptions_Local();
+        mPrescriptionManager.saveUserPrescriptions_Firebase();
+        finish();
     }
 }
