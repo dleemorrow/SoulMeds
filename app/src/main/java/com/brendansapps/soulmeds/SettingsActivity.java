@@ -2,6 +2,7 @@ package com.brendansapps.soulmeds;
 
 import android.annotation.TargetApi;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.res.Configuration;
 import android.media.Ringtone;
@@ -16,6 +17,7 @@ import android.support.v7.app.ActionBar;
 import android.preference.PreferenceFragment;
 import android.preference.PreferenceManager;
 import android.preference.RingtonePreference;
+import android.support.v7.app.AlertDialog;
 import android.text.TextUtils;
 import android.view.MenuItem;
 import android.support.v4.app.NavUtils;
@@ -67,10 +69,29 @@ public class SettingsActivity extends AppCompatPreferenceActivity {
             finish();
         }
         if (header.id == R.id.pref_reset_data) {
-            PrescriptionManager prescriptionManager = new PrescriptionManager(getApplicationContext());
-            prescriptionManager.resetDeafults();
+            // Confirm dialog option
+            DialogInterface.OnClickListener dialogClickListener = new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    switch (which){
+                        case DialogInterface.BUTTON_POSITIVE:
+                            //Yes button clicked
+                            PrescriptionManager prescriptionManager = new PrescriptionManager(getApplicationContext());
+                            prescriptionManager.resetDeafults();
 
-            Toast.makeText(getApplicationContext(), "Prescriptions Reset", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(getApplicationContext(), "Prescriptions Reset", Toast.LENGTH_SHORT).show();
+                            break;
+
+                        case DialogInterface.BUTTON_NEGATIVE:
+                            //No button clicked
+                            break;
+                    }
+                }
+            };
+            // Options for confirm dialog option
+            AlertDialog.Builder builder = new AlertDialog.Builder(this);
+            builder.setMessage("Are you sure?").setPositiveButton("Yes", dialogClickListener)
+                    .setNegativeButton("No", dialogClickListener).show();
         }
         if (header.id == R.id.pref_about) {
             Toast.makeText(getApplicationContext(), "Option Not Yet Available", Toast.LENGTH_SHORT).show();

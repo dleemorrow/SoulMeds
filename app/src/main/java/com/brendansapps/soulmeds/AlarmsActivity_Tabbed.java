@@ -1,5 +1,7 @@
 package com.brendansapps.soulmeds;
 
+import android.content.DialogInterface;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 
 import android.support.v4.app.Fragment;
@@ -12,6 +14,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -95,8 +98,24 @@ public class AlarmsActivity_Tabbed extends AppCompatActivity {
                         mViewPager.setCurrentItem(1);
                         break;
                     case 1: // save
-                        savePrescription();
-                        break;
+                        DialogInterface.OnClickListener dialogClickListener = new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                switch (which){
+                                    case DialogInterface.BUTTON_POSITIVE:
+                                        //Yes button clicked
+                                        savePrescription();
+                                        Toast.makeText(getApplicationContext(), "Prescriptions Saved", Toast.LENGTH_SHORT).show();
+                                        break;
+                                    case DialogInterface.BUTTON_NEGATIVE:
+                                        //No button clicked
+                                        break;
+                                }
+                            }
+                        };
+                        AlertDialog.Builder builder = new AlertDialog.Builder(AlarmsActivity_Tabbed.this);
+                        builder.setMessage("Are you sure?").setPositiveButton("Yes", dialogClickListener)
+                                .setNegativeButton("No", dialogClickListener).show();
                     default:
                         break;
                 }

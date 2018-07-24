@@ -1,6 +1,8 @@
 package com.brendansapps.soulmeds;
 
+import android.content.DialogInterface;
 import android.os.Build;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -59,8 +61,27 @@ public class AlarmsActivity extends AppCompatActivity {
         saveBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                saveAlarms();
-                Toast.makeText(AlarmsActivity.this, "Alarms Saved", Toast.LENGTH_SHORT).show();
+                // Confirm dialog option
+                DialogInterface.OnClickListener dialogClickListener = new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        switch (which){
+                            case DialogInterface.BUTTON_POSITIVE:
+                                //Yes button clicked
+                                saveAlarms();
+                                Toast.makeText(AlarmsActivity.this, "Alarms Saved", Toast.LENGTH_SHORT).show();
+                                break;
+
+                            case DialogInterface.BUTTON_NEGATIVE:
+                                //No button clicked
+                                break;
+                        }
+                    }
+                };
+                // Options for confirm dialog option
+                AlertDialog.Builder builder = new AlertDialog.Builder(AlarmsActivity.this);
+                builder.setMessage("Are you sure?").setPositiveButton("Yes", dialogClickListener)
+                        .setNegativeButton("No", dialogClickListener).show();
             }
         });
     }
