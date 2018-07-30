@@ -22,6 +22,7 @@ import android.widget.Toast;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Random;
@@ -193,46 +194,62 @@ public class MedsActivity extends AppCompatActivity {
         ArrayList<Pair<String, Integer>> newListOfVerses = new ArrayList<>();
         String nextSymptom;
 
-        switch (userSymptoms.size()){
+        // generate a random list of all verses
+        ArrayList<Integer> verseList = new ArrayList<>();
+        for (int i = 0; i < 5; i++) {
+            verseList.add(i);
+        }
+
+        // remove None options
+        ArrayList<String> symptomsList = new ArrayList<String>(userSymptoms);
+        while(symptomsList.remove("None")){}
+
+        switch (symptomsList.size()){
             case 1: // 1 symptom = all associated verses
-                nextSymptom = userSymptoms.get(0);
-                for (int nextVerseIndex = 0; nextVerseIndex < mPrescriptionManager.getNumVerses(nextSymptom); nextVerseIndex++){
-                    Pair<String, Integer> nextVerse = new Pair<>(nextSymptom, nextVerseIndex);
-                    newListOfVerses.add(nextVerse);
+                nextSymptom = symptomsList.get(0);
+                for (int nextVerse = 0; nextVerse < 5; nextVerse++){
+                    Pair<String, Integer> verse = new Pair<>(nextSymptom, verseList.get(nextVerse));
+                    newListOfVerses.add(verse);
                 }
                 break;
             case 2: // 2 symptoms = 3 associated verses from each
-                // Use first 3 verses for the first symptom
-                nextSymptom = userSymptoms.get(0);
-                for (int nextVerseIndex = 0; nextVerseIndex < 3; nextVerseIndex++){
-                    Pair<String, Integer> nextVerse = new Pair<>(nextSymptom, nextVerseIndex);
-                    newListOfVerses.add(nextVerse);
+                // Use first 3 verses of random list for the first symptom
+                Collections.shuffle(verseList);
+                nextSymptom = symptomsList.get(0);
+                for (int nextVerse = 0; nextVerse < 3; nextVerse++){
+                    //pick random verse of remaining verses
+                    Pair<String, Integer> verse = new Pair<>(nextSymptom, verseList.get(nextVerse));
+                    newListOfVerses.add(verse);
                 }
-                // Use first 3 verses for the second symptom
-                nextSymptom = userSymptoms.get(1);
-                for (int nextVerseIndex = 0; nextVerseIndex < 3; nextVerseIndex++){
-                    Pair<String, Integer> nextVerse = new Pair<>(nextSymptom, nextVerseIndex);
-                    newListOfVerses.add(nextVerse);
+                // Use remaining 3 verses for the second symptom
+                Collections.shuffle(verseList);
+                nextSymptom = symptomsList.get(1);
+                for (int nextVerse = 0; nextVerse < 3; nextVerse++){
+                    Pair<String, Integer> verse = new Pair<>(nextSymptom, verseList.get(nextVerse));
+                    newListOfVerses.add(verse);
                 }
                 break;
             case 3: // 3 symptoms = 2 associated verses from each
                 // Use first 2 verses for the first symptom
-                nextSymptom = userSymptoms.get(0);
-                for (int nextVerseIndex = 0; nextVerseIndex < 2; nextVerseIndex++){
-                    Pair<String, Integer> nextVerse = new Pair<>(nextSymptom, nextVerseIndex);
-                    newListOfVerses.add(nextVerse);
+                Collections.shuffle(verseList);
+                nextSymptom = symptomsList.get(0);
+                for (int nextVerse = 0; nextVerse < 2; nextVerse++){
+                    Pair<String, Integer> verse = new Pair<>(nextSymptom, verseList.get(nextVerse));
+                    newListOfVerses.add(verse);
                 }
-                // Use first 2 verses for the second symptom
-                nextSymptom = userSymptoms.get(1);
-                for (int nextVerseIndex = 0; nextVerseIndex < 2; nextVerseIndex++){
-                    Pair<String, Integer> nextVerse = new Pair<>(nextSymptom, nextVerseIndex);
-                    newListOfVerses.add(nextVerse);
+                // Use next 2 verses for the second symptom
+                Collections.shuffle(verseList);
+                nextSymptom = symptomsList.get(1);
+                for (int nextVerse = 0; nextVerse < 2; nextVerse++){
+                    Pair<String, Integer> verse = new Pair<>(nextSymptom, verseList.get(nextVerse));
+                    newListOfVerses.add(verse);
                 }
-                // Use first 2 verses for the third symptom
-                nextSymptom = userSymptoms.get(2);
-                for (int nextVerseIndex = 0; nextVerseIndex < 2; nextVerseIndex++){
-                    Pair<String, Integer> nextVerse = new Pair<>(nextSymptom, nextVerseIndex);
-                    newListOfVerses.add(nextVerse);
+                // Use final 2 verses for the third symptom
+                Collections.shuffle(verseList);
+                nextSymptom = symptomsList.get(2);
+                for (int nextVerse = 0; nextVerse < 2; nextVerse++){
+                    Pair<String, Integer> verse = new Pair<>(nextSymptom, verseList.get(nextVerse));
+                    newListOfVerses.add(verse);
                 }
                 break;
             default:
