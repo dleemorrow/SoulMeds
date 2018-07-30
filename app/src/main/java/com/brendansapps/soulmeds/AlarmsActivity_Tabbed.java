@@ -1,6 +1,7 @@
 package com.brendansapps.soulmeds;
 
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 
@@ -136,6 +137,9 @@ public class AlarmsActivity_Tabbed extends AppCompatActivity {
         if (time3 != null){mPrescriptionManager.editTime(2, time3);}
         mPrescriptionManager.saveUserPrescriptions_Local();
         mPrescriptionManager.saveUserPrescriptions_Firebase();
+        Intent intent = new Intent(AlarmsActivity_Tabbed.this, MedsActivity.class);
+        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        startActivity(intent);
         finish();
     }
 
