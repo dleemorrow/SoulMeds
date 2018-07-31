@@ -1,6 +1,8 @@
 package com.brendansapps.soulmeds;
 
+import android.content.Context;
 import android.content.DialogInterface;
+import android.media.AudioManager;
 import android.os.Build;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
@@ -8,6 +10,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.NumberPicker;
+import android.widget.SeekBar;
 import android.widget.TextView;
 import android.widget.TimePicker;
 import android.widget.Toast;
@@ -21,6 +24,9 @@ public class AlarmsActivity extends AppCompatActivity {
      * Member Variables
      * ===================================================== */
     private static final String TAG = "AlarmsFragment_Times";
+
+    // volume controls
+    private AudioManager audioManager = null;
 
     // Prescription Info
     private PrescriptionManager mPrescriptionManager;
@@ -38,6 +44,8 @@ public class AlarmsActivity extends AppCompatActivity {
         setContentView(R.layout.activity_alarms);
 
         mPrescriptionManager = new PrescriptionManager(getApplicationContext()); // or builtin this, is this the same thing?
+
+        // setVolumeControlStream(AudioManager.STREAM_ALARM); to allow volume buttons to control alarm volume
 
         // Connect to Activity for user Prescriptions
         userTimesList = mPrescriptionManager.getUserTimes();
@@ -84,6 +92,8 @@ public class AlarmsActivity extends AppCompatActivity {
                         .setNegativeButton("No", dialogClickListener).show();
             }
         });
+
+        initControls();
     }
 
     /** =================================================
@@ -175,6 +185,45 @@ public class AlarmsActivity extends AppCompatActivity {
                 time3 = getTimeInAMPM(hourOfDay, minute);
             }
         });
+    }
+
+    // https://stackoverflow.com/questions/10134338/using-seekbar-to-control-volume-in-android
+    // https://stackoverflow.com/questions/7459228/create-slider-to-change-android-volume
+    // https://stackoverflow.com/questions/40657472/change-volume-of-an-alarm
+
+    private void initControls()
+    {
+        try
+        {
+            SeekBar volumeSeekbar = (SeekBar)findViewById(R.id.seek_bar);
+            audioManager = (AudioManager) getSystemService(Context.AUDIO_SERVICE);
+            volumeSeekbar.setMax(audioManager.getStreamMaxVolume(AudioManager.STREAM_ALARM));
+            volumeSeekbar.setProgress(audioManager.getStreamVolume(AudioManager.STREAM_ALARM));
+
+            volumeSeekbar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener()
+            {
+                @Override
+                public void onStopTrackingTouch(SeekBar arg0)
+                {
+                }
+
+                @Override
+                public void onStartTrackingTouch(SeekBar arg0)
+                {
+                }
+
+                @Override
+                public void onProgressChanged(SeekBar arg0, int progress, boolean arg2)
+                {
+                    audioManager.setStreamVolume(AudioManager.STREAM_ALARM,
+                            progress, 0);
+                }
+            });
+        }
+        catch (Exception e)
+        {
+            e.printStackTrace();
+        }
     }
 
     // Returns a String representing the time in AM|PM format

@@ -1,6 +1,8 @@
 package com.brendansapps.soulmeds;
 
 import android.app.TimePickerDialog;
+import android.content.Context;
+import android.media.AudioManager;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -10,6 +12,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.SeekBar;
 import android.widget.TextView;
 import android.widget.TimePicker;
 
@@ -33,6 +36,9 @@ public class AlarmsFragment_Times extends Fragment {
     private static final String TAG = "AlarmsFragment_Times";
 
     AlarmsActivity_Tabbed theActivity;
+
+    // volume controls
+    private AudioManager audioManager = null;
 
     // Members for the TimePickers
     private TimePicker mTP1, mTP2, mTP3;
@@ -140,6 +146,41 @@ public class AlarmsFragment_Times extends Fragment {
 //                Log.d(TAG, "Set Time 3 to " + getTimeInAMPM(hourOfDay, minute));
             }
         });
+    }
+
+    private void initControls()
+    {
+        try
+        {
+            SeekBar volumeSeekbar = (SeekBar) getView().findViewById(R.id.seek_bar);
+            audioManager = (AudioManager) getActivity().getSystemService(Context.AUDIO_SERVICE);
+            volumeSeekbar.setMax(audioManager.getStreamMaxVolume(AudioManager.STREAM_ALARM));
+            volumeSeekbar.setProgress(audioManager.getStreamVolume(AudioManager.STREAM_ALARM));
+
+            volumeSeekbar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener()
+            {
+                @Override
+                public void onStopTrackingTouch(SeekBar arg0)
+                {
+                }
+
+                @Override
+                public void onStartTrackingTouch(SeekBar arg0)
+                {
+                }
+
+                @Override
+                public void onProgressChanged(SeekBar arg0, int progress, boolean arg2)
+                {
+                    audioManager.setStreamVolume(AudioManager.STREAM_ALARM,
+                            progress, 0);
+                }
+            });
+        }
+        catch (Exception e)
+        {
+            e.printStackTrace();
+        }
     }
 
     // Returns a String representing the time in AM|PM format

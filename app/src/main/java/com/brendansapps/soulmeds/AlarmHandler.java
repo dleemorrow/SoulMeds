@@ -50,7 +50,7 @@ public class AlarmHandler extends BroadcastReceiver {
         PendingIntent pendingIntent = PendingIntent.getActivity(mContext, 0, intent, 0);
 
         // Setup Ringtone & Vibrate
-        Uri alarmSound = Settings.System.DEFAULT_RINGTONE_URI; //was the commented line below
+        Uri alarmSound = Settings.System.DEFAULT_ALARM_ALERT_URI; //was the commented line below
         // Uri alarmSound = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
         long[] vibratePattern = { 0, 100, 200, 300 };
 
@@ -64,7 +64,7 @@ public class AlarmHandler extends BroadcastReceiver {
                 .setCategory(NotificationCompat.CATEGORY_CALL) // was reminder
                 .setVisibility(NotificationCompat.VISIBILITY_PUBLIC)
                 .setContentIntent(pendingIntent)
-                .setSound(alarmSound, AudioManager.STREAM_RING) // was notification
+                .setSound(alarmSound, AudioManager.STREAM_ALARM) // was notification / was STREAM_RING
                 .setVibrate(vibratePattern)
                 .setOnlyAlertOnce(true)
                 .setAutoCancel(true);
