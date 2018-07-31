@@ -25,9 +25,6 @@ public class AlarmsActivity extends AppCompatActivity {
      * ===================================================== */
     private static final String TAG = "AlarmsFragment_Times";
 
-    // volume controls
-    private AudioManager audioManager = null;
-
     // Prescription Info
     private PrescriptionManager mPrescriptionManager;
     private String time1, time2, time3;
@@ -37,6 +34,10 @@ public class AlarmsActivity extends AppCompatActivity {
 
     // Members for the Symptom Data
     private ArrayList<String> userTimesList;
+
+    // Members for the volume controls
+    private AudioManager audioManager = null;
+    private SeekBar volumeSeekbar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -55,6 +56,10 @@ public class AlarmsActivity extends AppCompatActivity {
         mTP2 = findViewById(R.id.tp_clock_2);
         mTP3 = findViewById(R.id.tp_clock_3);
         initTimePickers();
+
+        // Connect SeekerBar to the interface
+        volumeSeekbar = findViewById(R.id.seek_bar);
+        initControls();
 
         // Toolbar UI Items
         Button cancelBtn = findViewById(R.id.alarms_btn_cancel);
@@ -92,8 +97,6 @@ public class AlarmsActivity extends AppCompatActivity {
                         .setNegativeButton("No", dialogClickListener).show();
             }
         });
-
-        initControls();
     }
 
     /** =================================================
@@ -195,7 +198,6 @@ public class AlarmsActivity extends AppCompatActivity {
     {
         try
         {
-            SeekBar volumeSeekbar = (SeekBar)findViewById(R.id.seek_bar);
             audioManager = (AudioManager) getSystemService(Context.AUDIO_SERVICE);
             volumeSeekbar.setMax(audioManager.getStreamMaxVolume(AudioManager.STREAM_ALARM));
             volumeSeekbar.setProgress(audioManager.getStreamVolume(AudioManager.STREAM_ALARM));

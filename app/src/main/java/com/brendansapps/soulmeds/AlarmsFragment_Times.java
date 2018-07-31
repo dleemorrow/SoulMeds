@@ -37,14 +37,15 @@ public class AlarmsFragment_Times extends Fragment {
 
     AlarmsActivity_Tabbed theActivity;
 
-    // volume controls
-    private AudioManager audioManager = null;
-
     // Members for the TimePickers
     private TimePicker mTP1, mTP2, mTP3;
 
     // Members for the Symptom Data
     private ArrayList<String> userTimesList;
+
+    // Members for the volume controls
+    private AudioManager audioManager;
+    private SeekBar volumeSeekbar;
 
     /** =================================================
      * Constructors
@@ -58,11 +59,17 @@ public class AlarmsFragment_Times extends Fragment {
         theActivity = (AlarmsActivity_Tabbed) getActivity();
         userTimesList = theActivity.getUserTimes();
 
+        getActivity().setVolumeControlStream(AudioManager.STREAM_ALARM);
+
         // Connect to spinners in the interface
         mTP1 = view.findViewById(R.id.tp_clock_1);
         mTP2 = view.findViewById(R.id.tp_clock_2);
         mTP3 = view.findViewById(R.id.tp_clock_3);
         initTimePickers();
+
+        // Connect SeekerBar to the interface
+        volumeSeekbar = view.findViewById(R.id.seek_bar);
+        initControls();
 
         return view;
     }
@@ -152,7 +159,6 @@ public class AlarmsFragment_Times extends Fragment {
     {
         try
         {
-            SeekBar volumeSeekbar = (SeekBar) getView().findViewById(R.id.seek_bar);
             audioManager = (AudioManager) getActivity().getSystemService(Context.AUDIO_SERVICE);
             volumeSeekbar.setMax(audioManager.getStreamMaxVolume(AudioManager.STREAM_ALARM));
             volumeSeekbar.setProgress(audioManager.getStreamVolume(AudioManager.STREAM_ALARM));
