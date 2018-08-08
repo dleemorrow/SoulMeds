@@ -12,7 +12,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="80dp"
         android:layout_marginStart="16dp"
-        android:text="Symptom 1"
+        android:text="@string/symptom_1"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@id/symptom_picker_1" />
 
@@ -31,7 +31,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:layout_marginTop="80dp"
-        android:text="Symptom 2"
+        android:text="@string/symptom_2"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@id/symptom_picker_2" />
 
@@ -50,7 +50,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:layout_marginTop="50dp"
-        android:text="Symptom 3"
+        android:text="@string/symptom_3"
         app:layout_constraintTop_toTopOf="@id/symptom_picker_3"
         app:layout_constraintStart_toStartOf="parent" />
 

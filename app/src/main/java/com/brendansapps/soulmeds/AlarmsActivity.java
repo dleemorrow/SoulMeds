@@ -32,7 +32,7 @@ public class AlarmsActivity extends AppCompatActivity {
     // Members for the TimePickers
     private TimePicker mTP1, mTP2, mTP3;
 
-    // Members for the Symptom Data
+    // Members for the Alarm Data
     private ArrayList<String> userTimesList;
 
     // Members for the volume controls

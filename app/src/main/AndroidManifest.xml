@@ -41,6 +41,11 @@
         <activity
             android:name=".LoginActivity"
             android:label="@string/title_activity_login" />
+
+        <meta-data
+            android:name="android.support.PARENT_ACTIVITY"
+            android:value="com.brendansapps.soulmeds.MainActivity" />
+
         <activity
             android:name=".LoginActivity_Register"
             android:label="@string/title_activity_login_register" />
@@ -65,10 +70,19 @@
         </activity>
         <activity
             android:name=".AlarmsActivity"
-            android:theme="@style/AppTheme.NoActionBar"/>
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".SymptomsActivity"
-            android:theme="@style/AppTheme.NoActionBar"/>
+            android:theme="@style/AppTheme.NoActionBar" />
+
+        <receiver
+            android:name=".BootReceiver"
+            android:enabled="true"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.BOOT_COMPLETED" />
+            </intent-filter>
+        </receiver>
     </application>
 
 </manifest>

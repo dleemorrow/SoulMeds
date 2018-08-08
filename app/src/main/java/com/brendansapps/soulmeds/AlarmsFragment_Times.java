@@ -59,7 +59,7 @@ public class AlarmsFragment_Times extends Fragment {
         theActivity = (AlarmsActivity_Tabbed) getActivity();
         userTimesList = theActivity.getUserTimes();
 
-        getActivity().setVolumeControlStream(AudioManager.STREAM_ALARM);
+        // getActivity().setVolumeControlStream(AudioManager.STREAM_ALARM);
 
         // Connect to spinners in the interface
         mTP1 = view.findViewById(R.id.tp_clock_1);

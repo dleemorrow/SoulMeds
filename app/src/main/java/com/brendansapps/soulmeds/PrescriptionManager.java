@@ -184,6 +184,12 @@ public class PrescriptionManager {
         setAlarm(getTimeInMillis(userTimesList.get(index).name), userTimesList.get(index).alarmID);
     }
 
+    public void resetAlarms(){
+        for(int alarmNum = 0; alarmNum < userTimesList.size(); alarmNum++){
+            setAlarm(getTimeInMillis(userTimesList.get(alarmNum).name), userTimesList.get(alarmNum).alarmID);
+        }
+    }
+
 //    public void addSymptom(String name){
 //        Log.d(TAG, "Adding Symptom " + name);
 //        PrescriptionDataObject newSymptom = new PrescriptionDataObject();

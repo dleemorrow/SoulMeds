@@ -20,7 +20,7 @@
     <string name="cancel_btn">Cancel</string>
     <string name="save_btn">Save</string>
     <string name="done_btn">Done</string>
-    <string name="title_activity_emergency">Pick a symptom</string>
+    <string name="title_activity_emergency">Set Symptoms</string>
 
     <!-- ======================================================== -->
     <!-- login & registration -->
@@ -159,5 +159,7 @@
     <string name="symptom_3">Symptom 3</string>
     <string name="alarm_volume">Alarm Volume</string>
     <string name="pick_a_symptom">Pick a Symptom</string>
+    <string name="set_symptoms">Set Symptoms</string>
+
 
 </resources>
