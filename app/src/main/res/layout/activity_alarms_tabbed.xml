@@ -51,7 +51,7 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     android:layout_marginTop="16dp"
-                    android:text="@string/pick_a_symptom"
+                    android:text="@string/choose_symptoms"
                     android:textAlignment="center"
                     android:textAppearance="@style/TextAppearance.AppCompat.Title"
                     app:layout_constraintEnd_toStartOf="parent"

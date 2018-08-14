@@ -1,5 +1,6 @@
 package com.brendansapps.soulmeds;
 
+import android.annotation.SuppressLint;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.support.v7.app.AlertDialog;
@@ -172,12 +173,12 @@ public class AlarmsActivity_Tabbed extends AppCompatActivity {
             public void onPageSelected(int position) {
                 switch (position){
                     case 0:
-                        pageTitle.setText(R.string.title_alarms_symptoms);
+                        pageTitle.setText(R.string.choose_symptoms);
                         mBackBtn.setText(R.string.cancel_btn);
                         mNextBtn.setText(R.string.next_btn);
                         break;
                     case 1:
-                        pageTitle.setText(R.string.title_alarms_times);
+                        pageTitle.setText(R.string.choose_alarms);
                         mBackBtn.setText(R.string.back_btn);
                         mNextBtn.setText(R.string.save_btn);
                         break;

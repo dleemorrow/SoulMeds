@@ -33,7 +33,9 @@ public class AlarmHandler extends BroadcastReceiver {
     private static final String notificationMessage = "An alarm has gone off";
     private static final int NOTIFICATION_ID = 6578;
 
+    // Prescription Info
     private Context mContext;
+    private PrescriptionManager mPrescriptionManager;
 
     @Override
     public void onReceive(Context context, Intent intent) {
@@ -41,6 +43,9 @@ public class AlarmHandler extends BroadcastReceiver {
         mContext = context;
 
         showNotification();
+
+        mPrescriptionManager = new PrescriptionManager(mContext);
+        mPrescriptionManager.setNextAlarms();
     }
 
     private void showNotification(){

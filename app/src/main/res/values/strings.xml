@@ -158,8 +158,9 @@
     <string name="symptom_2">Symptom 2</string>
     <string name="symptom_3">Symptom 3</string>
     <string name="alarm_volume">Alarm Volume</string>
-    <string name="pick_a_symptom">Pick a Symptom</string>
     <string name="set_symptoms">Set Symptoms</string>
+    <string name="choose_symptoms">Choose Symptoms</string>
+    <string name="choose_alarms">Choose Alarms</string>
 
 
 </resources>

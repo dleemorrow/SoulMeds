@@ -12,10 +12,8 @@ import java.util.ArrayList;
 
 public class BootReceiver extends BroadcastReceiver {
 
-    //rebuild from prescription manager / other apps? maybe some private fields not necessary
-    private Context mContext;
-
     // Prescription Info
+    private Context mContext;
     private PrescriptionManager mPrescriptionManager;
 
     @Override

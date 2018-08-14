@@ -56,6 +56,7 @@ public class PrescriptionManager {
     private static SharedPreferences.Editor prescriptionSPEditor;
     private Context mContext;
     private static AlarmManager mAlarmManager;
+    private static final long MILLIS_IN_DAY = 86400000;
 
     // Symptom Data
     private static ArrayList<String> allSymptomsList;
@@ -187,6 +188,12 @@ public class PrescriptionManager {
     public void resetAlarms(){
         for(int alarmNum = 0; alarmNum < userTimesList.size(); alarmNum++){
             setAlarm(getTimeInMillis(userTimesList.get(alarmNum).name), userTimesList.get(alarmNum).alarmID);
+        }
+    }
+
+    public void setNextAlarms(){
+        for(int alarmNum = 0; alarmNum < userTimesList.size(); alarmNum++){
+            setAlarm(getTimeInMillis(userTimesList.get(alarmNum).name) + MILLIS_IN_DAY, userTimesList.get(alarmNum).alarmID);
         }
     }
 
@@ -493,7 +500,8 @@ public class PrescriptionManager {
     private void setAlarm(long timeInMillis, int alarmID){
         Intent intent = new Intent(mContext, AlarmHandler.class);
         PendingIntent pendingIntent = PendingIntent.getBroadcast(mContext, alarmID, intent, 0);
-        mAlarmManager.setRepeating(AlarmManager.RTC_WAKEUP, timeInMillis, AlarmManager.INTERVAL_DAY, pendingIntent);
+        // should be set exact???
+        mAlarmManager.setExact(AlarmManager.RTC_WAKEUP, timeInMillis, pendingIntent);
         Log.d(TAG, "Set alarm for " + timeInMillis + " millis");
         printAlarms();
     }

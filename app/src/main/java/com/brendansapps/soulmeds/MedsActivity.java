@@ -144,14 +144,15 @@ public class MedsActivity extends AppCompatActivity {
         mSymptomTV.setText(symptom);
         mVerseTV.setText(mPrescriptionManager.getVerse(symptom, verseIndex));
         mReferenceTV.setText(mPrescriptionManager.getReference(symptom, verseIndex));
+        mDoneButton.setVisibility(View.VISIBLE);
 
         // Manage Next & Done button visibility
         if (currentVerseIndex == currentVersesList.size() - 1){
-            mDoneButton.setVisibility(View.VISIBLE);
+            // mDoneButton.setVisibility(View.VISIBLE);
             mNextButton.setVisibility(View.INVISIBLE);
         }
         else {
-            mDoneButton.setVisibility(View.INVISIBLE);
+            // mDoneButton.setVisibility(View.INVISIBLE);
             mNextButton.setVisibility(View.VISIBLE);
 
             // Manage Back button visibility
