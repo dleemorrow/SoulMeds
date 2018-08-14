@@ -64,7 +64,16 @@ public class AlarmsActivity_Tabbed extends AppCompatActivity {
         mViewPager = findViewById(R.id.container);
         setupViewPager(mViewPager);
 
-        initButtonListeners();
+        // if user has set a custom prescription
+        if(mPrescriptionManager.getPrescriptionState()){
+            Intent intent = new Intent(AlarmsActivity_Tabbed.this, MedsActivity.class);
+            intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+            startActivity(intent);
+            finish();
+        }
+        else {
+            initButtonListeners();
+        }
 
     }
 

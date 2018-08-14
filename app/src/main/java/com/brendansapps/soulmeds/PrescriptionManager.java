@@ -65,6 +65,9 @@ public class PrescriptionManager {
     // Alarm Times Data
     private static ArrayList<PrescriptionDataObject> userTimesList;
 
+    // User Data
+    private boolean prescriptionState;
+
     // Firebase Database
     DatabaseReference mFirebasePrescriptionDataReference;
 
@@ -80,7 +83,7 @@ public class PrescriptionManager {
         symptomDataManager = new DataManager();
         allSymptomsList = symptomDataManager.getSymptomsList();
         prescriptionSP = mContext.getSharedPreferences("Prescriptions", MODE_PRIVATE);
-        prescriptionSPEditor = prescriptionSP.edit();
+        // prescriptionSPEditor = prescriptionSP.edit();
 
         // Connect to Firebase
         FirebaseDatabase database = FirebaseDatabase.getInstance();
@@ -149,6 +152,10 @@ public class PrescriptionManager {
     // Returns the Reference for the Verse for that symptom at that index
     public String getReference(String symptom, int index){
         return symptomDataManager.getVerseReference(symptom, index);
+    }
+
+    public boolean getPrescriptionState(){
+        return prescriptionState;
     }
 
     public void printTimes(){
@@ -257,6 +264,7 @@ public class PrescriptionManager {
     public void saveUserPrescriptions_Local(){
         saveUserSymptoms();
         saveUserTimes();
+        savePrescriptionState(true);
     }
 
     // Saves the user's Symptoms to the Shared Preference
@@ -289,6 +297,13 @@ public class PrescriptionManager {
         prescriptionSPEditor.apply();
     }
 
+    private void savePrescriptionState(boolean state){
+        prescriptionState = state;
+        prescriptionSPEditor = prescriptionSP.edit();
+        prescriptionSPEditor.putBoolean("prescription", prescriptionState);
+        prescriptionSPEditor.apply();
+    }
+
     private void loadUserPrescriptions_Firebase(){
         FirebaseAuth mFirebaseAuth = FirebaseAuth.getInstance();
         String userID = mFirebaseAuth.getCurrentUser().getUid();
@@ -315,6 +330,8 @@ public class PrescriptionManager {
 //        String compressedSymptomsString = prescriptionSP.getString("symptomsList_Active", "");
         String compressedTimesString = prescriptionSP.getString("timesList", "");
 //        String compressedTimesString = prescriptionSP.getString("timesList_Active", "");
+
+        prescriptionState = prescriptionSP.getBoolean("prescription", false); // second param is value to return if prescription DNE
 
         // Parse Loaded data into userSymptomsList
         ArrayList<String> listOfUserSymptoms = new ArrayList<>(Arrays.asList(compressedSymptomsString.split(",")));
@@ -430,6 +447,7 @@ public class PrescriptionManager {
         // Save First Prescription
         saveUserSymptoms();
         saveUserTimes();
+        savePrescriptionState(false); // with default configuration users still experience setting their own custom symptoms
 
         // Mark as having visited
         prescriptionSPEditor.putBoolean("firstTimeVisiting", false);
