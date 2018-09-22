@@ -5,6 +5,7 @@ import android.app.PendingIntent;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
 import android.media.AudioManager;
 import android.media.MediaPlayer;
 import android.media.RingtoneManager;
@@ -55,9 +56,7 @@ public class AlarmHandler extends BroadcastReceiver {
         PendingIntent pendingIntent = PendingIntent.getActivity(mContext, 0, intent, 0);
 
         // Setup Ringtone & Vibrate
-        Uri alarmSound = Settings.System.DEFAULT_ALARM_ALERT_URI; //was the commented line below
-        // Uri alarmSound = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
-        long[] vibratePattern = { 0, 100, 200, 300 };
+        Uri alarmSound = Settings.System.DEFAULT_NOTIFICATION_URI;
 
         // Setup Notification
         String channelID = mContext.getResources().getString(R.string.channel_id_alarms);
@@ -66,13 +65,13 @@ public class AlarmHandler extends BroadcastReceiver {
                 .setContentTitle(notificationTitle)
                 .setSmallIcon(R.mipmap.ic_launcher_round)
                 .setPriority(NotificationCompat.PRIORITY_DEFAULT)
-                .setCategory(NotificationCompat.CATEGORY_CALL) // was reminder
+                .setCategory(NotificationCompat.CATEGORY_REMINDER)
                 .setVisibility(NotificationCompat.VISIBILITY_PUBLIC)
                 .setContentIntent(pendingIntent)
-                .setSound(alarmSound, AudioManager.STREAM_ALARM) // was notification / was STREAM_RING
-                .setVibrate(vibratePattern)
+                .setSound(alarmSound, AudioManager.STREAM_NOTIFICATION)
                 .setOnlyAlertOnce(true)
-                .setAutoCancel(true);
+                .setAutoCancel(true)
+                .setLights(Color.YELLOW, 3000, 3000);
 
         // Send Notification
         NotificationManager manager = (NotificationManager) mContext.getSystemService(NOTIFICATION_SERVICE);
