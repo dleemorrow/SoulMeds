@@ -26,7 +26,6 @@ public class BootReceiver extends BroadcastReceiver {
             // set repeating alarm
             mContext = context;
             mPrescriptionManager.resetAlarms();
-//            temp.set(context);
         }
     }
 }

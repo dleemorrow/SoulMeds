@@ -14,7 +14,6 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
-import com.google.firebase.iid.FirebaseInstanceId;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -518,8 +517,7 @@ public class PrescriptionManager {
     private void setAlarm(long timeInMillis, int alarmID){
         Intent intent = new Intent(mContext, AlarmHandler.class);
         PendingIntent pendingIntent = PendingIntent.getBroadcast(mContext, alarmID, intent, 0);
-        // should be set exact???
-        mAlarmManager.setExact(AlarmManager.RTC_WAKEUP, timeInMillis, pendingIntent);
+        mAlarmManager.setExactAndAllowWhileIdle(AlarmManager.RTC_WAKEUP, timeInMillis, pendingIntent);
         Log.d(TAG, "Set alarm for " + timeInMillis + " millis");
         printAlarms();
     }
