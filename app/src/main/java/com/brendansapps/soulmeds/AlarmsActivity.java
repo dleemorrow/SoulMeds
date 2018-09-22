@@ -35,10 +35,6 @@ public class AlarmsActivity extends AppCompatActivity {
     // Members for the Alarm Data
     private ArrayList<String> userTimesList;
 
-    // Members for the volume controls
-    private AudioManager audioManager = null;
-    private SeekBar volumeSeekbar;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -56,10 +52,6 @@ public class AlarmsActivity extends AppCompatActivity {
         mTP2 = findViewById(R.id.tp_clock_2);
         mTP3 = findViewById(R.id.tp_clock_3);
         initTimePickers();
-
-        // Connect SeekerBar to the interface
-        volumeSeekbar = findViewById(R.id.seek_bar);
-        initControls();
 
         // Toolbar UI Items
         Button cancelBtn = findViewById(R.id.alarms_btn_cancel);
@@ -188,44 +180,6 @@ public class AlarmsActivity extends AppCompatActivity {
                 time3 = getTimeInAMPM(hourOfDay, minute);
             }
         });
-    }
-
-    // https://stackoverflow.com/questions/10134338/using-seekbar-to-control-volume-in-android
-    // https://stackoverflow.com/questions/7459228/create-slider-to-change-android-volume
-    // https://stackoverflow.com/questions/40657472/change-volume-of-an-alarm
-
-    private void initControls()
-    {
-        try
-        {
-            audioManager = (AudioManager) getSystemService(Context.AUDIO_SERVICE);
-            volumeSeekbar.setMax(audioManager.getStreamMaxVolume(AudioManager.STREAM_ALARM));
-            volumeSeekbar.setProgress(audioManager.getStreamVolume(AudioManager.STREAM_ALARM));
-
-            volumeSeekbar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener()
-            {
-                @Override
-                public void onStopTrackingTouch(SeekBar arg0)
-                {
-                }
-
-                @Override
-                public void onStartTrackingTouch(SeekBar arg0)
-                {
-                }
-
-                @Override
-                public void onProgressChanged(SeekBar arg0, int progress, boolean arg2)
-                {
-                    audioManager.setStreamVolume(AudioManager.STREAM_ALARM,
-                            progress, 0);
-                }
-            });
-        }
-        catch (Exception e)
-        {
-            e.printStackTrace();
-        }
     }
 
     // Returns a String representing the time in AM|PM format
