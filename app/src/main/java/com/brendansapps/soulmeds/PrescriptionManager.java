@@ -203,46 +203,6 @@ public class PrescriptionManager {
         }
     }
 
-//    public void addSymptom(String name){
-//        Log.d(TAG, "Adding Symptom " + name);
-//        PrescriptionDataObject newSymptom = new PrescriptionDataObject();
-//        newSymptom.name = name;
-//        newSymptom.isActive = true;
-//        userSymptomsList.add(newSymptom);
-//
-//        saveUserSymptoms();
-//    }
-
-//    public void addTime(String time){
-//        Log.d(TAG, "Adding Time " + time);
-//        PrescriptionDataObject newTime = new PrescriptionDataObject();
-//        newTime.name = time;
-//        newTime.isActive = true;
-//        newTime.alarmID = getAlarmID(newTime.name);
-//        userTimesList.add(newTime);
-//        saveUserTimes();
-//        // printTimes();
-//
-//        // Add Alarm
-//        setAlarm(getTimeInMillis(newTime.name), newTime.alarmID);
-//    }
-
-//    public void deleteSymptom(int index){
-//        Log.d(TAG, "Deleting Symptom " + userSymptomsList.get(index).name);
-//        userSymptomsList.remove(index);
-//
-//        saveUserSymptoms();
-//    }
-
-//    public void deleteTime(int index){
-//        Log.d(TAG, "Deleting Time " + userTimesList.get(index).name);
-//        deleteAlarm(userTimesList.get(index).alarmID);
-//        userTimesList.remove(index);
-//
-//        saveUserTimes();
-//        // printTimes();
-//    }
-
     /** =================================================
      * Save and Load User's Prescriptions
      * ===================================================== */

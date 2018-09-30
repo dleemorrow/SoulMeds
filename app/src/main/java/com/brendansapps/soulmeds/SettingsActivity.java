@@ -93,9 +93,6 @@ public class SettingsActivity extends AppCompatPreferenceActivity {
             builder.setMessage("Are you sure?").setPositiveButton("Yes", dialogClickListener)
                     .setNegativeButton("No", dialogClickListener).show();
         }
-        if (header.id == R.id.pref_about) {
-            Toast.makeText(getApplicationContext(), "Option Not Yet Available", Toast.LENGTH_SHORT).show();
-        }
         if (header.id == R.id.pref_email_support) {
             Toast.makeText(getApplicationContext(), "Option Not Yet Available", Toast.LENGTH_SHORT).show();
         }

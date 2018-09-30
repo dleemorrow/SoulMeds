@@ -255,12 +255,12 @@ public class AlarmsActivity_Tabbed extends AppCompatActivity {
         private final List<Fragment> mFragmentList = new ArrayList<>();
 
         // Constructor
-        public SectionsPagerAdapter(FragmentManager fm) {
+        private SectionsPagerAdapter(FragmentManager fm) {
             super(fm);
         }
 
         // Add the fragments to the mFragmentList
-        public void addFragment(Fragment fragment){
+        private void addFragment(Fragment fragment){
             mFragmentList.add(fragment);
         }
 

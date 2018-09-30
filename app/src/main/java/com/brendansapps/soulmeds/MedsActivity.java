@@ -311,14 +311,9 @@ public class MedsActivity extends AppCompatActivity {
     // This version is just a copy of the Twitter version below
     private void shareToFacebook(){
         try {
-            // Prepare Image
-//            String filename = "twitter_image.jpg";
-//            File imageFile = new File(Environment.getExternalStorageDirectory(), filename);
-
             // Prepare Intent
             Intent shareIntent = new Intent(Intent.ACTION_SEND);
             shareIntent.putExtra(Intent.EXTRA_TEXT, getString(R.string.share_text));
-//            shareIntent.putExtra(Intent.EXTRA_STREAM, Uri.fromFile(imageFile)); // add image to intent
             shareIntent.setType("image/jpeg");
             shareIntent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
 
@@ -347,18 +342,12 @@ public class MedsActivity extends AppCompatActivity {
     // https://stackoverflow.com/questions/19120036/add-image-to-twitter-share-intent-android
     private void shareToTwitter(){
         try {
-            // Prepare Image
-//            String filename = "twitter_image.jpg";
-//            File imageFile = new File(Environment.getExternalStorageDirectory(), filename);
-
             String share_text =  "\n\n\"" + mPrescriptionManager.getVerse(currentVersesList.get(currentVerseIndex).first, currentVersesList.get(currentVerseIndex).second)
                     + "\"" + " - " + mPrescriptionManager.getReference(currentVersesList.get(currentVerseIndex).first, currentVersesList.get(currentVerseIndex).second);
 
-            // getString(R.string.share_text)
             // Prepare Intent
             Intent shareIntent = new Intent(Intent.ACTION_SEND);
             shareIntent.putExtra(Intent.EXTRA_TEXT, getString(R.string.share_text) + share_text);
-//            shareIntent.putExtra(Intent.EXTRA_STREAM, Uri.fromFile(imageFile)); // add image to intent
             shareIntent.setType("image/jpeg");
 
             // Try to connect to twitter app

@@ -78,7 +78,6 @@ public class EmergencyActivity extends AppCompatActivity {
     }
 
     private void goToMedsActivity(){
-//        Log.d(TAG, "Emergency Symptom = " + allSymptomsList.get(symptomsDisplay.getValue()));
         Intent intent = new Intent(this, MedsActivity.class);
         intent.putExtra("symptom", allSymptomsList.get(symptomsDisplay.getValue())); // pass the symptom
         startActivity(intent);

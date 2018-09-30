@@ -122,12 +122,6 @@ public class MainActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
-    // Meds (see verses)
-//    private void goToMedsPage(){
-//        Intent intent = new Intent(this, MedsActivity.class);
-//        startActivity(intent);
-//    }
-
     // ============================================================================
     // Lifecycle events for HockeyApp CrashReporting & Beta-Distrobution
     // ============================================================================
