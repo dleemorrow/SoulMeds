@@ -5,6 +5,8 @@ import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 
+import java.util.Objects;
+
 public class AboutActivity extends AppCompatActivity {
     protected RecyclerView mRecyclerView;
     protected RecyclerView.Adapter mAdapter;
@@ -16,6 +18,8 @@ public class AboutActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_about);
+
+        Objects.requireNonNull(getSupportActionBar()).setTitle("Privacy Policy");
 
         initDataSet();
 
@@ -36,9 +40,6 @@ public class AboutActivity extends AppCompatActivity {
     }
 
     private void initDataSet() {
-        mDataSet = new String[100];
-        for (int i = 0; i < 100; i++) {
-            mDataSet[i] = "This is element #" + i;
-        }
+        mDataSet = getResources().getStringArray(R.array.privacy_policy_array);
     }
 }

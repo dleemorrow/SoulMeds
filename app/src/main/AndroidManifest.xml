@@ -3,7 +3,7 @@
     package="com.brendansapps.soulmeds">
 
     <uses-permission android:name="android.permission.VIBRATE" />
-    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED"/>
+    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
 
     <application
         android:allowBackup="true"
@@ -84,6 +84,11 @@
                 <action android:name="android.intent.action.BOOT_COMPLETED" />
             </intent-filter>
         </receiver>
+
+        <activity
+            android:name=".AboutActivity"
+            android:parentActivityName=".SettingsActivity"
+            />
     </application>
 
 </manifest>

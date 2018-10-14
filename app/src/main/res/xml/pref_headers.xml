@@ -36,7 +36,11 @@
     <header
         android:id="@+id/pref_about"
         android:icon="@drawable/ic_info_black_24dp"
-        android:title="@string/pref_header_about" />
+        android:title="@string/pref_header_about">
+        <intent
+            android:targetPackage="com.brendansapps.soulmeds"
+            android:targetClass="com.brendansapps.soulmeds.AboutActivity"/>
+    </header>
 
     <header
         android:id="@+id/pref_email_support"

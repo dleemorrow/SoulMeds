@@ -9,16 +9,6 @@
         android:layout_height="wrap_content"
         android:orientation="vertical">
 
-        <!--<Switch-->
-            <!--android:id="@+id/prescriptionToggle"-->
-            <!--android:layout_width="match_parent"-->
-            <!--android:layout_height="wrap_content" />-->
-
-        <!--<Button-->
-            <!--android:text="@string/action_delete_alarm"-->
-            <!--android:layout_width="match_parent"-->
-            <!--android:layout_height="wrap_content" />-->
-
         <TextView
             android:id="@+id/prescriptionSymptom"
             android:layout_width="match_parent"
