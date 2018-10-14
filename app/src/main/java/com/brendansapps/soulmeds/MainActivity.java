@@ -28,7 +28,6 @@ public class MainActivity extends AppCompatActivity {
         // Get Buttons
         mBtnAlarm = findViewById(R.id.btn_Alarm);
         mBtnQuote = findViewById(R.id.btn_Quote);
-        mBtnFolder = findViewById(R.id.btn_Folder);
         mBtnHelp = findViewById(R.id.btn_Help);
 
         // Button OnClickListener
@@ -38,21 +37,12 @@ public class MainActivity extends AppCompatActivity {
                 goToAlarmsPage();
             }
         });
-
         mBtnQuote.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 goToEmergencyPage();
             }
         });
-
-        mBtnFolder.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                printNotYetAvailableToast();
-            }
-        });
-
         mBtnHelp.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -82,16 +72,6 @@ public class MainActivity extends AppCompatActivity {
             NotificationManager notificationManager = getSystemService(NotificationManager.class);
             notificationManager.createNotificationChannel(channel);
         }
-    }
-
-
-    // Send a toast saying "Option Not Yet Available"
-    private void printNotYetAvailableToast(){
-        Context context = getApplicationContext();
-        CharSequence text = "Option Not Yet Available";
-        int duration = Toast.LENGTH_SHORT;
-        Toast toast = Toast.makeText(context, text, duration);
-        toast.show();
     }
 
     // ============================================================================
