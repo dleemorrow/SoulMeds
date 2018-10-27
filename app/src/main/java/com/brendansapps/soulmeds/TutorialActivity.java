@@ -45,4 +45,9 @@ public class TutorialActivity extends AppCompatActivity {
         videoView.requestFocus();
         videoView.start();
     }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+    }
 }

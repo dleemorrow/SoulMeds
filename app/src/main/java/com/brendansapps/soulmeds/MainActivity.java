@@ -2,15 +2,13 @@ package com.brendansapps.soulmeds;
 
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
-import android.content.Context;
 import android.content.Intent;
 import android.os.Build;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
-import android.widget.Toast;
+
 
 import net.hockeyapp.android.CrashManager;
 import net.hockeyapp.android.UpdateManager;
@@ -18,10 +16,7 @@ import net.hockeyapp.android.UpdateManager;
 public class MainActivity extends AppCompatActivity {
 
     private static final String TAG = "MainActivity";
-    PrescriptionManager mPrescriptionManager;
     Button mBtnAlarm, mBtnQuote, mBtnHelp;
-
-    Boolean launched = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,13 +48,8 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        checkForUpdates();
-    }
-
-    @Override
-    protected void onStart() {
-        super.onStart();
         createNotificationChannel();
+        checkForUpdates();
         goToLoginPage();
     }
 

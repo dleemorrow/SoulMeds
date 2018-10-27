@@ -70,6 +70,8 @@ public class SettingsActivity extends AppCompatPreferenceActivity {
                             mFirebaseAuth.signOut();
 
                             Toast.makeText(getApplicationContext(), "User Logged Out", Toast.LENGTH_SHORT).show();
+                            Intent intent = new Intent(SettingsActivity.this, LoginActivity.class);
+                            startActivity(intent);
                             finish();
                             break;
 
