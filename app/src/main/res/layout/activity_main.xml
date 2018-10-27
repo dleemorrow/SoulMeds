@@ -12,54 +12,42 @@
         android:id="@+id/btn_Alarm"
         android:layout_width="100dp"
         android:layout_height="100dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="12dp"
         android:background="@drawable/btn_prescription"
-        app:layout_constraintEnd_toStartOf="@id/btn_Folder"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/imageView"
+        app:layout_constraintLeft_toRightOf="@id/btn_Quote"
+        app:layout_constraintRight_toLeftOf="@id/btn_Help"
         app:layout_constraintTop_toTopOf="parent" />
 
     <Button
         android:id="@+id/btn_Quote"
         android:layout_width="100dp"
-        android:layout_height="100dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="24dp"
+        android:layout_height="105dp"
+        android:layout_marginStart="28dp"
         android:background="@drawable/btn_911"
-        app:layout_constraintEnd_toStartOf="@id/imageView"
+        app:layout_constraintRight_toLeftOf="@id/imageView"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btn_Alarm" />
-
-    <Button
-        android:id="@+id/btn_Folder"
-        android:layout_width="100dp"
-        android:layout_height="100dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginTop="16dp"
-        android:background="@drawable/btn_rescources"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@id/btn_Alarm"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="@id/imageView" />
 
     <Button
         android:id="@+id/btn_Help"
         android:layout_width="100dp"
         android:layout_height="100dp"
-        android:layout_marginEnd="16dp"
-        android:layout_marginTop="24dp"
+        android:layout_marginEnd="28dp"
         android:background="@drawable/btn_settings"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@id/imageView"
-        app:layout_constraintTop_toBottomOf="@+id/btn_Folder" />
+        app:layout_constraintLeft_toRightOf="@id/imageView"
+        app:layout_constraintTop_toTopOf="@id/imageView" />
 
     <ImageView
         android:id="@+id/imageView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="92dp"
-        app:layout_constraintEnd_toStartOf="@id/btn_Help"
-        app:layout_constraintStart_toEndOf="@id/btn_Quote"
-        app:layout_constraintTop_toTopOf="parent"
+        android:layout_width="130dp"
+        android:layout_height="110dp"
+        android:layout_marginTop="8dp"
+        android:contentDescription="@string/cross_image"
+        app:layout_constraintLeft_toRightOf="@id/btn_Quote"
+        app:layout_constraintRight_toLeftOf="@id/btn_Help"
+        app:layout_constraintTop_toBottomOf="@id/btn_Alarm"
         app:srcCompat="@drawable/crosswhite" />
 
 </android.support.constraint.ConstraintLayout>

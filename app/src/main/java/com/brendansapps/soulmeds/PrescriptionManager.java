@@ -89,7 +89,7 @@ public class PrescriptionManager {
         mFirebasePrescriptionDataReference = database.getReference("prescriptionData");
 
         // Initialize User's Prescriptions
-        if (firstTimeUser()){
+        if (firstTimeVisiting()){
             Log.d(TAG, "First Time User");
             resetDeafults();
         }
@@ -360,7 +360,7 @@ public class PrescriptionManager {
     /** =================================================
      * Functions for managing first time user
      * ===================================================== */
-    private Boolean firstTimeUser(){
+    private Boolean firstTimeVisiting(){
 //        Boolean firstTimeVisiting = prescriptionSP.getBoolean("firstTimeVisiting", true);
 //        Log.d(TAG, "firstTimeVisiting = " + firstTimeVisiting);
         return prescriptionSP.getBoolean("firstTimeVisiting", true);
@@ -477,7 +477,7 @@ public class PrescriptionManager {
     private void setAlarm(long timeInMillis, int alarmID){
         Intent intent = new Intent(mContext, AlarmHandler.class);
         PendingIntent pendingIntent = PendingIntent.getBroadcast(mContext, alarmID, intent, 0);
-        mAlarmManager.setExactAndAllowWhileIdle(AlarmManager.RTC_WAKEUP, timeInMillis, pendingIntent);
+        mAlarmManager.setExact(AlarmManager.RTC_WAKEUP, timeInMillis, pendingIntent);
         Log.d(TAG, "Set alarm for " + timeInMillis + " millis");
         printAlarms();
     }

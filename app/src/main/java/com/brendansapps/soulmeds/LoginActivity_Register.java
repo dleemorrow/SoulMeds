@@ -294,6 +294,10 @@ public class LoginActivity_Register extends AppCompatActivity implements LoaderC
                             Log.d(TAG, "createUserWithEmailAndPassword:success");
                             FirebaseUser currentUser = mFirebaseAuth.getCurrentUser();
                             Toast.makeText(LoginActivity_Register.this, "Registration Succeeded", Toast.LENGTH_SHORT).show();
+
+                            Intent intent = new Intent(LoginActivity_Register.this, FirstActivity.class);
+                            startActivity(intent);
+
                             finish();
                             // updateUI(currentUser);
                         }

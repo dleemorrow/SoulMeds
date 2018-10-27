@@ -72,8 +72,7 @@
     <string name="pref_header_email_support">Email Support</string>
 
     <!-- About Settings -->
-    <string-array
-        name="privacy_policy_array">
+    <string-array name="privacy_policy_array">
         <item><![CDATA[
 
         <br/>
@@ -374,8 +373,8 @@
     <string name="set_symptoms">Set Symptoms</string>
     <string name="choose_symptoms">Choose Symptoms</string>
     <string name="choose_alarms">Choose Alarms</string>
-
-
+    <string name="cross_image">cross image</string>
+    <string name="continue_to_app">Continue To App</string>
 
 
 </resources>

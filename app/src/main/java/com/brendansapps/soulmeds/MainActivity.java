@@ -18,7 +18,10 @@ import net.hockeyapp.android.UpdateManager;
 public class MainActivity extends AppCompatActivity {
 
     private static final String TAG = "MainActivity";
-    Button mBtnAlarm, mBtnQuote, mBtnFolder, mBtnHelp;
+    PrescriptionManager mPrescriptionManager;
+    Button mBtnAlarm, mBtnQuote, mBtnHelp;
+
+    Boolean launched = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

@@ -3,7 +3,11 @@
     <header
         android:id="@+id/pref_tutorial"
         android:icon="@drawable/ic_help_black_24dp"
-        android:title="@string/pref_header_tutorial" />
+        android:title="@string/pref_header_tutorial">
+        <intent
+            android:targetPackage="com.brendansapps.soulmeds"
+            android:targetClass="com.brendansapps.soulmeds.TutorialActivity"/>
+    </header>
 
     <header
         android:icon="@drawable/ic_edit_black_24dp"

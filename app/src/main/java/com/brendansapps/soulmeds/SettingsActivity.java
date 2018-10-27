@@ -57,16 +57,34 @@ public class SettingsActivity extends AppCompatPreferenceActivity {
     @Override
     public void onHeaderClick(Header header, int position) {
         super.onHeaderClick(header, position);
-        if (header.id == R.id.pref_tutorial) {
-            Toast.makeText(getApplicationContext(), "Option Not Yet Available", Toast.LENGTH_SHORT).show();
-        }
         if (header.id == R.id.pref_logout) {
-            FirebaseAuth mFirebaseAuth;
-            mFirebaseAuth = FirebaseAuth.getInstance();
-            mFirebaseAuth.signOut();
+            // Confirm dialog option
+            DialogInterface.OnClickListener dialogClickListener = new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    switch (which){
+                        case DialogInterface.BUTTON_POSITIVE:
+                            //Yes button clicked
+                            FirebaseAuth mFirebaseAuth;
+                            mFirebaseAuth = FirebaseAuth.getInstance();
+                            mFirebaseAuth.signOut();
 
-            Toast.makeText(getApplicationContext(), "User Logged Out", Toast.LENGTH_SHORT).show();
-            finish();
+                            Toast.makeText(getApplicationContext(), "User Logged Out", Toast.LENGTH_SHORT).show();
+                            finish();
+                            break;
+
+                        case DialogInterface.BUTTON_NEGATIVE:
+                            //No button clicked
+                            break;
+                    }
+                }
+            };
+            // Options for confirm dialog option
+            AlertDialog.Builder builder = new AlertDialog.Builder(this);
+            builder.setMessage("Are you sure?").setPositiveButton("Yes", dialogClickListener)
+                    .setNegativeButton("No", dialogClickListener).show();
+
+
         }
         if (header.id == R.id.pref_reset_data) {
             // Confirm dialog option
@@ -94,9 +112,11 @@ public class SettingsActivity extends AppCompatPreferenceActivity {
                     .setNegativeButton("No", dialogClickListener).show();
         }
         if (header.id == R.id.pref_email_support) {
-            Toast.makeText(getApplicationContext(), "Option Not Yet Available", Toast.LENGTH_SHORT).show();
+            Intent intent = new Intent(Intent.ACTION_SEND);
+            intent.setType("plain/text");
+            intent.putExtra(Intent.EXTRA_EMAIL, new String[] { "SoulMedsapp@gmail.com" });
+            startActivity(Intent.createChooser(intent, ""));
         }
-
     }
 
     // Set up the {@link android.app.ActionBar}, if the API is available.
