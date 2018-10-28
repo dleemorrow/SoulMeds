@@ -368,6 +368,12 @@ public class PrescriptionManager {
 
     // Initializes Symptom data for first time users
     public void resetDeafults(){
+
+        // delete old alarms
+        deleteAlarm(userTimesList.get(0).alarmID);
+        deleteAlarm(userTimesList.get(1).alarmID);
+        deleteAlarm(userTimesList.get(2).alarmID);
+
         userSymptomsList = new ArrayList<>();
         userTimesList = new ArrayList<>();
 
@@ -477,7 +483,7 @@ public class PrescriptionManager {
     private void setAlarm(long timeInMillis, int alarmID){
         Intent intent = new Intent(mContext, AlarmHandler.class);
         PendingIntent pendingIntent = PendingIntent.getBroadcast(mContext, alarmID, intent, 0);
-        mAlarmManager.setExact(AlarmManager.RTC_WAKEUP, timeInMillis, pendingIntent);
+        mAlarmManager.setInexactRepeating(AlarmManager.RTC_WAKEUP, timeInMillis, AlarmManager.INTERVAL_DAY, pendingIntent);
         Log.d(TAG, "Set alarm for " + timeInMillis + " millis");
         printAlarms();
     }

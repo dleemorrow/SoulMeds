@@ -9,6 +9,7 @@ import android.content.SharedPreferences;
 import android.util.Log;
 
 import java.util.ArrayList;
+import java.util.Objects;
 
 public class BootReceiver extends BroadcastReceiver {
 
@@ -22,7 +23,7 @@ public class BootReceiver extends BroadcastReceiver {
         mContext = context;
         mPrescriptionManager = new PrescriptionManager(mContext);
 
-        if (Intent.ACTION_BOOT_COMPLETED.equals(intent.getAction())) {
+        if (Objects.equals(intent.getAction(), "android.intent.action.BOOT_COMPLETED")) {
             // set repeating alarm
             mContext = context;
             mPrescriptionManager.resetAlarms();

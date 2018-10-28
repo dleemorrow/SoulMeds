@@ -46,7 +46,7 @@ public class AlarmHandler extends BroadcastReceiver {
         showNotification();
 
         mPrescriptionManager = new PrescriptionManager(mContext);
-        mPrescriptionManager.setNextAlarms();
+//        mPrescriptionManager.setNextAlarms();
     }
 
     private void showNotification(){
