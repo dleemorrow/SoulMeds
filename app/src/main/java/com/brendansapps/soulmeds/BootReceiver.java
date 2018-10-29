@@ -13,19 +13,14 @@ import java.util.Objects;
 
 public class BootReceiver extends BroadcastReceiver {
 
-    // Prescription Info
-    private Context mContext;
-    private PrescriptionManager mPrescriptionManager;
-
     @Override
     public void onReceive(Context context, Intent intent) {
 
-        mContext = context;
-        mPrescriptionManager = new PrescriptionManager(mContext);
+        // Prescription Info
+        PrescriptionManager mPrescriptionManager = new PrescriptionManager(context);
 
         if (Objects.equals(intent.getAction(), "android.intent.action.BOOT_COMPLETED")) {
             // set repeating alarm
-            mContext = context;
             mPrescriptionManager.resetAlarms();
         }
     }

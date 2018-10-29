@@ -5,33 +5,20 @@ import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.support.annotation.NonNull;
 import android.util.Log;
-
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
-
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
-
-import java.nio.charset.StandardCharsets;
-import java.security.MessageDigest;
-import java.security.NoSuchAlgorithmException;
-import java.sql.Time;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Base64;
 import java.util.Calendar;
-import java.util.List;
 import java.util.Objects;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-
 import static android.content.Context.ALARM_SERVICE;
 import static android.content.Context.MODE_PRIVATE;
 
@@ -55,7 +42,6 @@ public class PrescriptionManager {
     private static SharedPreferences.Editor prescriptionSPEditor;
     private Context mContext;
     private static AlarmManager mAlarmManager;
-    private static final long MILLIS_IN_DAY = 86400000;
 
     // Symptom Data
     private static ArrayList<String> allSymptomsList;
@@ -68,8 +54,7 @@ public class PrescriptionManager {
     private boolean prescriptionState;
 
     // Firebase Database
-    DatabaseReference mFirebasePrescriptionDataReference;
-
+    private DatabaseReference mFirebasePrescriptionDataReference;
 
     /** =================================================
      * Constructor
@@ -82,7 +67,6 @@ public class PrescriptionManager {
         symptomDataManager = new DataManager();
         allSymptomsList = symptomDataManager.getSymptomsList();
         prescriptionSP = mContext.getSharedPreferences("Prescriptions", MODE_PRIVATE);
-        // prescriptionSPEditor = prescriptionSP.edit();
 
         // Connect to Firebase
         FirebaseDatabase database = FirebaseDatabase.getInstance();
@@ -105,7 +89,7 @@ public class PrescriptionManager {
      * Accessors
      * ===================================================== */
     // Returns the user's symptoms as a ArrayList of Strings
-    public ArrayList<String> getUserSymptoms(){
+    ArrayList<String> getUserSymptoms(){
         ArrayList<String> userSymptoms = new ArrayList<>();
         for (int i = 0; i < userSymptomsList.size(); i++){
             userSymptoms.add(userSymptomsList.get(i).name);
@@ -115,7 +99,7 @@ public class PrescriptionManager {
     }
 
     // Returns the user's times as a ArrayList of Strings
-    public ArrayList<String> getUserTimes(){
+    ArrayList<String> getUserTimes(){
         ArrayList<String> userTimes = new ArrayList<>();
         for (int i = 0; i < userTimesList.size(); i++){
             userTimes.add(userTimesList.get(i).name);
@@ -125,35 +109,35 @@ public class PrescriptionManager {
     }
 
     // Returns all possible symptoms
-    public ArrayList<String> getAllSymptoms(){
+    ArrayList<String> getAllSymptoms(){
         return allSymptomsList;
     }
 
-    public String getSymptom(int index){
+    String getSymptom(int index){
         return symptomDataManager.getSymptomAtIndex(index);
     }
 
     // Returns the number of Verses for that symptom
-    public int getNumSymptoms(){
+    int getNumSymptoms(){
         return symptomDataManager.size();
     }
 
     // Returns the number of Verses for that symptom
-    public int getNumVerses(String symptom){
+    int getNumVerses(String symptom){
         return symptomDataManager.getNumVerses(symptom);
     }
 
     // Returns the Verse for that symptom at that index
-    public String getVerse(String symptom, int index){
+    String getVerse(String symptom, int index){
         return symptomDataManager.getVerse(symptom, index);
     }
 
     // Returns the Reference for the Verse for that symptom at that index
-    public String getReference(String symptom, int index){
+    String getReference(String symptom, int index){
         return symptomDataManager.getVerseReference(symptom, index);
     }
 
-    public boolean getPrescriptionState(){
+    boolean getPrescriptionState(){
         return prescriptionState;
     }
 
@@ -167,31 +151,26 @@ public class PrescriptionManager {
      * Prescription Data Manipulators
      * ===================================================== */
 
-    public void editSymptom(int index, String newName){
-//        Log.d(TAG, "Changing Symptom " + userSymptomsList.get(index).name + " to " + newName);
+    void editSymptom(int index, String newName){
         userSymptomsList.get(index).name = newName;
 
 //        saveUserSymptoms();
 //        saveUserSymptoms_Firebase();
     }
 
-    public void editTime(int index, String newTime){
+    void editTime(int index, String newTime){
         // Delete Old Alarm
         deleteAlarm(userTimesList.get(index).alarmID);
 
         // Edit Time
-//        Log.d(TAG, "Changing Time " + userTimesList.get(index).name + " to " + newTime);
         userTimesList.get(index).name = newTime;
         userTimesList.get(index).alarmID = getAlarmID(newTime);
-//        saveUserTimes();
-//        saveUserSymptoms_Firebase();
-//         printTimes();
 
         // Add New Alarm
         setAlarm(getTimeInMillis(userTimesList.get(index).name), userTimesList.get(index).alarmID);
     }
 
-    public void resetAlarms(){
+    void resetAlarms(){
         for(int alarmNum = 0; alarmNum < userTimesList.size(); alarmNum++){
             setAlarm(getTimeInMillis(userTimesList.get(alarmNum).name), userTimesList.get(alarmNum).alarmID);
         }
@@ -199,7 +178,7 @@ public class PrescriptionManager {
 
     public void setNextAlarms(){
         for(int alarmNum = 0; alarmNum < userTimesList.size(); alarmNum++){
-            setAlarm(getTimeInMillis(userTimesList.get(alarmNum).name) + MILLIS_IN_DAY, userTimesList.get(alarmNum).alarmID);
+            setAlarm(getTimeInMillis(userTimesList.get(alarmNum).name) + AlarmManager.INTERVAL_DAY, userTimesList.get(alarmNum).alarmID);
         }
     }
 
@@ -208,9 +187,9 @@ public class PrescriptionManager {
      * ===================================================== */
 
     // Saves the user's Prescriptions to Firebase
-    public void saveUserPrescriptions_Firebase(){
+    void saveUserPrescriptions_Firebase(){
         FirebaseAuth mFirebaseAuth = FirebaseAuth.getInstance();
-        String userID = mFirebaseAuth.getCurrentUser().getUid();
+        String userID = Objects.requireNonNull(mFirebaseAuth.getCurrentUser()).getUid();
         mFirebasePrescriptionDataReference.child(userID).child("AlarmOne").setValue(getAsMilitaryTime(userTimesList.get(0).name));
         mFirebasePrescriptionDataReference.child(userID).child("AlarmTwo").setValue(getAsMilitaryTime(userTimesList.get(1).name));
         mFirebasePrescriptionDataReference.child(userID).child("AlarmThree").setValue(getAsMilitaryTime(userTimesList.get(2).name));
@@ -220,7 +199,7 @@ public class PrescriptionManager {
     }
 
     // Saves the user's Prescriptions to the Shared Preference
-    public void saveUserPrescriptions_Local(){
+    void saveUserPrescriptions_Local(){
         saveUserSymptoms();
         saveUserTimes();
         savePrescriptionState(true);
@@ -248,7 +227,6 @@ public class PrescriptionManager {
         for (int i = 0; i < userTimesList.size(); i++){
             stringBuilder.append(userTimesList.get(i).name).append(",");
         }
-//        Log.d(TAG, "Saved Times: " + stringBuilder.toString());
 
         // Save SharedPreference
         prescriptionSPEditor = prescriptionSP.edit();
@@ -265,16 +243,16 @@ public class PrescriptionManager {
 
     private void loadUserPrescriptions_Firebase(){
         FirebaseAuth mFirebaseAuth = FirebaseAuth.getInstance();
-        String userID = mFirebaseAuth.getCurrentUser().getUid();
+        String userID = Objects.requireNonNull(mFirebaseAuth.getCurrentUser()).getUid();
         mFirebasePrescriptionDataReference.child(userID).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 String alarm1 = dataSnapshot.getValue(String.class);
                 Log.d(TAG, alarm1);
             }
 
             @Override
-            public void onCancelled(DatabaseError databaseError) {
+            public void onCancelled(@NonNull DatabaseError databaseError) {
                 Log.d(TAG, "Failed to load data from Firebase: " + databaseError);
             }
         });
@@ -286,9 +264,7 @@ public class PrescriptionManager {
 
         // Load SharedPreferences
         String compressedSymptomsString = prescriptionSP.getString("symptomsList", "");
-//        String compressedSymptomsString = prescriptionSP.getString("symptomsList_Active", "");
         String compressedTimesString = prescriptionSP.getString("timesList", "");
-//        String compressedTimesString = prescriptionSP.getString("timesList_Active", "");
 
         prescriptionState = prescriptionSP.getBoolean("prescription", false); // second param is value to return if prescription DNE
 
@@ -305,7 +281,6 @@ public class PrescriptionManager {
             }
 
             if (!(loadedSymptom.name.equals(""))){
-                // loadedSymptom.isActive = listOfUserSymptoms_Active;
                 userSymptomsList.add(loadedSymptom);
             }
         }
@@ -323,14 +298,10 @@ public class PrescriptionManager {
             }
 
             if (!(loadedTime.name.equals(""))){
-                // loadedTime.isActive = listOfUserTimes_Active;
                 loadedTime.alarmID = getAlarmID(loadedTime.name);
                 userTimesList.add(loadedTime);
             }
         }
-
-//        Log.d(TAG, "Loaded Times:");
-//        printTimes();
     }
 
     // Takes in a string in AMPM format and returns it as military time
@@ -351,23 +322,15 @@ public class PrescriptionManager {
         return stringBuilder.toString();
     }
 
-    // Takes in a string in Military time and returns it as AMPM format
-    private String getFromMilitaryTime(String time){
-        String timeInAMPM = "00:00 AM";
-        return timeInAMPM;
-    }
-
     /** =================================================
      * Functions for managing first time user
      * ===================================================== */
     private Boolean firstTimeVisiting(){
-//        Boolean firstTimeVisiting = prescriptionSP.getBoolean("firstTimeVisiting", true);
-//        Log.d(TAG, "firstTimeVisiting = " + firstTimeVisiting);
         return prescriptionSP.getBoolean("firstTimeVisiting", true);
     }
 
     // Initializes Symptom data for first time users
-    public void resetDeafults(){
+    void resetDeafults(){
 
         // delete old alarms
         deleteAlarm(userTimesList.get(0).alarmID);
@@ -428,7 +391,7 @@ public class PrescriptionManager {
         try {
             Pattern timePattern = Pattern.compile("^([0-9]|0[0-9]|1[0-9]|2[0-3]):([0-5][0-9]) (AM|PM)$");
             m = timePattern.matcher(currentTime);
-            m.find();
+            final boolean b = m.find();
             int currentHour = Integer.parseInt(m.group(1));
             int currentMinute = Integer.parseInt(m.group(2));
 
@@ -447,8 +410,6 @@ public class PrescriptionManager {
                     0
             );
 
-            long alarmTIM = calendar.getTimeInMillis();
-//            Log.d(TAG, "Got Time in Millis as " + alarmTIM);
             return calendar.getTimeInMillis();
         }
         catch (IllegalStateException e){
@@ -483,7 +444,7 @@ public class PrescriptionManager {
     private void setAlarm(long timeInMillis, int alarmID){
         Intent intent = new Intent(mContext, AlarmHandler.class);
         PendingIntent pendingIntent = PendingIntent.getBroadcast(mContext, alarmID, intent, 0);
-        mAlarmManager.setInexactRepeating(AlarmManager.RTC_WAKEUP, timeInMillis, AlarmManager.INTERVAL_DAY, pendingIntent);
+        mAlarmManager.setInexactRepeating(AlarmManager.RTC_WAKEUP, timeInMillis, 30000, pendingIntent);
         Log.d(TAG, "Set alarm for " + timeInMillis + " millis");
         printAlarms();
     }

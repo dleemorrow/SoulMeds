@@ -23,7 +23,7 @@ public class AboutActivity extends AppCompatActivity {
 
         initDataSet();
 
-        mRecyclerView = (RecyclerView) findViewById(R.id.policy_view);
+        mRecyclerView = findViewById(R.id.policy_view);
 
         // use this setting to improve performance if you know that changes
         // in content do not change the layout size of the RecyclerView

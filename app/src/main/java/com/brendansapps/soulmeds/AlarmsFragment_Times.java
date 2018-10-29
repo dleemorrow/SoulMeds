@@ -1,23 +1,16 @@
 package com.brendansapps.soulmeds;
 
-import android.app.TimePickerDialog;
-import android.content.Context;
-import android.media.AudioManager;
 import android.os.Build;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
-import android.support.annotation.RequiresApi;
 import android.support.v4.app.Fragment;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.SeekBar;
-import android.widget.TextView;
 import android.widget.TimePicker;
-
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -33,7 +26,6 @@ public class AlarmsFragment_Times extends Fragment {
     /** =================================================
      * Member Variables
      * ===================================================== */
-    private static final String TAG = "AlarmsFragment_Times";
 
     AlarmsActivity_Tabbed theActivity;
 
@@ -48,11 +40,12 @@ public class AlarmsFragment_Times extends Fragment {
      * ===================================================== */
     @Nullable
     @Override
-    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState){
+    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState){
         View view = inflater.inflate(R.layout.fragment_alarms_times, container, false);
 
         // Connect to Activity for user Prescriptions
         theActivity = (AlarmsActivity_Tabbed) getActivity();
+        assert theActivity != null;
         userTimesList = theActivity.getUserTimes();
 
         // getActivity().setVolumeControlStream(AudioManager.STREAM_ALARM);
@@ -150,7 +143,6 @@ public class AlarmsFragment_Times extends Fragment {
     // Returns a String representing the time in AM|PM format
     public String getTimeInAMPM(int hour, int minute){
         String newTime;
-//        Log.d(TAG, "Getting time in AMPM with hour " + hour);
         Boolean isPM = false;
 
         // Create Hour
@@ -174,7 +166,6 @@ public class AlarmsFragment_Times extends Fragment {
             newTime = newTime + " AM";
         }
 
-//        Log.d(TAG, "Time in AMPM = " + newTime);
         return newTime;
     }
 }

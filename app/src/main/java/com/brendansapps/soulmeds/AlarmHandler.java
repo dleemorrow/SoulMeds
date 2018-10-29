@@ -7,16 +7,10 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
 import android.media.AudioManager;
-import android.media.MediaPlayer;
-import android.media.RingtoneManager;
 import android.net.Uri;
-import android.os.CountDownTimer;
-import android.os.Vibrator;
 import android.provider.Settings;
 import android.support.v4.app.NotificationCompat;
 import android.util.Log;
-
-import static android.content.Context.ALARM_SERVICE;
 import static android.content.Context.NOTIFICATION_SERVICE;
 
 /**
@@ -36,7 +30,6 @@ public class AlarmHandler extends BroadcastReceiver {
 
     // Prescription Info
     private Context mContext;
-    private PrescriptionManager mPrescriptionManager;
 
     @Override
     public void onReceive(Context context, Intent intent) {
@@ -45,7 +38,8 @@ public class AlarmHandler extends BroadcastReceiver {
 
         showNotification();
 
-        mPrescriptionManager = new PrescriptionManager(mContext);
+        // for using exact, non-repeating alarms
+//        PrescriptionManager mPrescriptionManager = new PrescriptionManager(mContext);
 //        mPrescriptionManager.setNextAlarms();
     }
 
@@ -75,6 +69,7 @@ public class AlarmHandler extends BroadcastReceiver {
 
         // Send Notification
         NotificationManager manager = (NotificationManager) mContext.getSystemService(NOTIFICATION_SERVICE);
+        assert manager != null;
         manager.notify(NOTIFICATION_ID, mBuilder.build());
     }
 }

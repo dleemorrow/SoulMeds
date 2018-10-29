@@ -8,7 +8,6 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.MediaController;
 import android.widget.VideoView;
-
 import java.util.Objects;
 
 public class FirstActivity extends AppCompatActivity {
@@ -20,7 +19,7 @@ public class FirstActivity extends AppCompatActivity {
 
         Objects.requireNonNull(getSupportActionBar()).setTitle("Tutorial");
 
-        final VideoView videoView =(VideoView)findViewById(R.id.videoView);
+        final VideoView videoView = findViewById(R.id.videoView);
         MediaController mediaController= new MediaController(this);
         mediaController.setAnchorView(videoView);
         Uri uri=Uri.parse("android.resource://"+getPackageName()+"/"+R.raw.tutorial);
@@ -32,7 +31,7 @@ public class FirstActivity extends AppCompatActivity {
                 mp.setOnVideoSizeChangedListener(new MediaPlayer.OnVideoSizeChangedListener() {
                     @Override
                     public void onVideoSizeChanged(MediaPlayer mp, int width, int height) {
-                        MediaController mediaController = new MediaController(FirstActivity.this);;
+                        MediaController mediaController = new MediaController(FirstActivity.this);
                         videoView.setMediaController(mediaController);
                         mediaController.setAnchorView(videoView);
                     }

@@ -1,5 +1,6 @@
 package com.brendansapps.soulmeds;
 
+import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.text.Html;
 import android.view.LayoutInflater;
@@ -14,7 +15,7 @@ public class AboutAdapter extends RecyclerView.Adapter<AboutAdapter.AboutViewHol
         private final TextView mTextView;
         AboutViewHolder(View view) {
             super(view);
-            mTextView = (TextView) view.findViewById(R.id.textView);
+            mTextView = view.findViewById(R.id.textView);
         }
         public TextView getTextView() {
             return mTextView;
@@ -26,8 +27,9 @@ public class AboutAdapter extends RecyclerView.Adapter<AboutAdapter.AboutViewHol
     }
 
     // Create new views (invoked by the layout manager)
+    @NonNull
     @Override
-    public AboutViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+    public AboutViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         // create a new view
         View v = LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.policy_section, parent, false);
@@ -37,7 +39,7 @@ public class AboutAdapter extends RecyclerView.Adapter<AboutAdapter.AboutViewHol
 
     // Replace the contents of a view (invoked by the layout manager)
     @Override
-    public void onBindViewHolder(AboutViewHolder holder, final int position) {
+    public void onBindViewHolder(@NonNull AboutViewHolder holder, final int position) {
         // - get element from your dataset at this position
         // - replace the contents of the view with that element
         holder.getTextView().setText(Html.fromHtml(policyDataSet[position]));

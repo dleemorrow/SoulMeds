@@ -2,9 +2,6 @@ package com.brendansapps.soulmeds;
 
 import android.media.MediaPlayer;
 import android.net.Uri;
-import android.support.v4.media.session.MediaControllerCompat;
-import android.support.v4.media.session.MediaSessionCompat;
-import android.support.v4.media.session.PlaybackStateCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.widget.MediaController;
@@ -21,7 +18,7 @@ public class TutorialActivity extends AppCompatActivity {
 
         Objects.requireNonNull(getSupportActionBar()).setTitle("Tutorial");
 
-        final VideoView videoView =(VideoView)findViewById(R.id.videoView);
+        final VideoView videoView = findViewById(R.id.videoView);
         MediaController mediaController= new MediaController(this);
         mediaController.setAnchorView(videoView);
         Uri uri=Uri.parse("android.resource://"+getPackageName()+"/"+R.raw.tutorial);
@@ -33,7 +30,7 @@ public class TutorialActivity extends AppCompatActivity {
                 mp.setOnVideoSizeChangedListener(new MediaPlayer.OnVideoSizeChangedListener() {
                     @Override
                     public void onVideoSizeChanged(MediaPlayer mp, int width, int height) {
-                        MediaController mediaController = new MediaController(TutorialActivity.this);;
+                        MediaController mediaController = new MediaController(TutorialActivity.this);
                         videoView.setMediaController(mediaController);
                         mediaController.setAnchorView(videoView);
                     }

@@ -5,11 +5,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
-import android.widget.AdapterView;
 import android.widget.Button;
-import android.widget.ListView;
 import android.widget.NumberPicker;
-
 import java.util.ArrayList;
 
 /** =================================================
@@ -24,12 +21,7 @@ public class EmergencyActivity extends AppCompatActivity {
     /** =================================================
      * Member Variables
      * ===================================================== */
-    private static final String TAG = "EmergencyActivity";
 
-    private Button nextBtn, cancelBtn;
-
-    // Members for the Emergency Symptom Picker
-    private PrescriptionManager prescriptionManager;
     private ArrayList<String> allSymptomsList; // List of all possible symptoms
     private NumberPicker symptomsDisplay;
 
@@ -39,12 +31,13 @@ public class EmergencyActivity extends AppCompatActivity {
         setContentView(R.layout.activity_emergency);
 
         // Setup the Symptom List View
-        prescriptionManager = new PrescriptionManager(getApplicationContext());
+        // Members for the Emergency Symptom Picker
+        PrescriptionManager prescriptionManager = new PrescriptionManager(getApplicationContext());
         allSymptomsList = prescriptionManager.getAllSymptoms();
         initSymptomListView();
 
         // Setup Next Button
-        nextBtn = findViewById(R.id.emergency_btn_next);
+        Button nextBtn = findViewById(R.id.emergency_btn_next);
         nextBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -53,7 +46,7 @@ public class EmergencyActivity extends AppCompatActivity {
         });
 
         // Setup Cancel Button
-        cancelBtn = findViewById(R.id.emergency_btn_back);
+        Button cancelBtn = findViewById(R.id.emergency_btn_back);
         cancelBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

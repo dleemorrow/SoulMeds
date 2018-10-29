@@ -14,12 +14,12 @@ import java.util.ArrayList;
 
 // Structure for each Symptom and the associated Verses
 class SymptomObject{
-    public String symptomName;
-    public ArrayList<String> arrayVerses;
-    public ArrayList<String> arrayReferences;
-    public ArrayList<String> arrayVerseCards;
+    String symptomName;
+    ArrayList<String> arrayVerses;
+    ArrayList<String> arrayReferences;
+    ArrayList<String> arrayVerseCards;
 
-    public SymptomObject(){
+    SymptomObject(){
         arrayVerses = new ArrayList<>();
         arrayReferences = new ArrayList<>();
         arrayVerseCards = new ArrayList<>();
@@ -35,7 +35,7 @@ public class DataManager {
     // ===========================================================
     // Constructor
     // ===========================================================
-    public DataManager(){
+    DataManager(){
         arraySymptomObjects = new ArrayList<>();
         populateSymptomObjectData();
 //        printSymptomData();
@@ -51,7 +51,7 @@ public class DataManager {
     }
 
     // Returns the name of the symptom at the index
-    public String getSymptomAtIndex(int index){
+    String getSymptomAtIndex(int index){
         if (index < arraySymptomObjects.size()){
             return arraySymptomObjects.get(index).symptomName;
         }
@@ -68,7 +68,7 @@ public class DataManager {
     }
 
     // Returns the number of Verses for that symptom
-    public int getNumVerses(String symptom){
+    int getNumVerses(String symptom){
         for (int i = 0; i < arraySymptomObjects.size(); i++){
             if (symptom.equals(arraySymptomObjects.get(i).symptomName)){
                 return arraySymptomObjects.get(i).arrayVerses.size();
@@ -78,7 +78,7 @@ public class DataManager {
     }
 
     // Returns the verse for the Symptom at the Verse
-    public String getVerse(String currentSymptom, int quoteNumber){
+    String getVerse(String currentSymptom, int quoteNumber){
         for (int i = 0; i < arraySymptomObjects.size(); i++){
             if (currentSymptom.equals(arraySymptomObjects.get(i).symptomName)){
                 return arraySymptomObjects.get(i).arrayVerses.get(quoteNumber);
@@ -88,7 +88,7 @@ public class DataManager {
     }
 
     // Returns the Reference for the verse for the Symptom at the Verse
-    public String getVerseReference(String currentSymptom, int quoteNumber){
+    String getVerseReference(String currentSymptom, int quoteNumber){
         for (int i = 0; i < arraySymptomObjects.size(); i++){
             if (currentSymptom.equals(arraySymptomObjects.get(i).symptomName)){
                 return arraySymptomObjects.get(i).arrayReferences.get(quoteNumber);
@@ -127,10 +127,9 @@ public class DataManager {
     // Fills in all of the data for the Symptoms and their associated Verses
     // currentSystem doesn't cause a memory leak because of garbage collection
     private void populateSymptomObjectData(){
-        SymptomObject currentSymptom = new SymptomObject();
 
         // Anger
-        currentSymptom = new SymptomObject();
+        SymptomObject currentSymptom = new SymptomObject();
         currentSymptom.symptomName = "Anger";
 
         currentSymptom.arrayVerses.add("For the anger of man does not achieve the righteousness of God.");
@@ -806,7 +805,6 @@ public class DataManager {
         arraySymptomObjects.add(currentSymptom);
 
         // Clean Memory
-        currentSymptom = null;
         System.gc();
     }
 

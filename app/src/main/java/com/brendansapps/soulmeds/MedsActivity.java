@@ -5,10 +5,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
-import android.net.Uri;
-import android.os.Environment;
-import android.support.annotation.NonNull;
-import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -18,15 +14,11 @@ import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
-
-import java.io.File;
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.Collections;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Random;
-import java.util.Set;
+
 
 /** ===========================================================
  * MedsActivity.java Created by bt on 3/31/18.
@@ -44,7 +36,6 @@ public class MedsActivity extends AppCompatActivity {
     /** ===========================================================
      * Member Variables
      * =========================================================== */
-    private static final String TAG = "MedsActivity";
 
     // Layout Accessors
     TextView mSymptomTV, mVerseTV, mReferenceTV;
@@ -202,8 +193,10 @@ public class MedsActivity extends AppCompatActivity {
         }
 
         // remove None options
-        ArrayList<String> symptomsList = new ArrayList<String>(userSymptoms);
-        while(symptomsList.remove("None")){}
+        ArrayList<String> symptomsList = new ArrayList<>(userSymptoms);
+        while(true){
+            if (!symptomsList.remove("None")) break;
+        }
 
         switch (symptomsList.size()){
             case 1: // 1 symptom = all associated verses

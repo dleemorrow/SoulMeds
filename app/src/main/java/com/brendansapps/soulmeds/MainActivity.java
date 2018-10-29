@@ -15,7 +15,6 @@ import net.hockeyapp.android.UpdateManager;
 
 public class MainActivity extends AppCompatActivity {
 
-    private static final String TAG = "MainActivity";
     Button mBtnAlarm, mBtnQuote, mBtnHelp;
 
     @Override
@@ -63,6 +62,7 @@ public class MainActivity extends AppCompatActivity {
             NotificationChannel channel = new NotificationChannel(channelID, name, importance);
             channel.setDescription(description);
             NotificationManager notificationManager = getSystemService(NotificationManager.class);
+            assert notificationManager != null;
             notificationManager.createNotificationChannel(channel);
         }
     }

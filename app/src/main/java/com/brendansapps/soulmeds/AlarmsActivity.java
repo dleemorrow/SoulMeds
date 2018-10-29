@@ -1,29 +1,23 @@
 package com.brendansapps.soulmeds;
 
-import android.content.Context;
 import android.content.DialogInterface;
-import android.media.AudioManager;
 import android.os.Build;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
-import android.widget.NumberPicker;
-import android.widget.SeekBar;
-import android.widget.TextView;
 import android.widget.TimePicker;
 import android.widget.Toast;
-
 import java.util.ArrayList;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class AlarmsActivity extends AppCompatActivity {
+
     /** =================================================
      * Member Variables
      * ===================================================== */
-    private static final String TAG = "AlarmsFragment_Times";
 
     // Prescription Info
     private PrescriptionManager mPrescriptionManager;

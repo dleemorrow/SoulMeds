@@ -1,17 +1,13 @@
 package com.brendansapps.soulmeds;
 
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.NumberPicker;
-import android.widget.Spinner;
-
 import java.util.ArrayList;
 
 /**
@@ -26,7 +22,7 @@ public class AlarmsFragment_Symptoms extends Fragment {
     /** =================================================
      * Member Variables
      * ===================================================== */
-    private static final String TAG = "AlarmsFragment_Symptoms";
+
     AlarmsActivity_Tabbed theActivity;
 
     // Members for the Symptom Picker UI elements
@@ -42,11 +38,12 @@ public class AlarmsFragment_Symptoms extends Fragment {
      * ===================================================== */
     @Nullable
     @Override
-    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState){
+    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState){
         View view = inflater.inflate(R.layout.fragment_alarms_symptoms, container, false);
 
         // Connect to Activity for user Prescriptions
         theActivity = (AlarmsActivity_Tabbed) getActivity();
+        assert theActivity != null;
         allSymptomsList = theActivity.getAllSymptoms();
         allSymptomsListNone = theActivity.getAllSymptoms();
         userSymptomsList = theActivity.getUserSymptoms();
