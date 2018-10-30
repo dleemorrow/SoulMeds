@@ -333,9 +333,11 @@ public class PrescriptionManager {
     void resetDeafults(){
 
         // delete old alarms
-        deleteAlarm(userTimesList.get(0).alarmID);
-        deleteAlarm(userTimesList.get(1).alarmID);
-        deleteAlarm(userTimesList.get(2).alarmID);
+        if(userTimesList != null) {
+            deleteAlarm(userTimesList.get(0).alarmID);
+            deleteAlarm(userTimesList.get(1).alarmID);
+            deleteAlarm(userTimesList.get(2).alarmID);
+        }
 
         userSymptomsList = new ArrayList<>();
         userTimesList = new ArrayList<>();
