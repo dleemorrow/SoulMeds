@@ -1,7 +1,10 @@
 package com.brendansapps.soulmeds;
 
+import android.content.DialogInterface;
+import android.media.AudioManager;
 import android.media.MediaPlayer;
 import android.net.Uri;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -41,9 +44,16 @@ public class FirstActivity extends AppCompatActivity {
 
         videoView.setVideoURI(uri);
         videoView.requestFocus();
-        videoView.start();
 
-        Button mBtnContinue = findViewById(R.id.btn_Continue);
+        Button mBtnPlay = findViewById(R.id.btn_play);
+        mBtnPlay.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                videoView.start();
+            }
+        });
+
+        Button mBtnContinue = findViewById(R.id.btn_continue);
         mBtnContinue.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -56,5 +66,25 @@ public class FirstActivity extends AppCompatActivity {
     @Override
     public void onBackPressed() {
         // do nothing
+    }
+
+    @Override
+    public void onStart(){
+        super.onStart();
+
+        AudioManager am = (AudioManager) getSystemService(AUDIO_SERVICE);
+        assert am != null;
+        if(am.getStreamVolume(AudioManager.STREAM_MUSIC) == 0){
+            AlertDialog alertDialog = new AlertDialog.Builder(this).create();
+            alertDialog.setTitle("Your device is muted!");
+            alertDialog.setMessage("Please enable media volume for the video tutorial. ");
+            alertDialog.setButton(AlertDialog.BUTTON_NEUTRAL, "OK",
+                    new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int which) {
+                            dialog.dismiss();
+                        }
+                    });
+            alertDialog.show();
+        }
     }
 }

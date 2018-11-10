@@ -78,8 +78,6 @@ public class MedsActivity extends AppCompatActivity {
         mNextButton = findViewById(R.id.next_btn_meds);
         mBackButton = findViewById(R.id.back_btn_meds);
         mDoneButton = findViewById(R.id.done_btn_meds);
-        mFacebookShareButton = findViewById(R.id.facebook_share_btn);
-        mTwitterShareButton = findViewById(R.id.twitter_share_btn);
 
         // Next Btn OnClickListener
         mNextButton.setOnClickListener(new View.OnClickListener() {
@@ -102,22 +100,6 @@ public class MedsActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 handleDoneButton();
-            }
-        });
-
-        // Facebook Share OnClickListener
-        mFacebookShareButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                shareToFacebook();
-            }
-        });
-
-        // Twitter Share OnClickListener
-        mTwitterShareButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                shareToTwitter();
             }
         });
 
@@ -287,81 +269,4 @@ public class MedsActivity extends AppCompatActivity {
         return newListOfVerses;
     }
 
-    /** ===========================================================
-    * Social Media Sharing
-    * =========================================================== */
-
-    // Send a toast saying "Option Not Yet Available"
-    private void printNotYetAvailableToast(){
-        Context context = getApplicationContext();
-        CharSequence text = "Option Not Yet Available";
-        int duration = Toast.LENGTH_SHORT;
-        Toast toast = Toast.makeText(context, text, duration);
-        toast.show();
-    }
-
-    // There is a better way to share to Facebook using the Facebook SDK
-    // This version is just a copy of the Twitter version below
-    private void shareToFacebook(){
-        try {
-            // Prepare Intent
-            Intent shareIntent = new Intent(Intent.ACTION_SEND);
-            shareIntent.putExtra(Intent.EXTRA_TEXT, getString(R.string.share_text));
-            shareIntent.setType("image/jpeg");
-            shareIntent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
-
-            // Try to connect to facebook app
-            PackageManager pm = this.getPackageManager();
-            List<ResolveInfo> lract = pm.queryIntentActivities(shareIntent, PackageManager.MATCH_DEFAULT_ONLY);
-            boolean resolved = false;
-            for (ResolveInfo ri : lract) {
-                if (ri.activityInfo.name.contains("facebook")) {
-                    shareIntent.setClassName(ri.activityInfo.packageName,
-                            ri.activityInfo.name);
-                    resolved = true;
-                    break;
-                }
-            }
-
-            // Send it to facebook, else ask
-            startActivity(resolved ?
-                    shareIntent :
-                    Intent.createChooser(shareIntent, "Choose one"));
-        } catch (final ActivityNotFoundException e) {
-            Toast.makeText(this, "You don't seem to have facebook installed on this device", Toast.LENGTH_SHORT).show();
-        }
-    }
-
-    // https://stackoverflow.com/questions/19120036/add-image-to-twitter-share-intent-android
-    private void shareToTwitter(){
-        try {
-            String share_text =  "\n\n\"" + mPrescriptionManager.getVerse(currentVersesList.get(currentVerseIndex).first, currentVersesList.get(currentVerseIndex).second)
-                    + "\"" + " - " + mPrescriptionManager.getReference(currentVersesList.get(currentVerseIndex).first, currentVersesList.get(currentVerseIndex).second);
-
-            // Prepare Intent
-            Intent shareIntent = new Intent(Intent.ACTION_SEND);
-            shareIntent.putExtra(Intent.EXTRA_TEXT, getString(R.string.share_text) + share_text);
-            shareIntent.setType("image/jpeg");
-
-            // Try to connect to twitter app
-            PackageManager pm = this.getPackageManager();
-            List<ResolveInfo> lract = pm.queryIntentActivities(shareIntent, PackageManager.MATCH_DEFAULT_ONLY);
-            boolean resolved = false;
-            for (ResolveInfo ri : lract) {
-                if (ri.activityInfo.name.contains("twitter")) {
-                    shareIntent.setClassName(ri.activityInfo.packageName,
-                            ri.activityInfo.name);
-                    resolved = true;
-                    break;
-                }
-            }
-
-            // Send it to twitter, else ask
-            startActivity(resolved ?
-                    shareIntent :
-                    Intent.createChooser(shareIntent, "Choose one"));
-        } catch (final ActivityNotFoundException e) {
-            Toast.makeText(this, "You don't seem to have twitter installed on this device", Toast.LENGTH_SHORT).show();
-        }
-    }
 }
