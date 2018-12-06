@@ -376,6 +376,9 @@
     <string name="cross_image">cross image</string>
     <string name="continue_to_app">Continue To App</string>
     <string name="play_tutorial">Play Tutorial</string>
+    <string name="action_request_reset">Request Password Reset</string>
+    <string name="request_reset_navigate">Request Password Reset</string>
+    <string name="action_reset">Request Password Reset</string>
 
 
 </resources>

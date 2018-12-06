@@ -81,6 +81,15 @@
                 android:text="@string/action_register_navigate"
                 android:textStyle="bold" />
 
+            <Button
+                android:id="@+id/action_reset_navigate"
+                style="?android:buttonBarNegativeButtonStyle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/request_reset_navigate"
+                android:textStyle="bold" />
+
+
         </LinearLayout>
 
     </ScrollView>

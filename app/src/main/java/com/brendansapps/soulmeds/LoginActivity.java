@@ -69,7 +69,6 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
 
         // Set up the login form.
         mEmailView = findViewById(R.id.email);
-//        populateAutoComplete();
 
         mPasswordView = findViewById(R.id.password);
         mPasswordView.setOnEditorActionListener(new TextView.OnEditorActionListener() {
@@ -98,6 +97,15 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(LoginActivity.this, LoginActivity_Register.class);
+                startActivity(intent);
+            }
+        });
+
+        Button mRequestResetButton = findViewById(R.id.action_reset_navigate);
+        mRequestResetButton.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(LoginActivity.this, ResetActivity.class);
                 startActivity(intent);
             }
         });
