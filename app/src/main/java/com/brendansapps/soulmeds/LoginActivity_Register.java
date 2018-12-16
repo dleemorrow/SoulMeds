@@ -133,6 +133,11 @@ public class LoginActivity_Register extends AppCompatActivity implements LoaderC
             focusView = mPasswordView;
             cancel = true;
         }
+        else if(TextUtils.isEmpty(password)){
+            mPasswordView.setError(getString(R.string.error_field_required));
+            focusView = mPasswordView;
+            cancel = true;
+        }
 
         // Check for a valid email address.
         if (TextUtils.isEmpty(email)) {
